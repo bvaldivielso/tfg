@@ -103,6 +103,15 @@ la forma $F : \arr{\C_1\times\C_2}{\D}$. Un ejemplo de
 bifuntor sería $-\times - : \arr{\Set\times\Set}{\Set}$ que
 a cada par de conjuntos le asigna su producto cartesiano.
 
+\paragraph{Composición de funtores}
+Dados dos funtores $F : \arr{\C}{\D}$ y $G: \arr{\D}{\E}$ podemos
+definir $F \circ G : \arr{\C}{\E}$ tal que $(F\circ G)C = F(G(C))$
+y $(F\circ G)(f) = F(Gf) : \arr{FGC}{FGC'}$ donde $C, C'$ son objetos
+de $\C$ y $f: \arr{C}{C'}$ una flecha de esta categoría. $F\circ G$
+es un funtor. Además esta composición de funtores es asociativa
+y los funtores identidad se comportan como identidades frente
+a esta composición.
+
 %% \paragraph{Endofuntores en Haskell}
 %% Es habitual que en lenguajes de programación fuertemente tipados exista
 %% una noción de \emph{constructor de tipo} o \emph{generics}. Uno de los usos más
