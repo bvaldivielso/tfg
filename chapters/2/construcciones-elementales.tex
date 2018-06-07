@@ -364,10 +364,48 @@ A \arrow[ur, "f_1"] \arrow[r, "i_1"] &
 \textit{Hablar de que es único salvo isomorfismo}
 \textit{Arreglar el diagrama}
 
-\subsection{Funtores Contravariantes}
-\textit{Hablar de esto}
+\subsection{Funtores $\Hom(-, A)$}
+Sea $\C$ una categoría y $A$ un objeto de esta.
+Sea $f \in \Hom_{\C^{op}}(C, C')$. Definimos:
 
+$$\Hom_{\C}(f, A) :
+  \arr{
+    \Hom_{\C}(C, A)
+  }{
+    \Hom_{\C}(C', A)
+  }$$
+$$\Hom_{\C}(f, A)(g) = g \circ f$$
 
+(recordando que $g : \arr{C}{A}$ y $f : \arr{C'}{C}$ como
+flechas de $\C$ y por tanto se pueden componer)
+
+Se cumple además que:
+
+\begin{itemize}
+\item $\Hom_{\C}(1_C, A)(g) = g \circ 1_C = g$ para toda flecha
+  $g\in \Hom_{\C}(C, A)$ y por tanto
+  $\Hom_{\C}(1_C, A) = 1_{\Hom_{\C}(C, A)}$ para todo objeto $C$
+  de $\C^{op}$.
+
+\item Sean $f \in \Hom_{\C^{op}}(C, D)$ y $g : \Hom_{\C^{op}}(D, E)$
+  entonces
+  \begin{multline*}
+    $$\Hom_{\C}(g \circ_{op} f, A)(h) = h \circ (g \circ_{op} f) \\
+      h \circ (f \circ g) = (h \circ f) \circ g = \Hom_{\C}(g, A)(h \circ f) \\
+      = \Hom_{\C}(g, A)(\Hom_{\C}(f, A)(h))$$
+  \end{multline*}
+  para toda $h \in \Hom_{\C}(C, A)$ y por tanto
+  $\Hom_{\C}(g \circ_{op} f, A) = \Hom_{\C}(g, A) \circ \Hom_{\C}(f, A)$.
+\end{itemize}
+
+Esto nos muestra que $\Hom_\C(-, A)$ es un funtor
+$\Hom_\C(-, A) : \arr{\C^{op}}{\Set}$. Más aun, se puede demostrar
+que $\Hom_\C(-, -) : \arr{\C^{op} \times \C}{\Set}$ es un bifuntor.
+
+Cuando queremos hacer énfasis a que un funtor está actuando sobre
+la categoría opuesta a una particular, decimos que es un funtor
+contravariante. Por ejemplo, diríamos que $\Hom(-, A)$ es un funtor
+contravariante.
 
 \section{En programación}
 A lo largo de esta sección aplicamos las construcciones que hemos visto
