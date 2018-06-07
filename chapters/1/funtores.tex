@@ -20,6 +20,13 @@ objeto de $\mathcal{C}$ entonces $F 1_C = 1_{F C}$.
 \item $F$ respeta la composición: si tenemos $f: \arr{A}{B}$ y
 $g : \arr{B}{C}$ tenemos que $F (g\circ f) = F g \circ F f$.
 \end{enumerate}
+
+Aunque la acción sobre los objetos
+no determina por completo a un funtor, habrá ocasiones en las que
+el lector podrá completar por sí mismo fácilmente la acción de este
+sobre las flechas. En tales casos nos limitaremos a referirnos
+al funtor describiendo su acción sobre los objetos.
+
 La ley de la composición se puede interpretar como que $F$ lleva
 diagramas conmutativos a diagramas conmutativos. \textcolor{red}{para hacer este comentario aquí tendrías que decir lo que  es un diagrama conmutativo ?¿?¿ Sí, diré qué es un diagrama conmutativo (antes de esta parte para que se entienda el comentario).}
 
@@ -92,12 +99,9 @@ un funtor.
 
 \paragraph{Bifuntores}
 Llamamos bifuntor a un funtor de
-la forma $F : \arr{\C_1\times\C_2}{\D}$. Podemos enunciar sobre ellos
-la siguiente propiedad:
-
-\begin{proposition*}
-
-\end{proposition*}
+la forma $F : \arr{\C_1\times\C_2}{\D}$. Un ejemplo de
+bifuntor sería $-\times - : \arr{\Set\times\Set}{\Set}$ que
+a cada par de conjuntos le asigna su producto cartesiano.
 
 %% \paragraph{Endofuntores en Haskell}
 %% Es habitual que en lenguajes de programación fuertemente tipados exista
