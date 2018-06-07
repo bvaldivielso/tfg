@@ -3,13 +3,66 @@ inesperados que surgen a raíz de la teoría de categorías. Una
 de las consecuencias más importantes de este resultado es
 el \textit{embebimiento} (cambiar) de Yoneda, que nos permite
 ver una categoría $\C$ cualquiera dentro de la categoría de
-funtores $[\C, \Set]$. Empezamos enunciando y demostrando el lema:
+funtores $[\C, \Set]$. Necesitaremos algunos resultados
+previos para enunciar el lema:
 
-\begin{theorem}[Lema de Yoneda (versión básica solo con biyecciones, escribir mañana sobre la otra)]
-  Sea $\C$ una categoría, $A$ un objeto de esta
-  y $F : \arr{\C}{\Set}$ un funtor. El conjunto de transformaciones
-  naturales entre $\Hom(A, -)$ y $F$ está en biyección con el
-  conjunto $F A$.
+\begin{proposition*}
+  Dada una categoría $\C$ y un objeto suyo
+  $A$,
+  $$\Nat(\Hom(A, -), -) : \arr{\C \times [\C, \Set]}{\Set}$$
+  es un bifuntor donde $\Nat(F, G)$ es el conjunto de transformaciones
+  naturales entre los funtores $F$ y $G$.
+\end{proposition*}
+\begin{proof}
+  Consideramos el funtor identidad
+  $1_{[\C, \Set]} :\arr{[\C, \Set]}{[\C, \Set]}$ y el funtor
+  $\Hom(*, -) : \arr{C}{[\C, \Set]^{op}}$ (demostrar)
+  el producto de estos nos define un funtor:
+  $$\Hom(*, -)\times 1_{[\C, \Set]} :
+  \arr{\C\times [\C, \Set]}{ [\C, \Set]^{op} \times [\C, \Set] }$$
+  pero sabemos que
+  $$\Nat(-, -) = \Hom_{[\C, \Set]}(-, -) :
+    \arr{[\C, \Set]^{op}\times[\C, \Set]}{\Set}$$
+    es un funtor. La composición de estos dos funtores
+    que hemos dicho es el funtor que buscamos.
+\end{proof}
+
+
+Necesitaremos probar que podemos definir el siguiente funtor:
+
+\begin{proposition*}
+  Sea $\C$ una categoría y $Ev(-, -) : \arr{\C\times[\C, \Set]}{\Set}$
+  dado por $Ev(C, F) = FC$. $E$ es un funtor y lo llamamos
+  \textbf{funtor de evaluación}.
+\end{proposition*}
+\begin{proof}
+  Sean $\sigma : \arr{F}{G}$ y $\tau : \arr{G}{H}$ transformaciones naturales entre funtores
+  $F, G, H : \arr{\C}{\Set}$. Sean además $f : \arr{C}{D}$,
+  $g : \arr{D}{E}$ flechas de $\C$.
+  Podemos definir la acción de $Ev$ sobre las flechas de
+  $\arr{\C\times[\C, \Set]}{\Set}$ como
+  $Ev(f, \sigma) = \sigma_D \circ Ff : \arr{FC}{GD}$. Veamos que $E$ se comporta bien
+  respecto a las composiciones:
+  \begin{multline*}
+    Ev(g \circ f, \tau\circ\sigma) =
+    (\tau \circ \sigma)_E\circ F(g\circ f) =
+    \tau_E\circ\sigma_E\circ Fg \circ Ff = \\
+  \tau_E\circ Gg \circ\sigma_D \circ Ff =
+  \tau_E\circ Gg \circ Ev(f, \sigma) =\\
+  Ev(g, \tau) \circ Ev(f, \sigma)
+  \end{multline*}
+
+  El hecho de que $Ev(1_C, 1_F) = 1_{FC}$ se prueba de forma sencilla
+  y por tanto $Ev : \arr{\C\times[\C, \Set]}{\Set}$ es un funtor
+
+  \textit{Explicar mejor la demostración}
+\end{proof}
+
+\begin{theorem}[Lema de Yoneda]
+  Sea $\C$ una categoría y $A$ un objeto de esta. Los funtores
+  $$(A, F) \mapsto \Nat(\Hom(A, -), F)$$
+  $$(A, F) \mapsto FA$$
+  son naturalmente isomorfos.
 \end{theorem}
 \begin{proof}
   Sea $a \in F A$. Definimos la transformación natural entre
