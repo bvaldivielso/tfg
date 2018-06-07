@@ -1,0 +1,98 @@
+En el primer capítulo introdujimos los funtores como los morfismos
+entre las categorías. Ahora ha llegado el momento de dar un paso más
+e introducir las transformaciones naturales como morfismos entre
+funtores. Esta es una de las nociones que motivó la creación de la
+teoría de categorías: se encuentran ejemplos de esta en múltiples
+ramas de las matemáticas.
+
+Procedemos con la definición:
+
+\begin{definition}
+  Dados dos funtores $F: \arr{\C}{\D}, G : \arr{\C}{\D}$ decimos
+  que $\lambda : \arr{F}{G}$ es una transformación natural si $\lambda$
+  asigna a cada objeto $C$ de $\C$ una flecha
+  $\lambda_C : \arr{FC}{GC}$ de manera que para
+  cualquier flecha $g : \arr{C}{C'}$ el siguiente diagrama
+  es conmutativo:
+
+
+  \begin{center}
+    \begin{tikzcd}
+      F C \arrow{r}{\lambda_C} \arrow{d}[swap]{F g} & GC \arrow{d}{G g} \\
+      F C' \arrow{r}{\lambda_{C'}} & G C'
+    \end{tikzcd}
+  \end{center}
+\end{definition}
+
+Los siguientes resultados nos permitirán considerar categorías en las
+que los objetos son funtores entre dos categorías $\C$ y $\D$ y las
+flechas son las transformaciones naturales entre los funtores:
+
+\begin{proposition}
+  \begin{enumerate}
+  \item Dado cualquier funtor $F : \arr{\C}{\D}$ podemos definir
+    $({1_F})_C  = 1_{(FC)} : \arr{FC}{FC}$. $1_F$ es una transformación
+    natural entre $1_F : \arr{F}{F}$.
+  \item Podemos componer transformaciones naturales de la siguiente
+    forma: dados funtores $F, G, H : \arr{\C}{\D}$ y transformaciones
+    naturales $\lambda : \arr{F}{G}$, $\sigma : \arr{G}{H}$ podemos
+    definir $\sigma \circ \lambda$ dada
+    por sus componentes
+    $(\sigma\circ\lambda)_C = \sigma_C \circ \lambda_C$.
+    $\sigma\circ\lambda$ es una transformación natural
+    $\sigma\circ\lambda : \arr{F}{H}$.
+  \item La composición de transformaciones naturales
+    es asociativa en el siguiente sentido: dados
+    $F \xrightarrow{\lambda} G \xrightarrow{\sigma} H \xrightarrow{\tau}I$
+    tenemos que $(\tau \circ \sigma) \circ \lambda = \tau \circ (\sigma \lambda)$
+  \item Dado cualquier par de funtores $F,G : \arr{\C}{\D}$ y
+    transformaciones naturales $\tau : \arr{F}{G}$,
+    $\sigma : \arr{G}{F}$ tenemos que $1_F \circ \sigma = \sigma$
+    y $\tau \circ 1_F = \tau$.
+  \end{enumerate}
+
+  En definitiva los funtores $\arr{\C}{\D}$ y las transformaciones
+  naturales entre estos funtores forman una categoría. A esa categoría
+  la llamaremos $[\C, \D]$.
+\end{proposition}
+
+\subsection{Ejemplos}
+\paragraph{El doble dual}
+Consideremos la categoría de espacios vectoriales sobre un cuerpo
+$K$ a la que llamaremos $\VectK$. Podemos considerar los endofuntores
+identidad $1_{\VectK} : \arr{\VectK}{\VectK}$ y el funtor doble dual:
+$(-)^{**} : \arr{\VectK}{\VectK}$. El último de estos funtores actúa
+así sobre los morfismos:
+
+$$(-)^{**} : \arr{\Hom(V, W)}{\Hom(V^{**}, W^{**})}$$
+$$f^{**}(g)(\phi) = g(\phi \circ f)$$
+
+Para cada espacio vectorial sobre $K$ $V$ podemos además
+definir un monomorfismo de espacios vectoriales
+ (isomorfismo
+en el caso finito-dimensional) en su doble dual:
+
+\begin{equation*}
+i_V : \arr{V}{V^{**}}
+\end{equation*}
+\begin{equation*}
+i_V(v)(\phi) = \phi(v)
+\end{equation*}
+
+Pues $i$ es una transformación natural entre $1_K$ y
+$(-)^{**}$. Más aun, si nos restringimos al caso finito dimensional,
+debido a que todas las componentes de la transformación natural
+son isomorfismos, decimos que ambos funtores son naturalmente isomorfos.
+
+\paragraph{Abelianización de grupos}
+Dado un grupo $G$ definimos su abelianización $G^{ab}$ como
+$G^{ab} = \frac{G}{[G, G]}$. Llamemos $\pi_G : \arr{G}{G^{ab}}$
+a la proyección sobre el cociente. Para cualquier morfismo
+de grupos $f : \arr{G}{H}$ tenemos que la aplicación
+$\pi_H \circ f$ contiene en su nucleo a $[G, G]$ (ya que
+$H^{ab}$ es abeliano y un morfismo de un grupo a un grupo abeliano
+lleva los conmutadores al 0) y por tanto factoriza a través
+de $G^{ab}$ permitiéndonos definir una aplicación
+$f^{ab} : \arr{G^{ab}}{H^{ab}}$ y comprobar
+que $(-)^{ab}$ es un funtor. La proyección de $\pi$ es una transformación
+natural $\pi : \arr{ 1_{\Grp} }{ (-)^{ab} }$.

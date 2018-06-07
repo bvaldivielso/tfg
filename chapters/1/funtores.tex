@@ -1,0 +1,160 @@
+\subsection{Definición}
+De la misma manera que para los grupos se definen los homomorfismos
+de grupos, para los anillos los homomorfismos de anillos y para los
+espacios topológicos las funciones continuas, también
+podemos asociar a las categorías una noción de morfismos que preserva
+su estructura. A estos morfismos de categorías les llamaremos
+\emph{funtores}. Un funtor $F$ de una categoría
+$\C$ en una categoría $\D$ (que notaremos por $F : \arr{\C}{\D}$)
+tendrá que llevar objetos de $\C$ en objetos de $\D$ y flechas
+de $\C$ en flechas de $\D$ preservando la estructura de la
+categoría en el siguiente sentido:
+\begin{enumerate}
+\item $F$ respeta los dominios y los codominios:
+si $f : \arr{A}{B}$ una flecha
+de la categoría $\mathcal{C}$ entonces
+$F f : \arr{F A}{F B}$ es la correspondente flecha asociada
+en $\D$.
+\item $F$ preserva las identidades. Dicho de otra forma si $C$ es un
+objeto de $\mathcal{C}$ entonces $F 1_C = 1_{F C}$.
+\item $F$ respeta la composición: si tenemos $f: \arr{A}{B}$ y
+$g : \arr{B}{C}$ tenemos que $F (g\circ f) = F g \circ F f$.
+\end{enumerate}
+La ley de la composición se puede interpretar como que $F$ lleva
+diagramas conmutativos a diagramas conmutativos. \textcolor{red}{para hacer este comentario aquí tendrías que decir lo que  es un diagrama conmutativo ?¿?¿ Sí, diré qué es un diagrama conmutativo (antes de esta parte para que se entienda el comentario).}
+
+
+\subsection{Ejemplos}
+\paragraph{Funtores Identidad}
+Para cada categoría $\C$ podemos definir el funtor identidad
+$1_{\C} : \arr{C}{C}$ que deja invariante tanto a los objetos
+como a las flechas. Comprobar las propiedades de los funtores
+es trivial.
+
+\paragraph{Funtores subyacentes}
+Podemos considerar el funtor $U : \arr{\Grp}{\Set}$
+que asigna a cada grupo su conjunto subyacente y a cada flecha la
+aplicación entre los conjuntos subyacentes (cada homomorfismo de
+grupos es también una aplicación entre ambos conjuntos). Es rutinario
+comprobar que se respetan los axiomas de funtores. Existen también
+funtores subyacentes desde la categoría de anillos, espacios topológicos
+o retículos por ejemplo.
+
+\paragraph{Grupos libres}
+Podemos definir un funtor $F : \arr{\Set}{\Grp}$ de la siguiente
+forma: a cada conjunto $X$ le asignamos el grupo libre sobre $X$
+(al que llamaremos $F X$) y a
+cada aplicación $f : \arr{X}{Y}$ entre conjuntos le asignamos el
+único homomorfismo de grupos $F f: \arr{F X}{F Y}$ que extiende a $f$.
+Comprobar que
+$F$ es en efecto un funtor es sencillo.
+
+\paragraph{Funtores $\Hom$}
+Ya hemos dicho que para cada par de objetos $A, B$ de
+una categoría $\C$ tenemos que
+$\Hom(A, B)$ es un conjunto. Fijado un objeto $A$ de
+$\C$ tenemos que $\Hom(A, -)$ nos permite asociar a cada
+objeto $B$ de la categoría $\C$ un conjunto $\Hom(A, B)$.
+
+Veamos que $\Hom(A, -)$ es un funtor
+$\Hom(A, -) : \C \rightarrow \Set$. Ya conocemos la acción
+sobre los objetos ahora tenemos que encontrar como actúa
+el funtor sobre las flechas. Supongamos que tenemos
+$f : \arr{B}{C}$ una flecha de $\C$. Definimos
+$\Hom(A, f) : \arr{\Hom(A, B)}{\Hom(A, C)}$
+($\Hom(A, f)$ es una aplicación entre los conjuntos
+$\Hom(A, B)$ y $\Hom(A, C)$ es decir a cada función $\arr{A}{B}$
+le asigna una función $\arr{A}{C}$) por
+$$\Hom(A, f)(g) = f \circ g $$.
+
+Probamos a modo de ejemplo
+que se cumplen los axiomas de los funtores. En primer lugar
+supongamos que $g : \arr{C}{D}$ y $h : \arr{D}{E}$ entonces tenemos
+que probar
+$$\Hom(A, h \circ g) = \Hom(A, h) \circ \Hom(A, g) :
+\arr{\Hom(A, B)}{\Hom(A, C)}$$
+
+Para probar tal cosa suponemos $f \in \Hom(A, B)$ y entonces:
+\begin{multline*}
+\Hom(A, h\circ g)(f) = (h \circ g) \circ f = h \circ (g \circ f) \\
+= h \circ \Hom(A, g)(f) = \Hom(A, h)(\Hom(A, g)(f)) \\
+= (\Hom(A, h) \circ \Hom(A, g))(f)
+\end{multline*}
+
+Y por tanto se comporta bien respecto a la composición. Veamos que se
+comporta bien respecto a la identidad. Sea $f \in \Hom(A, B)$ entonces
+$$\Hom(A, 1_B)(f) = 1_B \circ f = f$$ y por tanto
+$\Hom(A, 1_B) = 1_{\Hom(A, B)}$.
+
+Teniendo en cuenta $\Hom(A, -)$ se comporta bien respecto a la
+composición y lleva identidades en identidades concluimos que es
+un funtor.
+
+\paragraph{Bifuntores}
+Llamamos bifuntor a un funtor de
+la forma $F : \arr{\C_1\times\C_2}{\D}$. Podemos enunciar sobre ellos
+la siguiente propiedad:
+
+\begin{proposition*}
+
+\end{proposition*}
+
+%% \paragraph{Endofuntores en Haskell}
+%% Es habitual que en lenguajes de programación fuertemente tipados exista
+%% una noción de \emph{constructor de tipo} o \emph{generics}. Uno de los usos más
+%% habituales de estos constructores de tipo son los contenedores. En
+%% \verb~C++~ por ejemplo tenemos el constructor de tipo \verb~vector~, que no es
+%% un tipo en si mismo pero que asigna a cada tipo un nuevo tipo. Por
+%% ejemplo al tipo \verb~int~ le asigna el tipo \verb~vector<int>~ que representa
+%% un vector con elementos de tipo \verb~int~.
+
+%% En Haskell existen también constructores de tipos. Viéndolo desde el
+%% punto de vista de \verb~Hask~ un constructor de tipos es una forma de asignar
+%% objetos de la categoría a otros objetos de la categoría. Esto nos hace
+%% pensar que un funtor de \verb~Hask~ a \verb~Hask~ (cuando un funtor va de una
+%% categoría en sí misma le llamamos endofuntor) será un constructor de
+%% tipos que además cumple una serie de propiedades adicionales.
+
+%% Pondremos un ejemplo de endofuntor en \verb~Hask~. De forma similar a
+%% \verb~vector~ podemos considerar el constructor de tipos \verb~[]~ de Haskell
+%% que a cada tipo (por ejemplo \verb~Int~) le hace corresponder otro tipo
+%% (en este caso \verb~[Int]~, una lista de enteros). Nos hace falta ahora
+%% definir cómo a una función \verb~f :: a -> b~ se le asigna una función
+%% de tipo \verb~[a] -> [b]~ de manera que se cumplan los axiomas
+%% de los functores, pero eso es sencillo: extenderemos una función \verb~f~
+%% sobre listas aplicando \verb~f~ elemento a elemento. Escribimos en haskell
+%% la definición de esta extensión y escribimos algunos ejemplos:
+
+%% \begin{verbatim}
+%% map :: (a -> b) -> ([a] -> [b])
+%% map f [] = []
+%% map f (x:xs) = (f x):(map f xs)
+
+
+%% add_1 :: Int -> Int
+%% add_1 x = x + 1
+
+%% map add_1 [] ; Esto da como resultado []
+%% map add_1 [1,2,3,4,5] ; [2,3,4,5,6]
+
+%% ; en general map f [x1, x2,x3...] = [f x1, f x2, f x3, ...]
+%% \end{verbatim}
+
+%% Veamos que se cumplen los axiomas de los funtores. En primer lugar
+%% veamos que la identidad va a la identidad:
+
+%% \begin{verbatim}
+%% map id [] ; esto es []
+%% map id [x1, ..., xn]; esto es [id x1, ..., id xn] = [x1, ..., xn]
+%% \end{verbatim}
+
+%% por lo que la función \verb~map id~ es la identidad. Veamos que la función
+%% además respeta las composiciones:
+
+%% \begin{verbatim}
+%% ((map f) . (map g)) [x1, ..., xn] = map f (map g [x1, ..., xn])
+%%                                   = map f [g x1, ..., g xn]
+%%                                   = [ f (g x1), ..., f (g xn) ]
+%%                                   = [ (f . g) x1, ..., (f . g) xn ]
+%%                                   = map (f . g) [x1, ..., xn]
+%% \end{verbatim}

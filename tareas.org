@@ -1,0 +1,12 @@
+* Tareas
+** TODO Escribir lo de ~Pipes~
+** TODO Poner referencias en la parte de Generics y Tempaltes C++
+** TODO Escribir ~List~ functor
+** DONE Funtores libres
+Quizá explicarlo mejor
+** TODO Meter diagramas conmutativos
+** TODO Introducción del segundo capítulo
+** TODO Usar environments de LaTeX para las definiciones, teoremas...
+** TODO Poner algún otro ejemplo más de epimorfismo, monomorfismo...
+** TODO Hablar de los morfismos nulos
+** TODO Demostrar que no existe objeto final en \Ring

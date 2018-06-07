@@ -1,0 +1,444 @@
+Dedicamos este capítulo al tratamiento de construcciones elementales
+sobre categorías. En este capítulo podremos ver cómo un marco tan general
+como el de la teoría de categorías permite realizar definiciones
+\textit{Continuar introducción de construcciones elementales luego}.
+
+\section{Elementos}
+Cuando hablamos de conjuntos es común hablar de sus elementos. Muchas
+definiciones que se hacen sobre conjuntos y aplicaciones entre
+ellos se hacen en base a los elementos de los conjuntos involucrados.
+Dos ejemplos de este tipo de definiciones serían las definiciones de
+aplicación inyectiva y de producto cartesiano.
+
+\begin{definition*}
+Una aplicación $f : \arr{A}{B}$ es inyectiva si dados
+$a, a' \in A$ tenemos que $f(a) = f(a') \implies a = a'$.
+\end{definition*}
+
+\begin{definition*}
+Dados dos conjuntos $A$ y $B$ definimos su producto cartesiano
+como:
+$$A\times B = \{ (a, b) : a \in A \quad b \in B \}$$
+\end{definition*}
+
+Si intentamos trasladar las construcciones que hacemos sobre los
+conjuntos y sus aplicaciones a categorías arbitrarias con sus objetos
+y sus flechas tenemos que saber cómo trasladar la noción de elemento.
+
+Si consideramos el conjunto con un solo elemento, al que llamaremos
+$*$, y las aplicaciones que salen de él nos damos cuentas de que podemos
+identificar las aplicaciones entre el conjunto $* = \{ 1 \}$ y un conjunto
+$A$ (estas aplicaciones son de la forma $1 \mapsto a \in A$)
+arbitrario con los elementos (en el sentido de teoría de conjuntos)
+de $A$. Dicho de otra forma $\Hom(*, A)$ son lo mismo $A$ como conjuntos.
+pero $\Hom(*, A)$ está formado por flechas y eso es algo de lo que
+sí podemos hablar dentro de una categoría. Sin embargo, para realizar
+este procedimiento de identificar los elementos de un conjunto con
+un conjunto de flechas de la categoría hemos tenido que acudir a un
+objeto especial de la categoría de conjuntos: $*$. Este procedimiento
+es algo que quizá no podamos realizar en otras categorías pero nos
+motiva a hacer una definición más general de
+\textit{elemento categórico}:
+
+\begin{definition}
+En una categoría $\C$ llamaremos elemento de un objeto $A$
+a cualquier flecha $x : \arr{T}{A}$ (sea cual sea el objeto
+$T$). De forma paralela a como se hace con conjuntos, utilizaremos
+la notación $x \in^T A$.
+\end{definition}
+
+Con esta noción de elemento notamos que $f : \arr{A}{B}$ lleva
+elementos de $A$ a elementos de $B$ mediante la composición: si
+$x \in^T A$ entonces $f \circ x \in^T B$. Esto motiva que en lo que
+sigue omitamos a veces el signo de composición ($f x$ en lugar
+de $f \circ x$) si buscamos que se interpreten algunas flechas
+como elementos categóricos y la acción de otras flechas sobre estos.
+
+Veamos como esta noción nos permite llevar a teoría de categorías
+algunos conceptos originados sobre conjuntos.
+
+\section{Monomorfismos}
+\begin{definition}
+Consideremos una categoría $\C$ y una flecha $f : \arr{A}{B}$ de esta.
+Diremos que $f$ es un monomorfismo si dados dos elementos de $A$
+$x, y \in^T A$ tenemos que $fx = fy \implies x = y$.
+\end{definition}
+
+Nótese cómo esta definición es casi idéntica a la definición de
+inyectividad sobre aplicaciones entre conjuntos. De hecho es sencillo
+demostrar que la noción de monomorfismo sobre $\Set$ se corresponde
+efectivamente con las aplicaciones inyectivas.
+
+
+\paragraph{Ejemplos}
+Esta noción se puede aplicar sobre otras categorías. En general
+cuando consideramos categorías en la que los objetos son estructuras
+matemáticas y las flechas son sus morfismos, los monomorfismos son
+aquellas flechas tales que las aplicaciones entre conjuntos subyacentes
+son inyectivas. Ejemplos de esto son las categorías
+$\Grp$, $\Ring$...
+
+\section{Isomorfismos}
+\begin{definition}
+Consideremos una categoría $\C$ y una flecha $f : \arr{A}{B}$ de
+esta. Diremos que $f$ es un isomorfismo si $f$ es una biyección
+entre los elementos de $A$ y los elementos de $B$ definido sobre
+$T$ para cualquier objeto $T$ de $\C$.
+\end{definition}
+
+Esta definición es similar a la definición habitual
+de biyección sobre conjuntos pero generalizando los elementos de
+los conjuntos sobre elementos de los objeto sobre el resto los elementos
+de la categoría.
+
+Nótese que de este concepto podemos dar una definición equivalente
+que no requiere del uso de elementos categóricos.
+
+\begin{proposition}
+Dada la categoría $\C$ y y una flecha $f: \arr{A}{B}$ tenemos que
+$f$ es un isomorfismo sí y solo sí existe una flecha $g: \arr{B}{A}$
+tal que $f \circ g = 1_B$ y $g \circ f = 1_A$.
+\end{proposition}
+
+
+Esta caracterización de isomorfismo nos permite ver rápidamente
+que los isomorfismos de la categoría $\Set$ se corresponden con las
+biyecciones y que los isomorfismos sobre $\Grp$, $\Ring$, $\Top$...
+se corresponden con los isomorfismos de grupos,
+isomorfismos de anillos y homeomorfismos de espacios topológicos.
+
+
+\section{Productos}
+Otra de los ejemplos que dimos anteriormente de construcción que
+se realiza sobre conjuntos era el producto cartesiano. Esta definición
+podemos llevarla a categorías arbitrarias de la siguiente forma:
+
+\begin{definition}
+Sea $\C$ una categoría y $A$ y $B$ dos objetos de esta. Diremos que
+existe el producto de $A$ y $B$ si
+existe una terna $(A\times B, \pi_1, \pi_2)$
+donde $A\times B$ es un objeto de $\C$ y
+$\pi_1 : \arr{A\times B}{A}, \pi_2 : \arr{A\times B}{B}$ son dos flechas tales
+que para cualquiera elementos $x : \arr{T}{A}$ de $A$ e
+$y: \arr{T}{B}$ de $B$, existe un único elemento
+$(x,y): \arr{T}{A\times B}$ de $A\times B$ tal que $\pi_1 (x,y)=x$ y $\pi_2(x,y)=y$.
+
+Expresaremos esto diciendo que  el siguiente diagrama es conmutativo:
+\begin{center}
+\begin{tikzcd}
+&\arrow{ld}[swap]{x} T \arrow[d, dotted, "{\exists! (x, y)}"] \arrow[rd, "y"] & \\
+A & \arrow[l, "\pi_1"] A\times B  \arrow{r}[swap]{\pi_2} & B
+\end{tikzcd}
+\end{center}
+
+\end{definition}
+
+Debemos resaltar dos aspectos importantes de esta definición:
+\begin{itemize}
+\item El producto de dos objetos en una categoría dada no tiene por qué
+      existir.
+\item De existir un producto, este solo queda determinado salvo isomorfismo. De hecho si $(A\times B, \pi_1, \pi_2)$ es un producto de $A$ y $B$
+y $\phi : \arr{P}{A\times B}$ es un isomorfismo entonces
+$(P, \pi_1 \circ \phi , \pi_2 \circ \phi)$ es otro producto de $A$
+y $B$.
+\end{itemize}
+
+
+\subsection{Ejemplos}
+\paragraph{\Set}
+Dados dos conjuntos $A$ y $B$ siempre existe el producto categórico
+y además coincide (salvo el isomorfismo
+que comentamos antes) con el producto cartesiano de ambos conjuntos
+y las proyecciones canónicas. Lo demostramos a continuación:
+
+Sea $a : \arr{T}{A}, b : \arr{T}{B}$ un par de funciones. Podemos
+definir la función $(a, b) : \arr{X}{A\times B}$ tal que
+$f(x) = (a(x), b(x))$. Esta función cumple en efecto que
+$\pi_1 \circ f = a$ y $\pi_2 \circ f = b$. Pero además es la única
+que cumple esto pues
+$f(x)=(\pi_1\circ f(x), \pi_2\circ f(x))=(f_1(x), f_2(x))$.
+
+\paragraph{Otras estructuras matemáticas}
+A continuación mostramos ejemplos de productos categóricos
+en categorías conocidas:
+
+\begin{itemize}
+\item En $\Grp$ el producto categórico se corresponde con el
+producto directo de grupos.
+\item En $\Top$ se corresponde con el producto de espacios topológicos.
+\item En $\Ring$ se corresponde con el producto de anillos.
+\end{itemize}
+
+\paragraph{Categoría de cuerpos}
+En la categoría de cuerpos no existen los productos.
+\textit{Demostrar}
+
+\section{Objetos iniciales}
+Al principio de la sección le dimos un papel especial al conjunto
+de un solo elemento $*$. Nos gustaría caracterizar a ese objeto de
+la categoría $\Set$ con alguna propiedad estrictamente categórica.
+Esto es posible:
+
+\begin{definition}
+Sea $\C$ una categoría y $I$ un objeto. Diremos que $I$ es un objeto
+inicial si dado cualquier objeto $T$ de la categoría solo existe un
+elemento de $I$ definido sobre $T$.
+\end{definition}
+
+Esto es cierto sobre $* = \{ 1 \}$: la única flecha que llega a
+a $*$ desde cualquier conjunto es la que vale constantemente 1, pero
+una vez más esta definición se puede aplicar a otras categorías.
+
+\subsection{Ejemplos}
+\paragraph{En $\Grp$}
+El objeto inicial en $\Grp$ es el grupo trivial. Solo existe una función
+que vaya del grupo trivial a cualquier otro grupo y es la aplicación
+nula. Resulta, además, que el objeto final de la categoría es también
+el grupo trivial. Si en una categoría tenemos que un objeto
+$O$ es a la vez inicial y final diremos que $O$ es un objeto nulo. Esto
+es importante porque nos permite definir morfismos nulos.
+% TODO: definir
+
+\paragraph{En $\Ring$}
+En la categoría de los anillos con unidad el objeto inicial es
+$\Z$ y el único morfismo que existe de él en cualquier otro anillo
+$R$ es el que lleva $1_\Z$ a $1_R$. No existe objeto final en la
+categoría de anillos (se razona considerando la característica
+del supuesto anillo final).
+
+\section{Dualidad}
+El concepto de dualidad que se encuentra frecuentemente en las
+matemáticas puede ser analizado de forma muy general desde el punto
+de vista categórico. Para introducir esta noción presentamos a
+continuación la definición de categoría opuesta.
+
+\subsection{La categoría opuesta}
+Dada una categoría $\C$ podemos construir una categoría
+$\C^{op}$ en la que definimos $\Obj{\C^{op}} = \Obj{\C}$,
+$\Hom_{\C^{op}}(A, B) = \Hom_{\C}(B, A)$ y una operación de
+composición dad por $f \circ_{op} g = g \circ f$. Veamos
+la construcción realizada describe en efecto una categoría:
+\begin{itemize}
+\item La composición es asociativa: sean
+      $f \in \Hom_{\C^{op}}(A, B)$, $g \in \Hom_{\C^{op}}(B, C)$
+      y $h \in \Hom_{\C^{op}}(C, D)$. Tenemos que
+
+\begin{multline*}
+(h \circ_{op} g) \circ_{op} f = (g \circ h) \circ_{op} f \\
+                              = f \circ (g \circ h)
+                              = (f \circ g) \circ h
+                              = (g \circ_{op} f)  \circ h
+                              = h \circ_{op} (g \circ_{op} f)
+\end{multline*}
+\item Existen las identidades. Las identidades siguen siendo
+      las mismas flechas que son identidad en $\C$. La demostración
+      es inmediata.
+\end{itemize}
+
+La categoría opuesta nos otorga una herramienta para reaprovechar
+definiciones realizadas anteriormente. Veremos ejemplos de propiedades
+duales en las siguientes secciones.
+
+\subsection{Epimorfismos}
+En una sección anterior especificamos cuando una flecha
+$f : \arr{A}{B}$ de una categoría $\C$ era un monomorfismo. La categoría
+opuesta nos permite dualizar esta definición de la siguiente manera:
+
+\begin{definition}
+Dada una categoría $\C$ y una flecha $f: \arr{A}{B}$, diremos que
+$f$ es un epimorfismo si y solo si $f$ es un monomorfismo en
+$\C^{op}$.
+\end{definition}
+
+En este sentido decimos que las propiedades ``$f$ es un monomorfismo''
+y ``$f$ es un epimorfismo'' son propiedades duales. Esta propiedad
+se puede enunciar de forma sencilla también sin recurrir a
+$\C^{op}$.
+
+\begin{proposition}
+$f$ es un epimorfismo si y solo si dado cualquier objeto $X$ y
+cualquier par de flechas $g_1, g_2 : \arr{B, X}$
+tenemos que $g_1 \circ f = g_1 \circ f \implies g_1 = g_2$.
+Decimos también en este caso que $f$ se puede cancelar por la
+derecha.
+\end{proposition}
+
+\subsubsection{Ejemplos}
+\paragraph{En \Set}
+En la categoría de los conjuntos los epimorfismos coinciden con las
+aplicaciones sobreyectivas.
+
+\paragraph{Isomorfismos}
+Todo isomorfismo es un epimorfismo y un monomorfismo. El recíproco
+es cierto en algunas categorías (como en $\Set$ o $\Grp$) pero no
+lo es en general.
+
+\paragraph{En \Ring}
+Consideremos la categoría de anillos con unidad (en la
+que los objetos son anillos con unidad y
+las flechas son homomorfismos de anillos). En esta categoría
+que $f : \arr{R}{S}$ es equivalente también a que $f$ sea una aplicación
+inyectiva.
+
+Sin embargo consideremos la inclusión
+$i : \arr{\Z}{\Q}$, un anillo $R$
+y un par de aplicaciones de anillos $g_1, g_2 : \arr{\Q}{R}$. Supongamos
+que $g_1 \circ f = g_2 \circ f$. Ahora  $\forall x \in \Q$
+tenemos que $\exists a, b \in \Z : x = \frac{a}{b}$ y entonces:
+
+\begin{multline*}
+g_1(x) = g_1(\frac{a}{b}) = g_1(a)g_1(b)^{-1} \\
+       = (g_1 \circ i)(a)(g_1\circ i)(b)^{-1}
+       = (g_2\circ i)(a)(g_2\circ i)(b)^{-1}
+       = g_2(a)g_2(b)^{-1} = g_2(x)
+\end{multline*}
+
+Con lo que $g_1=g_2$. Esto prueba que $i : \arr{\Z}{\Q}$ es epimorfismo
+y sin embargo no es sobreyectiva como aplicación. Un isomorfismo en
+la categoría de anillos se corresponde con un isomorfismo de anillos
+(que en particular es una biyección de conjuntos) y por tanto
+en la categoría de anillos se pueden encontrar flechas que son
+monomorfismos y epimorfismos pero no son isomorfismos.
+
+\subsection{Objetos finales}
+Existe también una propiedad dual a la de ser objeto inicial.
+
+\begin{definition}
+Dado un objeto $T$ de una categoría $C$ decimos que
+$T$ es un objeto final si $T$ es un objeto inicial en la
+categoría $C^{op}$.
+\end{definition}
+
+Podemos probar una caracterización que no hace referencia a
+$\C^{op}$:
+
+\begin{proposition}
+El objeto $T$ es final si y solo si para cualquier otro objeto
+$X$ existe una sola flecha tiene a $X$ como dominio y a $T$ como
+codominio.
+\end{proposition}
+
+\subsubsection{Ejemplos}
+\paragraph{En \Set}
+En $\Set$ el conjunto vacío $\emptyset$ es un objeto final.
+
+\paragraph{En \Grp}
+
+El objeto final en $\Grp$ es el grupo de un solo elemento. Notemos
+que coincide con el objeto inicial. Cuando en una categoría $\C$ coinciden
+el objeto inicial y el final $T$ llamamos a $T$ objeto nulo. El objeto
+nulo nos permite definir una aplicación nula (\textit{explicar esto mejor}).
+
+Otro ejemplo de categoría en la que ocurre esto es en la de espacios vectoriales
+sobre un cuerpo $K$.
+
+\paragraph{En \Ring}
+\textit{Probar que no existen objetos finales en la categoría de anillos}
+
+\subsection{Coproducto}
+Podemos repetir la definición de producto categórico sobre la categoría
+opuesta y \textit{dando la vuelta} a las flechas para volver a la
+categoría inicial $\C$ llegaríamos a la siguiente definición de lo que
+llamaremos \textbf{coproducto}:
+
+\begin{definition}
+Sea $\C$ una categoría y $A$ y $B$ dos objetos de esta. Diremos que
+existe el coproducto de $A$ y $B$
+si existe una terna $(A+B, i_1, i_2)$
+donde $P$ es un objeto de $\C$ y
+$i_1 : \arr{P}{A}, i_2 : \arr{P}{B}$ son dos flechas tales
+que para cualquier objeto $Y$ y sendas flechas $f_1 : \arr{A}{Y}$,
+$f_2 : \arr{B}{Y}$ existe un morfismo
+$f : \arr{P}{Y}$ tal que el siguiente diagrama es conmutativo:
+\begin{center}
+\begin{tikzcd}
+&  Y  \arrow[rd, "f_2"]& \\
+A \arrow[ur, "f_1"] \arrow[r, "i_1"] &
+ \arrow[u, dotted, "\exists! f"] P
+ & B \arrow[l, "i_2"]
+\end{tikzcd}
+\end{center}
+\end{definition}
+
+\textit{Retocar esta sección para que sea más consistente con las otras}
+\textit{Hablar de que es único salvo isomorfismo}
+\textit{Arreglar el diagrama}
+
+\subsection{Funtores Contravariantes}
+\textit{Hablar de esto}
+
+
+
+\section{En programación}
+A lo largo de esta sección aplicamos las construcciones que hemos visto
+a la categoría \texttt{Hask}.
+
+\subsection{Objetos iniciales y finales}
+\texttt{Hask} tiene tanto objetos iniciales como objetos finales. El
+objeto final es el tipo con un solo valor, al que se le suele llamar
+\texttt{()} (pronunciado \texttt{Unit}). \texttt{()} es un tipo
+cuyo único valor es \texttt{()} y para cada tipo \texttt{a} podemos
+definir la función:
+\begin{verbatim}
+constUnit :: a -> ()
+constUnit x = ()
+\end{verbatim}
+Por otro lado tenemos que el objeto inicial de \texttt{Hask} es el tipo
+llamado \texttt{Void}, que no tiene ningún valor. En la biblioteca
+estándar se encuentra una función llamada \texttt{absurd}
+que tiene
+como tipo \texttt{Void -> a} y es la única función con este tipo.
+En cualquier caso, la función no puede ser llamada puesto que no
+hay ningún valor con el que llamarla. La situación tanto como para
+el objeto inicial como para el final es muy similar a la que se daba
+en \Set.
+
+\subsection{Productos}
+\texttt{Hask} tiene productos. Dado dos tipos \texttt{A} y
+\texttt{B} podemos construir el tipo \texttt{(A, B)} que tiene
+como valores pares de valores de \texttt{A} y de \texttt{B}.
+Las proyecciones se implementan en la biblioteca estándar de
+Haskell de la siguiente forma:
+
+\begin{verbatim}
+fst :: (a, b) -> a
+fst (x, y) = x
+
+snd :: (a, b) -> b
+fst (x, y) = y
+\end{verbatim}
+
+Si tenemos un par de funciones \cod{f1 :: X -> A} y
+\cod{f2 :: X -> B} podemos definir la función \texttt{f}:
+\begin{verbatim}
+f :: X -> (A, B)
+f x = (f1 x, f2 x)
+\end{verbatim}
+
+\subsection{Coproductos}
+En la sección sobre funtores introdujimos el tipo \cod{Either}:
+\begin{verbatim}
+data Either a b = Left a | Right b
+\end{verbatim}
+Resulta que \cod{Either} es el coproducto en \cod{Hask}. Si
+\cod{A} y \cod{B} son dos tipos de haskell entonces su coproducto
+es \cod{Either A B} y las inyecciones canónicas son por un lado
+\cod{Left :: A -> Either A B} y por otro lado
+\cod{Right :: B -> Either A B}. Si tenemos un par de funciones
+\cod{f1 :: A -> Y} y \cod{f2 :: B -> Y} tenemos que la única
+función \cod{f :: Either A B -> Y} que se lleva bien con las inyecciones
+es:
+\begin{verbatim}
+f :: Either A B -> Y
+f (Left a) = f1 a
+f (Right b) = f2 b
+\end{verbatim}
+
+Veamos que se lleva bien con las inyecciones:
+\begin{verbatim}
+(f . Left) a = f (Left a) = f1 a
+;; por tanto f . Left = f1
+
+(f . Right) b = f (Right b) = f2 b
+;; por tanto f . Right = f2
+\end{verbatim}

@@ -1,0 +1,19 @@
+El lema de Yoneda es uno de los primeros resultados
+inesperados que surgen a raíz de la teoría de categorías. Una
+de las consecuencias más importantes de este resultado es
+el \textit{embebimiento} (cambiar) de Yoneda, que nos permite
+ver una categoría $\C$ cualquiera dentro de la categoría de
+funtores $[\C, \Set]$. Empezamos enunciando y demostrando el lema:
+
+\begin{theorem}[Lema de Yoneda (versión básica solo con biyecciones, escribir mañana sobre la otra)]
+  Sea $\C$ una categoría, $A$ un objeto de esta
+  y $F : \arr{\C}{\Set}$ un funtor. El conjunto de transformaciones
+  naturales entre $\Hom(A, -)$ y $F$ está en biyección con el
+  conjunto $F A$.
+\end{theorem}
+\begin{proof}
+  Sea $a \in F A$. Definimos la transformación natural entre
+  $\lambda_a : \arr{\Hom(A, -)}{F}$ componente a componente de
+  la siguiente forma: $(\lambda_a)_C(f) = f(a)$.
+  \textit{Continuar mañana}
+\end{proof}

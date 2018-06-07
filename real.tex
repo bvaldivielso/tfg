@@ -1,0 +1,91 @@
+\documentclass[12pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm} % unnumbered environments
+
+\usepackage{tikz-cd} % diagramas conmutativos
+
+\usepackage[hidelinks]{hyperref} % para hiperreferencias
+
+\usepackage{color} %para el color
+
+% pies de página y esas cosas
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% cambiar chapter por capítulo
+\renewcommand{\chaptername}{Capítulo}
+
+% algunas macros que usaré frecuentemente
+\input{macros/macros.tex}
+
+% bibliografía
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+\setcounter{secnumdepth}{3} % que numere las subsecciones también
+
+\graphicspath{ {images/} }
+
+% ambientes: teoremas, definiciones
+\newtheorem{definition}{Definición}
+\newtheorem*{definition*}{Definición}
+\newtheorem{proposition}{Proposición}
+\newtheorem*{proposition*}{Proposición}
+\newtheorem{theorem}{Teorema}
+
+
+\title{
+	{Patrones de diseño inspirados por teoría de categorías}\\
+	{\large Universidad de Granada}\\
+}
+\author{Braulio Valdivielso Martínez}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\chapter*{Abstract}
+Abstract goes here
+
+\chapter*{Dedication}
+To mum and dad
+
+\chapter*{Declaration}
+I declare that..
+
+\chapter*{Acknowledgements}
+I want to thank...
+
+\tableofcontents
+
+\chapter{Categorías y funtores}
+\section{Categorías}
+\input{chapters/1/categorias.tex}
+\section{Funtores}
+\input{chapters/1/funtores.tex}
+\section{En programación}
+\input{chapters/1/programacion.tex}
+
+\chapter{Construcciones elementales}
+\input{chapters/2/construcciones-elementales.tex}
+
+\chapter{Transformaciones Naturales y el lema de Yoneda}
+\section{Transformaciones Naturales}
+\input{chapters/3/transformaciones-naturales.tex}
+\section{Lema de Yoneda}
+\input{chapters/3/yoneda.tex}
+
+\chapter{Chapter Four Title}
+
+
+\chapter{Conclusion}
+
+\printbibliography
+
+\appendix
+\chapter{Appendix Title}
+\end{document}
