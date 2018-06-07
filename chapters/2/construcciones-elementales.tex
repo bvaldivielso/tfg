@@ -353,7 +353,7 @@ $f : \arr{P}{Y}$ tal que el siguiente diagrama es conmutativo:
 \begin{center}
 \begin{tikzcd}
 &  Y  \arrow[rd, "f_2"]& \\
-A \arrow[ur, "f_1"] \arrow[r, "i_1"] &
+A \arrow[ur, "f_1"] \arrow{r}[swap]{i_1} &
  \arrow[u, dotted, "\exists! f"] P
  & B \arrow[l, "i_2"]
 \end{tikzcd}
@@ -361,8 +361,8 @@ A \arrow[ur, "f_1"] \arrow[r, "i_1"] &
 \end{definition}
 
 \textit{Retocar esta sección para que sea más consistente con las otras}
-\textit{Hablar de que es único salvo isomorfismo}
-\textit{Arreglar el diagrama}
+\textit{Hablar de que es único salvo isomorfismo}.
+
 
 \subsection{Funtores $\Hom(-, A)$}
 Sea $\C$ una categoría y $A$ un objeto de esta.
