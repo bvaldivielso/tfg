@@ -1,0 +1,45 @@
+De camino a nuestro objetivo de definir las mónadas tendremos
+que pasar previamente por la noción de adjunción. Aunque
+es cierto, como veremos en las próximas secciones, que cada par
+de funtores adjuntos permite construir una mónada, este no es
+ni de lejos el
+único motivo por el que las adjunciones son importantes en matemáticas.
+
+\begin{quotation}
+  adjunction arises everywhere
+\end{quotation}
+
+Empezaremos por dar la definición.
+
+\subsection{Definición}
+\begin{definition}
+  Una adjunción entre categorías $\C$ y $\D$ es un par de funtores
+  $F : \arr{\C}{\D}$ y $G: \arr{\D}{\C}$ tales que los funtores
+  $\Hom_\D(F-, -) : \arr{\C^{op}\times\D}{\Set}$ y
+  $\Hom_\C(-, G-) : \arr{\C^{op}\times\D}{\Set}$ son naturalmente isomorfos.
+
+  Diremos que $F$ es el
+  adjunto por la izquierda de $G$ y que $G$ es el adjunto
+  por la derecha de $F$. Notaremos esta relación entre ambos funtores
+  como $F \adjoint G$.
+\end{definition}
+
+\subsection{Ejemplos}
+\paragraph{Producto}
+Consideramos un conjunto $A$ y el funtor $-\times A : \arr{\Set}{\Set}$.
+
+$-\times A$ es el adjunto por la izquierda del funtor $\Hom(A, -)$.
+Dicho de otra forma para cualquier conjunto $B$ tenemos:
+
+$$\Hom(B\times A, T) \cong \Hom(B, \Hom(A, T))$$
+
+Esto nos dice que es lo mismo dar una aplicación entre
+$B\times A$ y $T$ que una aplicación de $B$ a $\Hom(A, T)$. La
+biyección es la siguiente:
+
+$$\phi: \arr{\Hom(B, \Hom(A, T))}{\Hom(B\times A, T)}$$
+$$\phi(h)(b, a) = h(b)(a)$$
+
+\paragraph{Grupos libres}
+
+\paragraph{Producto y diagonal}

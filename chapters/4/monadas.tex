@@ -1,0 +1,24 @@
+\subsection{Definición}
+\begin{definition}
+  Una mónada sobre una categoría $\C$
+  es una terna $(T, \eta, \mu)$ donde $T : \arr{C}{C}$ es un
+  endofuntor y $\eta : \nat{1_\C}{T}$ $\mu: \nat{T^2}{T}$ dos
+  transformaciones naturales tales que los siguientes diagramas
+  conmutan:
+
+
+  \begin{center}
+    \begin{tikzcd}
+      T^3 \arrow{d}{\mu T} \arrow{r}{T\mu} & T^2 \arrow{d}{\mu} \\
+      T^2 \arrow{r}{\mu} & T
+
+    \end{tikzcd}
+
+    \begin{tikzcd}
+      T \ar[equal]{dr} \arrow{r}{T\eta} & T^2 \arrow{d}{\mu} & T \arrow{l}[swap]{\eta T} \ar[equal]{ld} \\
+      & T &
+    \end{tikzcd}
+  \end{center}
+
+
+\end{definition}
