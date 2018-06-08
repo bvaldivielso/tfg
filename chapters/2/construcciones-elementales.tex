@@ -27,10 +27,10 @@ y sus flechas tenemos que saber cómo trasladar la noción de elemento.
 
 Si consideramos el conjunto con un solo elemento, al que llamaremos
 $*$, y las aplicaciones que salen de él nos damos cuentas de que podemos
-identificar las aplicaciones entre el conjunto $* = \{ 1 \}$ y un conjunto
+identificar las aplicaciones entre el conjunto $* = \{ 1 \}$ \textcolor{red}{es curioso, parece que aquí tenemos una visión dual del asunto. A mi me gusta escribir $\uno=\{*\}$ mientras que tu prefieres $*=\{1\}$ fíjate que he usado una macro para uno para que puedas usar el símbolo que quieras, aunque en conjuntos uno=1 es bastante bueno. Yo prefiero mi notación a la tuya pero ????? supongo que tienes tus motivos} y un conjunto
 $A$ (estas aplicaciones son de la forma $1 \mapsto a \in A$)
 arbitrario con los elementos (en el sentido de teoría de conjuntos)
-de $A$. Dicho de otra forma $\Hom(*, A)$ son lo mismo $A$ como conjuntos.
+de $A$. Dicho de otra forma $\Hom(*, A)$ y $A$ son ``\emph{lo mismo}"  como conjuntos.
 pero $\Hom(*, A)$ está formado por flechas y eso es algo de lo que
 sí podemos hablar dentro de una categoría. Sin embargo, para realizar
 este procedimiento de identificar los elementos de un conjunto con
@@ -76,7 +76,7 @@ cuando consideramos categorías en la que los objetos son estructuras
 matemáticas y las flechas son sus morfismos, los monomorfismos son
 aquellas flechas tales que las aplicaciones entre conjuntos subyacentes
 son inyectivas. Ejemplos de esto son las categorías
-$\Grp$, $\Ring$...
+$\Grp$, $\Ring$, ...
 
 \section{Isomorfismos}
 \begin{definition}
@@ -103,7 +103,7 @@ tal que $f \circ g = 1_B$ y $g \circ f = 1_A$.
 
 Esta caracterización de isomorfismo nos permite ver rápidamente
 que los isomorfismos de la categoría $\Set$ se corresponden con las
-biyecciones y que los isomorfismos sobre $\Grp$, $\Ring$, $\Top$...
+biyecciones y que los isomorfismos sobre $\Grp$, $\Ring$, $\Top$, ...
 se corresponden con los isomorfismos de grupos,
 isomorfismos de anillos y homeomorfismos de espacios topológicos.
 
@@ -111,7 +111,7 @@ isomorfismos de anillos y homeomorfismos de espacios topológicos.
 \section{Productos}
 Otra de los ejemplos que dimos anteriormente de construcción que
 se realiza sobre conjuntos era el producto cartesiano. Esta definición
-podemos llevarla a categorías arbitrarias de la siguiente forma:
+podemos llevarla a categorías arbitrarias de la siguiente forma: \textcolor{red}{la redacción de este párrafo es algo farragosa. Yo la simplificaría: Podemos también llevar a categorías cualesquiera la definición de producto cartesiano que hicimos en conjuntos?¿??}
 
 \begin{definition}
 Sea $\C$ una categoría y $A$ y $B$ dos objetos de esta. Diremos que
@@ -152,14 +152,14 @@ que comentamos antes) con el producto cartesiano de ambos conjuntos
 y las proyecciones canónicas. Lo demostramos a continuación:
 
 Sea $a : \arr{T}{A}, b : \arr{T}{B}$ un par de funciones. Podemos
-definir la función $(a, b) : \arr{X}{A\times B}$ tal que
+definir la función $(a, b) : \arr{T}{A\times B}$ tal que
 $f(x) = (a(x), b(x))$. Esta función cumple en efecto que
 $\pi_1 \circ f = a$ y $\pi_2 \circ f = b$. Pero además es la única
 que cumple esto pues
-$f(x)=(\pi_1\circ f(x), \pi_2\circ f(x))=(f_1(x), f_2(x))$.
+$f(x)=(\pi_1\circ f(x), \pi_2\circ f(x))=(f_1(x), f_2(x))$. \textcolor{red}{aquí has hecho una mezcla de antiguo y nuevo que tienes que arreglar, $a$ es $x$, $b$ es $y$, $f$ es $(x,y)$.... además decir que una función $h$ está definida tal que $h(x)=...$ no me hace mucha gracia yo preferiría decir que $h$ está definida como o por $h(x)=....$ Otra cosa que no me hace mucha gracia es hablar de funciones en conjuntos, yo prefiero usar siempre aplicaciones cuando nos referimos a flechas de $\Set$ esto es posible que sea una paranoia pero..... }
 
 \paragraph{Otras estructuras matemáticas}
-A continuación mostramos ejemplos de productos categóricos
+A continuación mostramos ejemplos de productos categóricos \textcolor{red}{yo eliminaría lo de categóricos simplemente productos....}
 en categorías conocidas:
 
 \begin{itemize}
@@ -173,6 +173,9 @@ producto directo de grupos.
 En la categoría de cuerpos no existen los productos.
 \textit{Demostrar}
 
+\textcolor{red}{no se si puedes probar esto aquí. Ni siquiera se si podrías justificar ( a estar alturas) que el conjunto subyacente al producto de dos cuerpos (si existiese) tendría que ser el producto de los conjuntos subyacentes y en este no hay estructura de cuerpo de manera que las proyecciones sean morfismos?¿?¿?  Es decir no se si a estas alturas puedes justificar que los futores subyacentes a conjuntos conservan productos}
+
+
 \section{Objetos iniciales}
 Al principio de la sección le dimos un papel especial al conjunto
 de un solo elemento $*$. Nos gustaría caracterizar a ese objeto de
@@ -182,10 +185,12 @@ Esto es posible:
 \begin{definition}
 Sea $\C$ una categoría y $I$ un objeto. Diremos que $I$ es un objeto
 inicial si dado cualquier objeto $T$ de la categoría solo existe un
-elemento de $I$ definido sobre $T$.
+elemento de $I$ definido sobre $T$. 
 \end{definition}
 
-Esto es cierto sobre $* = \{ 1 \}$: la única flecha que llega a
+\textcolor{red}{De nuevo no tengo claro que $I$ sea una buena notación para objeto inicial, yo utilizaría una macro y al final decidiría que poner dentro, mi elección sería algún tipo de uno .... e incluso una $*$ me parece mejor que $I$ }
+
+Esto es cierto sobre $* = \{ 1 \}$: la única flecha que llega 
 a $*$ desde cualquier conjunto es la que vale constantemente 1, pero
 una vez más esta definición se puede aplicar a otras categorías.
 
@@ -196,7 +201,7 @@ que vaya del grupo trivial a cualquier otro grupo y es la aplicación
 nula. Resulta, además, que el objeto final de la categoría es también
 el grupo trivial. Si en una categoría tenemos que un objeto
 $O$ es a la vez inicial y final diremos que $O$ es un objeto nulo. Esto
-es importante porque nos permite definir morfismos nulos.
+es importante porque nos permite definir morfismos nulos. \textcolor{red}{esto no lo puedes hacer aquí....quizás después cuando digas que es objeto final...}
 % TODO: definir
 
 \paragraph{En $\Ring$}
@@ -204,7 +209,7 @@ En la categoría de los anillos con unidad el objeto inicial es
 $\Z$ y el único morfismo que existe de él en cualquier otro anillo
 $R$ es el que lleva $1_\Z$ a $1_R$. No existe objeto final en la
 categoría de anillos (se razona considerando la característica
-del supuesto anillo final).
+del supuesto anillo final). \textcolor{red}{de nuevo final .....}
 
 \section{Dualidad}
 El concepto de dualidad que se encuentra frecuentemente en las
@@ -216,13 +221,12 @@ continuación la definición de categoría opuesta.
 Dada una categoría $\C$ podemos construir una categoría
 $\C^{op}$ en la que definimos $\Obj{\C^{op}} = \Obj{\C}$,
 $\Hom_{\C^{op}}(A, B) = \Hom_{\C}(B, A)$ y una operación de
-composición dad por $f \circ_{op} g = g \circ f$. Veamos
+composición dada por $f \circ_{op} g = g \circ f$. Veamos
 la construcción realizada describe en efecto una categoría:
 \begin{itemize}
 \item La composición es asociativa: sean
       $f \in \Hom_{\C^{op}}(A, B)$, $g \in \Hom_{\C^{op}}(B, C)$
       y $h \in \Hom_{\C^{op}}(C, D)$. Tenemos que
-
 \begin{multline*}
 (h \circ_{op} g) \circ_{op} f = (g \circ h) \circ_{op} f \\
                               = f \circ (g \circ h)
@@ -238,6 +242,10 @@ la construcción realizada describe en efecto una categoría:
 La categoría opuesta nos otorga una herramienta para reaprovechar
 definiciones realizadas anteriormente. Veremos ejemplos de propiedades
 duales en las siguientes secciones.
+
+\textcolor{red}{aqui tienes que hablar de propiedades duales. Luego yo diría que llamaremos epimorfismos la propiedad dual de monomorfimo, coproducto a la dual de producto, final a la dual de inicial etc.  y luego diría que vas especificar estas propiedades más detalladamente }
+
+
 
 \subsection{Epimorfismos}
 En una sección anterior especificamos cuando una flecha
@@ -257,7 +265,7 @@ $\C^{op}$.
 
 \begin{proposition}
 $f$ es un epimorfismo si y solo si dado cualquier objeto $X$ y
-cualquier par de flechas $g_1, g_2 : \arr{B, X}$
+cualquier par de flechas $g_1, g_2 : \arr{B}{X}$
 tenemos que $g_1 \circ f = g_1 \circ f \implies g_1 = g_2$.
 Decimos también en este caso que $f$ se puede cancelar por la
 derecha.
@@ -283,9 +291,8 @@ inyectiva.
 Sin embargo consideremos la inclusión
 $i : \arr{\Z}{\Q}$, un anillo $R$
 y un par de aplicaciones de anillos $g_1, g_2 : \arr{\Q}{R}$. Supongamos
-que $g_1 \circ f = g_2 \circ f$. Ahora  $\forall x \in \Q$
+que $g_1 \circ i = g_2 \circ i$. Ahora  $\forall x \in \Q$
 tenemos que $\exists a, b \in \Z : x = \frac{a}{b}$ y entonces:
-
 \begin{multline*}
 g_1(x) = g_1(\frac{a}{b}) = g_1(a)g_1(b)^{-1} \\
        = (g_1 \circ i)(a)(g_1\circ i)(b)^{-1}
@@ -301,16 +308,16 @@ en la categoría de anillos se pueden encontrar flechas que son
 monomorfismos y epimorfismos pero no son isomorfismos.
 
 \subsection{Objetos finales}
-Existe también una propiedad dual a la de ser objeto inicial.
+Existe también una propiedad dual a la de ser objeto inicial. \textcolor{red}{toda propiedad tiene su dual, no queda bien decir que existe la propiedad dual de ser inicial, tendrías que decir que la propiedad dual de ser un objeto inicial es ser un objeto final o algo así}
 
 \begin{definition}
-Dado un objeto $T$ de una categoría $C$ decimos que
+Dado un objeto $T$ de una categoría $\C$ decimos que
 $T$ es un objeto final si $T$ es un objeto inicial en la
-categoría $C^{op}$.
+categoría $\C^{op}$.
 \end{definition}
 
 Podemos probar una caracterización que no hace referencia a
-$\C^{op}$:
+$\C^{op}$: \textcolor{red}{yo no pondría esto como proposición, diría algo así: Si leemos lo que significa ser objeto final en la propia categoría $\C$ obtendríamos...}
 
 \begin{proposition}
 El objeto $T$ es final si y solo si para cualquier otro objeto
@@ -327,19 +334,19 @@ En $\Set$ el conjunto vacío $\emptyset$ es un objeto final.
 El objeto final en $\Grp$ es el grupo de un solo elemento. Notemos
 que coincide con el objeto inicial. Cuando en una categoría $\C$ coinciden
 el objeto inicial y el final $T$ llamamos a $T$ objeto nulo. El objeto
-nulo nos permite definir una aplicación nula (\textit{explicar esto mejor}).
+nulo nos permite definir una aplicación nula (\textit{explicar esto mejor}). \textcolor{red}{no tengo muy claro que nulo sea el nombre apropiado para esto. Yo siempre he usado cero}
 
 Otro ejemplo de categoría en la que ocurre esto es en la de espacios vectoriales
 sobre un cuerpo $K$.
 
 \paragraph{En \Ring}
-\textit{Probar que no existen objetos finales en la categoría de anillos}
+\textit{Probar que no existen objetos finales en la categoría de anillos} \textcolor{red}{que me dices del anillo con sólo un elemeno el $0$ que es al mismo tiempo cero y uno?¿?¿ lo que pasa en anillos es que no hay cero, el inicial y el terminal no coinciden}
 
 \subsection{Coproducto}
 Podemos repetir la definición de producto categórico sobre la categoría
 opuesta y \textit{dando la vuelta} a las flechas para volver a la
 categoría inicial $\C$ llegaríamos a la siguiente definición de lo que
-llamaremos \textbf{coproducto}:
+llamaremos \textbf{coproducto}: \textcolor{red}{de nuevo yo diría aquí algo así: Coproducto es la propiedad dual de producto, si leemos esta propiedad en la propia categoría $\C$ en lugar de en $\C^{op}$ tendríamaos}
 
 \begin{definition}
 Sea $\C$ una categoría y $A$ y $B$ dos objetos de esta. Diremos que
@@ -361,10 +368,14 @@ A \arrow[ur, "f_1"] \arrow{r}[swap]{i_1} &
 \end{definition}
 
 \textit{Retocar esta sección para que sea más consistente con las otras}
-\textit{Hablar de que es único salvo isomorfismo}.
+\textit{Hablar de que es único salvo isomorfismo}. \textcolor{red}{Quizás deberías decir que la propiedad dual de isomorfismo es de nuevo isomorfismo, esto hace que el carácter \emph{único salvo isomorfismo} que tienen las construcciones definidas por  una \emph{propiedad universal} también lo tengan las construcciones definidas por sus propiedades duales.....}
 
 
 \subsection{Funtores $\Hom(-, A)$}
+\textcolor{red}{Creo que le das demasiadas vueltas a esto. Diría algo así; Dado un objeto $A$ de una categoría $\C$ definimos el funtor $Hom_\C(-,A)$ como $$Hom_\C(-,A)=Hom_{\C^{op}}(A,-):\arr{\C^{op}}{\Set}$$ Si queremos observar el efecto de este funtor sobre $\C$ tenemos que para cada flecha $\arr{C'}{C}$....}
+
+
+
 Sea $\C$ una categoría y $A$ un objeto de esta.
 Sea $f \in \Hom_{\C^{op}}(C, C')$. Definimos:
 
@@ -379,7 +390,7 @@ $$\Hom_{\C}(f, A)(g) = g \circ f$$
 (recordando que $g : \arr{C}{A}$ y $f : \arr{C'}{C}$ como
 flechas de $\C$ y por tanto se pueden componer)
 
-Se cumple además que:
+Se cumple además que:\textcolor{red}{esto es evidente}
 
 \begin{itemize}
 \item $\Hom_{\C}(1_C, A)(g) = g \circ 1_C = g$ para toda flecha
@@ -409,7 +420,7 @@ que $\Hom_\C(-, -) : \arr{\C^{op} \times \C}{\Set}$ es un bifuntor.
 Cuando queremos hacer énfasis a que un funtor está actuando sobre
 la categoría opuesta a una particular, decimos que es un funtor
 contravariante. Por ejemplo, diríamos que $\Hom(-, A)$ es un funtor
-contravariante.
+contravariante \textcolor{red}{desde la categoría $\C$}.
 
 \section{En programación}
 A lo largo de esta sección aplicamos las construcciones que hemos visto
