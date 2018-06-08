@@ -27,7 +27,7 @@ y sus flechas tenemos que saber cómo trasladar la noción de elemento.
 
 Si consideramos el conjunto con un solo elemento, al que llamaremos
 $*$, y las aplicaciones que salen de él nos damos cuentas de que podemos
-identificar las aplicaciones entre el conjunto $* = \{ 1 \}$ \textcolor{red}{es curioso, parece que aquí tenemos una visión dual del asunto. A mi me gusta escribir $\uno=\{*\}$ mientras que tu prefieres $*=\{1\}$ fíjate que he usado una macro para uno para que puedas usar el símbolo que quieras, aunque en conjuntos uno=1 es bastante bueno. Yo prefiero mi notación a la tuya pero ????? supongo que tienes tus motivos} y un conjunto
+identificar las aplicaciones entre el conjunto $\uno = \{ 1 \}$
 $A$ (estas aplicaciones son de la forma $1 \mapsto a \in A$)
 arbitrario con los elementos (en el sentido de teoría de conjuntos)
 de $A$. Dicho de otra forma $\Hom(*, A)$ y $A$ son ``\emph{lo mismo}"  como conjuntos.
@@ -35,7 +35,7 @@ pero $\Hom(*, A)$ está formado por flechas y eso es algo de lo que
 sí podemos hablar dentro de una categoría. Sin embargo, para realizar
 este procedimiento de identificar los elementos de un conjunto con
 un conjunto de flechas de la categoría hemos tenido que acudir a un
-objeto especial de la categoría de conjuntos: $*$. Este procedimiento
+objeto especial de la categoría de conjuntos: $\uno$. Este procedimiento
 es algo que quizá no podamos realizar en otras categorías pero nos
 motiva a hacer una definición más general de
 \textit{elemento categórico}:
@@ -44,23 +44,26 @@ motiva a hacer una definición más general de
 En una categoría $\C$ llamaremos elemento de un objeto $A$
 a cualquier flecha $x : \arr{T}{A}$ (sea cual sea el objeto
 $T$). De forma paralela a como se hace con conjuntos, utilizaremos
-la notación $x \in^T A$.
+la notación $x \in^T A$. Diremos también que $x$ es un elemento
+de $A$ definido sobre $T$.
 \end{definition}
 
 Con esta noción de elemento notamos que $f : \arr{A}{B}$ lleva
 elementos de $A$ a elementos de $B$ mediante la composición: si
 $x \in^T A$ entonces $f \circ x \in^T B$. Esto motiva que en lo que
 sigue omitamos a veces el signo de composición ($f x$ en lugar
-de $f \circ x$) si buscamos que se interpreten algunas flechas
-como elementos categóricos y la acción de otras flechas sobre estos.
+de $f \circ x$) si nuestra intención es
+que algunas flechas (en este caso $x$) se interpreten
+como elementos categóricos.
 
-Veamos como esta noción nos permite llevar a teoría de categorías
+Veremos como esta noción nos permite llevar a teoría de categorías
 algunos conceptos originados sobre conjuntos.
 
 \section{Monomorfismos}
 \begin{definition}
 Consideremos una categoría $\C$ y una flecha $f : \arr{A}{B}$ de esta.
-Diremos que $f$ es un monomorfismo si dados dos elementos de $A$
+Diremos que $f$ es un monomorfismo si para cualquier objeto
+$T$ de $\C$ y dados dos elementos de $A$
 $x, y \in^T A$ tenemos que $fx = fy \implies x = y$.
 \end{definition}
 
@@ -82,13 +85,14 @@ $\Grp$, $\Ring$, ...
 \begin{definition}
 Consideremos una categoría $\C$ y una flecha $f : \arr{A}{B}$ de
 esta. Diremos que $f$ es un isomorfismo si $f$ es una biyección
-entre los elementos de $A$ y los elementos de $B$ definido sobre
+entre los elementos de $A$ y los elementos de $B$ definidos sobre
 $T$ para cualquier objeto $T$ de $\C$.
 \end{definition}
 
 Esta definición es similar a la definición habitual
 de biyección sobre conjuntos pero generalizando los elementos de
-los conjuntos sobre elementos de los objeto sobre el resto los elementos
+los conjuntos a elementos de los objetos definidos sobre todos
+los objetos
 de la categoría.
 
 Nótese que de este concepto podemos dar una definición equivalente
@@ -109,9 +113,8 @@ isomorfismos de anillos y homeomorfismos de espacios topológicos.
 
 
 \section{Productos}
-Otra de los ejemplos que dimos anteriormente de construcción que
-se realiza sobre conjuntos era el producto cartesiano. Esta definición
-podemos llevarla a categorías arbitrarias de la siguiente forma: \textcolor{red}{la redacción de este párrafo es algo farragosa. Yo la simplificaría: Podemos también llevar a categorías cualesquiera la definición de producto cartesiano que hicimos en conjuntos?¿??}
+También es posible trasladar la definición de producto de conjuntos
+a una categoría arbitraria mediante la siguiente definición:
 
 \begin{definition}
 Sea $\C$ una categoría y $A$ y $B$ dos objetos de esta. Diremos que
@@ -146,70 +149,59 @@ y $B$.
 
 \subsection{Ejemplos}
 \paragraph{\Set}
-Dados dos conjuntos $A$ y $B$ siempre existe el producto categórico
+Dados dos conjuntos $A$ y $B$ siempre existe el producto de estos
 y además coincide (salvo el isomorfismo
-que comentamos antes) con el producto cartesiano de ambos conjuntos
-y las proyecciones canónicas. Lo demostramos a continuación:
+que comentamos antes) con el producto cartesiano de ambos
+junto a sus proyecciones canónicas. Desmotramos tal
+afirmación a continuación:
 
-Sea $a : \arr{T}{A}, b : \arr{T}{B}$ un par de funciones. Podemos
-definir la función $(a, b) : \arr{T}{A\times B}$ tal que
-$f(x) = (a(x), b(x))$. Esta función cumple en efecto que
-$\pi_1 \circ f = a$ y $\pi_2 \circ f = b$. Pero además es la única
-que cumple esto pues
-$f(x)=(\pi_1\circ f(x), \pi_2\circ f(x))=(f_1(x), f_2(x))$. \textcolor{red}{aquí has hecho una mezcla de antiguo y nuevo que tienes que arreglar, $a$ es $x$, $b$ es $y$, $f$ es $(x,y)$.... además decir que una función $h$ está definida tal que $h(x)=...$ no me hace mucha gracia yo preferiría decir que $h$ está definida como o por $h(x)=....$ Otra cosa que no me hace mucha gracia es hablar de funciones en conjuntos, yo prefiero usar siempre aplicaciones cuando nos referimos a flechas de $\Set$ esto es posible que sea una paranoia pero..... }
+Sean $x: \arr{T}{A}, y: \arr{T}{B}$ dos aplicaciones. Podemos
+definir la aplicación $(x, y) :\arr{T}{A\times B}$ por
+$(x, y)(t) = (x(t), y(t))$. Esta aplicación cumple en efecto que
+$\pi_1 \circ (x, y) = x$ y $\pi_2 \circ y = y$. Pero además es la única
+que cumple esto pues si tenemos otra aplicación
+$f : \arr{T}{A\times B}$ cumpliendo $\pi_1 \circ f = x$ y
+$\pi_2 \circ f = y$ solo nos basta recordar que podemos
+escribir $f$ como:
+$f(t)=(\pi_1\circ f(t), \pi_2\circ f(t))=(x(t), y(t))$.
+y por tanto $f = (x, y)$.
 
 \paragraph{Otras estructuras matemáticas}
-A continuación mostramos ejemplos de productos categóricos \textcolor{red}{yo eliminaría lo de categóricos simplemente productos....}
+A continuación mostramos ejemplos de productos
 en categorías conocidas:
 
 \begin{itemize}
-\item En $\Grp$ el producto categórico se corresponde con el
+\item En $\Grp$ el producto se corresponde con el
 producto directo de grupos.
 \item En $\Top$ se corresponde con el producto de espacios topológicos.
 \item En $\Ring$ se corresponde con el producto de anillos.
 \end{itemize}
 
-\paragraph{Categoría de cuerpos}
-En la categoría de cuerpos no existen los productos.
-\textit{Demostrar}
-
-\textcolor{red}{no se si puedes probar esto aquí. Ni siquiera se si podrías justificar ( a estar alturas) que el conjunto subyacente al producto de dos cuerpos (si existiese) tendría que ser el producto de los conjuntos subyacentes y en este no hay estructura de cuerpo de manera que las proyecciones sean morfismos?¿?¿?  Es decir no se si a estas alturas puedes justificar que los futores subyacentes a conjuntos conservan productos}
-
-
-\section{Objetos iniciales}
+\section{Objetos finales}
 Al principio de la sección le dimos un papel especial al conjunto
-de un solo elemento $*$. Nos gustaría caracterizar a ese objeto de
+de un solo elemento $\uno$. Nos gustaría caracterizar a ese objeto de
 la categoría $\Set$ con alguna propiedad estrictamente categórica.
 Esto es posible:
 
 \begin{definition}
-Sea $\C$ una categoría y $I$ un objeto. Diremos que $I$ es un objeto
-inicial si dado cualquier objeto $T$ de la categoría solo existe un
-elemento de $I$ definido sobre $T$. 
+Sea $\C$ una categoría y $\uno$ un objeto. Diremos que $\uno$ es un objeto
+final si dado cualquier objeto $T$ de la categoría existe un
+único elemento de $\uno$ definido sobre $T$.
 \end{definition}
 
-\textcolor{red}{De nuevo no tengo claro que $I$ sea una buena notación para objeto inicial, yo utilizaría una macro y al final decidiría que poner dentro, mi elección sería algún tipo de uno .... e incluso una $*$ me parece mejor que $I$ }
-
-Esto es cierto sobre $* = \{ 1 \}$: la única flecha que llega 
-a $*$ desde cualquier conjunto es la que vale constantemente 1, pero
-una vez más esta definición se puede aplicar a otras categorías.
+Es sencillo ver cómo el conjunto $\uno$ se corresponde con el
+objeto $\final$ de la categoría $\Set$.
 
 \subsection{Ejemplos}
 \paragraph{En $\Grp$}
-El objeto inicial en $\Grp$ es el grupo trivial. Solo existe una función
-que vaya del grupo trivial a cualquier otro grupo y es la aplicación
-nula. Resulta, además, que el objeto final de la categoría es también
-el grupo trivial. Si en una categoría tenemos que un objeto
-$O$ es a la vez inicial y final diremos que $O$ es un objeto nulo. Esto
-es importante porque nos permite definir morfismos nulos. \textcolor{red}{esto no lo puedes hacer aquí....quizás después cuando digas que es objeto final...}
-% TODO: definir
+El grupo trivial es el objeto final de la categoría $\Grp$.
+Esto es sencillo de comprobar: dado cualquier grupo $G$ tenemos
+que homomorfismo trivial $\arr{G}{\final}$ es el único morfismo
+entre $G$ y $\final$.
 
 \paragraph{En $\Ring$}
-En la categoría de los anillos con unidad el objeto inicial es
-$\Z$ y el único morfismo que existe de él en cualquier otro anillo
-$R$ es el que lleva $1_\Z$ a $1_R$. No existe objeto final en la
-categoría de anillos (se razona considerando la característica
-del supuesto anillo final). \textcolor{red}{de nuevo final .....}
+En la categoría de los anillos con unidad el objeto final es
+también el anillo trivial.
 
 \section{Dualidad}
 El concepto de dualidad que se encuentra frecuentemente en las
