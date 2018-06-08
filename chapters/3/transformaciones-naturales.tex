@@ -14,15 +14,15 @@ Procedemos con la definición:
   $\lambda_C : \arr{FC}{GC}$ de manera que para
   cualquier flecha $g : \arr{C}{C'}$ el siguiente diagrama
   es conmutativo:
-
-
-  \begin{center}
+\begin{center}
     \begin{tikzcd}
       F C \arrow{r}{\lambda_C} \arrow{d}[swap]{F g} & GC \arrow{d}{G g} \\
       F C' \arrow{r}{\lambda_{C'}} & G C'
     \end{tikzcd}
   \end{center}
 \end{definition}
+
+\textcolor{red}{normalmente se utiliza $\Rightarrow$ para las transformaciones naturales, en lugar de $\rightarrow$}
 
 Los siguientes resultados nos permitirán considerar categorías en las
 que los objetos son funtores entre dos categorías $\C$ y $\D$ y las
@@ -32,11 +32,11 @@ flechas son las transformaciones naturales entre los funtores:
   \begin{enumerate}
   \item Dado cualquier funtor $F : \arr{\C}{\D}$ podemos definir
     $({1_F})_C  = 1_{(FC)} : \arr{FC}{FC}$. $1_F$ es una transformación
-    natural entre $1_F : \arr{F}{F}$.
+    natural entre $1_F : \arr{F}{F}$. \textcolor{red}{esto no queda  muy bien redactado $1_F$ entre .... }
   \item Podemos componer transformaciones naturales de la siguiente
     forma: dados funtores $F, G, H : \arr{\C}{\D}$ y transformaciones
     naturales $\lambda : \arr{F}{G}$, $\sigma : \arr{G}{H}$ podemos
-    definir $\sigma \circ \lambda$ dada
+    definir $\sigma \circ \lambda$ dada \textcolor{red}{podemos definir...dada no cuadra}
     por sus componentes
     $(\sigma\circ\lambda)_C = \sigma_C \circ \lambda_C$.
     $\sigma\circ\lambda$ es una transformación natural
@@ -53,21 +53,21 @@ flechas son las transformaciones naturales entre los funtores:
 
   En definitiva los funtores $\arr{\C}{\D}$ y las transformaciones
   naturales entre estos funtores forman una categoría. A esa categoría
-  la llamaremos $[\C, \D]$.
+  la llamaremos $[\C, \D]$. \textcolor{red}{Supongo que tienes algún motivo para usar esta notación, yo creo que es mucho mejor usar $\D^\C$}
 \end{proposition}
 
 \subsection{Ejemplos}
 \paragraph{El doble dual}
 Consideremos la categoría de espacios vectoriales sobre un cuerpo
 $K$ a la que llamaremos $\VectK$. Podemos considerar los endofuntores
-identidad $1_{\VectK} : \arr{\VectK}{\VectK}$ y el funtor doble dual:
+identidad $1_{\VectK} : \arr{\VectK}{\VectK}$ y  doble dual:
 $(-)^{**} : \arr{\VectK}{\VectK}$. El último de estos funtores actúa
 así sobre los morfismos:
 
 $$(-)^{**} : \arr{\Hom(V, W)}{\Hom(V^{**}, W^{**})}$$
 $$f^{**}(g)(\phi) = g(\phi \circ f)$$
 
-Para cada espacio vectorial sobre $K$ $V$ podemos además
+Para cada espacio vectorial sobre $K$ $V$ \textcolor{red}{uff} podemos además
 definir un monomorfismo de espacios vectoriales
  (isomorfismo
 en el caso finito-dimensional) en su doble dual:
@@ -82,7 +82,7 @@ i_V(v)(\phi) = \phi(v)
 Pues $i$ es una transformación natural entre $1_K$ y
 $(-)^{**}$. Más aun, si nos restringimos al caso finito dimensional,
 debido a que todas las componentes de la transformación natural
-son isomorfismos, decimos que ambos funtores son naturalmente isomorfos.
+son isomorfismos, decimos que ambos funtores son naturalmente isomorfos. \textcolor{red}{este paraqraph no está muy bien redactado, además naturalmente isomorfos e isomorfos en la categoría de funtores ?¿?¿? a estas alturas no se?¿?? y también la restricción a finito dimensionales uff?¿?¿ estás cambiando los dominios de definición....?¿?¿}
 
 \paragraph{Abelianización de grupos}
 Dado un grupo $G$ definimos su abelianización $G^{ab}$ como
@@ -95,4 +95,4 @@ lleva los conmutadores al 0) y por tanto factoriza a través
 de $G^{ab}$ permitiéndonos definir una aplicación
 $f^{ab} : \arr{G^{ab}}{H^{ab}}$ y comprobar
 que $(-)^{ab}$ es un funtor. La proyección de $\pi$ es una transformación
-natural $\pi : \arr{ 1_{\Grp} }{ (-)^{ab} }$.
+natural $\pi : \arr{ 1_{\Grp} }{ (-)^{ab} }$. \textcolor{red}{también tienes que redactar esto un poco mejor}
