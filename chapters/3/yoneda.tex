@@ -3,7 +3,7 @@ inesperados que surgen a raíz de la teoría de categorías. Una
 de las consecuencias más importantes de este resultado es
 el \textit{embebimiento} (cambiar \textcolor{red}{yo suelo usar encaje}) de Yoneda, que nos permite
 ver una categoría $\C$ cualquiera dentro de la categoría de
-funtores $[\C, \Set]$. Necesitaremos algunos resultados
+funtores $\funccat{\C}{\Set}$. Necesitaremos algunos resultados
 previos para enunciar el lema:
 
 \textcolor{red}{yo sacaría la definicion de $\Nat$ de la proposición. Diciendo algo así: Vamos a escribir $\Nat(-,-)$ en lugar de $Hom_{[\C,\D]}(-,-)$}
@@ -11,24 +11,24 @@ previos para enunciar el lema:
 \begin{proposition*}
   Dada una categoría $\C$ y un objeto suyo
   $A$,
-  $$\Nat(\Hom(A, -), -) : \arr{\C \times [\C, \Set]}{\Set}$$
+  $$\Nat(\Hom(A, -), -) : \arr{\C \times \funccat{\C}{\Set}}{\Set}$$
   es un bifuntor donde $\Nat(F, G)$ es el conjunto de transformaciones
   naturales entre los funtores $F$ y $G$.
 \end{proposition*}
 \begin{proof}
   Consideramos el funtor identidad
-  $1_{[\C, \Set]} :\arr{[\C, \Set]}{[\C, \Set]}$ y el funtor
-  $\Hom(*, -) : \arr{C}{[\C, \Set]^{op}}$ (demostrar)
+  $1_{\funccat{\C}{\Set}} :\arr{\funccat{\C}{\Set}}{\funccat{\C}{\Set}}$ y el funtor
+  $\Hom(*, -) : \arr{C^{op}}{\funccat{\C}{\Set}}$ (demostrar)
   el producto de estos nos define un funtor:
-  $$\Hom(*, -)\times 1_{[\C, \Set]} :
-  \arr{\C\times [\C, \Set]}{ [\C, \Set]^{op} \times [\C, \Set] }$$
+  $$\Hom(*, -)\times 1_{\funccat{\C}{\Set}} :
+  \arr{\C\times \funccat{\C}{\Set}}{ \funccat{\C^{op}}{\Set} \times \funccat{\C}{\Set} }$$
   pero sabemos que
-  $$\Nat(-, -) = \Hom_{[\C, \Set]}(-, -) :
-    \arr{[\C, \Set]^{op}\times[\C, \Set]}{\Set}$$
+  $$\Nat(-, -) = \Hom_{\funccat{\C}{\Set}}(-, -) :
+    \arr{\funccat{\C^{op}}{\Set}\times\funccat{\C}{\Set}}{\Set}$$
     es un funtor. La composición de estos dos funtores
     que hemos dicho es el funtor que buscamos.
-    
- \textcolor{red}{esto es un poco mucho caótico, por lo pronto el nombre $Hom(*,-) $ es horrible, luego en los dos funtores que vas a componer no aparece $A$ por ningún lado...por último has dicho quien es $\Nat(-,-)$ por tanto $\Nat(F,-):[\C ,\Set]\rightarrow \Set$ estaría claro para cualquier $F\in [\C ,\Set]^{op}=[\C^{op},\Set]$, en particular estaría claro quien es $\Nat(\Hom(A, -), -)$ pero como funtor de  $[\C, \Set]$ en $\Set$  }
+
+ \textcolor{red}{esto es un poco mucho caótico, por lo pronto el nombre $Hom(*,-) $ es horrible, luego en los dos funtores que vas a componer no aparece $A$ por ningún lado...por último has dicho quien es $\Nat(-,-)$ por tanto $\Nat(F,-):[\C ,\Set]\rightarrow \Set$ estaría claro para cualquier $F\in [\C ,\Set]^{op}=[\C^{op},\Set]$, en particular estaría claro quien es $\Nat(\Hom(A, -), -)$ pero como funtor de  $\funccat{\C}{\Set}$ en $\Set$  }
 \end{proof}
 
 \textcolor{red}{me quedo aquí para darte tiempo a que repases esto.......recuerda que la semana que viene sólo estoy aquí el lunes......creo que antes de seguir deberías quitar todos los comentarios en rojo, yo posiblemente no vuelva a leer los cambios que hagas a menos que me indiques que lea algo en particular.....}
@@ -38,7 +38,7 @@ previos para enunciar el lema:
 Necesitaremos probar que podemos definir el siguiente funtor:
 
 \begin{proposition*}
-  Sea $\C$ una categoría y $Ev(-, -) : \arr{\C\times[\C, \Set]}{\Set}$
+  Sea $\C$ una categoría y $Ev(-, -) : \arr{\C\times\funccat{\C}{\Set}}{\Set}$
   dado por $Ev(C, F) = FC$. $E$ es un funtor y lo llamamos
   \textbf{funtor de evaluación}.
 \end{proposition*}
@@ -47,7 +47,7 @@ Necesitaremos probar que podemos definir el siguiente funtor:
   $F, G, H : \arr{\C}{\Set}$. Sean además $f : \arr{C}{D}$,
   $g : \arr{D}{E}$ flechas de $\C$.
   Podemos definir la acción de $Ev$ sobre las flechas de
-  $\arr{\C\times[\C, \Set]}{\Set}$ como
+  $\arr{\C\times\funccat{\C}{\Set}}{\Set}$ como
   $Ev(f, \sigma) = \sigma_D \circ Ff : \arr{FC}{GD}$. Veamos que $E$ se comporta bien
   respecto a las composiciones:
   \begin{multline*}
@@ -60,7 +60,7 @@ Necesitaremos probar que podemos definir el siguiente funtor:
   \end{multline*}
 
   El hecho de que $Ev(1_C, 1_F) = 1_{FC}$ se prueba de forma sencilla
-  y por tanto $Ev : \arr{\C\times[\C, \Set]}{\Set}$ es un funtor
+  y por tanto $Ev : \arr{\C\times\funccat{\C}{\Set}}{\Set}$ es un funtor
 
   \textit{Explicar mejor la demostración}
 \end{proof}
