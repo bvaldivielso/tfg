@@ -184,15 +184,17 @@ la categoría $\Set$ con alguna propiedad estrictamente categórica.
 Esto es posible:
 
 \begin{definition}
-Sea $\C$ una categoría y $\uno$ un objeto. Diremos que $\uno$ es un objeto
+Sea $\C$ una categoría y $\final$ un objeto. Diremos que $\final$ es un objeto
 final si dado cualquier objeto $T$ de la categoría existe un
-único elemento de $\uno$ definido sobre $T$.
+único elemento de $\final$ definido sobre $T$.
 \end{definition}
 
-Es sencillo ver cómo el conjunto $\uno$ se corresponde con el
-objeto $\final$ de la categoría $\Set$.
-
+Comprobar que de existir el objeto $\final$ es único salvo isomorfismo
+es inmediato.
 \subsection{Ejemplos}
+\paragraph{En $\Set$}
+En la categoría de los conjuntos el objeto final es el $\uno$.
+
 \paragraph{En $\Grp$}
 El grupo trivial es el objeto final de la categoría $\Grp$.
 Esto es sencillo de comprobar: dado cualquier grupo $G$ tenemos
@@ -210,56 +212,66 @@ de vista categórico. Para introducir esta noción presentamos a
 continuación la definición de categoría opuesta.
 
 \subsection{La categoría opuesta}
-Dada una categoría $\C$ podemos construir una categoría
-$\C^{op}$ en la que definimos $\Obj{\C^{op}} = \Obj{\C}$,
+\begin{definition}
+Dada una categoría $\C$ definimos
+$\C^{op}$ (a la que llamaremos categoría opuesta a $\C^{op}$)
+como la categoría determinada por $\Obj{\C^{op}} = \Obj{\C}$,
 $\Hom_{\C^{op}}(A, B) = \Hom_{\C}(B, A)$ y una operación de
-composición dada por $f \circ_{op} g = g \circ f$. Veamos
-la construcción realizada describe en efecto una categoría:
+composición dada por $f \circ_{op} g = g \circ f$.
+\end{definition}
+
+Comprobar que esta construcción es efectivamente una categoría
+en sencillo:
 \begin{itemize}
 \item La composición es asociativa: sean
-      $f \in \Hom_{\C^{op}}(A, B)$, $g \in \Hom_{\C^{op}}(B, C)$
-      y $h \in \Hom_{\C^{op}}(C, D)$. Tenemos que
+$f \in \Hom_{\C^{op}}(A, B)$, $g \in \Hom_{\C^{op}}(B, C)$
+y $h \in \Hom_{\C^{op}}(C, D)$. Tenemos que
 \begin{multline*}
 (h \circ_{op} g) \circ_{op} f = (g \circ h) \circ_{op} f \\
-                              = f \circ (g \circ h)
-                              = (f \circ g) \circ h
-                              = (g \circ_{op} f)  \circ h
-                              = h \circ_{op} (g \circ_{op} f)
+= f \circ (g \circ h)
+= (f \circ g) \circ h
+= (g \circ_{op} f)  \circ h
+= h \circ_{op} (g \circ_{op} f)
 \end{multline*}
-\item Existen las identidades. Las identidades siguen siendo
-      las mismas flechas que son identidad en $\C$. La demostración
-      es inmediata.
+\item Existen las identidades. Las identidades en $\C^{op}$
+son las mismas flechas que en la categoría original $\C$.
 \end{itemize}
 
 La categoría opuesta nos otorga una herramienta para reaprovechar
-definiciones realizadas anteriormente. Veremos ejemplos de propiedades
-duales en las siguientes secciones.
+definiciones realizadas anteriormente. Dada una propiedad $P$ que
+se pueda o no cumplir en una categoría $\C$ llamamos propiedad
+dual de $P$ a la propiedad de que se cumpla $P$ en la categoría opuesta
+$\C^{op}$. Esto nos permite definir las siguientes propiedades:
 
-\textcolor{red}{aqui tienes que hablar de propiedades duales. Luego yo diría que llamaremos epimorfismos la propiedad dual de monomorfimo, coproducto a la dual de producto, final a la dual de inicial etc.  y luego diría que vas especificar estas propiedades más detalladamente }
+\begin{itemize}
+\item Ser epimorfismo es la propiedad dual de ser monomorfismo (es decir
+$f$ es un epimorfismo en $\C$ si $f$ es un monomorfismo en la categoría opuesta
+$\C^{op}$)
+\item La propiedad dual de ser isomorfismo es ella misma. La propiedad
+dual de ser único salvo isomorfismo es ella misma.
+\item El coproducto es el dual del producto, es decir llamaremos
+a $(A+B, i_1, i_2)$ el coproducto de $A$ y $B$ en $\C$ si
+$(A+B, i_1, i_2)$ es el producto de $A$ y $B$ en $\C^{op}$.
+\item La propiedad de ser objeto inicial es la dual a la de ser objeto final.
+\end{itemize}
 
-
+Comentamos estas propiedades en mayor profundidad en las siguientes
+secciones.
 
 \subsection{Epimorfismos}
-En una sección anterior especificamos cuando una flecha
-$f : \arr{A}{B}$ de una categoría $\C$ era un monomorfismo. La categoría
-opuesta nos permite dualizar esta definición de la siguiente manera:
-
+Como ya hemos dicho, la definición de epimorfismo es la siguiente.
 \begin{definition}
 Dada una categoría $\C$ y una flecha $f: \arr{A}{B}$, diremos que
 $f$ es un epimorfismo si y solo si $f$ es un monomorfismo en
 $\C^{op}$.
 \end{definition}
-
-En este sentido decimos que las propiedades ``$f$ es un monomorfismo''
-y ``$f$ es un epimorfismo'' son propiedades duales. Esta propiedad
-se puede enunciar de forma sencilla también sin recurrir a
-$\C^{op}$.
-
+Esta propiedad
+se puede caracterizar de forma sencilla desde dentro de $\C$.
 \begin{proposition}
-$f$ es un epimorfismo si y solo si dado cualquier objeto $X$ y
+$f: \arr{A}{B}$ es un epimorfismo si y solo si dado cualquier objeto $X$ y
 cualquier par de flechas $g_1, g_2 : \arr{B}{X}$
-tenemos que $g_1 \circ f = g_1 \circ f \implies g_1 = g_2$.
-Decimos también en este caso que $f$ se puede cancelar por la
+tenemos que $g_1 \circ f = g_2 \circ f \implies g_1 = g_2$.
+En este caso diremos también que $f$ se puede cancelar por la
 derecha.
 \end{proposition}
 
@@ -269,7 +281,8 @@ En la categoría de los conjuntos los epimorfismos coinciden con las
 aplicaciones sobreyectivas.
 
 \paragraph{Isomorfismos}
-Todo isomorfismo es un epimorfismo y un monomorfismo. El recíproco
+Todo isomorfismo es a la vez
+un epimorfismo y un monomorfismo. El recíproco
 es cierto en algunas categorías (como en $\Set$ o $\Grp$) pero no
 lo es en general.
 
@@ -277,7 +290,8 @@ lo es en general.
 Consideremos la categoría de anillos con unidad (en la
 que los objetos son anillos con unidad y
 las flechas son homomorfismos de anillos). En esta categoría
-que $f : \arr{R}{S}$ es equivalente también a que $f$ sea una aplicación
+el hecho de que $f : \arr{R}{S}$ sea un monomorfismo
+es equivalente a que $f$ sea una aplicación
 inyectiva.
 
 Sin embargo consideremos la inclusión
@@ -292,127 +306,91 @@ g_1(x) = g_1(\frac{a}{b}) = g_1(a)g_1(b)^{-1} \\
        = g_2(a)g_2(b)^{-1} = g_2(x)
 \end{multline*}
 
-Con lo que $g_1=g_2$. Esto prueba que $i : \arr{\Z}{\Q}$ es epimorfismo
-y sin embargo no es sobreyectiva como aplicación. Un isomorfismo en
-la categoría de anillos se corresponde con un isomorfismo de anillos
-(que en particular es una biyección de conjuntos) y por tanto
-en la categoría de anillos se pueden encontrar flechas que son
-monomorfismos y epimorfismos pero no son isomorfismos.
+Con lo que $g_1=g_2$. Esto prueba que $i : \arr{\Z}{\Q}$ es epimorfismo.
+Claramente es también un monomorfismo. La categoría de anillos es
+un ejemplo entonces de categoría en la que ser monomorfismo y
+epimorfismo no es equivalente a ser isomorfismo.
 
-\subsection{Objetos finales}
-Existe también una propiedad dual a la de ser objeto inicial. \textcolor{red}{toda propiedad tiene su dual, no queda bien decir que existe la propiedad dual de ser inicial, tendrías que decir que la propiedad dual de ser un objeto inicial es ser un objeto final o algo así}
-
+\subsection{Objetos iniciales}
 \begin{definition}
-Dado un objeto $T$ de una categoría $\C$ decimos que
-$T$ es un objeto final si $T$ es un objeto inicial en la
-categoría $\C^{op}$.
+Dada una categoría $\C$ diremos que $\inicial$ es un objeto
+inicial si $\inicial$ es un objeto final en la categoría
+$\C^{op}$.
 \end{definition}
 
-Podemos probar una caracterización que no hace referencia a
-$\C^{op}$: \textcolor{red}{yo no pondría esto como proposición, diría algo así: Si leemos lo que significa ser objeto final en la propia categoría $\C$ obtendríamos...}
-
+Esta definición la podemos ver en exclusivamente en términos
+de la categoría $\C$ de la siguiente forma:
 \begin{proposition}
-El objeto $T$ es final si y solo si para cualquier otro objeto
-$X$ existe una sola flecha tiene a $X$ como dominio y a $T$ como
+El objeto $\inicial$ es inicial si y solo si para cualquier otro objeto
+$X$ existe una única flecha tiene a $\inicial$ como dominio y a $X$ como
 codominio.
 \end{proposition}
 
 \subsubsection{Ejemplos}
 \paragraph{En \Set}
-En $\Set$ el conjunto vacío $\emptyset$ es un objeto final.
+En $\Set$ el conjunto vacío $\emptyset$ es un objeto inicial.
 
 \paragraph{En \Grp}
+Vimos anteriormente que el objeto final de $\Grp$ era el grupo
+trivial. Resulta que el grupo trivial es también el objeto inicial
+de la categoría. Cuando en una categoría coinciden el objeto inicial
+$\inicial$ y el objeto final $\final$ llamamos a tal objeto el objeto
+nulo y lo notamos por $\nulo$. La existencia de objetos nulos en una categoría nos garantiza
+la existencia de una flecha distinguida entre cada par de objetos
+$A$ y $B$ de la categoría, a la que llamaremos
+flecha cero y la definimos por
+$0_{A,B} = i \circ j : \arr{A}{B}$ donde
+$j: \arr{A}{\nulo}$ y $i : \arr{\nulo}{B}$
+son respectivamente la única flecha que va de $A$ al objeto nulo y
+la única flecha que va del objeto nulo a $B$.
 
-El objeto final en $\Grp$ es el grupo de un solo elemento. Notemos
-que coincide con el objeto inicial. Cuando en una categoría $\C$ coinciden
-el objeto inicial y el final $T$ llamamos a $T$ objeto nulo. El objeto
-nulo nos permite definir una aplicación nula (\textit{explicar esto mejor}). \textcolor{red}{no tengo muy claro que nulo sea el nombre apropiado para esto. Yo siempre he usado cero}
 
-Otro ejemplo de categoría en la que ocurre esto es en la de espacios vectoriales
-sobre un cuerpo $K$.
+Otro ejemplo de categoría con objeto cero es la categoría de espacios
+vectoriales sobre un cuerpo $K$.
 
-\paragraph{En \Ring}
-\textit{Probar que no existen objetos finales en la categoría de anillos} \textcolor{red}{que me dices del anillo con sólo un elemeno el $0$ que es al mismo tiempo cero y uno?¿?¿ lo que pasa en anillos es que no hay cero, el inicial y el terminal no coinciden}
+\paragraph{En la categoría de cuerpos}
+En la categoría de cuerpos no existen ni objetos finales ni objetos
+iniciales.
 
 \subsection{Coproducto}
-Podemos repetir la definición de producto categórico sobre la categoría
-opuesta y \textit{dando la vuelta} a las flechas para volver a la
-categoría inicial $\C$ llegaríamos a la siguiente definición de lo que
-llamaremos \textbf{coproducto}: \textcolor{red}{de nuevo yo diría aquí algo así: Coproducto es la propiedad dual de producto, si leemos esta propiedad en la propia categoría $\C$ en lugar de en $\C^{op}$ tendríamaos}
+Coproducto es la propiedad dual de producto. Si vemos qué significa
+ser coproducto desde dentro de la misma categoría $\C$ obtenemos
+la siguiente definición:
 
 \begin{definition}
 Sea $\C$ una categoría y $A$ y $B$ dos objetos de esta. Diremos que
 existe el coproducto de $A$ y $B$
 si existe una terna $(A+B, i_1, i_2)$
-donde $P$ es un objeto de $\C$ y
-$i_1 : \arr{P}{A}, i_2 : \arr{P}{B}$ son dos flechas tales
+donde $A+B$ es un objeto de $\C$ y
+$i_1 : \arr{A}{A+B}, i_2 : \arr{B}{A+B}$ son dos flechas tales
 que para cualquier objeto $Y$ y sendas flechas $f_1 : \arr{A}{Y}$,
-$f_2 : \arr{B}{Y}$ existe un morfismo
-$f : \arr{P}{Y}$ tal que el siguiente diagrama es conmutativo:
+$f_2 : \arr{B}{Y}$ existe un único morfismo
+$f : \arr{A+B}{Y}$ tal que el siguiente diagrama es conmutativo:
 \begin{center}
 \begin{tikzcd}
-&  Y  \arrow[rd, "f_2"]& \\
+&  Y  & \\
 A \arrow[ur, "f_1"] \arrow{r}[swap]{i_1} &
- \arrow[u, dotted, "\exists! f"] P
- & B \arrow[l, "i_2"]
+ \arrow[u, dotted, "\exists! f"] A+B
+ & B \arrow[l, "i_2"] \arrow[ul, "f_2"]
 \end{tikzcd}
 \end{center}
 \end{definition}
 
-\textit{Retocar esta sección para que sea más consistente con las otras}
-\textit{Hablar de que es único salvo isomorfismo}. \textcolor{red}{Quizás deberías decir que la propiedad dual de isomorfismo es de nuevo isomorfismo, esto hace que el carácter \emph{único salvo isomorfismo} que tienen las construcciones definidas por  una \emph{propiedad universal} también lo tengan las construcciones definidas por sus propiedades duales.....}
+\subsubsection{Ejemplos}
+\paragraph{En \Set}
+En $\Set$ el coproducto coincide con la unión disjunta.
 
+\paragraph{En \Grp}
+En $\Grp $ el coproducto coincide con el producto libre.
 
 \subsection{Funtores $\Hom(-, A)$}
 \textcolor{red}{Creo que le das demasiadas vueltas a esto. Diría algo así; Dado un objeto $A$ de una categoría $\C$ definimos el funtor $Hom_\C(-,A)$ como $$Hom_\C(-,A)=Hom_{\C^{op}}(A,-):\arr{\C^{op}}{\Set}$$ Si queremos observar el efecto de este funtor sobre $\C$ tenemos que para cada flecha $\arr{C'}{C}$....}
 
 
-
-Sea $\C$ una categoría y $A$ un objeto de esta.
-Sea $f \in \Hom_{\C^{op}}(C, C')$. Definimos:
-
-$$\Hom_{\C}(f, A) :
-  \arr{
-    \Hom_{\C}(C, A)
-  }{
-    \Hom_{\C}(C', A)
-  }$$
-$$\Hom_{\C}(f, A)(g) = g \circ f$$
-
-(recordando que $g : \arr{C}{A}$ y $f : \arr{C'}{C}$ como
-flechas de $\C$ y por tanto se pueden componer)
-
-Se cumple además que:\textcolor{red}{esto es evidente}
-
-\begin{itemize}
-\item $\Hom_{\C}(1_C, A)(g) = g \circ 1_C = g$ para toda flecha
-  $g\in \Hom_{\C}(C, A)$ y por tanto
-  $\Hom_{\C}(1_C, A) = 1_{\Hom_{\C}(C, A)}$ para todo objeto $C$
-  de $\C^{op}$.
-
-\item Sean $f \in \Hom_{\C^{op}}(C, D)$ y $g : \Hom_{\C^{op}}(D, E)$
-  entonces
-  \begin{multline*}
-    $$\Hom_{\C}(g \circ_{op} f, A)(h) = h \circ (g \circ_{op} f) \\
-      h \circ (f \circ g) = (h \circ f) \circ g = \Hom_{\C}(g, A)(h \circ f) \\
-      = \Hom_{\C}(g, A)(\Hom_{\C}(f, A)(h))$$
-  \end{multline*}
-  para toda $h \in \Hom_{\C}(C, A)$ y por tanto
-  $\Hom_{\C}(g \circ_{op} f, A) = \Hom_{\C}(g, A) \circ \Hom_{\C}(f, A)$.
-\end{itemize}
-
-Esto nos muestra que $\Hom_\C(-, A)$ es un funtor
-$\Hom_\C(-, A) : \arr{\C^{op}}{\Set}$, lo que no resulta
-nada sorprendente teniendo en cuenta que
-$\Hom_\C(-, A) = \Hom_{\C^{op}}(A, -)$ (que ya vimos que
-era un funtor) tanto sobre los objetos
-como sobre las flechas. Más aun, se puede demostrar
-que $\Hom_\C(-, -) : \arr{\C^{op} \times \C}{\Set}$ es un bifuntor.
-
 Cuando queremos hacer énfasis a que un funtor está actuando sobre
 la categoría opuesta a una particular, decimos que es un funtor
 contravariante. Por ejemplo, diríamos que $\Hom(-, A)$ es un funtor
-contravariante \textcolor{red}{desde la categoría $\C$}.
+contravariante desde la categoría $\C$.
 
 \section{En programación}
 A lo largo de esta sección aplicamos las construcciones que hemos visto
