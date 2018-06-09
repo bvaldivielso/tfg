@@ -386,11 +386,32 @@ En $\Grp $ el coproducto coincide con el producto libre.
 \subsection{Funtores $\Hom(-, A)$}
 \textcolor{red}{Creo que le das demasiadas vueltas a esto. Diría algo así; Dado un objeto $A$ de una categoría $\C$ definimos el funtor $Hom_\C(-,A)$ como $$Hom_\C(-,A)=Hom_{\C^{op}}(A,-):\arr{\C^{op}}{\Set}$$ Si queremos observar el efecto de este funtor sobre $\C$ tenemos que para cada flecha $\arr{C'}{C}$....}
 
+Dado un objeto $A$ de la categoría $\C$ definimos el funtor
+$\Hom_\C(-, A)$ como
+$$\Hom_\C(-, A) = \Hom_{\C^{op}}(A, -) : \arr{\C^{op}}{\Set}$$
 
-Cuando queremos hacer énfasis a que un funtor está actuando sobre
-la categoría opuesta a una particular, decimos que es un funtor
-contravariante. Por ejemplo, diríamos que $\Hom(-, A)$ es un funtor
-contravariante desde la categoría $\C$.
+Sabemos cómo actúa $\Hom_\C(-, A)$ sobre las flechas de $\C^{op}$
+pero si tenemos una flecha $f \in \Hom_\C(C, C')$ tenemos que:
+
+$$\Hom_\C(f, A) = \Hom_{\C^{op}}(A, f) :
+  \arr{\Hom_{\C^{op}}(A, C')}{\Hom_{\C^{op}}(A, C)}$$
+ya que $f \in \Hom_{\C^{op}}(C', C)$. Dicho de otra forma:
+$$\Hom_\C(f, A) : \arr{\Hom_{\C}(C', A)}{\Hom_{\C}(C, A)}$$
+
+y su acción es:
+
+$$\Hom_\C(f, A)(g) = g\circ f$$
+
+además si tenemos dos flechas de $\C$ que se pueden componer
+$f$ y $g$ tenemos que:
+
+$$\Hom_\C(g \circ f, A) = \Hom_\C(f, A) \circ \Hom_\C(g, A)$$
+
+con lo que la composición funciona \textit{al revés}. Diremos que
+$F$ es un funtor contravariante sobre sobre $\C$ cuando $F$ sea
+un funtor definido sobre $\C^{op}$. En este sentido
+decimos que $\Hom_\C(-, A)$ es un funtor contravariante
+sobre $\C$.
 
 \section{En programación}
 A lo largo de esta sección aplicamos las construcciones que hemos visto
