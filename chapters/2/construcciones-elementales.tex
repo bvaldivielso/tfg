@@ -384,8 +384,6 @@ En $\Set$ el coproducto coincide con la unión disjunta.
 En $\Grp $ el coproducto coincide con el producto libre.
 
 \subsection{Funtores $\Hom(-, A)$}
-\textcolor{red}{Creo que le das demasiadas vueltas a esto. Diría algo así; Dado un objeto $A$ de una categoría $\C$ definimos el funtor $Hom_\C(-,A)$ como $$Hom_\C(-,A)=Hom_{\C^{op}}(A,-):\arr{\C^{op}}{\Set}$$ Si queremos observar el efecto de este funtor sobre $\C$ tenemos que para cada flecha $\arr{C'}{C}$....}
-
 Dado un objeto $A$ de la categoría $\C$ definimos el funtor
 $\Hom_\C(-, A)$ como
 $$\Hom_\C(-, A) = \Hom_{\C^{op}}(A, -) : \arr{\C^{op}}{\Set}$$
@@ -412,6 +410,12 @@ $F$ es un funtor contravariante sobre sobre $\C$ cuando $F$ sea
 un funtor definido sobre $\C^{op}$. En este sentido
 decimos que $\Hom_\C(-, A)$ es un funtor contravariante
 sobre $\C$.
+
+\subsection{Funtor opuesto}
+Dado un funtor $F : \arr{\C}{\D}$ podemos definir el funtor opuesto
+$F^{op} : \arr{\C^{op}}{\D^{op}}$ tal que $F^{op}C = FC$ y para cualquier
+flecha $f \in \Hom_{\C^{op}}(C, C') = \Hom_{\C}(C', C)$
+$$F^{op}f = F f \in \Hom_\C(FC', FC) = \Hom_{\D^{op}}(FC, FC')$$
 
 \section{En programación}
 A lo largo de esta sección aplicamos las construcciones que hemos visto

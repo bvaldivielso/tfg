@@ -1,82 +1,116 @@
 El lema de Yoneda es uno de los primeros resultados
 inesperados que surgen a raíz de la teoría de categorías. Una
 de las consecuencias más importantes de este resultado es
-el \textit{embebimiento} (cambiar \textcolor{red}{yo suelo usar encaje}) de Yoneda, que nos permite
+el encaje de Yoneda, que nos permite
 ver una categoría $\C$ cualquiera dentro de la categoría de
 funtores $\funccat{\C}{\Set}$. Necesitaremos algunos resultados
-previos para enunciar el lema:
+previos para poder enunciar el lema.
 
-\textcolor{red}{yo sacaría la definicion de $\Nat$ de la proposición. Diciendo algo así: Vamos a escribir $\Nat(-,-)$ en lugar de $Hom_{[\C,\D]}(-,-)$}
+A lo largo de las siguientes
+secciones usaremos la notación $\Nat(-, -)$ en lugar de
+$\Hom_{\funccat{\C}{\D}}(-, -)$ para referirnos al conjunto de
+transformaciones naturales entre dos funtores. Definimos
+$L : \arr{\C\times\funccat{\C}{\Set}}{\Set}$ por
+$L(A, F) = \Nat(\Hom(A, -), F)$. Probaremos que $L$ es un funtor.
 
 \begin{proposition*}
-  Dada una categoría $\C$ y un objeto suyo
-  $A$,
-  $$\Nat(\Hom(A, -), -) : \arr{\C \times \funccat{\C}{\Set}}{\Set}$$
-  es un bifuntor donde $\Nat(F, G)$ es el conjunto de transformaciones
-  naturales entre los funtores $F$ y $G$.
+  $L$ definido anteriormente es un funtor.
 \end{proposition*}
 \begin{proof}
-  Consideramos el funtor identidad
-  $1_{\funccat{\C}{\Set}} :\arr{\funccat{\C}{\Set}}{\funccat{\C}{\Set}}$ y el funtor
-  $\Hom(*, -) : \arr{C^{op}}{\funccat{\C}{\Set}}$ (demostrar)
-  el producto de estos nos define un funtor:
-  $$\Hom(*, -)\times 1_{\funccat{\C}{\Set}} :
-  \arr{\C\times \funccat{\C}{\Set}}{ \funccat{\C^{op}}{\Set} \times \funccat{\C}{\Set} }$$
-  pero sabemos que
-  $$\Nat(-, -) = \Hom_{\funccat{\C}{\Set}}(-, -) :
-    \arr{\funccat{\C^{op}}{\Set}\times\funccat{\C}{\Set}}{\Set}$$
-    es un funtor. La composición de estos dos funtores
-    que hemos dicho es el funtor que buscamos.
+  Definimos el funtor
+  $H: \arr{\C^{op}}{\funccat{\C}{\Set}}$ dado por
+  $H(A) = \Hom_\C(A, -)$. Nuestro funtor $L$ es precisamente
 
- \textcolor{red}{esto es un poco mucho caótico, por lo pronto el nombre $Hom(*,-) $ es horrible, luego en los dos funtores que vas a componer no aparece $A$ por ningún lado...por último has dicho quien es $\Nat(-,-)$ por tanto $\Nat(F,-):[\C ,\Set]\rightarrow \Set$ estaría claro para cualquier $F\in [\C ,\Set]^{op}=[\C^{op},\Set]$, en particular estaría claro quien es $\Nat(\Hom(A, -), -)$ pero como funtor de  $\funccat{\C}{\Set}$ en $\Set$  }
+  $$L :\C\times\funccat{\C}{\Set}
+  \xrightarrow{H^{op}\times 1_{\funccat{\C}{\Set}}}
+  (\funccat{C}{\Set})^{op} \times \funccat{C}{\Set}
+  \xrightarrow{\Nat} \Set$$
 \end{proof}
-
-\textcolor{red}{me quedo aquí para darte tiempo a que repases esto.......recuerda que la semana que viene sólo estoy aquí el lunes......creo que antes de seguir deberías quitar todos los comentarios en rojo, yo posiblemente no vuelva a leer los cambios que hagas a menos que me indiques que lea algo en particular.....}
-
-
-
-Necesitaremos probar que podemos definir el siguiente funtor:
+Proseguimos con otro funtor $\arr{\C\times\funccat{\C}{\Set}}{\Set}$:
 
 \begin{proposition*}
   Sea $\C$ una categoría y $Ev(-, -) : \arr{\C\times\funccat{\C}{\Set}}{\Set}$
-  dado por $Ev(C, F) = FC$. $E$ es un funtor y lo llamamos
+  dado por $Ev(C, F) = FC$. $Ev$ es un funtor y lo llamamos
   \textbf{funtor de evaluación}.
 \end{proposition*}
 \begin{proof}
   Sean $\sigma : \arr{F}{G}$ y $\tau : \arr{G}{H}$ transformaciones naturales entre funtores
   $F, G, H : \arr{\C}{\Set}$. Sean además $f : \arr{C}{D}$,
   $g : \arr{D}{E}$ flechas de $\C$.
-  Podemos definir la acción de $Ev$ sobre las flechas de
+  Definimos la acción de $Ev$ sobre las flechas de
   $\arr{\C\times\funccat{\C}{\Set}}{\Set}$ como
   $Ev(f, \sigma) = \sigma_D \circ Ff : \arr{FC}{GD}$. Veamos que $E$ se comporta bien
   respecto a las composiciones:
   \begin{multline*}
     Ev(g \circ f, \tau\circ\sigma) =
-    (\tau \circ \sigma)_E\circ F(g\circ f) =
-    \tau_E\circ\sigma_E\circ Fg \circ Ff = \\
+    (\tau \circ \sigma)_E\circ F(g\circ f) =\\
+    \tau_E\circ\sigma_E\circ Fg \circ Ff =^*
   \tau_E\circ Gg \circ\sigma_D \circ Ff =
   \tau_E\circ Gg \circ Ev(f, \sigma) =\\
   Ev(g, \tau) \circ Ev(f, \sigma)
   \end{multline*}
 
-  El hecho de que $Ev(1_C, 1_F) = 1_{FC}$ se prueba de forma sencilla
-  y por tanto $Ev : \arr{\C\times\funccat{\C}{\Set}}{\Set}$ es un funtor
-
-  \textit{Explicar mejor la demostración}
+  Donde $*$ se deduce del hecho de que $\sigma : \nat{F}{G}$ es una transformación
+  natural.
+  Que $Ev(1_C, 1_F) = 1_{FC}$ se prueba de forma sencilla,
+  confirmando que $Ev : \arr{\C\times\funccat{\C}{\Set}}{\Set}$ es un funtor
 \end{proof}
 
 Ahora que conocemos estos dos funtores podemos enunciar el lema
 de Yoneda de forma sencilla.
 
 \begin{theorem}[Lema de Yoneda]
-  Sea $\C$ una categoría y $A$ un objeto de esta. Los funtores
-  $$(A, F) \mapsto \Nat(\Hom(A, -), F)$$
-  $$(A, F) \mapsto FA$$
-  son naturalmente isomorfos.
+  Sea $\C$ una categoría. Los funtores $L$ y $Ev$ son naturalmente isomorfos.
+  En particular, para cada objeto $A$ de $\C$ y cada funtor $F : \arr{\C}{\Set}$
+  se tiene una biyección
+  $$\Nat(\Hom(A, -), F) \cong FA$$
 \end{theorem}
 \begin{proof}
-  Sea $a \in F A$. Definimos la transformación natural entre
-  $\lambda_a : \arr{\Hom(A, -)}{F}$ componente a componente de
-  la siguiente forma: $(\lambda_a)_C(f) = f(a)$.
-  \textit{Continuar mañana}
+  Definimos la aplicación de conjuntos
+  $$\phi_{A, F} : \arr{\Nat(\Hom(A, -), F)}{FA}$$
+  $$\phi_{A, F}(\tau) = \tau_A (1_A)$$
+  (recordamos que $\tau_A$ por ser $\tau$ transformación natural entre $\Hom(A, -)$ y $F$ es
+  una aplicación de conjuntos $\tau_A : \arr{\Hom(A, A)}{F A}$).
+
+  Veamos que $\phi_{A, F}$ es una biyección. En primer lugar veremos que es sobreyectiva. Sea $x \in FA$
+  Definimos la transformación natural $\lambda_x : \nat{\Hom(A, -)}{F}$ por
+  $$(\lambda_x)_C : \arr{\Hom(A, C)}{F C}$$
+  $$(\lambda_x)_C(f) = f(x)$$
+
+  Comprobar que $\lambda_x$ es en efecto una transformación natural es sencillo. Pero
+  $\phi_{A, F}(\lambda_x) = (\lambda_x)_A (1_A) = 1_A(x) = x$, luego $\phi_{A, F}$
+  es sobreyectiva.
+
+  Veamos ahora que $\phi_{A, F}$ es inyectiva. Supongamos que tenemos
+  dos transformaciones naturales $\tau, \tau' : \nat{\Hom(A, -)}{F}$
+  tales que $\phi_{A, F}(\tau) = \phi_{A, F}(\tau')$. Para todo $f \in \Hom(A, C)$
+  la naturalidad de $\tau$ nos garantiza la conmutatividad
+  del siguiente diagrama:
+
+  \begin{center}
+    \begin{tikzcd}
+      \Hom(A, A) \arrow{d}[swap]{\Hom(A, f)} \arrow{r}{\tau_A}
+            & FA \arrow{d}{Ff} \\
+
+      \Hom(A, C) \arrow{r}{\tau_C} & F C
+    \end{tikzcd}
+  \end{center}
+
+
+  Es decir $\tau_C \circ \Hom(A, f) = F f \circ \tau_A$. Aplicando
+  esta flecha sobre el valor $1_A$ tenemos que:
+
+  $$\tau_C(f) = \tau_C(f \circ 1_A) = \tau_C(\Hom(A, f)(1_A)) = F f(\tau_A(1_A)) = Ff(\phi_{A, F}(\tau))$$
+  De la misma manera se puede obtener que $\tau'_C(f)  = Ff(\phi_{A, F}(\tau'))$
+
+  pero entonces para cualquier objeto $C$ y para cualquier flecha $f \in \Hom(A, C)$
+  se cumple:
+
+  $$\tau_C(f) = Ff (\phi_{A,F}(\tau)) = Ff(\phi_{A, F}(\tau')) = \tau'_C(f)$$
+  con lo que $\tau = \tau'$ y $\phi_{A, F}$ es biyectiva.
+
+
+  Probar que $\phi_{A, F}$ es natural en $A$ y $F$ es lo que queda para ver
+  que $\phi : \nat{L}{Ev}$ es un isomorfismo natural. La demostración es
+  rutinaria y no se incluye en el presente texto.
 \end{proof}
