@@ -11,7 +11,7 @@ de $\C$ en flechas de $\D$ preservando la estructura de la
 categoría en el siguiente sentido:
 \begin{enumerate}
 \item $F$ respeta los dominios y los codominios:
-si $f : \arr{A}{B}$ una flecha
+si $f : \arr{A}{B}$ es una flecha
 de la categoría $\mathcal{C}$ entonces
 $F f : \arr{F A}{F B}$ es la correspondente flecha asociada
 en $\D$.
@@ -27,8 +27,30 @@ el lector podrá completar por sí mismo fácilmente la acción de este
 sobre las flechas. En tales casos nos limitaremos a referirnos
 al funtor describiendo su acción sobre los objetos.
 
-La ley de la composición se puede interpretar como que $F$ lleva
-diagramas conmutativos a diagramas conmutativos. \textcolor{red}{Tengo que introducir la noción de diagrama conmutativo}.
+A lo largo del trabajo mostraremos diagramas en la que los nodos
+son objetos de una categoría y las aristas dirigidas
+que los unen son flechas.
+Diremos que el diagrama es conmutativo cuando para cada par
+de objetos $C$ y $C'$ del diagrama la composición
+de las flechas que conforman un camino entre $C$ y $C'$ es independiente
+del camino utilizado. Un ejemplo sería el siguiente diagrama:
+
+\begin{center}
+  \begin{tikzcd}
+    FA \arrow{r}{Ff} \arrow{rd}[swap]{F(g \circ f)} & FB \arrow{d}{Fg} \\
+    & FC
+  \end{tikzcd}
+\end{center}
+
+Donde afirmar que el diagrama es conmutativo se traduce en
+que $F g \circ F f = F (g\circ f)$. Según McLane en \cite{mclane}
+
+\begin{quotation}
+  Una parte considerable de la efectividad de los métodos
+  categóricos reside en el hecho de que los diagramas
+  conmutativos en representan muy fielmente las acciones de
+  las flechas en un contexto determinado.
+\end{quotation}
 
 
 \subsection{Ejemplos}
@@ -113,7 +135,9 @@ y los funtores identidad se comportan como identidades frente
 a esta composición.
 
 \paragraph{Producto de funtores}
-\textit{Hablar de esto}
+Dados dos funtors $F : \arr{\C}{\D}$ y $G: \arr{\C'}{\D'}$
+se define el funtor $F\times G: \arr{\C\times\C'}{\D\times\D'}$ de
+la manera evidente.
 
 %% \paragraph{Endofuntores en Haskell}
 %% Es habitual que en lenguajes de programación fuertemente tipados exista
