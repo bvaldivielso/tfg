@@ -61,46 +61,49 @@ flechas son las transformaciones naturales entre los funtores:
   de $\C$.
 \end{definition}
 
-Nótese que los isomorfismos naturales son precisamente los isomorfismos
-en las categorías de funtores.
+Se puede justificar además que los isomorfismos naturales
+son precisamente los isomorfismos en las categorías de funtores.
 
 \subsection{Ejemplos}
 \paragraph{El doble dual}
-Consideremos la categoría de espacios vectoriales sobre un cuerpo
-$K$ a la que llamaremos $\VectK$. Podemos considerar los endofuntores
-identidad $1_{\VectK} : \arr{\VectK}{\VectK}$ y  doble dual:
-$(-)^{**} : \arr{\VectK}{\VectK}$. El último de estos funtores actúa
-así sobre los morfismos:
+Consideremos la categoría de espacios vectoriales de dimensión
+finita sobre un cuerpo $K$, a la que llamaremos $\VectK$. Podemos
+definir el funtor $(-)^{**}: \arr{\VectK}{\VectK}$, al que llamaremos
+doble dual, que lleva un espacio vectorial $V$ a su doble dual
+$V^{**}$ y una aplicación lineal
+$f: \arr{V}{W}$ a la correspondiente aplicación
+lineal
+$f^{**} : \arr{V^{**}}{W^{**}}$ definida por
 
-$$(-)^{**} : \arr{\Hom(V, W)}{\Hom(V^{**}, W^{**})}$$
-$$f^{**}(g)(\phi) = g(\phi \circ f)$$
+$$f^{**}(g)(\phi) = g(\phi\circ f)$$
+Podemos probar que el funtor doble dual y el funtor identidad
+de la categoría $\VectK$ son naturalmente isomorfos. El isomorfismo
+natural es $\lambda : \nat{1_{\VectK}}{(-)^{**}}$ definido por:
 
-Para cada espacio vectorial sobre $K$ $V$ \textcolor{red}{uff} podemos además
-definir un monomorfismo de espacios vectoriales
- (isomorfismo
-en el caso finito-dimensional) en su doble dual:
-
-\begin{equation*}
-i_V : \arr{V}{V^{**}}
-\end{equation*}
-\begin{equation*}
-i_V(v)(\phi) = \phi(v)
-\end{equation*}
-
-Pues $i$ es una transformación natural entre $1_K$ y
-$(-)^{**}$. Más aun, si nos restringimos al caso finito dimensional,
-debido a que todas las componentes de la transformación natural
-son isomorfismos, decimos que ambos funtores son naturalmente isomorfos. \textcolor{red}{este paraqraph no está muy bien redactado, además naturalmente isomorfos e isomorfos en la categoría de funtores ?¿?¿? a estas alturas no se?¿?? y también la restricción a finito dimensionales uff?¿?¿ estás cambiando los dominios de definición....?¿?¿}
+$$\lambda_V : \arr{V}{V^{**}}$$
+$$\lambda_V(v)(\phi) = \phi(v)$$
 
 \paragraph{Abelianización de grupos}
-Dado un grupo $G$ definimos su abelianización $G^{ab}$ como
-$G^{ab} = \frac{G}{[G, G]}$. Llamemos $\pi_G : \arr{G}{G^{ab}}$
-a la proyección sobre el cociente. Para cualquier morfismo
-de grupos $f : \arr{G}{H}$ tenemos que la aplicación
-$\pi_H \circ f$ contiene en su nucleo a $[G, G]$ (ya que
-$H^{ab}$ es abeliano y un morfismo de un grupo a un grupo abeliano
-lleva los conmutadores al 0) y por tanto factoriza a través
-de $G^{ab}$ permitiéndonos definir una aplicación
-$f^{ab} : \arr{G^{ab}}{H^{ab}}$ y comprobar
-que $(-)^{ab}$ es un funtor. La proyección de $\pi$ es una transformación
-natural $\pi : \arr{ 1_{\Grp} }{ (-)^{ab} }$. \textcolor{red}{también tienes que redactar esto un poco mejor}
+Definimos el funtor $(-)^{ab} : \arr{\Grp}{\Grp}$
+como el funtor que lleva
+cada grupo $G$ a su abelianización
+$G^{ab} =\frac{G}{[G, G]}$
+
+y cada homomorfismo de grupos $f : \arr{G}{H}$ al homomorfismo
+de grupos dado por:
+
+$$f^{ab} : \arr{G^{ab}}{H^{ab}}$$
+$$f^{ab}(g[G, G]) = \pi_H (f(g))$$
+
+Donde $\pi_H$ es la proyección al cociente.
+La aplicación está bien definida porque los homomorfismos
+de grupos llevan conmutadores en conmutadores y como
+$H^{ab}$ es un grupo abeliano y el único conmutador de un
+grupo abeliano es el 1 se tiene que
+$[G, G] \subseteq \ker (\pi_H \circ f)$.
+
+
+Considerando una vez más las proyecciones
+$\pi_G : \arr{G}{G^{ab}}$ nos daremos cuenta
+que $\pi : \nat{1_\Grp}{(-)^{ab}}$ es precisamente
+una transformación natural.

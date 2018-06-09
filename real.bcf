@@ -2049,7 +2049,10 @@
     <bcf:datasource type="file" datatype="bibtex">references.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">fastandloose</bcf:citekey>
+    <bcf:citekey order="1">mclane</bcf:citekey>
+    <bcf:citekey order="2">fastandloose</bcf:citekey>
+    <bcf:citekey order="3">decorators</bcf:citekey>
+    <bcf:citekey order="4">haskell-functor</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global" type="entry" sortscheme="nty" sortnamekeyscheme="global">
   <bcf:sorting>
