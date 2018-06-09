@@ -3,7 +3,7 @@ inesperados que surgen a raíz de la teoría de categorías. Una
 de las consecuencias más importantes de este resultado es
 el encaje de Yoneda, que nos permite
 ver una categoría $\C$ cualquiera dentro de la categoría de
-funtores $\funccat{\C}{\Set}$. Necesitaremos algunos resultados
+funtores $\funccat{\C^{op}}{\Set}$. Necesitaremos algunos resultados
 previos para poder enunciar el lema.
 
 A lo largo de las siguientes
@@ -19,8 +19,9 @@ $L(A, F) = \Nat(\Hom(A, -), F)$. Probaremos que $L$ es un funtor.
 \begin{proof}
   Definimos el funtor
   $H: \arr{\C^{op}}{\funccat{\C}{\Set}}$ dado por
-  $H(A) = \Hom_\C(A, -)$. Nuestro funtor $L$ es precisamente
+  $H(A) = \Hom_\C(A, -)$. \textit{probar que es un funtor}
 
+  Nuestro funtor $L$ es precisamente
   $$L :\C\times\funccat{\C}{\Set}
   \xrightarrow{H^{op}\times 1_{\funccat{\C}{\Set}}}
   (\funccat{C}{\Set})^{op} \times \funccat{C}{\Set}
@@ -113,4 +114,24 @@ de Yoneda de forma sencilla.
   Probar que $\phi_{A, F}$ es natural en $A$ y $F$ es lo que queda para ver
   que $\phi : \nat{L}{Ev}$ es un isomorfismo natural. La demostración es
   rutinaria y no se incluye en el presente texto.
+\end{proof}
+
+Obtenemos un importante corolario del Lema de Yoneda aplicándolo a
+$F = \Hom(B, -)$ donde $B$ es otro objeto de $\C$.
+
+\begin{theorem}
+  Dada una categoría $\C$
+  el funtor $T : \arr{C^{op}}{\funccat{\C}{\Set}}$ dado por
+  $T(A) = \Hom_\C(A, -)$ es fiel y completo.
+\end{theorem}
+\begin{proof}
+
+  La acción de $T$ sobre las flechas es:
+  $f : \arr{A}{B}$
+  $T(f) : \nat{\Hom_\C(B, -)}{\Hom_\C(A, -}$
+  $T(f)_C(g) = g \circ f$
+
+
+
+
 \end{proof}

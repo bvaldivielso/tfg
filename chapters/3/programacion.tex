@@ -1,0 +1,128 @@
+\subsection{Transformaciones Naturales}
+Para construir una transformación natural entre dos endofuntores de
+$\Hask$ $F$ y $G$ necesitamos, en primer lugar, una función de tipo
+\cod{FA -> GA} para \cod{A} cualquier tipo del lenguaje.
+
+Usamos el sistema de polimorfismo de Haskell para suplir nuestra primera
+necesidad. El lenguaje nos permite definir una función de
+tipo \cod{F a -> G a} (una función polimórfica en la variable de
+tipo \cod{a}) que, especializando a cada tipo del lenguaje, será
+la componente en cada objeto de $\Hask$ de nuestra transformación natural.
+
+Un ejemplo de este tipo de función polimórfica sería:
+\begin{verbatim}
+discardLeft :: Either b a -> Maybe a
+discardLeft (Left stringQueNoQuiero) = Nothing
+discardLeft (Right v) = Just v
+\end{verbatim}
+(recordemos que es \cod{Either b}, y no \cod{Either} a secas,
+la instancia de la clase \cod{Functor})
+
+En segundo lugar, necesitamos que se cumplan las condiciones de
+naturalidad. Podríamos emplear nuestro tiempo en demostrar que
+la función \cod{discardLeft} que hemos definido cumple
+tales condiciones pero eso no
+será necesario: el sistema de polimorfismo de
+Haskell (\textit{parametric polymorphism}) nos lo garantiza.
+Haskell nos impone la restricción de que
+una función polimórfica en el la variable de tipo \cod{a}
+esté implementada
+con la misma expresión. Por ejemplo, en Haskell no es posible
+escribir una función polimórfica de esta forma:
+\begin{verbatim}
+polimorfica :: a -> a
+polimorfica v = v
+
+polimorfica :: Int -> Int
+polimorfica n = n + 1
+\end{verbatim}
+Esta restricción, junto con otras características
+del polimorfismo paramétrico, permite comprobar que cualquier
+función de tipo \cod{F a->G a} con \cod{F} y \cod{G} funtores es
+una transformación natural \cite{theorems-for-free}.
+
+Mostramos a continuación algunos ejemplos de transformaciones naturales
+que podemos escribir entre los funtores de Haskell que hemos visto
+anteriormente.
+
+\subsubsection{Ejemplos}
+\paragraph{Entre \cod{Maybe} y \cod{Either}}
+La función \cod{discardLeft :: Either b a -> Maybe a} que hemos definido
+antes es un ejemplo de transformación natural. La interpretación
+que dimos de estos tipos en el primer capítulo fue la siguiente:
+\begin{itemize}
+\item Los valores de la forma \cod{Nothing :: Maybe a} representan
+  situaciones de error durante un cómputo. Los valores de la forma
+  \cod{Just v :: Maybe a} representan un cómputo exitoso que tiene
+  como al valor \cod{v :: a} como valor de retorno.
+\item Los valores de la forma \cod{Left error :: Either b a} representan
+  situaciones de error durante un cómputo y además aportan más información
+  sobre el error (por ejemplo si la variable \cod{b} estuviera
+  especializada a \cod{String} podríamos tener un valor de error
+  que fuera \cod{Left "No fue posible conectar al servidor"}. Los
+  valores de la forma \cod{Right v :: Either b a} representan cómputos
+  exitosos con valor de retorno \cod{ v :: a }.
+\end{itemize}
+
+En este sentido podemos implementar la función \cod{discardLeft} como
+una aplicación que recibe un cómputo posiblemente fallido y descarta
+la información asociada al fallo en caso de que la haya. En caso de
+computación exitosa deja invariante su resultado.
+
+Podemos escribir una transformación natural en el sentido inverso
+fijando un valor de tipo \cod{b}. Por ejemplo
+
+\begin{verbatim}
+maybeToRight :: b -> Maybe a -> Either b a
+maybeToRight defaultError Nothing = Left defaultError
+maybeToRight defaultError (Just v) = Right v
+\end{verbatim}
+
+Y \cod{maybeToRight} no es una transformación natural pero para
+cualquier valor \cod{x :: B} tenemos que
+\cod{maybeToRight x :: Maybe a -> Either B a} sí que lo es. Bajo
+la interpretación de cómputos propensos a error, esta transformación
+natural añade una justificación del error a un cómputo fallido
+sin contexto del fallo.
+
+\paragraph{Transformaciones naturales al funtor constante}
+En Haskell podemos definir el funtor constante de la siguiente
+manera:
+\begin{verbatim}
+data Const b a = Const b
+
+instance Functor (Const b) where
+  fmap f (Const b) = Const b
+\end{verbatim}
+
+Este es un funtor distinto a los anteriores que hemos
+definido en Haskell demás en el sentido de que no utiliza
+la variable de tipo de ninguna forma. \textit{Escribir esto mejor}.
+
+
+Supongamos que tenemos una función polimórfica de tipo
+\cod{f :: F a -> B} donde \cod{B} es un tipo fijo. Esta función
+se puede extender a otra función
+\cod{fConst :: F a -> Const B a} de la siguiente forma:
+\begin{verbatim}
+-- recordamos f :: F a -> B
+fConst :: F a -> Const B a
+fConst x = Const (f x)
+\end{verbatim}
+El tipo de \cod{fConst} (es de la forma \cod{F a -> G a} donde tanto
+\cod{F} como \cod{G} son funtores) nos garantiza que es una transformación
+natural. En particular cumple las condiciones de naturalidad. Si
+escribimos estas condiciones de naturalidad en haskell llegamos a:
+
+\begin{verbatim}
+-- dado g :: c -> c'
+fConst . fmap g = fmap g . fConst
+\end{verbatim}
+
+donde el \cod{fmap} de la izquierda es el de \cod{F} y el de
+la izquierda es el de \cod{Const B}. Pero el de \cod{Const b}
+deja invariante el resultado. Esto nos lleva a comprobar que:
+\cod{f . fmap g = f}. Es decir, si modificamos un valor de
+nuestro funtor con alguna función de la forma \cod{fmap g} no
+estaremos variando la métrica. Un ejemplo de esto lo podemos
+ver con la función \cod{length :: [a] -> Int}.
