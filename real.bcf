@@ -2054,6 +2054,7 @@
     <bcf:citekey order="3">decorators</bcf:citekey>
     <bcf:citekey order="4">haskell-functor</bcf:citekey>
     <bcf:citekey order="5">theorems-for-free</bcf:citekey>
+    <bcf:citekey order="6">ariseeverywhere</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global" type="entry" sortscheme="nty" sortnamekeyscheme="global">
   <bcf:sorting>

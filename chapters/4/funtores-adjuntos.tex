@@ -1,15 +1,14 @@
-De camino a nuestro objetivo de definir las mónadas tendremos
-que pasar previamente por la noción de adjunción. Aunque
-es cierto, como veremos en las próximas secciones, que cada par
-de funtores adjuntos permite construir una mónada, este no es
-ni de lejos el
-único motivo por el que las adjunciones son importantes en matemáticas.
+De camino a nuestro objetivo de definir el concepto de mónada
+pasaremos por la definición de adjunción. Como veremos en las próximas
+secciones las mónadas y las adjunciones están estrechamente relacionadas.
+Esto no debe hacernos pensar que las mónadas son el único motivo
+por el que las adjunciones son importante en matemáticas. Las adjunciones
+han sido identificadas por algunos autores como uno de los conceptos
+clave de la teoría de categorías. McLane resume la importancia de
+esta noción diciendo que ``hay funtores adjuntos por todas partes''
+\cite{ariseeverywhere}.
 
-\begin{quotation}
-  adjunction arises everywhere
-\end{quotation}
-
-Empezaremos por dar la definición.
+Empezaremos por precisar qué es una adjunción.
 
 \subsection{Definición}
 \begin{definition}
@@ -24,8 +23,53 @@ Empezaremos por dar la definición.
   como $F \adjoint G$.
 \end{definition}
 
+Nótese que para cualquier
+objeto $C$ de $\C$ y cualquier objeto
+$D$ de $\D$ un par de funtores adjuntos $F \adjoint G$ nos permite
+establecer biyecciones entre los conjuntos:
+
+$$\Hom_\D(FC, D) \cong \Hom_\C(C, GD)$$
+
+Sea $\phi_{C, D} : \arr{\Hom_\D(FC, D)}{\Hom_\C(C, GD)}$ una tal
+familia de biyecciones. Comprobar que $\phi$ es natural se reduce
+a, por un lado, comprobar que el siguiente diagrama en $\D$:
+
+\begin{center}
+  \begin{tikzcd}
+    FC \arrow{r}{f} & D \arrow{r}{g} & D'
+  \end{tikzcd}
+\end{center}
+
+Se traslada al siguiente diagrama conmutativo en $\C$:
+
+\begin{center}
+  \begin{tikzcd}
+    C \arrow[bend right=50, swap]{rr}{\phi_{C, D'}(g \circ f)}
+      \arrow{r}{\phi_{C,D}(f)} & GD \arrow{r}{G g} & GD'
+  \end{tikzcd}
+\end{center}
+
+Y por otro lado, que el siguiente diagrama en $\C$:
+
+\begin{center}
+  \begin{tikzcd}
+    C' \arrow{r}{h} & C \arrow{r}{f} & GD
+  \end{tikzcd}
+\end{center}
+
+se traslada al siguiente diagrama conmutativo en $\D$
+
+\begin{center}
+  \begin{tikzcd}
+    FC' \arrow[bend right=50, swap]{rr}{\phi^{-1}_{C', D}(f \circ h)}
+        \arrow{r}{Fh} & FC \arrow{r}{\phi^{-1}_{C, D}(f)} & D
+  \end{tikzcd}
+\end{center}
+
 \subsection{Ejemplos}
 \paragraph{Producto}
+
+
 Consideramos un conjunto $A$ y el funtor $-\times A : \arr{\Set}{\Set}$.
 
 $-\times A$ es el adjunto por la izquierda del funtor $\Hom(A, -)$.
