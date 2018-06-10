@@ -66,6 +66,83 @@ se traslada al siguiente diagrama conmutativo en $\D$
   \end{tikzcd}
 \end{center}
 
+\subsection{Unidad y counidad}
+Dadas categorías $\C$ y $\D$ y funtores adjuntos $F \adjoint G$ es
+posible construir dos transformaciones naturales
+$\eta : \nat{1_\C}{GF}$ y $\epsilon: \nat{FG}{1_\D}$ a las que llamaremos
+respectivamente la \textbf{unidad} y la \textbf{counidad} de la
+adjunción.
+
+Sea $\phi : \nat{\Hom(F-, -)}{\Hom(-, G-)}$ el isomorfismo natural que
+nos viene dado por la adjunción. Damos la transformación $\eta$
+por sus componentes
+$\eta_C = \phi_{C, FC}(1_{FC}) : \arr{C}{GFC}$.
+
+Veamos que en efecto es natural. Sea $f : \arr{C}{C'}$
+una flecha de $\C$. El diagrama cuya conmutatividad
+tenemos que verificar es el siguiente:
+
+\begin{center}
+  \begin{tikzcd}
+    C \arrow{d}{f}
+      \arrow{r}{\eta_C} & GFC \arrow{d}{GFf} \\
+
+    C' \arrow{r}{\eta_{C'}} & GFC'
+  \end{tikzcd}
+\end{center}
+
+Es decir tenemos que comprobar que
+$$\phi_{C', FC'}(1_{FC'}) \circ f = \eta_{C'} \circ f = GFf \circ \eta_C
+  = GFf \circ \phi_{C, FC}(1_{FC})$$
+
+Pero teniendo cuenta que $\phi$ es natural tenemos que el diagrama
+
+\begin{center}
+  \begin{tikzcd}
+    FC \arrow{r}{1_{FC}} & FC \arrow{r}{Ff} & FC'
+  \end{tikzcd}
+\end{center}
+
+Lo podemos transponer en el siguiente diagrama conmutativo:
+
+\begin{center}
+  \begin{tikzcd}
+    C
+    \arrow[bend right=50, swap]{rr}{\phi_{C, FC'}(f \circ 1_C) = \phi_{C, FC'}(Ff) }
+      \arrow{r}{\eta_C}
+            & GFC \arrow{r}{GFf} & GFC'
+  \end{tikzcd}
+\end{center}
+
+Luego $GFf \circ \eta_C = \phi_{C, FC'}(Ff)$ pero a su vez:
+
+
+\begin{center}
+  \begin{tikzcd}
+    C \arrow{r}{f} & C'
+       \arrow{r}{\eta_{C'}} & GFC'
+  \end{tikzcd}
+\end{center}
+
+Lo podemos transponer en:
+
+\begin{center}
+  \begin{tikzcd}
+    FC \arrow[bend right=50, swap]{rr}{\phi_{C, FC'}^{-1}(\eta_{C'} \circ f)}
+       \arrow{r}{F f} & FC' \arrow{r}{1_{FC'}} & FC'
+  \end{tikzcd}
+\end{center}
+
+Este último diagrama muestra que
+$Ff = \phi^{-1}_{C, FC'}(\eta_{C'} \circ f)$.
+
+
+Y por tanto
+$$GFf \circ \eta_C = \phi_{C, FC'}(Ff) = \phi_{C, FC'}
+  (\phi^{-1}_{C,FC'}(\eta_{C'} \circ f)) = \eta_{C'} \circ f$$
+
+Y la naturalidad de $\eta : \nat{1_\C}{GF}$ queda probada.
+
 \subsection{Ejemplos}
 \paragraph{Producto}
 
