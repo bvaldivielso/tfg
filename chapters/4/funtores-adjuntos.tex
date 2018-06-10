@@ -148,7 +148,7 @@ Y la naturalidad de $\eta : \nat{1_\C}{GF}$ queda probada.
 Sea $A$ un conjunto. Veamos que los funtores
 $-\times A : \arr{\Set}{\Set}$ y
 $\Hom(A, -) : \arr{\Set}{\Set}$ conforman una adjunción.
-Tenemos que encontrar un isomorfismo natural
+Necesitamos encontrar un isomorfismo natural
 $$\phi : \nat{\Hom(-\times A, -)}{\Hom(-, \Hom(A, -))}$$.
 Para ello definimos
 $$\phi_{B, Z} : \arr{\Hom(B\times A, Z)}{\Hom(B, \Hom(A, Z))}$$
@@ -157,17 +157,19 @@ $$\phi_{B, Z}(f)(b)(a) = f(b, a)$$
 Veamos que $\phi_{B, Z}$ es una biyección.
 En primer lugar vemos que es sobreyectiva.
 Sea $f' \in \Hom(B, \Hom(A, Z))$. Definimos la aplicación
-$f : \arr{B\times A, Z}$ dada por $f(b, a) = f'(b)(a)$. Aplicando
+$f : \arr{B\times A}{Z}$ dada por $f(b, a) = f'(b)(a) \forall b\in B \quad a \in A$. Aplicando
 la definición de $\phi_{B, Z}$
-tenemos $\phi_{B,Z}(f)(b)(a) = f(b, a) = f'(b)(a)$ y por tanto
-$\phi_{B,Z}(f) = f'$. Veamos que $\phi$ es inyectiva. Supongamos
-que tenemos $f_1, f_2 : \arr{B\times A, Z}$ tales que
+tenemos $\phi_{B,Z}(f)(b)(a) = f(b, a) = f'(b)(a)$ también para
+todo $b \in B$ y para todo $a \in A$, y por tanto
+$\phi_{B,Z}(f) = f'$. Veamos ahora que $\phi$ es inyectiva. Supongamos
+que tenemos $f_1, f_2 : \arr{B\times A}{Z}$ tales que
 $\phi_{B, Z}(f_1) = \phi_{B, Z}(f_2)$ pero entonces tenemos que
 $f_1(b, a) = \phi_{B, Z}(f_1)(b)(a) = \phi_{B,Z}(f_2)(b)(a) = f_2(b, a)$
+$\forall (b, a) \in B\times A$
 y por tanto $f_1 = f_2$.
 
 Comprobamos ahora las condiciones de naturalidad. En primer lugar dado
-el siguiente diagrama en $\C$
+el diagrama:
 \begin{center}
   \begin{tikzcd}
     B \arrow{r}{f} & B' \arrow{r}{g} & \Hom(A, Z)
@@ -183,15 +185,16 @@ Hemos de ver que el siguiente diagrama es conmutativo:
 \end{center}
 Y esto equivale a probar
 $$\phi_{B,  Z}(g \circ f) = \phi_{B', Z}(g) \circ (f\times A)$$
-$$f\times A: \arr{B\times A}{B'\times A}$$
 donde $f \times A$ está definida por
-$(f\times A)(b, a) = (f(b), a)$. Aplicando sobre un valor cualquiera
+$$f\times A: \arr{B\times A}{B'\times A}$$
+$$(f\times A)(b, a) = (f(b), a)$$
+Aplicando sobre un valor cualquiera
 $(b, a) \in B\times A$ tenemos que:
 $$\phi_{B, Z}^{-1}(g \circ f)(b, a) = (g\circ f)(b)(a) = g(f(b))(a)$$
 y
 $$(\phi_{B', Z}^{-1}(g) \circ (f\times A))(b, a) =
    \phi_{B', Z}^{-1}(g)(f(b), a) = g(f(b))(a)$$
-En segundo lugar dado el siguiente diagrama:
+En segundo lugar dado el diagrama:
 \begin{center}
   \begin{tikzcd}
     B\times A \arrow{r}{f} & Z \arrow{r}{g} & Z'
@@ -204,7 +207,8 @@ Hemos de ver que el siguiene diagrama es conmutativo:
       \arrow{r}{\phi_{B, Z}(f)} & \Hom(A, Z) \arrow{r}{\Hom(A, g)} & \Hom(A, Z')
   \end{tikzcd}
 \end{center}
-Es decir, $\phi_{B, Z'}(g \circ f) = \Hom(A, g) \circ \phi_{B, Z}(f)$. Dados
+Es decir, $\phi_{B, Z'}(g \circ f) = \Hom(A, g) \circ \phi_{B, Z}(f)$. Para
+cualesquiera
 $b \in B, a \in A$ tenemos que:
 $$\phi_{B, Z'}(g \circ f)(b)(a) = (g\circ f)(b, a) = g(f(b, a))$$
 y
@@ -212,20 +216,20 @@ y
 (\Hom(A, g)\circ\phi_{B, Z}(f))(b)(a) = (\Hom(A, g)(\phi_{B, Z}(f)(b))(a)\\
   = (g \circ \phi_{B,Z}(f)(b))(a) = g(f(b, a))
 \end{multline*}
-Y por tanto $\phi$ es transformación natural.
+Y por tanto $\phi$ es una transformación natural.
 
 Esta adjunción nos dice que dar una aplicación que va de $B\times A$ a $Z$
 es esencialmente lo mismo que dar una aplicación que vaya de $B$ al conjunto
 de aplicaciones entre $A$ y $Z$.
 \paragraph{Grupos libres}
-El funtor de conjunto subyacente $U : \arr{\Grp}{\Set}$ y el funtor
+Los funtores de conjunto subyacente $U : \arr{\Grp}{\Set}$ y el funtor
 $F : \arr{\Set}{\Grp}$ que asigna a cada conjunto su grupo libre asociado
-son un par de funtores adjuntos $F \adjoint U$.
+son adjuntos $F \adjoint U$.
 
 La unidad $\eta : \nat{1_\Set}{UF}$ es la inclusión
-$\eta_X : X \subseteq UFX$ de un conjunto en el conjunto subyacente
-al grupo libre generado por él. La counidad
-$\mu : \nat{FU}{1_\Grp}$ nos da para cada grupo $G$
+$\eta_X : X \subseteq UFX$ de un conjunto en el
+grupo libre generado por él. La counidad
+$\mu : \nat{FU}{1_\Grp}$ determina para cada grupo $G$
 el homomorfismo de grupos $\mu_G : \arr{FUG}{G}$
 tal que a cada palabra
 $g_1g_2\ldots g_n \in FUG$ le asigna el valor $\prod_{i=1}^n g_i \in G$.

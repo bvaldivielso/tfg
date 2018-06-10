@@ -1,3 +1,8 @@
+Comenzamos con el estudio de una de las nociones nacidas
+en teoría de categorías que son
+más importantes para nuestro trabajo: las mónadas.
+
+
 \subsection{Definición}
 \begin{definition}
   Una mónada sobre una categoría $\C$
@@ -19,6 +24,103 @@
       & T &
     \end{tikzcd}
   \end{center}
-
-
 \end{definition}
+
+Estudiar algunos ejemplos será útil para aclarar qué parte hace qué
+en la definición.
+
+\subsubsection{Ejemplos}
+\paragraph{Monoides}
+Sea $M$ un monoide. Definimos el funtor $T : \arr{\Set}{\Set}$
+como $T(X) = M\times X$, $\eta_X : \arr{X}{T(X)}$ definida
+por $\eta_X(x) = (e, x)$ (con $e \in M$ el elemento neutro)
+y $\mu_X : \arr{T^2(X)}{T(X)}$ definida por
+$\mu_X(m, n, x) = (m\cdot n, x)$
+
+Veamos que $(T, \eta, \mu)$ es un monoide. En primer lugar
+tenemos que ver que para cualquier conjunto $X$ el siguiente
+diagrama es conmutativo:
+
+\begin{center}
+  \begin{tikzcd}
+    M\times M \times M \times X \arrow{r}{T\mu_X}
+           \arrow{d}{\mu_{TX}} & M\times M\times X \arrow{d}{\mu_X} \\
+    M\times M\times X \arrow{r}{\mu_X} & M \times X
+  \end{tikzcd}
+\end{center}
+Es decir $\mu_X \circ \mu_{TX} = \mu_X \circ T\mu_X$. Para comprobar
+esta igualdad de aplicaciones tomamos $(m, n, k, x) \in T^3(X)$.
+Por un lado:
+$$(\mu_X \circ \mu_{TX})(m, n, k, x) = \mu_X(\mu_{TX}(m, n, k, x)
+  = \mu_X(m\cdot n, k, x) = ((m\cdot n)\cdot k, x)$$
+Por otro lado:
+$$(\mu_X \circ T\mu_X)(m, n, k, x) = \mu_X(T\mu_X(m, n, k, x))
+  = \mu_X(m, n\cdot k, x) = (m \cdot (n\cdot k), x)$$
+y por la asociatividad del producto en $M$ tenemos que
+el diagrama es conmutativo.
+Queda ver que para cualquier conjunto $X$ el diagrama
+\begin{center}
+  \begin{tikzcd}
+    T(X) \ar[equal]{dr}
+         \arrow{r}{\eta_{TX}} & T^2(X) \arrow{d}{\mu_X} & \arrow{l}[swap]{T\eta_X} \ar[equal]{ld} T(X) \\
+    & T(X) &
+  \end{tikzcd}
+\end{center}
+es conmutativo, es decir, $\mu_X \circ T\eta_X = \mu_X \circ \eta_{TX}$. Podemos
+comprobar esta igualdad tomando $(m, x) \in T^2(X)$:
+$$\mu_X(T\eta_X(m, x)) = \mu_X(m, e, x) = (m \cdot e, x) = (m, x)$$
+$$\mu_X(\eta_{TX}(m, x)) = \mu_X(e, m, x) = (e\cdot m, x) = (m, x)$$
+
+\paragraph{Sumas}
+Sea $\C$ una categoría con coproductos finitos. Dado un objeto
+$C$ de $\C$ definimos
+un endofuntor $T : \arr{\C}{\C}$ por $T(X) = C + X$. La
+transformación natural $\eta_X : \arr{X}{C + X}$ será
+la inyección canónica y $\mu_X : \arr{C + C + X}{C+X}$ será
+la aplicación $(1_C + 1_C) + 1_X$. Veamos que
+$(T, \eta, \mu)$ es una mónada. En primer lugar
+dado un objeto $X$ de $\C$ comprobamos la conmutatividad
+del siguiente diagrama:
+\begin{center}
+  \begin{tikzcd}
+    C + C + C + X \arrow{r}{T\mu_X}
+           \arrow{d}{\mu_{TX}} & T^2(X) \arrow{d}{\mu_X} \\
+    T^2(X) \arrow{r}{\mu_X} & TX
+  \end{tikzcd}
+\end{center}
+Lo que equivale a comprobar que
+$\mu_X \circ \mu_{TX} = \mu_X \circ T\mu_X$.
+
+\textit{Demostrar esto va a ser muy laborioso. Quizá solo debería afirmar que esto es una mónada y luego simplemente explicar la versión en Haskell}.
+
+\paragraph{$\Hom(A, -)$}
+Sea $A$ un conjunto. Consideramos el endofuntor $\Hom(A, -) : \arr{\Set}{\Set}$.
+$\eta_X : \arr{X}{\Hom(A, X)}$ definida por $\eta_X(x)(a) = x$ y
+$\mu_X : \arr{\Hom(A, \Hom(A, X))}{\Hom(A, X)}$ dada por
+$\mu_X(f)(a) = f(a)(a)$. Veamos que $(T, \eta, \mu)$ es una
+mónada. El primer diagrama cuya conmutatividad debemos
+verificar es
+\begin{center}
+  \begin{tikzcd}
+    \Hom(A, \Hom(A, \Hom(A, X))) \arrow{r}{T\mu_X}
+    \arrow{d}{\mu_{TX}} & \Hom(A, \Hom(A, X)) \arrow{d}{\mu_X} \\
+
+    \Hom(A, \Hom(A, X)) \arrow{r}{\mu_X} & \Hom(A, X)
+  \end{tikzcd}
+\end{center}
+
+Sea $f : \Hom(A, \Hom(A, \Hom(A, X)))$ entonces:
+$$(\mu_X \circ T\mu_X)(f)(a) = (\mu_X( (T\mu_X)(f) )(a)
+   = ((\mu_X \circ f))(a))(a)
+   = \mu_X(f(a))(a)
+   = f(a)(a)(a)$$
+Por el otro lado:
+\begin{center}
+  \begin{tikzcd}
+    \Hom(A, X)
+    \arrow{r}{T\eta_X} &
+    \Hom(A, \Hom(A, X))
+    \arrow{d}{\mu} &
+    \Hom(A, X) \arrow{l}{\eta_{TX}}
+  \end{tikzcd}
+\end{center}
