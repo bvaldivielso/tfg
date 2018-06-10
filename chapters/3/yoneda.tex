@@ -110,11 +110,24 @@ de Yoneda de forma sencilla.
   $$\tau_C(f) = Ff (\phi_{A,F}(\tau)) = Ff(\phi_{A, F}(\tau')) = \tau'_C(f)$$
   con lo que $\tau = \tau'$ y $\phi_{A, F}$ es biyectiva.
 
+  Merece la pena apuntar cuál es la aplicación inversa a $\phi_{A, F}$.
+  Unas cuentas sencillas nos permiten comprobar que:
+
+  $$\phi_{A,F}^{-1} : \arr{FA}{\nat{\Hom(A, -)}{F}}$$
+  $$\phi_{A,F}^{-1}(a)_C(f) = (Ff)(a)$$
+
 
   Probar que $\phi_{A, F}$ es natural en $A$ y $F$ es lo que queda para ver
   que $\phi : \nat{L}{Ev}$ es un isomorfismo natural. La demostración es
   rutinaria y no se incluye en el presente texto.
 \end{proof}
+
+El lema de Yoneda se puede interpretar en términos de elementos
+categóricos. Si tenemos una categoría $\C$, un objeto $A$ de esta
+y un funtor $F : \arr{\C}{\Set}$, el lema de Yoneda nos permite
+decir que los elementos categóricos de $F$ definidos sobre
+el funtor $\Hom(A, -)$ son esencialmente los mismos que los
+elementos del conjunto $F A$.
 
 Obtenemos un importante corolario del Lema de Yoneda aplicándolo a
 $F = \Hom(B, -)$ donde $B$ es otro objeto de $\C$.
@@ -125,13 +138,45 @@ $F = \Hom(B, -)$ donde $B$ es otro objeto de $\C$.
   $T(A) = \Hom_\C(A, -)$ es fiel y completo.
 \end{theorem}
 \begin{proof}
+  $T$ actúa sobre flechas
+  $f \in \Hom_{\C^{op}}(A, B)$ de la siguiente manera:
 
-  La acción de $T$ sobre las flechas es:
-  $f : \arr{A}{B}$
-  $T(f) : \nat{\Hom_\C(B, -)}{\Hom_\C(A, -}$
-  $T(f)_C(g) = g \circ f$
+  $$T(f) = \Hom_\C(f, -) : \nat{T(A) = \Hom(A, -)}{\Hom(B, -) = T(B)}$$
+  $$T(f)_C(g) = g \circ f$$
 
+  Repitiendo la demostración del lema de Yoneda con
+  $F = \Hom(B, -)$ vemos que la aplicación inducida por
+  $T$ sobre los conjuntos $\Hom_{\C^{op}}(A, B)$ es precisamente la
+  biyección:
 
-
-
+  $$\phi_{A, F}^{-1} : \arr{
+    \Hom_{\C^{op}}(A, B) = FA
+  }{
+    \Nat(\Hom(A, -), F) = \Nat(T(A), T(B))
+  }$$
+  que definimos anteriormente.
+  Luego $T$ es inyectiva y sobreyectiva sobre los conjuntos
+  $\Hom$ y
+  por tanto es un funtor fiel y completo.
 \end{proof}
+
+Aplicando este mismo resultado sobre la categoría $\C^{op}$ llegamos
+al resultado dúal:
+
+\begin{theorem}
+  Dada una categoría $\C$, el funtor que asigna a cada objeto
+  $A$ de la categoría el funtor $\Hom(-, A)$ es un funtor
+  $\arr{\C}{\funccat{\C^{op}}{\Set}}$ fiel y completo.
+\end{theorem}
+
+Los funtores descritos en los dos últimos teoremas son conocidos
+como \textbf{encajes de Yoneda}.
+
+Los encajes de Yoneda son una herramienta fundamental para la teoría
+de categorías. Nos permiten ver la categoría $\C$ dentro de la
+categoría de funtores $\funccat{\C^{op}}{\Set}$. En este sentido
+la categoría $\funccat{\C^{op}}{\Set}$ se puede ver como una extensión
+de la categoría $\C$, identificando cada objeto $A$ de la categoría
+con el funtor $\Hom(-, A)$ y cada flecha $f : \arr{A}{B}$ con la
+transformación natural asociada
+$\Hom(-, f) : \nat{\Hom(-, A)}{\Hom(-, B)}$.
