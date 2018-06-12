@@ -1,5 +1,6 @@
 El lema de Yoneda es uno de los primeros resultados
-inesperados que surgen a raíz de la teoría de categorías. Una
+inesperados que surgen a raíz del
+estudio de la teoría de categorías. Una
 de las consecuencias más importantes de este resultado es
 el encaje de Yoneda, que nos permite
 ver una categoría $\C$ cualquiera dentro de la categoría de
@@ -11,7 +12,7 @@ secciones usaremos la notación $\Nat(-, -)$ en lugar de
 $\Hom_{\funccat{\C}{\D}}(-, -)$ para referirnos al conjunto de
 transformaciones naturales entre dos funtores. Definimos
 $L : \arr{\C\times\funccat{\C}{\Set}}{\Set}$ por
-$L(A, F) = \Nat(\Hom(A, -), F)$. Probaremos que $L$ es un funtor.
+$L(A, F) = \Nat(\Hom(A, -), F)$. Probaremos que $L$ es un funtor. \textcolor{red}{no se si esto tiene carácter de proposición}
 
 \begin{proposition*}
   $L$ definido anteriormente es un funtor.
@@ -40,18 +41,18 @@ Proseguimos con otro funtor $\arr{\C\times\funccat{\C}{\Set}}{\Set}$:
   $g : \arr{D}{E}$ flechas de $\C$.
   Definimos la acción de $Ev$ sobre las flechas de
   $\arr{\C\times\funccat{\C}{\Set}}{\Set}$ como
-  $Ev(f, \sigma) = \sigma_D \circ Ff : \arr{FC}{GD}$. Veamos que $E$ se comporta bien
+  $Ev(f, \sigma) = \sigma_D \circ Ff : \arr{FC}{GD}$. Veamos que $Ev$ se comporta bien
   respecto a las composiciones:
   \begin{multline*}
     Ev(g \circ f, \tau\circ\sigma) =
     (\tau \circ \sigma)_E\circ F(g\circ f) =\\
-    \tau_E\circ\sigma_E\circ Fg \circ Ff =^*
+    \tau_E\circ\sigma_E\circ Fg \circ Ff \stackrel{*}{=}
   \tau_E\circ Gg \circ\sigma_D \circ Ff =
   \tau_E\circ Gg \circ Ev(f, \sigma) =\\
   Ev(g, \tau) \circ Ev(f, \sigma)
   \end{multline*}
 
-  Donde $*$ se deduce del hecho de que $\sigma : \nat{F}{G}$ es una transformación
+  Donde la igualdad $(*)$ se deduce del hecho de que $\sigma : \nat{F}{G}$ es una transformación
   natural.
   Que $Ev(1_C, 1_F) = 1_{FC}$ se prueba de forma sencilla,
   confirmando que $Ev : \arr{\C\times\funccat{\C}{\Set}}{\Set}$ es un funtor
@@ -63,23 +64,23 @@ de Yoneda de forma sencilla.
 \begin{theorem}[Lema de Yoneda]
   Sea $\C$ una categoría. Los funtores $L$ y $Ev$ son naturalmente isomorfos.
   En particular, para cada objeto $A$ de $\C$ y cada funtor $F : \arr{\C}{\Set}$
-  se tiene una biyección
+  se tiene una biyección \textcolor{red}{natural}
   $$\Nat(\Hom(A, -), F) \cong FA$$
 \end{theorem}
 \begin{proof}
-  Definimos la aplicación de conjuntos
+  Definimos la aplicación
   $$\phi_{A, F} : \arr{\Nat(\Hom(A, -), F)}{FA}$$
   $$\phi_{A, F}(\tau) = \tau_A (1_A)$$
   (recordamos que $\tau_A$ por ser $\tau$ transformación natural entre $\Hom(A, -)$ y $F$ es
-  una aplicación de conjuntos $\tau_A : \arr{\Hom(A, A)}{F A}$).
+  induce una aplicación de conjuntos $\tau_A : \arr{\Hom(A, A)}{F A}$).
 
   Veamos que $\phi_{A, F}$ es una biyección. En primer lugar veremos que es sobreyectiva. Sea $x \in FA$
   Definimos la transformación natural $\lambda_x : \nat{\Hom(A, -)}{F}$ por
   $$(\lambda_x)_C : \arr{\Hom(A, C)}{F C}$$
-  $$(\lambda_x)_C(f) = f(x)$$
+  $$(\lambda_x)_C(f) = Ff(x)$$
 
   Comprobar que $\lambda_x$ es en efecto una transformación natural es sencillo. Pero
-  $\phi_{A, F}(\lambda_x) = (\lambda_x)_A (1_A) = 1_A(x) = x$, luego $\phi_{A, F}$
+  $\phi_{A, F}(\lambda_x) = (\lambda_x)_A (1_A) = F1_A(x) = x$, luego $\phi_{A, F}$
   es sobreyectiva.
 
   Veamos ahora que $\phi_{A, F}$ es inyectiva. Supongamos que tenemos
@@ -87,8 +88,7 @@ de Yoneda de forma sencilla.
   tales que $\phi_{A, F}(\tau) = \phi_{A, F}(\tau')$. Para todo $f \in \Hom(A, C)$
   la naturalidad de $\tau$ nos garantiza la conmutatividad
   del siguiente diagrama:
-
-  \begin{center}
+\begin{center}
     \begin{tikzcd}
       \Hom(A, A) \arrow{d}[swap]{\Hom(A, f)} \arrow{r}{\tau_A}
             & FA \arrow{d}{Ff} \\
@@ -100,22 +100,15 @@ de Yoneda de forma sencilla.
 
   Es decir $\tau_C \circ \Hom(A, f) = F f \circ \tau_A$. Aplicando
   esta flecha sobre el valor $1_A$ tenemos que:
-
-  $$\tau_C(f) = \tau_C(f \circ 1_A) = \tau_C(\Hom(A, f)(1_A)) = F f(\tau_A(1_A)) = Ff(\phi_{A, F}(\tau))$$
-  De la misma manera se puede obtener que $\tau'_C(f)  = Ff(\phi_{A, F}(\tau'))$
-
-  pero entonces para cualquier objeto $C$ y para cualquier flecha $f \in \Hom(A, C)$
+$$\tau_C(f) = \tau_C(f \circ 1_A) = \tau_C(\Hom(A, f)(1_A)) = F f(\tau_A(1_A)) = Ff(\phi_{A, F}(\tau))$$
+  De la misma manera se puede obtener que $\tau'_C(f)  = Ff(\phi_{A, F}(\tau'))$, pero entonces para cualquier objeto $C$ y para cualquier flecha $f \in \Hom(A, C)$
   se cumple:
-
   $$\tau_C(f) = Ff (\phi_{A,F}(\tau)) = Ff(\phi_{A, F}(\tau')) = \tau'_C(f)$$
   con lo que $\tau = \tau'$ y $\phi_{A, F}$ es biyectiva.
-
-  Merece la pena apuntar cuál es la aplicación inversa a $\phi_{A, F}$.
+  Merece la pena apuntar cuál es la aplicación inversa de $\phi_{A, F}$.
   Unas cuentas sencillas nos permiten comprobar que:
-
-  $$\phi_{A,F}^{-1} : \arr{FA}{\nat{\Hom(A, -)}{F}}$$
+  $$\phi_{A,F}^{-1} : \arr{FA}{\Nat(\Hom(A, -), F)}$$
   $$\phi_{A,F}^{-1}(a)_C(f) = (Ff)(a)$$
-
 
   Probar que $\phi_{A, F}$ es natural en $A$ y $F$ es lo que queda para ver
   que $\phi : \nat{L}{Ev}$ es un isomorfismo natural. La demostración es
@@ -129,18 +122,18 @@ decir que los elementos categóricos de $F$ definidos sobre
 el funtor $\Hom(A, -)$ son esencialmente los mismos que los
 elementos del conjunto $F A$.
 
-Obtenemos un importante corolario del Lema de Yoneda aplicándolo a
-$F = \Hom(B, -)$ donde $B$ es otro objeto de $\C$.
+Obtenemos un importante corolario del Lema de Yoneda cuando tomamos
+$F = \Hom(B, -)$ con $B$ otro objeto de $\C$.
 
 \begin{theorem}
   Dada una categoría $\C$
   el funtor $T : \arr{C^{op}}{\funccat{\C}{\Set}}$ dado por
-  $T(A) = \Hom_\C(A, -)$ es fiel y completo.
+  $T(A) = \Hom_\C(A, -)$ es fiel y pleno.
 \end{theorem}
 \begin{proof}
   $T$ actúa sobre flechas
-  $f \in \Hom_{\C^{op}}(A, B)$ de la siguiente manera:
-
+  $f \in \Hom_{\C^{op}}(A, B)$ \textcolor{red}{te he visto usar esto antes aunque creo que lo quitamos, me parece un poco confuso creo que es más claro porner $f:B\rightarrow A$, pero tu mismo....}
+  de la siguiente manera:
   $$T(f) = \Hom_\C(f, -) : \nat{T(A) = \Hom(A, -)}{\Hom(B, -) = T(B)}$$
   $$T(f)_C(g) = g \circ f$$
 
@@ -148,7 +141,6 @@ $F = \Hom(B, -)$ donde $B$ es otro objeto de $\C$.
   $F = \Hom(B, -)$ vemos que la aplicación inducida por
   $T$ sobre los conjuntos $\Hom_{\C^{op}}(A, B)$ es precisamente la
   biyección:
-
   $$\phi_{A, F}^{-1} : \arr{
     \Hom_{\C^{op}}(A, B) = FA
   }{
@@ -157,16 +149,16 @@ $F = \Hom(B, -)$ donde $B$ es otro objeto de $\C$.
   que definimos anteriormente.
   Luego $T$ es inyectiva y sobreyectiva sobre los conjuntos
   $\Hom$ y
-  por tanto es un funtor fiel y completo.
+  por tanto es un funtor fiel y pleno.
 \end{proof}
 
-Aplicando este mismo resultado sobre la categoría $\C^{op}$ llegamos
-al resultado dúal:
+Aplicando esta misma proposición sobre la categoría $\C^{op}$ llegamos
+al resultado dual:
 
 \begin{theorem}
   Dada una categoría $\C$, el funtor que asigna a cada objeto
   $A$ de la categoría el funtor $\Hom(-, A)$ es un funtor
-  $\arr{\C}{\funccat{\C^{op}}{\Set}}$ fiel y completo.
+  $\arr{\C}{\funccat{\C^{op}}{\Set}}$ fiel y pleno.
 \end{theorem}
 
 Los funtores descritos en los dos últimos teoremas son conocidos
@@ -176,7 +168,36 @@ Los encajes de Yoneda son una herramienta fundamental para la teoría
 de categorías. Nos permiten ver la categoría $\C$ dentro de la
 categoría de funtores $\funccat{\C^{op}}{\Set}$. En este sentido
 la categoría $\funccat{\C^{op}}{\Set}$ se puede ver como una extensión
-de la categoría $\C$, identificando cada objeto $A$ de la categoría
+de la categoría $\C$, identificando cada objeto $A$ de $\C$
 con el funtor $\Hom(-, A)$ y cada flecha $f : \arr{A}{B}$ con la
 transformación natural asociada
-$\Hom(-, f) : \nat{\Hom(-, A)}{\Hom(-, B)}$.
+$\Hom(-, f) : \nat{\Hom(-, A)}{\Hom(-, B)}$. El hecho
+de que el encaje de
+Yoneda sea fiel y pleno nos dice que esta identificación es buena
+en el sentido de que las flechas entre objetos $A$ y $B$ de $\C$
+son \textit{las mismas} que las flechas (transformaciones naturales)
+entre los funtores
+$\Hom(-, A)$ y $\Hom(-, B)$
+
+Cuando en el capítulo 2 introdujimos la noción
+de elemento categórico subrayamos que dados $x \in^T A$ y
+$f : \arr{A}{B}$ entonces $f \circ x \in^T B$.
+Que $f$ lleve elementos de $A$ en elementos de $B$
+motivó que utilizáramos la notación $f(x)$ en lugar de $f \circ x$.
+Esta notación podría llevarnos a interpretar $f$ como una familia
+de aplicaciones
+$f_T : \arr{\Hom(T, A)}{\Hom(T, B)}$ para objeto $T$ de $\C$,
+pero esta familia es precisamente
+la imagen de $f$ a través del encaje de Yoneda: $f_T = \Hom(-, f)_T$.
+Recíprocamente,
+dada cualquier familia de aplicaciones
+$g_T : \arr{\Hom(T, A)}{\Hom(T, B)}$ natural en $T$, en el sentido
+de que para cualquier $h : \arr{S}{T}$ se dé
+$g_T(x) \circ h = g_S(x \circ h)$, tendríamos que $g$ es una transformación
+natural $g: \nat{\Hom(-, A)}{\Hom(-, B)}$ y el
+encaje de Yoneda nos permitiría realizar la identificación $g : \arr{A}{B}$.
+
+Todo esto nos permite decir que dar una flecha $f: \arr{A}{B}$ en una categoría
+arbitraria $\C$ es esencialmente lo mismo que dar una aplicación que lleva
+elementos de $A$ a elementos de $B$ de una forma coherente (la condición
+de naturalidad).

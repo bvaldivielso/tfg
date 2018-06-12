@@ -7,7 +7,7 @@ Usamos el sistema de polimorfismo de Haskell para suplir nuestra primera
 necesidad. El lenguaje nos permite definir una función de
 tipo \cod{F a -> G a} (una función polimórfica en la variable de
 tipo \cod{a}) que, especializando a cada tipo del lenguaje, será
-la componente en cada objeto de $\Hask$ de nuestra transformación natural.
+la componente en cada objeto de $\Hask$ de nuestra transformación natural. \textcolor{red}{usas $A$ y $a$ para tipo casi en el mismo párrafo ?¿?¿?}
 
 Un ejemplo de este tipo de función polimórfica sería:
 \begin{verbatim}
@@ -25,7 +25,7 @@ tales condiciones pero eso no
 será necesario: el sistema de polimorfismo de
 Haskell (\textit{parametric polymorphism}) nos lo garantiza.
 Haskell nos impone la restricción de que
-una función polimórfica en el la variable de tipo \cod{a}
+una función polimórfica en el la \textcolor{red}{???} variable de tipo \cod{a}
 esté implementada
 con la misma expresión. Por ejemplo, en Haskell no es posible
 escribir una función polimórfica de esta forma:
@@ -54,7 +54,7 @@ que dimos de estos tipos en el primer capítulo fue la siguiente:
 \item Los valores de la forma \cod{Nothing :: Maybe a} representan
   situaciones de error durante un cómputo. Los valores de la forma
   \cod{Just v :: Maybe a} representan un cómputo exitoso que tiene
-  como al valor \cod{v :: a} como valor de retorno.
+  al valor \cod{v :: a} como valor de retorno.
 \item Los valores de la forma \cod{Left error :: Either b a} representan
   situaciones de error durante un cómputo y además aportan más información
   sobre el error (por ejemplo si la variable \cod{b} estuviera
@@ -96,8 +96,8 @@ instance Functor (Const b) where
 \end{verbatim}
 
 Este es un funtor distinto a los anteriores que hemos
-definido en Haskell demás en el sentido de que no utiliza
-la variable de tipo de ninguna forma. \textit{Escribir esto mejor}.
+definido en Haskell demás \textcolor{red}{????} en el sentido de que no utiliza
+la variable de tipo de ninguna forma. \textit{Escribir esto mejor} \textcolor{red}{pues si}.
 
 
 Supongamos que tenemos una función polimórfica de tipo
@@ -118,9 +118,8 @@ escribimos estas condiciones de naturalidad en haskell llegamos a:
 -- dado g :: c -> c'
 fConst . fmap g = fmap g . fConst
 \end{verbatim}
-
 donde el \cod{fmap} de la izquierda es el de \cod{F} y el de
-la izquierda es el de \cod{Const B}. Pero el de \cod{Const b}
+la izquierda es el de \cod{Const B}.\textcolor{red}{izquierda derecha?¿?¿?} Pero el de \cod{Const b}
 deja invariante el resultado. Esto nos lleva a comprobar que:
 \cod{f . fmap g = f}. Es decir, si modificamos un valor de
 nuestro funtor con alguna función de la forma \cod{fmap g} no
