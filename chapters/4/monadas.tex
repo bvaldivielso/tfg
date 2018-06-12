@@ -12,17 +12,21 @@ más importantes para nuestro trabajo: las mónadas.
   conmutan:
 
 
+
   \begin{center}
+    \begin{equation}\label{diagrama:mu}
     \begin{tikzcd}
       T^3 \arrow{d}{\mu T} \arrow{r}{T\mu} & T^2 \arrow{d}{\mu} \\
       T^2 \arrow{r}{\mu} & T
-
     \end{tikzcd}
+    \end{equation}
 
-    \begin{tikzcd}
-      T \ar[equal]{dr} \arrow{r}{T\eta} & T^2 \arrow{d}{\mu} & T \arrow{l}[swap]{\eta T} \ar[equal]{ld} \\
-      & T &
-    \end{tikzcd}
+    \begin{equation}\label{diagrama:eta}
+      \begin{tikzcd}
+        T \ar[equal]{dr} \arrow{r}{T\eta} & T^2 \arrow{d}{\mu} & T \arrow{l}[swap]{\eta T} \ar[equal]{ld} \\
+        & T &
+      \end{tikzcd}
+    \end{equation}
   \end{center}
 \end{definition}
 
@@ -135,118 +139,120 @@ de funtores adjuntos que la definen?
 
 Veamos que las respuesta es afirmativa.
 
-\begin{theorem}[Categoría de Kleisli]
-Sea $\C$ una categoría y $(T: \arr{\C}{\C}, \eta: \nat{1_\C}{T}, \mu: \nat{T^2}{T})$
-una mónada sobre $\C$. Entonces:
-
-\begin{enumerate}
-\item Podemos construir una categoría $\D$ que tiene los mismos objetos
-  de $\C$ y en la que $\Hom_\D(A, B) = \Hom_\C(A, TB)$ para cualquier
-  par de objetos de $\C$. $\D$ es la categoría de Kleisli de la mónada.
-
-
-\item Podemos definir $F: \arr{\C}{\D}$ que lleva cualquier objeto
-  de $A$ en si mismo y cualquier flecha $f : \arr{A}{B}$ en la flecha
-  $Ff = Tf \circ \eta_A$. $F$ es un funtor.
-
-\item Podemos definir $G: \arr{\D}{\C}$ con $GA = TA$ para todo objeto
-  $A$ de $\D$ y dada $f: \Hom_\D(A, B) = \Hom_\C(A, TB)$
-  $$Gf =  \mu_B \circ Tf$$
-
-\item $F$ y $G$ son un par de funtores adjuntos $F \adjoint G$
-  con $T = GF$, su
-  unidad es $\eta$ y además $\mu = F\epsilon G$ con $\epsilon$
-  la counidad de la adjunción.
-\end{enumerate}
+\begin{theorem}
+  Sea $\C$ una categoría y $(T, \eta, \mu)$ una mónada
+  sobre $\C$. Entonces existe una categoría $\D$ y un par
+  de funtores $F : \arr{\C}{\D}$, $G : \arr{\D}{\C}$ tales
+  que $F \adjoint G$ y además:
+  \begin{enumerate}
+  \item $T = GF$
+  \item $\eta$ es la unidad de la adjunción
+  \item $\mu = F\epsilon G$ donde $\epsilon: \nat{FG}{1_\D}$ es
+    la counidad de la adjunción.
+  \end{enumerate}
 \end{theorem}
-\begin{proof}
+\begin{proof}[\textbf{Prueba. } Categoría de Kleisli]
   Probamos el resultado paso por paso.
   \begin{enumerate}
-  \item $\D$ es una categoría. Dadas dos flechas $f : \Hom_\D(A, B)$ y
-    $g: \Hom_\D(B, C)$ definimos la composición $g \circ_\D f : \Hom_\D(A, C)$
-    como la flecha $g \circ_\D f = \mu_{C} \circ Tg \circ f$. Esta operación
-    de composición cumple los axiomas:
-
+  \item Construcción de $\D$. Definimos $\Obj{\D} = \Obj{\C}$ y
+    $\Hom_\D(A, B) = \Hom_\C(A, TB)$.
+    Dadas dos flechas $f \in \Hom_\D(A, B)$ y
+    $g \in \Hom_\D(B, C)$ definimos la composición $g \circ_\D f \in \Hom_\D(A, C)$
+    como la flecha
+    $$g \circ_\D f :
+    A \xrightarrow{f} TB \xrightarrow{Tg} T^2 C \xrightarrow{\mu_C} T C
+    $$
+    Veamos que esta operación de composición
+    cumple los axiomas:
     \begin{itemize}
     \item Es asociativa. Sean $f : \Hom_\D(A, B)$, $g : \Hom_\D(B, C)$
       y $h : \Hom_\D(C, D)$ entonces
       $$(h \circ_{\D} g) \circ_\D f = \mu_D \circ T(h \circ_\D g) \circ f
       = \mu_D \circ T(\mu_D \circ Th \circ g) \circ f
       = \mu_D \circ T\mu_D \circ T^2h \circ Tg \circ f$$
-      $$= \mu_D \circ \mu_{TD} \circ T^2h \circ Tg \circ f
-      =\mu_D \circ Th \circ \mu_C \circ Tg \circ f
+      $$=^* \mu_D \circ \mu_{TD} \circ T^2h \circ Tg \circ f
+      =^{**}\mu_D \circ Th \circ \mu_C \circ Tg \circ f
       =\mu_D \circ Th \circ (g \circ_\D f)
       = h \circ_\D (g \circ_\D f)$$
 
-    \item Existen identidades. La identidad es $\eta_A \in \Hom_\D(A, A)$. Lo
-      comprobamos:
-      $$f \circ_\D \eta_A = \mu_B \circ Tf \circ \eta_A$$
-      $$= \mu_B \circ \eta_{TB} \circ f$$
-      $$= f $$
+      Donde ($*$) es consecuencia del diagrama \eqref{diagrama:mu}
+      de la definición de mónada aplicado sobre $D$ y ($**$) es
+      consecuencia de la naturalidad de $\mu : \nat{T^2}{T}$.
+
+    \item Existen identidades. Sean
+      $f \in \Hom_\D(A, X)$ y $g \in \Hom_\D(X, A)$. Observamos
+      que
+      $$f \circ_\D \eta_A = \mu_X \circ Tf \circ \eta_A
+      =^* \mu_X \circ \eta_{TB} \circ f
+      =^{**} f$$
+    Donde $(*)$ es consecuencia de la naturalidad de
+    $\eta : \nat{1_\C}{T}$ y $(**)$ es consecuencia
+    del diagrama \eqref{diagrama:eta} de la definición de mónada.
+    Por otro lado
+    $$\eta_A \circ_\D g = \mu_A \circ T\eta_A \circ g
+    =^* g$$
+    con $(*)$ consecuencia otra vez del diagrama \eqref{diagrama:eta}.
+
+    Esto muestra que en la categoría $\D$ la flecha $\eta_A$ es la
+    identidad del objeto $A$ para cualquier objeto $A$ de la categoría.
     \end{itemize}
-  \item $F$ es un funtor. Vamos por partes:
+  \item Ahora que conocemos la estructura de categoría
+    de $\D$ definimos $F : \arr{\C}{\D}$ como $FA = A$
+    para cada objeto $A$ de $\C$ y $Ff = Tf \circ \eta_A$ para
+    toda flecha $f: \arr{A}{B}$ de $\C$.
+    Veamos que $F$ es un funtor. Por partes:
     \begin{itemize}
-    \item $F$ se lleva bien con la composición.
-      $A \xrightarrow{f} B \xrightarrow{C}$ tenemos que
-      $$F(g \circ f) = T(g \circ f) \circ \eta_A = Tg \circ Tf \circ \eta_A
-      = Tg \circ \eta_B \circ f$$
-
+    \item $F$ se lleva bien con la composición. Dado el diagrama
+      $A \xrightarrow{f} B \xrightarrow{C}$ en la categoría $\C$
+      tenemos que:
+      $$F(g \circ f) = T(g \circ f) \circ \eta_A
+      = Tg \circ Tf \circ \eta_A
+      =^* Tg \circ \eta_B \circ f$$
+      Donde $(*)$ se deduce de la naturalidad de
+      $\eta : \nat{1_\C}{T}$. Igualmente:
       $$Fg \circ_\D Ff = (Tg \circ \eta_B) \circ_\D (Tf \circ \eta_A)
-      = \mu_C \circ T(Tg \circ \eta_B) \circ (Tf \circ \eta_A)
-      = \mu_C \circ T^2g \circ T\eta_B \circ Tf \circ \eta_A$$
-      $$= \mu_C \circ T^2g \circ T\eta_B \circ \eta_B \circ f
-      = Tg \circ \mu_B \circ T\eta_B \circ \eta_B \circ f
-      = Tg \circ \eta_B \circ f$$
+      = \mu_C \circ T(Tg \circ \eta_B) \circ (Tf \circ \eta_A)$$
+      $$= \mu_C \circ T^2g \circ T\eta_B \circ Tf \circ \eta_A
+      =^* \mu_C \circ T^2g \circ T\eta_B \circ \eta_B \circ f$$
+      $$=^{**} Tg \circ \mu_B \circ T\eta_B \circ \eta_B \circ f
+      =^{***} Tg \circ \eta_B \circ f$$
+      Con $(*)$ consecuencia de la naturalidad de
+      $\eta: \nat{1_\C}{T}$, $(**)$ consecuencia de la naturalidad
+      de $\mu : \nat{T^2}{T}$, y $(***)$ por el diagrama
+      \eqref{diagrama:eta} de la definición de mónadas.
 
-      %$$=\mu_C \circ TFg \circ Tf \circ \eta_A$$
 
-    \item $F$ lleva identidades a identidades: $F1_A = T1_A \circ \eta_A = 1_TA \circ \eta_A = \eta_A$ que
-    sabemos que es la identidad.
+    \item $F$ lleva identidades a identidades:
+      $$F1_A = T1_A \circ \eta_A = 1_{TA} \circ \eta_A = \eta_A$$
+      que es la flecha identidad de $A$ en $\D$.
 
     \end{itemize}
 
-  \item $G$ es un funtor. Por partes
+  \item Definimos $GA = TA$ para cada objeto $A$ de $\D$
+    y $Gf = \mu_B \circ Tf$ para cada flecha $f \in \Hom_\D(A, B)$.
+    Mostramos que $G: \arr{\D}{\C}$ es un funtor:
     \begin{itemize}
     \item $G$ se lleva bien con la composición. Dadas $f \in \Hom_\D(A, B)$
       y $g \in \Hom_\D(B, C)$ tenemos que:
       $$G(g \circ_\D f) = \mu_C \circ T(g \circ_\D f)
       = \mu_C \circ T(\mu_C \circ Tg \circ f)
       = \mu_C \circ T\mu_C \circ T^2g \circ Tf$$
-      $$= \mu_C \circ \mu_{TC} \circ T^2g \circ Tf
-      = \mu_C \circ Tg \mu_B \circ Tf
+      $$=^* \mu_C \circ \mu_{TC} \circ T^2g \circ Tf
+      =^{**} \mu_C \circ Tg \circ \mu_B \circ Tf
       = Gg \circ Gf$$
+      Con $(*)$ consecuencia del diagrama \eqref{diagrama:mu}
+      de la definición de mónada y $(**)$ consecuencia de la
+      naturalidad de $\mu : \nat{T^2}{T}$.
     \item $G$ se lleva bien con las identidades.
       $G\eta_A = \mu_A \circ T\eta_A = 1_{TA}$
+      por el diagrama \eqref{diagrama:eta} de la definición de mónada.
     \end{itemize}
-  \item El cuarto punto se deja como ejercicio.
+  \item La prueba de que $F \adjoint G$ es sencilla.
+    El isomorfismo natural que necesitamos para establecer la
+    adjunción es precisamente:
+    $$\phi : \Hom_\D(F-, -) \cong \Hom_\C(-, G-)$$
+    $$\phi_{A, B}(f) = f$$
+    La comprobación de la naturalidad de $\phi$ es rutinaria.
 
   \end{enumerate}
-
-
-  Diagramas para la demostración:
-  \begin{center}
-    \begin{tikzcd}
-      T^2 B \arrow{d}{T^2g} \arrow{r}{\mu_B} & T B \arrow{d}{T g} \\
-      T^2 (TC) \arrow{r}{\mu_{TC}} & TC
-    \end{tikzcd}
-  \end{center}
-  \begin{center}
-    \begin{tikzcd}
-      T^2B \arrow{d}{T^2g} \arrow{r}{\mu_B} & T B \arrow{d}{T g} \\
-      T^2 C \arrow{r}{\mu_C} & T C
-    \end{tikzcd}
-  \end{center}
-  \begin{center}
-    \begin{tikzcd}
-      T^2 C \arrow{d}{T^2 h} \arrow{r}{\mu_C} & T C \arrow{d}{T h}\\
-      T^2 (T D) \arrow{r}{\mu_{TD}} & T (T D)
-    \end{tikzcd}
-  \end{center}
-
-  \begin{center}
-    \begin{tikzcd}
-      A \arrow{d}{f} \arrow{r}{\eta_A} & TA \arrow{d}{T f} \\
-      T B \arrow{r}{\eta_{TB}} & T (T B)
-    \end{tikzcd}
-  \end{center}
 \end{proof}

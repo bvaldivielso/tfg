@@ -1,0 +1,86 @@
+\subsection{Adjunciones}
+\paragraph{Currificación}
+Definimos el siguiente funtor producto en Haskell.
+\begin{verbatim}
+type Product b a = (b, a)
+
+instance Functor (Product fijo) where
+  -- fmap :: a -> c -> (fijo, a) -> (fijo, c)
+  fmap f (x, a) = (x, f a)
+\end{verbatim}
+
+Veamos que los funtores \cod{Product fijo} y y \cod{Reader fijo}
+son funtores adjuntos. Para comprobarlo necesitamos definir
+una biyección natural entre los conjuntos
+$\Hom_\Hask(\cod{Product fijo a}, z) \cong
+\Hom_\Hask(a, \cod{Reader fijo z})$. La biyección se puede
+implementar de la siguiente forma:
+\begin{verbatim}
+biy :: ((Product fijo a) -> z) -> (a -> (Reader fijo z))
+biy f a = Reader (\fijo -> f (a, fijo))
+
+-- y la inversa
+biy_inv :: (a -> Reader fijo z) -> (Product fijo a -> z)
+biy_inv f (fijo, a) = (f a) fijo
+\end{verbatim}
+Se puede comprobar que son inversas fácilmente. La unidad la podemos
+implementar tambień:
+\begin{verbatim}
+unit :: a -> Reader fijo (Product fijo a)
+unit a = Reader (\fijo -> (fijo, a))
+\end{verbatim}
+Y la counidad:
+\begin{verbatim}
+counit :: Product fijo (Reader fijo a) -> a
+counit (fijo, Reader f) = f fijo
+\end{verbatim}
+
+Y sabemos que son naturales porque son polimórficos en la variable
+\cod{a}.
+
+Esta adjunción nos dice una cosa sobre Haskell: es equivalente
+dar una función que recibe dos parámetros de tipo
+\cod{A} y de tipo \cod{B} y devuelve uno de tipo \cod{Z} que dar
+una función que recibe un parámetro de tipo \cod{A} y devuelve
+una función de tipo \cod{B -> Z}. Esto motiva la sintaxis de
+Haskell para llamar a función. Habitualmente cuando en un lenguaje
+se implementa una función \cod{f} que recibe dos parámetros ha
+de ser llamada como:
+\begin{verbatim}
+f(a, b)
+\end{verbatim}
+En Haskell esto no es así. Debido a que \textit{es lo mismo} definir
+una función que recibe dos parámetros que una función que recibe
+un parámetro y devuelve otra función tenemos que Haskell opta por
+la segunda. Entonces la sintaxis de Haskell
+
+\begin{verbatim}
+f a b = (f a) b
+\end{verbatim}
+
+Es decir, se aplica la función \cod{f} al valor \cod{a}, lo que devuelve
+una función que recibe un parámetro \cod{b} y esta se aplica a continuación
+al valor \cod{b}.
+\textcolor{red}{Esto es útil en Haskell por varios motivos que explicitaremos}.
+
+\subsection{Mónadas}
+Al igual que existe una typeclass \cod{Functor} también existe una typeclass
+\cod{Monad} en la bibiloteca estándar de Haskell. La definición es la siguiente:
+
+\begin{verbatim}
+class Monad M where
+  return :: a -> M a
+  bind :: M a -> (a -> M b) -> M b
+\end{verbatim}
+
+Esta definición de Mónada es similar a la que dimos originalmente. Podemos ver
+que \cod{return} es precisamente la transformación natural $\eta$.
+¿Pero cómo se relaciona \cod{bind} con la terminología que usamos anteriormente?
+Implementamos la siguiente función:
+
+\begin{verbatim}
+mu :: Monad m => m (m a) -> m a
+mu mma = bind mma id
+\end{verbatim}
+
+\subsubsection{Notación \cod{do}}

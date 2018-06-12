@@ -11,3 +11,9 @@ Quizá explicarlo mejor
 ** DONE Hablar de los morfismos nulos
 ** TODO Demostrar que no existe objeto final en \Field
 ** TODO Organizar mejor la información de funtores
+** DONE Organizar la demostración de Kleisli
+*** DONE Darle nombre a los diagramas de las mónadas
+*** DONE Hacer referencias desde dentro de la demostración
+*** DONE Mejorar el enunciado del teorema de Kleisli
+** TODO Hablar de la aplicación de transformaciones naturales sobre
+   funtores y ese tema
