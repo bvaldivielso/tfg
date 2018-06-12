@@ -1,4 +1,9 @@
-\documentclass[12pt]{report}
+\documentclass[11pt]{book}
+\usepackage[utf8]{inputenc}
+
+\usepackage{textcomp}
+
+\usepackage[T1]{fontenc}
 
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -17,8 +22,8 @@
 \usepackage{color} %para el color
 
 % pies de página y esas cosas
-\usepackage{fancyhdr}
-\pagestyle{fancy}
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
 
 % cambiar chapter por capítulo
 %\renewcommand{\chaptername}{Capítulo}
@@ -29,6 +34,7 @@
 % bibliografía
 \usepackage{biblatex}
 \addbibresource{references.bib}
+
 
 \setcounter{secnumdepth}{3} % que numere las subsecciones también
 
@@ -49,8 +55,83 @@
 \author{Braulio Valdivielso Martínez}
 \date{\today}
 
+
+\usepackage{eso-pic}
+\usepackage{graphicx}
+%\usepackage{fourier}
+\usepackage[beramono,eulerchapternumbers,linedheaders,parts,a5paper,dottedtoc,
+manychapters,pdfspacing]{classicthesis}
+\usepackage[top=1in, bottom=1.5in, left=1in, right=1in]{geometry}
+
+\newcommand\BackgroundPic{%
+	\put(0,0){%
+		\parbox[b][\paperheight]{\paperwidth}{%
+			\vfill
+			\centering
+			\includegraphics[width=\paperwidth,height=\paperheight,%
+			keepaspectratio]{ugrA4.pdf}%
+			\vfill
+}}}
+
+
 \begin{document}
-\maketitle
+
+\begin{titlepage}	
+\AddToShipoutPicture*{\BackgroundPic}
+
+\newlength{\centeroffset}
+\setlength{\centeroffset}{-0.5\oddsidemargin}
+\addtolength{\centeroffset}{0.5\evensidemargin}
+\thispagestyle{empty}
+
+\vspace*{4cm}
+
+\noindent\hspace*{\centeroffset}\begin{minipage}{\textwidth}
+	
+	\centering
+	%\includegraphics[width=0.4\textwidth]{logougrnuevo.jpg}\\[1.4cm]
+	
+	\textsc{ \huge Trabajo Fin de Grado\\[0.2cm]}
+	\medskip
+	\textsc{ \Large Grado en Matemáticas}\\[0.8cm]
+	% Upper part of the page
+	% 
+	% Title
+	
+	{\Huge\bfseries \makeatletter \@title \makeatother
+	}
+	
+\end{minipage}
+
+\vspace{2cm}
+\noindent\hspace*{\centeroffset}\begin{minipage}{\textwidth}
+	\centering
+	\textbf{\large Autor}\\ {\large \makeatletter \@author \makeatother}\\[5.5ex]
+	%		\textbf{\large Tutor}\\
+	%		{\large Pedro A. García-Sánchez}\\[1.6cm]
+	%		\textsc{---}\\
+	%		Granada, febrero de 2018
+\end{minipage}
+%\addtolength{\textwidth}{\centeroffset}
+%\vspace{\stretch{2}}
+
+\vfill
+\begin{minipage}[t][1cm][t]{1.7cm}
+	{\large  \textbf{Tutor:}}
+\end{minipage}\hfill
+\begin{minipage}[t][1cm][t]{7cm}
+	{\large María Burgos Navarro\\
+		\emph{Didáctica de la Matemática}}\\[.7em]
+	{\large Pedro A. García Sánchez\\
+		\emph{Álgebra}}
+\end{minipage}\hfill
+\begin{minipage}[t][1cm][t]{3.5cm}
+	\large{Junio 2018}
+\end{minipage}
+
+\end{titlepage}
+
+\tableofcontents
 
 \chapter*{Abstract}
 Abstract goes here
