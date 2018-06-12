@@ -1,5 +1,5 @@
 De camino a nuestro objetivo de definir el concepto de mónada
-pasaremos por la definición de adjunción. Como veremos en las próximas
+pasaremos \textcolor{red}{pasaremos?¿??¿ comenzamos?¿?¿} por la definición de adjunción. Como veremos en las próximas
 secciones las mónadas y las adjunciones están estrechamente relacionadas.
 Esto no debe hacernos pensar que las mónadas son el único motivo
 por el que las adjunciones son importante en matemáticas. Las adjunciones
@@ -69,9 +69,9 @@ se traslada al siguiente diagrama conmutativo en $\D$
 \subsection{Unidad y counidad}
 Dadas categorías $\C$ y $\D$ y funtores adjuntos $F \adjoint G$ es
 posible construir dos transformaciones naturales
-$\eta : \nat{1_\C}{GF}$ y $\epsilon: \nat{FG}{1_\D}$ a las que llamaremos
+$\eta : \nat{1_\C}{GF}$ y $\epsilon: \nat{FG}{1_\D}$, a las que llamaremos
 respectivamente la \textbf{unidad} y la \textbf{counidad} de la
-adjunción.
+adjunción. \textcolor{red}{creo que hay muchos las...mejor sería:..que llamaremos..la... o a las que llamaremos unidad y...}
 
 Sea $\phi : \nat{\Hom(F-, -)}{\Hom(-, G-)}$ el isomorfismo natural que
 nos viene dado por la adjunción. Damos la transformación $\eta$
@@ -150,14 +150,14 @@ $-\times A : \arr{\Set}{\Set}$ y
 $\Hom(A, -) : \arr{\Set}{\Set}$ conforman una adjunción.
 Necesitamos encontrar un isomorfismo natural
 $$\phi : \nat{\Hom(-\times A, -)}{\Hom(-, \Hom(A, -))}$$.
-Para ello definimos
+\textcolor{red}{el punto lo tienes que poner antes del doble dolar para que no pase esto}Para ello definimos
 $$\phi_{B, Z} : \arr{\Hom(B\times A, Z)}{\Hom(B, \Hom(A, Z))}$$
 $$\phi_{B, Z}(f)(b)(a) = f(b, a)$$
 
 Veamos que $\phi_{B, Z}$ es una biyección.
 En primer lugar vemos que es sobreyectiva.
 Sea $f' \in \Hom(B, \Hom(A, Z))$. Definimos la aplicación
-$f : \arr{B\times A}{Z}$ dada por $f(b, a) = f'(b)(a) \forall b\in B \quad a \in A$. Aplicando
+$f : \arr{B\times A}{Z}$ dada por $f(b, a) = f'(b)(a), \,  \forall b\in B \, , a \in A$. Aplicando
 la definición de $\phi_{B, Z}$
 tenemos $\phi_{B,Z}(f)(b)(a) = f(b, a) = f'(b)(a)$ también para
 todo $b \in B$ y para todo $a \in A$, y por tanto
@@ -166,7 +166,7 @@ que tenemos $f_1, f_2 : \arr{B\times A}{Z}$ tales que
 $\phi_{B, Z}(f_1) = \phi_{B, Z}(f_2)$ pero entonces tenemos que
 $f_1(b, a) = \phi_{B, Z}(f_1)(b)(a) = \phi_{B,Z}(f_2)(b)(a) = f_2(b, a)$
 $\forall (b, a) \in B\times A$
-y por tanto $f_1 = f_2$.
+y por tanto $f_1 = f_2$. \textcolor{red}{este párrafo es un poco farragoso, la puntuación está regular además mezclas para todo símbolo con para todo texto, $\forall b\in B a\in A $ y $\forall (b,a)\in B\times A$ uff....}
 
 Comprobamos ahora las condiciones de naturalidad. En primer lugar dado
 el diagrama:
@@ -224,9 +224,9 @@ de aplicaciones entre $A$ y $Z$.
 \paragraph{Grupos libres}
 Los funtores de conjunto subyacente $U : \arr{\Grp}{\Set}$ y el funtor
 $F : \arr{\Set}{\Grp}$ que asigna a cada conjunto su grupo libre asociado
-son adjuntos $F \adjoint U$.
+son adjuntos $F \adjoint U$. \textcolor{red}{Ufff. yo simplificaría esto: Los funtores $U : \arr{\Grp}{\Set}$, conjunto subyacente, y $F : \arr{\Set}{\Grp}$ , grupo libre, son adjuntos  $F \adjoint U$.}
 
-La unidad $\eta : \nat{1_\Set}{UF}$ es la inclusión
+La unidad $\eta : \nat{1_\Set}{UF}$ es la inclusión \textcolor{red}{canónica}
 $\eta_X : X \subseteq UFX$ de un conjunto en el
 grupo libre generado por él. La counidad
 $\mu : \nat{FU}{1_\Grp}$ determina para cada grupo $G$
