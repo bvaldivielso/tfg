@@ -7,16 +7,13 @@ más importantes para nuestro trabajo: las mónadas.
 \begin{definition}
   Una mónada sobre una categoría $\C$
   es una terna $(T, \eta, \mu)$ donde $T : \arr{\C}{\C}$ es un
-  endofuntor y $\eta : \nat{1_\C}{T}, \, \mu: \nat{T^2}{T}$ \textcolor{red}{son} dos
+  endofuntor y $\eta : \nat{1_\C}{T}, \, \mu: \nat{T^2}{T}$ son dos
   transformaciones naturales tales que los siguientes diagramas
   conmutan:
-
-
-
   \begin{center}
     \begin{equation}\label{diagrama:mu}
     \begin{tikzcd}
-      T^3 \arrow{d}{\mu T} \arrow{r}{T\mu} & T^2 \arrow{d}{\mu} \\
+      T^3 \arrow{d}[swap]{\mu T} \arrow{r}{T\mu} & T^2 \arrow{d}{\mu} \\
       T^2 \arrow{r}{\mu} & T
     \end{tikzcd}
     \end{equation}
@@ -29,30 +26,28 @@ más importantes para nuestro trabajo: las mónadas.
     \end{equation}
   \end{center}
 \end{definition}
-
-\textcolor{red}{los diagramas quedan mejor si los pones uno al lado del otro con un quad}
-Estudiar algunos ejemplos será útil para aclarar qué parte hace qué
-en la definición.
+Estudiar algunos ejemplos será útil para comprender mejor
+los distintos elementos que forman parte
+de la definición.
 
 \subsubsection{Ejemplos}
 \paragraph{Monoides}
-\textit{Aquí estoy tratando con mucha ligereza la asociatividad del producto cartesiano pero es por simplificar la notación}\textcolor{red}{me parece bien, pero dilo}
-Sea $M$ un monoide. Definimos el funtor $T : \arr{\Set}{\Set}$
-como $T(X) = M\times X$, $\eta_X : \arr{X}{T(X)}$ definida
+Sea $M$ un monoide. Definimos:
+\begin{itemize}
+\item El funtor $T : \arr{\Set}{\Set}$
+  como $T(X) = M\times X$
+\item $\eta_X : \arr{X}{T(X)}$ definida
 por $\eta_X(x) = (e, x)$ (con $e \in M$ el elemento neutro)
-y $\mu_X : \arr{T^2(X)}{T(X)}$ definida por
-$\mu_X(m, n, x) = (m\cdot n, x)$ \textcolor{red}{acuérdate de los puntos al acabar párrafo}
+\item $\mu_X : \arr{T^2(X)}{T(X)}$ definida por
+$\mu_X(m, n, x) = (m\cdot n, x)$
+\end{itemize}
 
-
-Veamos que $(T, \eta, \mu)$ es un monoide. \textcolor{red}{mónada}
-
-
-\textcolor{red}{queda un poco farragoso, si después de una coma empiezas con un símbolo matemático no se sabe si sigues con las matemáticas o...yo haría algo así: Sea $M$ un monoide, veamos que la siguiente terna $(T, \eta, \mu)$ es una mónada, donde (casi con un itemize) $T$.........}
-
+Veamos que $(T, \eta, \mu)$ es una mónada.
+\textit{A lo largo de este ejemplo nos tomaremos la libertad de identificar $T^2X$ con $M\times M\times X$ en lugar con $M \times (M\times X)$ con la intención de simplificar la notación}.
 En primer lugar
 tenemos que ver que para cualquier conjunto $X$ el siguiente
-diagrama es conmutativo:
-
+diagrama es conmutativo (diagrama \eqref{diagrama:mu} de la definición
+de mónada):
 \begin{center}
   \begin{tikzcd}
     M\times M \times M \times X \arrow{r}{T\mu_X}
@@ -61,7 +56,7 @@ diagrama es conmutativo:
   \end{tikzcd}
 \end{center}
 Es decir $\mu_X \circ \mu_{TX} = \mu_X \circ T\mu_X$. Para comprobar
-esta igualdad de aplicaciones \textcolor{red}{yo quitaría lo de aplicaciones} tomamos $(m, n, k, x) \in T^3(X)$.
+esta igualdad tomamos $(m, n, k, x) \in T^3(X)$.
 Por un lado:
 $$(\mu_X \circ \mu_{TX})(m, n, k, x) = \mu_X(\mu_{TX}(m, n, k, x)
   = \mu_X(m\cdot n, k, x) = ((m\cdot n)\cdot k, x)$$
@@ -71,6 +66,7 @@ $$(\mu_X \circ T\mu_X)(m, n, k, x) = \mu_X(T\mu_X(m, n, k, x))
 y por la asociatividad del producto en $M$ tenemos que
 el diagrama es conmutativo.
 Queda ver que para cualquier conjunto $X$ el diagrama
+(\ref{diagrama:eta} de la definición de mónada)
 \begin{center}
   \begin{tikzcd}
     T(X) \ar[equal]{dr}
@@ -78,8 +74,8 @@ Queda ver que para cualquier conjunto $X$ el diagrama
     & T(X) &
   \end{tikzcd}
 \end{center}
-es conmutativo, es decir, $\mu_X \circ T\eta_X = \mu_X \circ \eta_{TX}$. Podemos
-comprobar esta igualdad tomando $(m, x) \in T^2(X)$:
+es conmutativo, es decir, $\mu_X \circ T\eta_X = 1_{TX} = \mu_X \circ \eta_{TX}$. Podemos
+comprobar esta igualdad basta ver que para cualquier $(m, x) \in TX$:
 $$\mu_X(T\eta_X(m, x)) = \mu_X(m, e, x) = (m \cdot e, x) = (m, x)$$
 $$\mu_X(\eta_{TX}(m, x)) = \mu_X(e, m, x) = (e\cdot m, x) = (m, x)$$
 
@@ -98,7 +94,7 @@ $C$ de $\C$ de definimos:
 La terna $(T, \eta, \mu)$ es una mónada.
 
 
-\paragraph{$\Hom(A, -)$}
+\paragraph{Mónada $\Hom(A, -)$}
 Sea $A$ un conjunto. Definimos:
 
 \begin{itemize}
@@ -120,24 +116,16 @@ $\eta : \nat{1_{\C}}{GF}$ y counidad $\epsilon: \nat{FG}{1_\D}$. La terna
 $(GF, \eta, G\epsilon F)$ es una mónada.
 \end{theorem}
 \begin{proof}
-  El primer diagrama cuya conmutatividad probaremos es:
-
-  \begin{center}
-    \begin{tikzcd}
-      GF \ar[equal]{rd} \arrow{r}{\eta GF} & GFGF \arrow{d}{G\epsilon F} & GF \arrow{l}[swap]{GF\eta} \ar[equal]{ld} \\
-         & GF   &
-    \end{tikzcd}
-  \end{center}
+  \textcolor{red}{Hacer demostración}
 \end{proof}
 
 Pero este resultado lo sabemos. El siguiente resultado.
 
 \subsection{Categoría de Kleisli de una mónada}
-Hemos visto que todo par de funtores adjuntos definen una mónada.
-Nos planteamos ahora el recíproco: dada una mónada, ¿existe un par
-de funtores adjuntos que la definen?
-
-Veamos que las respuesta es afirmativa.
+Hemos visto que todo par de funtores adjuntos inducen una mónada.
+Es natural plantearse si el recíproco es cierto: ¿es toda mónada
+la composición de un par de funtores adjuntos?
+La respuesta es afirmativa.
 
 \begin{theorem}
   Sea $\C$ una categoría y $(T, \eta, \mu)$ una mónada
@@ -151,7 +139,7 @@ Veamos que las respuesta es afirmativa.
     la counidad de la adjunción.
   \end{enumerate}
 \end{theorem}
-\begin{proof}[\textbf{Prueba. } Categoría de Kleisli]
+\begin{proof}[\textbf{Demostración. } Categoría de Kleisli]
   Probamos el resultado paso por paso.
   \begin{enumerate}
   \item Construcción de $\D$. Definimos $\Obj{\D} = \Obj{\C}$ y

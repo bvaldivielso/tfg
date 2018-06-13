@@ -1,12 +1,15 @@
-En el primer capítulo introdujimos los funtores como los morfismos
-entre las categorías. Ahora ha llegado el momento de dar un paso más
-e introducir las transformaciones naturales como morfismos entre
-funtores.
+En el primer capítulo introdujimos la noción de funtor
+como morfismo
+entre categorías. Llegados a este punto
+podemos dar un paso más
+e introducir el concepto de transformación
+natural como el morfismo
+entre funtores.
 
 Procedemos con la definición:
 
 \begin{definition}
-  Dados dos funtores $F: \arr{\C}{\D}, G : \arr{\C}{\D}$ decimos
+  Dados dos funtores $F: \arr{\C}{\D}$ y $G : \arr{\C}{\D}$ decimos
   que $\lambda : \nat{F}{G}$ es una transformación natural si $\lambda$
   asigna a cada objeto $C$ de $\C$ una flecha
   $\lambda_C : \arr{FC}{GC}$ de manera que para
@@ -20,6 +23,53 @@ Procedemos con la definición:
   \end{center}
 \end{definition}
 
+\subsubsection{Ejemplos}
+\paragraph{El doble dual}
+Consideremos la categoría de espacios vectoriales de dimensión
+finita sobre un cuerpo $K$, a la que llamaremos $\VectK$. Podemos
+definir el funtor $(-)^{**}: \arr{\VectK}{\VectK}$, al que llamaremos
+doble dual, que lleva un espacio vectorial $V$ a su doble dual
+$V^{**}$ y una aplicación lineal
+$f: \arr{V}{W}$ a la correspondiente aplicación
+lineal
+$f^{**} : \arr{V^{**}}{W^{**}}$ definida por
+$$f^{**}(g)(\phi) = g(\phi\circ f)$$
+Podemos probar que existe una transformación
+natural entre el funtor doble dual y el funtor identidad
+de la categoría $\VectK$. La transformación
+natural es $\lambda : \nat{1_{\VectK}}{(-)^{**}}$ definido por:
+$$\lambda_V : \arr{V}{V^{**}}$$
+$$\lambda_V(v)(\phi) = \phi(v)$$
+Nótese además que para cada espacio vectorial $V$ se tiene
+que $\lambda_V$ es un isomorfismo de espacios vectoriales.
+
+\paragraph{Abelianización de grupos}
+Definimos el funtor $(-)^{ab} : \arr{\Grp}{\Grp}$
+como el funtor que lleva
+cada grupo $G$ a su abelianización
+$G^{ab} =\frac{G}{[G, G]}$
+y cada homomorfismo de grupos $f : \arr{G}{H}$ al homomorfismo
+de grupos dado por:
+$$f^{ab} : \arr{G^{ab}}{H^{ab}}$$
+$$f^{ab}(g[G, G]) = \pi_H (f(g))$$
+Donde $\pi_H$ es la proyección al cociente.
+La aplicación está bien definida porque los homomorfismos
+de grupos llevan conmutadores en conmutadores y como
+$H^{ab}$ es un grupo abeliano y el único conmutador de un
+grupo abeliano es el 1 se tiene que
+$[G, G] \subseteq \ker (\pi_H \circ f)$.
+
+Comprobar que $\pi: \nat{1_\Grp}{(-)^{ab}}$ es una transformación natural
+se reduce a comprobar que para cada homomorfismo de grupos
+$f: \arr{G}{H}$ el siguiente diagrama es conmutativo:
+\begin{center}
+  \begin{tikzcd}
+    G \arrow{r}{\pi_G} \arrow{d}{f} & G^{ab} \arrow{d}{f^{ab}} \\
+    H \arrow{r}{\pi_H} & H^{ab}
+  \end{tikzcd}
+\end{center}
+
+\subsection{Categorías de funtores}
 Los siguientes resultados nos permitirán componer
 transformaciones naturales y considerar categorías en las
 que los objetos son funtores entre dos categorías $\C$ y $\D$ y las
@@ -49,60 +99,72 @@ las transformaciones naturales entre estos funtores:
   \end{enumerate}
 
   En definitiva los funtores $\arr{\C}{\D}$ y las transformaciones
-  naturales entre estos funtores forman una categoría. A esta categoría
-  la llamaremos $\funccat{\C}{\D}$.
+  naturales entre estos funtores forman una categoría. Notaremos
+  esta categoría
+  como $\funccat{\C}{\D}$.
 \end{proposition}
 
-
+\subsection{Isomorfismos naturales}
 \begin{definition}
   Dados dos funtores $F, G : \arr{\C}{\D}$ diremos que la transformación
   natural $\lambda : \nat{F}{G}$ es un isomorfismo natural si
   $\lambda_C : \arr{FC}{GC}$ es un isomorfismo para todo objeto $C$
   de $\C$.
 \end{definition}
+Podemos relacionar los isomorfismos naturales y las categorías
+de funtores de la siguiente manera:
+\begin{proposition}
+  Sean $F, G : \arr{\C}{\D}$ dos funtores. Entonces
+  $\phi: \nat{F}{G}$
+  es un isomorfismo natural si y solo si es un isomorfismo
+  en la categoría $\funccat{\C}{\D}$.
+\end{proposition}
+\begin{proof}
+  Supongamos que $\phi: \nat{F}{G}$ es un isomorfismo natural. Definimos
+  $\psi: \nat{G}{F}$ como $\psi_C = \phi_C^{-1}$ (podemos
+  considerar la inversa de $\phi_C$ gracias a que $\phi_C$ es un isomorfismo de
+  $\C$ por ser $\phi$ un isomorfismo natural). Comprobar la
+  naturalidad de $\psi$ consiste en ver que para cualquier
+  flecha $f: \arr{C}{C'}$ se tiene que el siguiente diagrama es
+  conmutativo:
+  \begin{center}
+    \begin{tikzcd}
+      GC \arrow{r}{\psi_C} \arrow{d}[swap]{Gf} & FC' \arrow{d}{Ff} \\
+      GC' \arrow{r}{\psi_{C'}} & FC'
+    \end{tikzcd}
+  \end{center}
+  Es decir, $\psi_{C'} \circ Gf = Ff \psi_C$. Esto es cierto sí y solo
+  sí $Gf \circ \phi_C = \phi_{C'} \circ Ff$ (componiendo a la izquierda
+  con el isomorfismo $\phi_{C'}$ y a la derecha con el isomorfismo
+  $\phi_C$), pero esta última igualdad se deduce de la naturalidad
+  de $\phi: \nat{F}{G}$. Entonces
+  $\psi$ es la inversa de $\phi$ y por tanto
+  $\phi$ es un isomorfismo en la categoría de funtores
+  $\funccat{\C}{\D}$.
 
-Se puede justificar además que los isomorfismos naturales
-son precisamente los isomorfismos en las categorías de funtores.
 
-\subsection{Ejemplos}
-\paragraph{El doble dual}
-Consideremos la categoría de espacios vectoriales de dimensión
-finita sobre un cuerpo $K$, a la que llamaremos $\VectK$. Podemos
-definir el funtor $(-)^{**}: \arr{\VectK}{\VectK}$, al que llamaremos
-doble dual, que lleva un espacio vectorial $V$ a su doble dual
-$V^{**}$ y una aplicación lineal
-$f: \arr{V}{W}$ a la correspondiente aplicación
-lineal
-$f^{**} : \arr{V^{**}}{W^{**}}$ definida por
+  Supongamos ahora que $\phi: \nat{F}{G}$ es un isomorfismo en la
+  categoría de funtores $\funccat{\C}{\D}$. Entonces $\phi$ tiene
+  una inversa $\psi: \nat{G}{F}$ (es decir
+  $\psi \circ \phi = 1_F$ y $\phi \circ \psi = 1_G$)
+  por lo que para cada objeto
+  $C$ de $\C$ tenemos que $\phi_C \circ \psi_C = 1_{GC}$ y
+  además $\phi_C \circ \psi_C = 1_{FC}$, es decir, $\phi_C$
+  es un isomorfismo en $\C$. Esto prueba que
+  $\phi: \nat{F}{G}$ es un isomorfismo natural.
+\end{proof}
 
-$$f^{**}(g)(\phi) = g(\phi\circ f)$$
-Podemos probar que el funtor doble dual y el funtor identidad
-de la categoría $\VectK$ son naturalmente isomorfos. El isomorfismo
-natural es $\lambda : \nat{1_{\VectK}}{(-)^{**}}$ definido por:
-
-$$\lambda_V : \arr{V}{V^{**}}$$
-$$\lambda_V(v)(\phi) = \phi(v)$$
-
-\paragraph{Abelianización de grupos}
-Definimos el funtor $(-)^{ab} : \arr{\Grp}{\Grp}$
-como el funtor que lleva
-cada grupo $G$ a su abelianización
-$G^{ab} =\frac{G}{[G, G]}$
-
-y cada homomorfismo de grupos $f : \arr{G}{H}$ al homomorfismo
-de grupos dado por:
-
-$$f^{ab} : \arr{G^{ab}}{H^{ab}}$$
-$$f^{ab}(g[G, G]) = \pi_H (f(g))$$
-
-Donde $\pi_H$ es la proyección al cociente.
-La aplicación está bien definida porque los homomorfismos
-de grupos llevan conmutadores en conmutadores y como
-$H^{ab}$ es un grupo abeliano y el único conmutador de un
-grupo abeliano es el 1 se tiene que
-$[G, G] \subseteq \ker (\pi_H \circ f)$.
-
-Considerando una vez más las proyecciones
-$\pi_G : \arr{G}{G^{ab}}$ nos daremos cuenta
-que $\pi : \nat{1_\Grp}{(-)^{ab}}$ es precisamente
-una transformación natural.
+\subsection{Transformaciones naturales a través de funtores}
+Sean $F: \arr{\C}{\D}$ y $G: \arr{\C}{\D}$ dos funtores y
+$\tau : \nat{F}{G}$ una transformación natural entre ellos.
+Entonces:
+\begin{itemize}
+\item Dado un funtor $H: \arr{\D}{\D'}$ definimos
+$(H\tau)_A = H(\tau_A)$ para cada objeto $A$ de
+$\C$. $H\tau$ es una transformación natural
+$H\tau : \nat{HF}{HG}$.
+\item Dado un funtor $K: \arr{\C'}{\C}$ definimos
+$(\tau K)_A' = \tau_{KA'}$ para cualquier objeto
+$A'$ de $\C'$. $\tau K$ es una transformación natural
+$\tau K : \nat{FK}{GK}$.
+\end{itemize}

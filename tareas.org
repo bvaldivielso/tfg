@@ -1,19 +1,51 @@
 * Tareas
 ** TODO Escribir lo de ~Pipes~
-** TODO Poner referencias en la parte de Generics y Tempaltes C++
+** TODO Poner referencias en la parte de Generics y Templates C++
 ** TODO Escribir ~List~ functor
 ** DONE Funtores libres
 Quizá explicarlo mejor
-** TODO Meter diagramas conmutativos
+** DONE Meter diagramas conmutativos
 ** TODO Introducción del segundo capítulo
 ** TODO Usar environments de LaTeX para las definiciones, teoremas...
 ** DONE Poner algún otro ejemplo más de epimorfismo, monomorfismo...
 ** DONE Hablar de los morfismos nulos
 ** TODO Demostrar que no existe objeto final en \Field
-** TODO Organizar mejor la información de funtores
+** DONE Organizar mejor la información de funtores
 ** DONE Organizar la demostración de Kleisli
 *** DONE Darle nombre a los diagramas de las mónadas
 *** DONE Hacer referencias desde dentro de la demostración
 *** DONE Mejorar el enunciado del teorema de Kleisli
-** TODO Hablar de la aplicación de transformaciones naturales sobre
+** DONE Hablar de la aplicación de transformaciones naturales sobre
    funtores y ese tema
+** DONE Organizar mejor los capítulos (sobre todo datos sueltos
+sobre transformaciones naturales y funtores
+** TODO Organizar mejor el segundo capítulo
+** TODO Escribir demostración adjuntos -> mónadas
+** TODO Funtor a funtor
+
+* Organización de la teoría de categorías
+
+** Categorías
+*** Definición
+*** Construcciones
+**** Categoría producto
+*** Ejemplos
+
+
+** Funtores
+*** Definición
+*** Ejemplos
+*** Construcciones o propiedades
+**** Funtor Identidad
+**** Funtor producto
+**** Bifuntores
+**** Composición de funtores
+**** Fijar parámetro en un bifuntor
+
+** Transformaciones naturales
+*** Definición
+*** Ejemplos
+*** Construcciones
+**** Transformación natural identidad
+**** Transformación natural composición
+**** Isomorfismos naturales

@@ -52,22 +52,7 @@ que $F g \circ F f = F (g\circ f)$. Según McLane en \cite{mclane}
   las flechas en un contexto determinado.
 \end{quotation}
 
-Diremos que un funtor $F : \arr{\C}{\D}$ es fiel si la
-para cada par de objetos $C$, $C'$ de $\C$ tenemos que
-la aplicación de conjuntos inducida
-$F : \arr{\Hom_\C(C, C')}{\Hom_\D(FC, FC')}$ es inyectiva,
-diremos que $F$ es pleno si es sobreyectiva.
-
-
-
-
-\subsection{Ejemplos}
-\paragraph{Funtores Identidad}
-Para cada categoría $\C$ podemos definir el funtor identidad
-$1_{\C} : \arr{C}{C}$ que deja invariante tanto a los objetos
-como a las flechas. Comprobar las propiedades de los funtores
-es trivial.
-
+\subsubsection{Ejemplos}
 \paragraph{Funtores subyacentes a $\Set$}
 Podemos considerar el funtor $U : \arr{\Grp}{\Set}$
 que asigna a cada grupo su conjunto subyacente y a cada flecha la
@@ -127,25 +112,57 @@ Teniendo en cuenta $\Hom(A, -)$ se comporta bien respecto a la
 composición y lleva identidades en identidades concluimos que es
 un funtor.
 
-\paragraph{Bifuntores}
+\subsection{Funtores fieles y plenos}
+Dado un funtor $F : \arr{\C}{\D}$,
+diremos que es fiel (resp. pleno) si para cada par de objetos
+$C$ y $C'$ de $\C$ tenemos que la aplicación inducida
+$F : \arr{\Hom_\C(C, C')}{\Hom_\D(FC, FC')}$ es inyectiva
+(resp. sobreyectiva).
+
+\subsection{Funtores Identidad}
+Dada una categoría $\C$ definimos el funtor
+$1_\C : \arr{\C}{\C}$ donde $1_\C C = C$ para todo
+objeto $C$ de $\C$ y $1_\C f = f$ para cada flecha
+$f: \arr{C}{C'}$ de $\C$.
+
+\subsection{Composición de funtores}
+Dados dos funtores $F : \arr{\C}{\D}$ y $G: \arr{\D}{\E}$
+definimos $F \circ G : \arr{\C}{\E}$ como $(F\circ G)C = F(G(C))$
+y $(F\circ G)(f) = F(Gf) : \arr{FGC}{FGC'}$ donde $C, C'$ son objetos
+de $\C$ y $f: \arr{C}{C'}$. $F\circ G$
+es un funtor. La composición de funtores cumple las siguientes
+propiedades:
+\begin{itemize}
+\item Es asociativa. Dado los funtores
+  $\C \xrightarrow{F} \C' \xrightarrow{G} \D \xrightarrow{H} \D'$
+  tenemos que $(H \circ G) \circ F = H \circ (G \circ F)$.
+\item Para cualquier funtor $F : \arr{\C}{\D}$ se cumple
+  que $F \circ 1_\C = F = 1_\D \circ F$.
+\end{itemize}
+
+Estas propiedades nos permiten considerar categorías en las que
+los objetos son categorías y las flechas son los funtores entre
+ellas.
+
+\subsection{Bifuntores}
 Llamamos bifuntor a un funtor de
 la forma $F : \arr{\C_1\times\C_2}{\D}$. Un ejemplo de
 bifuntor sería $-\times - : \arr{\Set\times\Set}{\Set}$ que
 a cada par de conjuntos le asigna su producto cartesiano.
 
-\paragraph{Composición de funtores}
-Dados dos funtores $F : \arr{\C}{\D}$ y $G: \arr{\D}{\E}$ podemos
-definir $F \circ G : \arr{\C}{\E}$ tal que $(F\circ G)C = F(G(C))$
-y $(F\circ G)(f) = F(Gf) : \arr{FGC}{FGC'}$ donde $C, C'$ son objetos
-de $\C$ y $f: \arr{C}{C'}$ una flecha de esta categoría. $F\circ G$
-es un funtor. Además esta composición de funtores es asociativa
-y los funtores identidad se comportan como identidades frente
-a esta composición.
+\subsection{Producto de funtores}
+Dados dos funtores $F : \arr{\C}{\D}$ y $G: \arr{\C'}{\D'}$
+podemos definir el funtor $F\times G: \arr{\C\times\C'}{\D\times\D'}$
+de forma que:
 
-\paragraph{Producto de funtores}
-Dados dos funtors $F : \arr{\C}{\D}$ y $G: \arr{\C'}{\D'}$
-se define el funtor $F\times G: \arr{\C\times\C'}{\D\times\D'}$ de
-la manera evidente.
+\begin{itemize}
+\item $(F\times G)(C, D) = (FC, GD)$ donde $C$ es un objeto
+  de $\C$ y $D$ es un objeto de $\D$.
+\item $(F\times G)(f, g) = (F f, G g)$ donde $f$ es una flecha
+  de $\C$ y $g$ es una flecha de $\D$.
+\end{itemize}
+
+
 
 %% \paragraph{Endofuntores en Haskell}
 %% Es habitual que en lenguajes de programación fuertemente tipados exista

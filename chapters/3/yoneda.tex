@@ -3,33 +3,35 @@ inesperados que surgen a raíz del
 estudio de la teoría de categorías. Una
 de las consecuencias más importantes de este resultado es
 el encaje de Yoneda, que nos permite
-ver una categoría $\C$ cualquiera dentro de la categoría de
+ver una categoría $\C$ arbitraria dentro de la categoría de
 funtores $\funccat{\C^{op}}{\Set}$. Necesitaremos algunos resultados
 previos para poder enunciar el lema.
 
 A lo largo de las siguientes
-secciones usaremos la notación $\Nat(-, -)$ en lugar de
-$\Hom_{\funccat{\C}{\D}}(-, -)$ para referirnos al conjunto de
-transformaciones naturales entre dos funtores. Definimos
-$L : \arr{\C\times\funccat{\C}{\Set}}{\Set}$ por
-$L(A, F) = \Nat(\Hom(A, -), F)$. Probaremos que $L$ es un funtor. \textcolor{red}{no se si esto tiene carácter de proposición}
-
+secciones usaremos la notación $\Nat(F, G)$ en lugar de
+$\Hom_{\funccat{\C}{\D}}(F, G)$ para referirnos al conjunto de
+transformaciones naturales entre dos funtores
+$F, G: \arr{\C}{\D}$. Probamos la funtorialidad de uno de los
+ingredientes principales del lema de Yoneda.
 \begin{proposition*}
-  $L$ definido anteriormente es un funtor.
+  Dadas una categoría $\C$ y un objeto $A$ de esta definimos:
+  $$L : \arr{\C\times\funccat{\C}{\Set}}{\Set}$$
+  $$L(A, F) = \Nat(\Hom(A, -), F)$$
+  $L$ es un funtor.
 \end{proposition*}
 \begin{proof}
-  Definimos el funtor
-  $H: \arr{\C^{op}}{\funccat{\C}{\Set}}$ dado por
-  $H(A) = \Hom_\C(A, -)$. \textit{probar que es un funtor}
-
-  Nuestro funtor $L$ es precisamente
+  Llamando
+  $H: \arr{\C^{op}}{\funccat{\C}{\Set}}$ al funtor dado por
+  $H(A) = \Hom_\C(A, -)$
+  (\textit{probaré que esto es un funtor})
+  podemos notar que nuestro funtor $L$ es precisamente
   $$L :\C\times\funccat{\C}{\Set}
   \xrightarrow{H^{op}\times 1_{\funccat{\C}{\Set}}}
   (\funccat{C}{\Set})^{op} \times \funccat{C}{\Set}
   \xrightarrow{\Nat} \Set$$
 \end{proof}
-Proseguimos con otro funtor $\arr{\C\times\funccat{\C}{\Set}}{\Set}$:
-
+Probamos la funtorialidad
+del otro ingrediente principal del lema de Yoneda.
 \begin{proposition*}
   Sea $\C$ una categoría y $Ev(-, -) : \arr{\C\times\funccat{\C}{\Set}}{\Set}$
   dado por $Ev(C, F) = FC$. $Ev$ es un funtor y lo llamamos
@@ -43,28 +45,25 @@ Proseguimos con otro funtor $\arr{\C\times\funccat{\C}{\Set}}{\Set}$:
   $\arr{\C\times\funccat{\C}{\Set}}{\Set}$ como
   $Ev(f, \sigma) = \sigma_D \circ Ff : \arr{FC}{GD}$. Veamos que $Ev$ se comporta bien
   respecto a las composiciones:
-  \begin{multline*}
-    Ev(g \circ f, \tau\circ\sigma) =
-    (\tau \circ \sigma)_E\circ F(g\circ f) =\\
-    \tau_E\circ\sigma_E\circ Fg \circ Ff \stackrel{*}{=}
-  \tau_E\circ Gg \circ\sigma_D \circ Ff =
-  \tau_E\circ Gg \circ Ev(f, \sigma) =\\
-  Ev(g, \tau) \circ Ev(f, \sigma)
-  \end{multline*}
+  \begin{align*}
+    Ev(g \circ f, \tau\circ\sigma) &
+     = (\tau \circ \sigma)_E\circ F(g\circ f)
+     = \tau_E\circ\sigma_E\circ Fg \circ Ff \\
+     & \stackrel{*}{=}
+  \tau_E\circ Gg \circ\sigma_D \circ Ff
+  = Ev(g, \tau) \circ Ev(f, \sigma)
+  \end{align*}
 
-  Donde la igualdad $(*)$ se deduce del hecho de que $\sigma : \nat{F}{G}$ es una transformación
-  natural.
+  Donde la igualdad $(*)$ se deduce de la
+  naturalidad de $\sigma : \nat{F}{G}$.
   Que $Ev(1_C, 1_F) = 1_{FC}$ se prueba de forma sencilla,
   confirmando que $Ev : \arr{\C\times\funccat{\C}{\Set}}{\Set}$ es un funtor
 \end{proof}
-
-Ahora que conocemos estos dos funtores podemos enunciar el lema
-de Yoneda de forma sencilla.
-
+Ya estamos preparados para enunciar el lema.
 \begin{theorem}[Lema de Yoneda]
-  Sea $\C$ una categoría. Los funtores $L$ y $Ev$ son naturalmente isomorfos.
+  Sea $\C$ una categoría. Entonces los funtores $L$ y $Ev$ son naturalmente isomorfos.
   En particular, para cada objeto $A$ de $\C$ y cada funtor $F : \arr{\C}{\Set}$
-  se tiene una biyección \textcolor{red}{natural}
+  se tiene una biyección natural
   $$\Nat(\Hom(A, -), F) \cong FA$$
 \end{theorem}
 \begin{proof}
@@ -88,7 +87,7 @@ de Yoneda de forma sencilla.
   tales que $\phi_{A, F}(\tau) = \phi_{A, F}(\tau')$. Para todo $f \in \Hom(A, C)$
   la naturalidad de $\tau$ nos garantiza la conmutatividad
   del siguiente diagrama:
-\begin{center}
+  \begin{center}
     \begin{tikzcd}
       \Hom(A, A) \arrow{d}[swap]{\Hom(A, f)} \arrow{r}{\tau_A}
             & FA \arrow{d}{Ff} \\
@@ -132,7 +131,7 @@ $F = \Hom(B, -)$ con $B$ otro objeto de $\C$.
 \end{theorem}
 \begin{proof}
   $T$ actúa sobre flechas
-  $f \in \Hom_{\C^{op}}(A, B)$ \textcolor{red}{te he visto usar esto antes aunque creo que lo quitamos, me parece un poco confuso creo que es más claro porner $f:B\rightarrow A$, pero tu mismo....}
+  $f \in \Hom_{\C^{op}}(A, B)$
   de la siguiente manera:
   $$T(f) = \Hom_\C(f, -) : \nat{T(A) = \Hom(A, -)}{\Hom(B, -) = T(B)}$$
   $$T(f)_C(g) = g \circ f$$

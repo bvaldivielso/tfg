@@ -1,7 +1,10 @@
-Dedicamos este capítulo al tratamiento de construcciones elementales
-sobre categorías. En este capítulo podremos ver cómo un marco tan general
-como el de la teoría de categorías permite realizar definiciones
-\textit{Continuar introducción de construcciones elementales luego}.
+Dedicamos este capítulo al tratamiento de
+algunas construcciones y definiciones elementales
+sobre categorías. Veremos algunos ejemplos en los que
+definiciones puramente categóricas nos permiten capturar nociones
+específicas de estructuras matemáticas como los grupos o los
+espacios topológicos. Además, introduciremos la categoría opuesta
+como herramienta para razonar sobre la dualidad.
 
 \section{Elementos}
 Cuando hablamos de conjuntos es común hablar de sus elementos. Muchas
@@ -21,18 +24,22 @@ como:
 $$A\times B = \{ (a, b) : a \in A \quad b \in B \}$$
 \end{definition*}
 
-Si intentamos trasladar las construcciones que hacemos sobre los
-conjuntos y sus aplicaciones a categorías arbitrarias con sus objetos
-y sus flechas tenemos que saber cómo trasladar la noción de elemento.
+Si intentamos trasladar las construcciones que hacemos sobre
+conjuntos y las aplicaciones entre ellos
+a construcciones sobre categorías arbitrarias
+será útil saber cómo trasladar la noción de elemento.
 
 Si consideramos el conjunto con un solo elemento, al que llamaremos
-$*$, y las aplicaciones que salen de él nos damos cuentas de que podemos
-identificar las aplicaciones entre el conjunto $\uno = \{ 1 \}$
-$A$ (estas aplicaciones son de la forma $1 \mapsto a \in A$)
-arbitrario con los elementos (en el sentido de teoría de conjuntos)
-de $A$. Dicho de otra forma $\Hom(*, A)$ y $A$ son ``\emph{lo mismo}"  como conjuntos.
+$\uno = \{ x \}$, y las aplicaciones que
+salen de él nos daremos cuenta de que podemos
+identificar las aplicaciones $\arr{\uno}{A}$
+(estas aplicaciones son de la forma $x \mapsto a \in A$)
+con los elementos
+de $A$. Dicho de otra forma $\Hom(*, A)$ y $A$ son
+\emph{``lo mismo''} como conjuntos,
 pero $\Hom(*, A)$ está formado por flechas y eso es algo de lo que
-sí podemos hablar dentro de una categoría. Sin embargo, para realizar
+sí podemos hablar en el contexto de una categoría
+arbitraria. Sin embargo, para realizar
 este procedimiento de identificar los elementos de un conjunto con
 un conjunto de flechas de la categoría hemos tenido que acudir a un
 objeto especial de la categoría de conjuntos: $\uno$. Este procedimiento
@@ -51,7 +58,8 @@ de $A$ definido sobre $T$.
 Con esta noción de elemento notamos que $f : \arr{A}{B}$ lleva
 elementos de $A$ a elementos de $B$ mediante la composición: si
 $x \in^T A$ entonces $f \circ x \in^T B$. Esto motiva que en lo que
-sigue omitamos a veces el signo de composición ($f x$ en lugar
+sigue omitamos a veces el signo de composición ($f x$
+o $f(x)$ en lugar
 de $f \circ x$) si nuestra intención es
 que algunas flechas (en este caso $x$) se interpreten
 como elementos categóricos.
@@ -63,7 +71,7 @@ algunos conceptos originados sobre conjuntos.
 \begin{definition}
 Consideremos una categoría $\C$ y una flecha $f : \arr{A}{B}$ de esta.
 Diremos que $f$ es un monomorfismo si para cualquier objeto
-$T$ de $\C$ y dados dos elementos de $A$
+$T$ de $\C$ y dados dos elementos
 $x, y \in^T A$ tenemos que $fx = fy \implies x = y$.
 \end{definition}
 
@@ -83,34 +91,29 @@ $\Grp$, $\Ring$, ...
 
 \section{Isomorfismos}
 \begin{definition}
-Consideremos una categoría $\C$ y una flecha $f : \arr{A}{B}$ de
-esta. Diremos que $f$ es un isomorfismo si $f$ es una biyección
-entre los elementos de $A$ y los elementos de $B$ definidos sobre
-$T$ para cualquier objeto $T$ de $\C$.
+Dada la categoría $\C$ y y una flecha $f: \arr{A}{B}$ diremos que
+$f$ es un isomorfismo si existe una flecha $g: \arr{B}{A}$
+tal que $f \circ g = 1_B$ y $g \circ f = 1_A$.
 \end{definition}
-
-Esta definición es similar a la definición habitual
+Nótese que esta definición la podemos caracterizar en términos
+de biyecciones sobre conjuntos de elementos.
+\begin{proposition}
+Sean $\C$ una categoría y $f: \arr{A}{B}$ una flecha de esta.
+$f$ es un isomorfismo si y solo si $f$ es una biyección entre
+los elementos de $A$ y los elementos de $B$ definidos sobre $T$
+para cualquier objeto $T$ de $\C$.
+\end{proposition}
+Esta caracterización es similar a la definición habitual
 de biyección sobre conjuntos pero generalizando los elementos de
 los conjuntos a elementos de los objetos definidos sobre todos
 los objetos
 de la categoría.
 
-Nótese que de este concepto podemos dar una definición equivalente
-que no requiere del uso de elementos categóricos.
-
-\begin{proposition}
-Dada la categoría $\C$ y y una flecha $f: \arr{A}{B}$ tenemos que
-$f$ es un isomorfismo sí y solo sí existe una flecha $g: \arr{B}{A}$
-tal que $f \circ g = 1_B$ y $g \circ f = 1_A$.
-\end{proposition}
-
-
-Esta caracterización de isomorfismo nos permite ver rápidamente
+Es inmediato ver
 que los isomorfismos de la categoría $\Set$ se corresponden con las
 biyecciones y que los isomorfismos sobre $\Grp$, $\Ring$, $\Top$, ...
 se corresponden con los isomorfismos de grupos,
 isomorfismos de anillos y homeomorfismos de espacios topológicos.
-
 
 \section{Productos}
 También es posible trasladar la definición de producto de conjuntos
@@ -122,7 +125,7 @@ existe el producto de $A$ y $B$ si
 existe una terna $(A\times B, \pi_1, \pi_2)$
 donde $A\times B$ es un objeto de $\C$ y
 $\pi_1 : \arr{A\times B}{A}, \pi_2 : \arr{A\times B}{B}$ son dos flechas tales
-que para cualquiera elementos $x : \arr{T}{A}$ de $A$ e
+que para cualesquiera elementos $x : \arr{T}{A}$ de $A$ e
 $y: \arr{T}{B}$ de $B$, existe un único elemento
 $(x,y): \arr{T}{A\times B}$ de $A\times B$ tal que $\pi_1 (x,y)=x$ y $\pi_2(x,y)=y$.
 
@@ -145,7 +148,6 @@ y $\phi : \arr{P}{A\times B}$ es un isomorfismo entonces
 $(P, \pi_1 \circ \phi , \pi_2 \circ \phi)$ es otro producto de $A$
 y $B$.
 \end{itemize}
-
 
 \subsection{Ejemplos}
 \paragraph{\Set}
@@ -193,12 +195,13 @@ Comprobar que de existir el objeto $\final$ es único salvo isomorfismo
 es inmediato.
 \subsection{Ejemplos}
 \paragraph{En $\Set$}
-En la categoría de los conjuntos el objeto final es el $\uno$.
+En la categoría de los conjuntos el objeto final es el $\uno$,
+el conjunto de un solo elemento.
 
 \paragraph{En $\Grp$}
 El grupo trivial es el objeto final de la categoría $\Grp$.
 Esto es sencillo de comprobar: dado cualquier grupo $G$ tenemos
-que homomorfismo trivial $\arr{G}{\final}$ es el único morfismo
+que el homomorfismo trivial $\arr{G}{\final}$ es el único morfismo
 entre $G$ y $\final$.
 
 \paragraph{En $\Ring$}
@@ -214,7 +217,7 @@ continuación la definición de categoría opuesta.
 \subsection{La categoría opuesta}
 \begin{definition}
 Dada una categoría $\C$ definimos
-$\C^{op}$ (a la que llamaremos categoría opuesta a $\C^{op}$)
+$\C^{op}$ (a la que llamaremos categoría opuesta a $\C$)
 como la categoría determinada por $\Obj{\C^{op}} = \Obj{\C}$,
 $\Hom_{\C^{op}}(A, B) = \Hom_{\C}(B, A)$ y una operación de
 composición dada por $f \circ_{op} g = g \circ f$.
@@ -255,6 +258,11 @@ $(A+B, i_1, i_2)$ es el producto de $A$ y $B$ en $\C^{op}$.
 \item La propiedad de ser objeto inicial es la dual a la de ser objeto final.
 \end{itemize}
 
+Merece la pena resaltar que ${\C^{op}}^{op} = \C$ y por tanto
+la ``propiedad dual a la propiedad dual a $P$'' es la misma propiedad
+$P$. Esto nos permite decir también, por ejemplo, que la propiedad
+dual a ser epimorfismo es ser monomorfismo.
+
 Comentamos estas propiedades en mayor profundidad en las siguientes
 secciones.
 
@@ -281,8 +289,9 @@ En la categoría de los conjuntos los epimorfismos coinciden con las
 aplicaciones sobreyectivas.
 
 \paragraph{Isomorfismos}
-Todo isomorfismo es a la vez
-un epimorfismo y un monomorfismo. El recíproco
+Es sencillo probar que todo isomorfismo es a la vez
+un epimorfismo y un monomorfismo.
+El recíproco
 es cierto en algunas categorías (como en $\Set$ o $\Grp$) pero no
 lo es en general.
 
@@ -294,7 +303,7 @@ el hecho de que $f : \arr{R}{S}$ sea un monomorfismo
 es equivalente a que $f$ sea una aplicación
 inyectiva.
 
-Sin embargo consideremos la inclusión
+Consideremos la inclusión
 $i : \arr{\Z}{\Q}$, un anillo $R$
 y un par de aplicaciones de anillos $g_1, g_2 : \arr{\Q}{R}$. Supongamos
 que $g_1 \circ i = g_2 \circ i$. Ahora  $\forall x \in \Q$
@@ -350,7 +359,14 @@ vectoriales sobre un cuerpo $K$.
 
 \paragraph{En la categoría de cuerpos}
 En la categoría de cuerpos no existen ni objetos finales ni objetos
-iniciales.
+iniciales. Para justificar por qué
+supongamos que $K$ es un objeto final de la categoría
+de cuerpos. La característica de $K$ es o bien 0 o bien un primo.
+En cualquier caso si consideramos un cuerpo $K'$ con característica
+distinta a la característica de $K$ es bien conocido que no existen
+homomorfismos de cuerpos $\arr{K'}{K}$ y por tanto $K$ no
+puede ser un objeto final. Para probar que no existen objetos iniciales
+se razona de forma análoga.
 
 \subsection{Coproducto}
 Coproducto es la propiedad dual de producto. Si vemos qué significa
@@ -368,10 +384,11 @@ $f_2 : \arr{B}{Y}$ existe un único morfismo
 $f : \arr{A+B}{Y}$ tal que el siguiente diagrama es conmutativo:
 \begin{center}
 \begin{tikzcd}
-&  Y  & \\
-A \arrow[ur, "f_1"] \arrow{r}[swap]{i_1} &
- \arrow[u, dotted, "\exists! f"] A+B
- & B \arrow[l, "i_2"] \arrow[ul, "f_2"]
+& &  Y & & \\
+& & & &  \\
+A \arrow[uurr, "f_1"] \arrow{rr}[swap]{i_1} & &
+ \arrow{uu}[dotted, swap]{\exists! [f_1, f_2]} A+B
+ & & B \arrow[ll, "i_2"] \arrow{uull}[swap]{f_2}
 \end{tikzcd}
 \end{center}
 \end{definition}
