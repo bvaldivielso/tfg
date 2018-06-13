@@ -116,10 +116,80 @@ $\eta : \nat{1_{\C}}{GF}$ y counidad $\epsilon: \nat{FG}{1_\D}$. La terna
 $(GF, \eta, G\epsilon F)$ es una mónada.
 \end{theorem}
 \begin{proof}
-  \textcolor{red}{Hacer demostración}
+  El diagrama \eqref{diagrama:mu} de la definición de mónada es en este
+  caso el diagrama:
+  \begin{center}
+    \begin{tikzcd}
+      GF \arrow{r}{GF\eta} & GFGF \arrow{d}{G\epsilon F} & GFGF \arrow{l}[swap]{\eta GF} \\
+      & GF \ar[equal]{ur} \ar[equal]{ul} &
+    \end{tikzcd}
+  \end{center}
+  Es decir, hay que probar que:
+  $$G\epsilon F \circ GF\eta = 1_{GF} = G\epsilon F \circ \eta GF$$
+  Probaremos la igualdad de la derecha.
+  Sea $C$ un objeto de $\C$. La componente en
+  $C$ de la transformación natural del
+  miembro de la derecha de la ecuación
+  es $G\epsilon_{FC} \circ \eta_{GFC}$.
+  Por la condición \eqref{diagrama:adjuncion1} de la definición de
+  adjunción tenemos que el siguiente diagrama en $\D$:
+  \begin{center}
+    \begin{tikzcd}
+      FGFC \arrow{r}{1_{FGFC}}
+      & FGFC \arrow{r}{\epsilon_{FC}}
+      & FC
+    \end{tikzcd}
+  \end{center}
+  Lo podemos trasladar al siguiente diagrama conmutativo en $\C$:
+  \begin{center}
+    \begin{tikzcd}
+      GFC \arrow{r}{\eta_{GFC}}
+          \arrow[bend right=50, swap]{rr}{\phi_{GFC, FC}(\epsilon_{FC})}
+      & GFGFC \arrow{r}{G\epsilon_{FC}}
+      & GFC
+    \end{tikzcd}
+  \end{center}
+  Y entonces $$\phi_{GFC, FC}(\epsilon_{FC}) = G\epsilon_{FC} \circ \eta_{GFC}$$
+  Pero por la definición de $\epsilon_{FC}$ tenemos que
+  $$1_{GFC} = \phi_{GFC, FC}(\epsilon_{FC}) = G\epsilon_{FC} \circ \eta_{GFC}$$
+  Con lo que
+  $G\epsilon F \circ \eta GF = 1_{GF}$. La prueba de que $G\epsilon F \circ GF\eta = 1_{GF}$ es análoga.
+
+
+  Queda probar la condición \eqref{diagrama:eta} de la definición
+  de mónada. El diagrama de \eqref{diagrama:eta} es en este caso:
+  \begin{center}
+    \begin{tikzcd}
+      GFGFGF \arrow{d}{GFG\epsilon F}
+             \arrow{r}{G\epsilon F GF}
+      & GFGF \arrow{d}{G \epsilon F} \\
+      GFGF \arrow{r}{G\epsilon F} & GFGF
+    \end{tikzcd}
+  \end{center}
+  Y la conmutatividad de este diagrama es
+  equivalente a la del siguiente:
+  \begin{center}
+    \begin{tikzcd}
+      FGFG \arrow{d}{FG \epsilon}
+           \arrow{r}{\epsilon FG}
+      & FG \arrow{d}{\epsilon} \\
+      FG \arrow{r}{\epsilon}& 1_\D
+    \end{tikzcd}
+  \end{center}
+  Pero este diagrama en cualquier objeto $D$ de la categoría $\D$ es
+  \begin{center}
+    \begin{tikzcd}
+      FGFG D \arrow{d}{FG\epsilon_D}
+      \arrow{r}{\epsilon_{FGD}}
+      & FG \arrow{d}{\epsilon_D} \\
+      FG \arrow{r}{\epsilon_D} & D
+    \end{tikzcd}
+  \end{center}
+  que es precisamente la condición de naturalidad de
+  $\epsilon : \nat{FG}{1_\D}$ aplicada a la flecha
+  $\epsilon_D : \arr{FGD}{D}$.
 \end{proof}
 
-Pero este resultado lo sabemos. El siguiente resultado.
 
 \subsection{Categoría de Kleisli de una mónada}
 Hemos visto que todo par de funtores adjuntos inducen una mónada.

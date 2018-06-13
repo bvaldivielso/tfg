@@ -150,6 +150,14 @@ la forma $F : \arr{\C_1\times\C_2}{\D}$. Un ejemplo de
 bifuntor sería $-\times - : \arr{\Set\times\Set}{\Set}$ que
 a cada par de conjuntos le asigna su producto cartesiano.
 
+Dado un bifuntor podemos obtener otro funtor \textit{fijando}
+uno de los parámetros. Por ejemplo, si $C_1$ es un objeto de
+$\C_1$ podemos considerar el funtor
+$F_{C_1} : \arr{\C_2}{\D}$ tal que para cada objeto $C_2$ de $\C_2$
+$F_{C_1}(C_2) = F(C_1, C_2)$ y para cada flecha de $\C_2$ de la forma
+$f: \arr{C_2}{C_2'}$ definimos $F_{C_1}(f) = F(1_{C_1}, f)$. Comprobar
+que $F_{C_1}$ es efectivamente un funtor es sencillo.
+
 \subsection{Producto de funtores}
 Dados dos funtores $F : \arr{\C}{\D}$ y $G: \arr{\C'}{\D'}$
 podemos definir el funtor $F\times G: \arr{\C\times\C'}{\D\times\D'}$
@@ -161,6 +169,7 @@ de forma que:
 \item $(F\times G)(f, g) = (F f, G g)$ donde $f$ es una flecha
   de $\C$ y $g$ es una flecha de $\D$.
 \end{itemize}
+
 
 
 

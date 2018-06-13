@@ -104,6 +104,20 @@ las transformaciones naturales entre estos funtores:
   como $\funccat{\C}{\D}$.
 \end{proposition}
 
+\subsection{Funtores a categorías de funtores}
+Sean $\C, \C'$ y $\D$ tres categorías y sea
+$F: \arr{\C\times \C'}{\D}$ un bifuntor. Veamos que
+$F$ nos permite definir
+un funtor
+$H: \arr{\C}{\funccat{\C'}{\D}}$. Definimos
+$HC = F_C = F(C, -) : \arr{\C'}{\D}$. Por otro lado,
+si $f: \arr{C_1}{C_2}$ es una flecha de $\C$ definimos
+$Hf$ como la transformación natural
+$$Hf: \nat{F_{C_1}}{F_{C_2}}$$
+$$Hf_{C'} = F(f, 1_{C'}): \arr{F(C_1, C')}{F(C_2, C')}$$
+Comprobar que $H: \arr{\C}{\funccat{\C'}{\D}}$ es natural
+es rutinario.
+
 \subsection{Isomorfismos naturales}
 \begin{definition}
   Dados dos funtores $F, G : \arr{\C}{\D}$ diremos que la transformación

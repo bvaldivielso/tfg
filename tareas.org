@@ -19,7 +19,7 @@ Quizá explicarlo mejor
    funtores y ese tema
 ** DONE Organizar mejor los capítulos (sobre todo datos sueltos
 sobre transformaciones naturales y funtores
-** TODO Organizar mejor el segundo capítulo
+** DONE Organizar mejor el segundo capítulo
 ** TODO Escribir demostración adjuntos -> mónadas
 ** TODO Funtor a funtor
 
