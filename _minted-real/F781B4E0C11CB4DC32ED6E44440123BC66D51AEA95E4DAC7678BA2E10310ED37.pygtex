@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} la identidad va a la identidad:}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} supongamos x = (Left y)}
+
+\PYG{n+nf}{fmap} \PYG{n}{id} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{fmap} \PYG{n}{id} \PYG{p}{(}\PYG{k+kt}{Left} \PYG{n}{y}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Left} \PYG{n}{y} \PYG{o+ow}{=} \PYG{n}{x}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} supongamos x = Right y}
+\PYG{n+nf}{fmap} \PYG{n}{id} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{fmap} \PYG{n}{id} \PYG{p}{(}\PYG{k+kt}{Right} \PYG{n}{y}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Right} \PYG{p}{(}\PYG{n}{id} \PYG{n}{y}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Right} \PYG{n}{y} \PYG{o+ow}{=} \PYG{n}{x}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} probemos ahora que se lleva bien con la composición}
+\PYG{n+nf}{fmap} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{g}\PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Left} \PYG{n}{y}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Left} \PYG{n}{y} \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Left} \PYG{n}{y}\PYG{p}{)}
+                      \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{g} \PYG{p}{(}\PYG{k+kt}{Left} \PYG{n}{y}\PYG{p}{))}
+                      \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{g}\PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Left} \PYG{n}{y}\PYG{p}{)}
+
+\PYG{n+nf}{fmap} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{g}\PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Right} \PYG{n}{y}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Right} \PYG{p}{(} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{g}\PYG{p}{)} \PYG{n}{y} \PYG{p}{)}
+                       \PYG{o+ow}{=} \PYG{n}{fmap} \PYG{n}{f} \PYG{p}{(}\PYG{k+kt}{Right} \PYG{p}{(}\PYG{n}{g} \PYG{n}{y}\PYG{p}{))}
+                       \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f} \PYG{o}{.} \PYG{n}{fmap} \PYG{n}{g}\PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Right} \PYG{n}{y}\PYG{p}{)}
+\end{Verbatim}

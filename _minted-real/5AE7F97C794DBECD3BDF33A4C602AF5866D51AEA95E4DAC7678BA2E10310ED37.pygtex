@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{genero} \PYG{o+ow}{::} \PYG{k+kt}{PersonaConAltura} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String}
+\PYG{n+nf}{genero} \PYG{n}{persona} \PYG{o+ow}{=} \PYG{k+kr}{case} \PYG{n}{persona} \PYG{k+kr}{of}
+    \PYG{k+kt}{Hombre} \PYG{k+kr}{\PYGZus{}} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{l+s}{\PYGZdq{}Hombre\PYGZdq{}}
+    \PYG{k+kt}{Mujer} \PYG{k+kr}{\PYGZus{}} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{l+s}{\PYGZdq{}Mujer\PYGZdq{}}
+    \PYG{k+kt}{Otro} \PYG{n}{g} \PYG{k+kr}{\PYGZus{}} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{g}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} equivalentemente podríamos haber implementado la función como}
+\PYG{n+nf}{genero} \PYG{p}{(}\PYG{k+kt}{Hombre} \PYG{k+kr}{\PYGZus{}}\PYG{p}{)} \PYG{o+ow}{=} \PYG{l+s}{\PYGZdq{}Hombre\PYGZdq{}}
+\PYG{n+nf}{genero} \PYG{p}{(}\PYG{k+kt}{Mujer} \PYG{k+kr}{\PYGZus{}}\PYG{p}{)} \PYG{o+ow}{=} \PYG{l+s}{\PYGZdq{}Mujer\PYGZdq{}}
+\PYG{n+nf}{genero} \PYG{p}{(}\PYG{k+kt}{Otro} \PYG{n}{g} \PYG{k+kr}{\PYGZus{}}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{g}
+\end{Verbatim}

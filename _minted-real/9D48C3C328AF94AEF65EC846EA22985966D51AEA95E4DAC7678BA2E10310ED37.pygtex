@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} veamos fmap id = id :: Maybe a \PYGZhy{}\PYGZgt{} Maybe a}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} fmap id x = id x = x}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} si x = (Just y) entonces}
+\PYG{n+nf}{fmap} \PYG{n}{id} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{fmap} \PYG{n}{id} \PYG{p}{(}\PYG{k+kt}{Just} \PYG{n}{y}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Just} \PYG{p}{(}\PYG{n}{id} \PYG{n}{y}\PYG{p}{)} \PYG{o+ow}{=} \PYG{p}{(}\PYG{k+kt}{Just} \PYG{n}{y}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{x}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} si x = Nothing}
+\PYG{n+nf}{fmap} \PYG{n}{id} \PYG{k+kt}{Nothing} \PYG{o+ow}{=} \PYG{k+kt}{Nothing}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} veamos que se comporta bien con la composición.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} una vez más supongamos que x = (Just y)}
+\PYG{p}{(}\PYG{n}{fmap} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{g}\PYG{p}{))} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{fmap} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{g}\PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Just} \PYG{n}{y}\PYG{p}{)}
+                 \PYG{o+ow}{=} \PYG{k+kt}{Just} \PYG{p}{(} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{g}\PYG{p}{)} \PYG{n}{y} \PYG{p}{)}
+                 \PYG{o+ow}{=} \PYG{k+kt}{Just} \PYG{p}{(}\PYG{n}{f} \PYG{p}{(}\PYG{n}{g} \PYG{n}{y}\PYG{p}{))}
+                 \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Just} \PYG{p}{(}\PYG{n}{g} \PYG{n}{y}\PYG{p}{))}
+                 \PYG{o+ow}{=} \PYG{p}{(} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{g}\PYG{p}{)} \PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Just} \PYG{n}{y}\PYG{p}{)}
+                 \PYG{o+ow}{=} \PYG{p}{(} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{g}\PYG{p}{)} \PYG{p}{)} \PYG{n}{x}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} si x = Nothing}
+\PYG{p}{(}\PYG{n}{fmap} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{g}\PYG{p}{))} \PYG{n}{x} \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{g}\PYG{p}{))} \PYG{k+kt}{Nothing}
+                 \PYG{o+ow}{=} \PYG{k+kt}{Nothing}
+                 \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{k+kt}{Nothing}
+                 \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{p}{((}\PYG{n}{fmap} \PYG{n}{g}\PYG{p}{)} \PYG{k+kt}{Nothing}\PYG{p}{)}
+                 \PYG{o+ow}{=} \PYG{p}{((}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{g}\PYG{p}{))} \PYG{k+kt}{Nothing}
+\end{Verbatim}

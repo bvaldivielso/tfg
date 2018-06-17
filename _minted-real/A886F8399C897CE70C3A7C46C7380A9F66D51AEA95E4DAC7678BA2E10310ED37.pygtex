@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{isNothing} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f} \PYG{n}{m}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{isNothing} \PYG{n}{m}
+\end{Verbatim}

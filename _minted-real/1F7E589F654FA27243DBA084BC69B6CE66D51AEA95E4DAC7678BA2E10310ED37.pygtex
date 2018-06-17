@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} f :: b \PYGZhy{}\PYGZgt{} c}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} g :: c \PYGZhy{}\PYGZgt{} d}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} a  = (Reader h) :: (Reader a b) y entonces}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} h :: a \PYGZhy{}\PYGZgt{} b}
+
+\PYG{n+nf}{fmap} \PYG{p}{(}\PYG{n}{g} \PYG{o}{.} \PYG{n}{f}\PYG{p}{)} \PYG{n}{a} \PYG{o+ow}{=} \PYG{n}{fmap} \PYG{p}{(}\PYG{n}{g}\PYG{o}{.} \PYG{n}{f}\PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Reader} \PYG{n}{h}\PYG{p}{)}
+               \PYG{o+ow}{=} \PYG{k+kt}{Reader} \PYG{p}{(} \PYG{p}{(}\PYG{n}{g} \PYG{o}{.} \PYG{n}{f}\PYG{p}{)} \PYG{o}{.} \PYG{n}{h}\PYG{p}{)}
+               \PYG{o+ow}{=} \PYG{k+kt}{Reader} \PYG{p}{(} \PYG{n}{g} \PYG{o}{.} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{h}\PYG{p}{))}
+               \PYG{o+ow}{=} \PYG{n}{fmap} \PYG{n}{g} \PYG{p}{(}\PYG{k+kt}{Reader} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{h}\PYG{p}{))}
+               \PYG{o+ow}{=} \PYG{n}{fmap} \PYG{n}{g} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f} \PYG{p}{(}\PYG{k+kt}{Reader} \PYG{n}{h}\PYG{p}{))}
+               \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{g} \PYG{o}{.} \PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Reader} \PYG{n}{h}\PYG{p}{)}
+               \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{g} \PYG{o}{.} \PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{n}{a}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} y por tanto fmap (g . f) = fmap g . fmap f}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} en las mismas condiciones:}
+
+\PYG{n+nf}{fmap} \PYG{n}{id} \PYG{n}{a} \PYG{o+ow}{=} \PYG{n}{fmap} \PYG{n}{id} \PYG{p}{(}\PYG{k+kt}{Reader} \PYG{n}{h}\PYG{p}{)}
+          \PYG{o+ow}{=} \PYG{k+kt}{Reader} \PYG{p}{(}\PYG{n}{id} \PYG{o}{.} \PYG{n}{h}\PYG{p}{)}
+          \PYG{o+ow}{=} \PYG{k+kt}{Reader} \PYG{n}{h}
+          \PYG{o+ow}{=} \PYG{n}{a}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} y por tanto fmap id = id}
+\end{Verbatim}

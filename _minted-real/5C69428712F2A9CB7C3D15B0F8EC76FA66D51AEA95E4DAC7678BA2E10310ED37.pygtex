@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{do}
+  \PYG{n}{lift} \PYG{p}{(}\PYG{n}{putStrLn} \PYG{o}{\PYGZdl{}} \PYG{l+s}{\PYGZdq{}el numero es \PYGZdq{}} \PYG{o}{++} \PYG{n}{show} \PYG{l+m+mi}{3}\PYG{p}{)}
+  \PYG{n}{lift} \PYG{p}{(}\PYG{n}{putStrLn} \PYG{o}{\PYGZdl{}} \PYG{l+s}{\PYGZdq{}el numero es \PYGZdq{}} \PYG{o}{++} \PYG{n}{show} \PYG{l+m+mi}{4}\PYG{p}{)}
+  \PYG{n}{lift} \PYG{o}{\PYGZdl{}} \PYG{n}{putStrLn} \PYG{l+s}{\PYGZdq{}Accion de IO\PYGZdq{}}
+  \PYG{n}{lift} \PYG{p}{(}\PYG{n}{putStrLn} \PYG{o}{\PYGZdl{}} \PYG{l+s}{\PYGZdq{}el numeroes \PYGZdq{}} \PYG{o}{++} \PYG{n}{show} \PYG{l+m+mi}{5}\PYG{p}{)}
+  \PYG{n}{return} \PYG{n+nb}{()}
+\end{Verbatim}

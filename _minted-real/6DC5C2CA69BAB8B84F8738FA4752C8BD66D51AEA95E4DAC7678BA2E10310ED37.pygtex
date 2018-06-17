@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{Product} \PYG{n}{b} \PYG{n}{a} \PYG{o+ow}{=} \PYG{k+kt}{Product} \PYG{p}{(}\PYG{n}{b}\PYG{p}{,} \PYG{n}{a}\PYG{p}{)}
+
+\PYG{k+kr}{instance} \PYG{k+kt}{Functor} \PYG{p}{(}\PYG{k+kt}{Product} \PYG{n}{b}\PYG{p}{)} \PYG{k+kr}{where}
+  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} fmap :: a \PYGZhy{}\PYGZgt{} c \PYGZhy{}\PYGZgt{} (b, a) \PYGZhy{}\PYGZgt{} (b, c)}
+  \PYG{n}{fmap} \PYG{n}{f} \PYG{p}{(}\PYG{k+kt}{Product} \PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{a}\PYG{p}{))} \PYG{o+ow}{=} \PYG{k+kt}{Product} \PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{f} \PYG{n}{a}\PYG{p}{)}
+\end{Verbatim}

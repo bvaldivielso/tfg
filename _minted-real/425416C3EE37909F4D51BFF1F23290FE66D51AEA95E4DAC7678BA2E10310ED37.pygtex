@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ley 2}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} la expresión}
+\PYG{k+kr}{do}
+  \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{m}
+  \PYG{n}{return} \PYG{n}{x}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} es igual a}
+\PYG{n+nf}{m}
+\end{Verbatim}

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{h} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{return} \PYG{n}{fa}
+\PYG{n+nf}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{g} \PYG{n}{h}
+\PYG{n+nf}{y} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{d}
+\PYG{n+nf}{h} \PYG{n}{x} \PYG{n}{y}
+\end{Verbatim}

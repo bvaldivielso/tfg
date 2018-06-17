@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{compilar} \PYG{n}{config} \PYG{n}{s} \PYG{o+ow}{=}
+  \PYG{n}{runReader} \PYG{p}{(}\PYG{n}{rAnalisisLexico} \PYG{n}{s} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{rAnalisisSintactico} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{rAnalisisSemantico}\PYG{p}{)} \PYG{n}{config}
+\end{Verbatim}

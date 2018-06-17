@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{instance} \PYG{p}{(}\PYG{k+kt}{Functor} \PYG{n}{f}\PYG{p}{,} \PYG{k+kt}{Functor} \PYG{n}{g}\PYG{p}{)} \PYG{o+ow}{=\PYGZgt{}} \PYG{k+kt}{Functor} \PYG{p}{(}\PYG{k+kt}{Compose} \PYG{n}{f} \PYG{n}{g}\PYG{p}{)} \PYG{k+kr}{where}
+  \PYG{n}{fmap} \PYG{n}{f} \PYG{p}{(}\PYG{k+kt}{Composition} \PYG{n}{fga}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Composition} \PYG{p}{(}\PYG{n}{fmap} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{n}{fga}\PYG{p}{)}
+\end{Verbatim}

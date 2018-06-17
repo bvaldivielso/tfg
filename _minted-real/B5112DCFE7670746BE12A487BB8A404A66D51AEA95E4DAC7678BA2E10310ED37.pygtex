@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{p}{)} \PYG{o+ow}{::} \PYG{n}{m} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{m} \PYG{n}{b} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{m} \PYG{n}{b}
+\PYG{n+nf}{ma} \PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{n}{mb} \PYG{o+ow}{=} \PYG{n}{ma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n+nf}{\PYGZbs{}}\PYG{k+kr}{\PYGZus{}} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{mb}
+\end{Verbatim}

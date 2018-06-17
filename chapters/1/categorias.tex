@@ -1,68 +1,56 @@
 \subsection{Definición}
-
-Una categoría $\mathcal{C}$ queda determinada por dos colecciones:
-
-\begin{enumerate}
-\item $\Obj{\C}$ a cuyos elementos nos referiremos como
-  \emph{objetos} de $\mathcal{C}$.
-\item $\Arr{\C}$ a la que nos referiremos como las
-  \emph{flechas} de $\mathcal{C}$. A cada flecha se le puede asignar
-  un par de objetos: al primero de ellos le llamaremos \emph{origen}
-  (o dominio) y al otro \emph{destino} (o \emph{codominio}). Con la notación
-  $f : \arr{A}{B}$ estaremos afirmando que $f$ es una flecha
-  que tiene como origen el objeto $A$ y como destino el objeto $B$.
-  No supondremos en general que $\mathcal{A}r(\mathcal{C})$ es un
-  conjunto pero a lo largo de este texto sí que asumiremos que
-  $Hom(A, B) = \{ f: f : A \longrightarrow B \}$ lo es. A las categorías
-  en las que $Hom(A, B)$ son conjuntos se les suele llamar categorías
-  localmente pequeñas. En este texto solo trataremos categorías
-  localmente pequeñas.
-\end{enumerate}
-Para poder hablar de categorías necesitamos también una operación de composición $\circ$ que funcione de la siguiente
-forma:
-
-\begin{enumerate}
-\item Para cada terna de objetos $A, B, C$ de la categoría $\mathcal{C}$
-  diremos que los pares de flechas de $Hom(B, C)\times Hom(A, B)$ se
-  pueden componer y tendremos que
-  $\circ : Hom(B, C)\times Hom(A, B) \rightarrow Hom(A, C)$. Dicho
-  de otra forma si $f: A\longrightarrow B$ y $g : B \longrightarrow C$
-  tenemos que $g \circ f : A \longrightarrow C$.
-\item $\circ$ es asociativa en el siguiente sentido: si
-  $f : A \longrightarrow B, g: B \longrightarrow C,$
-  $h : C \longrightarrow D$ tenemos que
-  $(h \circ g) \circ f = h \circ (g \circ f)$.
-\item Para cada objecto $C$ de la categoría $\mathcal{C}$ existe una
-  flecha a la que llamaremos $1_C : C \longrightarrow C$ tal que
-  para cualquier flecha $f: X \longrightarrow C$ tenemos que
-  $1_C \circ f = f$ y para cualquier flecha $g : C \longrightarrow Y$
-  se cumple $g \circ 1_C = g$ para cualquiera que sean los objetos
-  $X, Y$ de $\mathcal{C}$.
-\end{enumerate}
-
-\textcolor{red}{Voy a reescribirte esto, creo que la forma en que se introduce una categoría da una idea de la escuela que se sigue o de la filosofía con que se afronta esta teoría. Te voy a introducir en categorías como lo haría yo. TU ELIGES LA FORMA DEFINITIVA. No haré esto con el resto del trabajo pero el comienzo es importante.}
-
-Tradicionalmente las matemáticas están fundamentadas en  \emph{una teoría de conjuntos} y bajo esta fundamentación el concepto de \emph{conjunto} es básico. Entendemos lo que es un conjunto pero no tratamos de dar una definición formal de este. Ocurre lo mismo con los conceptos de \emph{elemento} y \emph{pertenece} que son básicos en esta teoría.  En la actualidad se puede utilizar la \emph{teoría de categorías} para fundamentar las matemáticas y en este sentido los conceptos de \emph{categoría, objeto, flecha} y \emph{composición} serían los conceptos básicos que se intentan entender sin dar una definición formal de estos. Siguiendo esta idea podemos decir que tendremos una categoría $\mathcal{C}$ si:
+Tradicionalmente las matemáticas están fundamentadas en una teoría
+de conjuntos. Cuando partimos de una teoría de conjuntos no hace
+falta (\textit{no se puede}) definir \textit{qué} es un conjunto. Ocurre de
+forma similar con los conceptos de \emph{elemento} y \emph{pertenece},
+que son básicos en la teoría. La teoría de categorías se puede utilizar
+también para fundamentar las matemáticas, y en este sentido no se
+podrían dar definiciones, en términos de otros conceptos,
+de nociones como \emph{categoría, objeto, flecha o composición}.
+Siguiendo una línea de trabajo similar podríamos decir que tenemos
+una categoría si:
 \begin{itemize}
-	\item Conocemos sus objetos, que denotamos $A,B,C,\ldots.$
-	\item Conocemos sus flechas, que denotamos $f,g,h,\ldots.$
-	\item Para cada flecha $f$ conocemos su dominio $A$ y su codominio $B$, que serán objetos de $\mathcal{C}$, escribiremos $f:A\rightarrow B$ o bien $A\xrightarrow{f} B$.
-	\item Para cada dos \emph{flechas componibles} $A\xrightarrow{f} B\xrightarrow{g} C$ conocemos su composición $g\circ f :A\rightarrow C$.
+\item Conocemos sus \textit{objetos},
+  que denotamos $A,B,C,\ldots.$
+\item Conocemos sus \textit{flechas},
+  que denotamos $f,g,h,\ldots.$
+\item Para cada flecha $f$ conocemos su dominio $A$ y su codominio $B$
+  , que serán objetos de $\mathcal{C}$ y que notaremos por
+  $f:A\rightarrow B$ o bien $A\xrightarrow{f} B$.
+\item Para cada dos \emph{flechas componibles}
+  $A\xrightarrow{f} B\xrightarrow{g} C$
+  conocemos su composición
+  $g\circ f :A\rightarrow C$.
 \end{itemize}
 Todos estos datos, que determinan una categoría $\mathcal{C}$, tienen que cumplir las siguientes propiedades o axiomas:
 \begin{enumerate}
-	\item La composición es asociativa, en el siguiente sentido: si $f : A \longrightarrow B, g: B \longrightarrow C$ y $h : C \longrightarrow D$ se ha de cumplir
-	$(h \circ g) \circ f = h \circ (g \circ f)$.
-	\item Existen identidades, esto es: para cada objecto $C$ existe una
-	flecha, a la que llamaremos identidad en $C$ y que denotaremos $1_C : C \longrightarrow C$, que cumple que
-	para cualquiera flechas $f: X \longrightarrow C$ y  $g : C \longrightarrow Y$ se tiene
-	$1_C \circ f = f$  y  $g \circ 1_C = g$.
+\item La composición es asociativa, en el siguiente sentido: si $f : A \longrightarrow B, g: B \longrightarrow C$ y $h : C \longrightarrow D$ se ha de cumplir
+  $(h \circ g) \circ f = h \circ (g \circ f)$.
+\item Existen identidades, esto es: para cada objecto $C$ existe una
+  flecha, a la que llamaremos identidad en $C$ y que denotaremos $1_C : C \longrightarrow C$, que cumple que
+  para cualquiera flechas $f: X \longrightarrow C$ y  $g : C \longrightarrow Y$ se tiene
+  $1_C \circ f = f$  y  $g \circ 1_C = g$.
 \end{enumerate}
 
-Con esta aproximación a la teoría de categorías no haríamos uso de la teoría de conjuntos. Sin embargo vamos a optar por una aproximación \emph{no tan categórica}. En toda esta memoria vamos a asumir que para cada par de objetos $A$ y $B$, de la categoría $\mathcal{C}$, las flechas de $\mathcal{C}$ con dominio $A$ y codominio $B$ forman un conjunto, que denotaremos $Hom_{\mathcal{C}}(A,B)$ o simplemente $Hom(A,B)$. De manera que la composición en $\mathcal{C}$ determina aplicaciones $\circ : Hom(B, C)\times Hom(A, B) \rightarrow Hom(A, C)$ para cada terna de objetos $A,B,C$ de $\mathcal{C}$. En este sentido, en esta memoria trataremos sólo con categorías \emph{localmente pequeñas}. Denotaremos $\Obj{\C}$ y $\Arr{\C}$ a las \emph{clases} de todos los objetos y todas las flechas respectivamente de $\C$.
-
-
-
+Con esta aproximación inicial a la teoría de categorías y con el
+suficiente esfuerzo se puede evitar hacer uso de la teoría de conjuntos.
+En vista de que este no es un trabajo que pretenda tratar sobre la
+fundamentación de las matemáticas no seguiremos un enfoque tan estricto
+y consideraremos que para cada par de objetos $A$ y $B$ de la categoría
+$\C$ las flechas entre $A$ y $B$ forman un conjunto, al que llamaremos
+$\Hom_\C(A, B)$ o simplemente $\Hom(A, B)$ cuando esté claro a que
+categoría $\C$ nos referimos. Por otro lado, y en vista de
+esta notación, la operación de composición induce una aplicación
+$\circ : \arr{\Hom(B, C) \times \Hom(A, B)}{\Hom(A, C)}$ para cada
+terna de objetos $A, B$ y $C$. Las categorías en las que se puede
+hablar de los conjuntos $\Hom(A, B)$ son conocidas en la literatura
+como categorías \emph{localmente pequeñas} y serán las únicas
+categorías consideradas a lo largo de este trabajo. Denotaremos por
+$\Obj{\C}$ y $\Arr{\C}$ a la \emph{clase} de todos los objetos
+y a la clase de todas las flechas de la categoría $\C$ respectivamente,
+sin profundizar
+en la noción precisa de clase utilizada por estar fuera
+de nuestro objetivo.
 
 Mostramos a continuación algunos ejemplos de categorías.
 
@@ -70,22 +58,22 @@ Mostramos a continuación algunos ejemplos de categorías.
 \paragraph{Conjuntos}
 Uno de los más típicos ejemplos de categorías es $\Set$,
 la categoría de los conjuntos. En esta categoría
-cada conjunto es un objeto (no se puede asumir que
-$\mathcal{O}b(\mathcal{C})$ es un conjunto por ejemplos como este:
-no tiene sentido hablar del conjunto de todos los conjuntos) y cada
-aplicación $f$ entre conjuntos con dominio el conjunto $A$ y como codominio
-el conjunto $B$ es una flecha $f : A \longrightarrow B$. La composición
+cada conjunto es un objeto y cada
+aplicación $f$ entre el conjunto $A$ y
+el conjunto $B$ es una flecha $f : \arr{A}{B}$. La composición
 es la composición habitual de aplicaciones y las identidades
 $1_C : C \longrightarrow C$ son las aplicaciones identidad en
 cada conjunto $C$.
 Comprobar que se cumplen los axiomas de las categorías es una tarea
-rutinaria.
+rutinaria. No se puede asumir en general que los
+objetos de una categoría
+forman un conjunto por ejemplos como este:
+no tiene sentido hablar del conjunto de todos los conjuntos.
 
 \paragraph{Otras estructuras matemáticas}
 Gran parte de las estructuras que se estudian en matemáticas forman
 categorías si consideramos sus morfismos como flechas.
-Podemos dar multitud de ejemplos de este tipo:
-
+Podemos dar multitud de ejemplos de este tipo.
 \begin{itemize}
 \item \texttt{Grp}: la categoría en la que los objetos son grupos
   y las flechas son los homomorfismos de grupos.
@@ -95,7 +83,6 @@ Podemos dar multitud de ejemplos de este tipo:
   anillos y las flechas son homomorfismos de anillos.
 \end{itemize}
 La lista sigue y sigue.
-
 \paragraph{Monoides}
 Proponemos este ejemplo para evitar la asumción de que en una categoría
 los objetos deben ser estructuras matemáticas y las flechas entre ellos
@@ -117,7 +104,7 @@ identidad la llamaremos 0. Es trivial ver que $f \circ 0 = f$ y que
 $0 \circ g = g$ en este contexto.
 \end{enumerate}
 En general esta construcción que acabamos de aplicar a $(\mathbb{Z}, +)$
-se puede aplicar a cualquier monoide. Toda categoría con un solo
+se puede utilizar con cualquier monoide. Toda categoría con un solo
 objeto se puede interpretar como un monoide (y viceversa):
 la asociatividad de la
 composición garantiza la asociatividad de la operación monoidal y
@@ -129,13 +116,13 @@ las categorías son una generalización de los monoides.
 Dado un par de categorías $\C$ y $\D$ podemos construir la categoría
 producto $\C\times\D$ de la siguiente forma:
 \begin{itemize}
-\item Los objetos serán de la forma $(C, D)$ donde $C$ es un objeto
-  de $\C$ y $D$ es un objeto de $\D$.
-\item Las flechas serán de la forma $(f, g) : \arr{(C, D)}{(C', D')}$
+\item los objetos serán de la forma $(C, D)$ donde $C$ es un objeto
+  de $\C$ y $D$ es un objeto de $\D$;
+\item las flechas serán de la forma $(f, g) : \arr{(C, D)}{(C', D')}$,
   donde $f: \arr{C}{C'}$ es una flecha de $\C$ y $g : \arr{D}{D'}$
-  es una flecha de $\D$.
-\item La composición actúa componente a componente
-  $(f, g) \circ (f', g') = (f \circ f', g \circ g')$ siempre
+  es una flecha de $\D$;
+\item la composición actúa componente a componente
+  $(f, g) \circ (f', g') = (f \circ f', g \circ g')$, siempre
   que $f$ y $f'$, y $g$ y $g'$ se puedan componer.
 \end{itemize}
 

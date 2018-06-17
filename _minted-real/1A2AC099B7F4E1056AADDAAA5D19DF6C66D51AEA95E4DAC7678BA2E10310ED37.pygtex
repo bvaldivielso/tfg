@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{PersonaConAltura} \PYG{o+ow}{=} \PYG{k+kt}{Hombre} \PYG{k+kt}{Int} \PYG{o}{|} \PYG{k+kt}{Mujer} \PYG{k+kt}{Int} \PYG{o}{|} \PYG{k+kt}{Otro} \PYG{k+kt}{String} \PYG{k+kt}{Int}
+\end{Verbatim}

@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{print} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Effect} \PYG{k+kt}{IO} \PYG{n+nb}{()}
+\PYG{n+nf}{print} \PYG{n}{x} \PYG{o+ow}{=} \PYG{k+kr}{do}
+  \PYG{n}{lift} \PYG{p}{(}\PYG{n}{putStrLn} \PYG{o}{\PYGZdl{}} \PYG{l+s}{\PYGZdq{}el numero es \PYGZdq{}} \PYG{o}{++} \PYG{n}{show} \PYG{n}{x}\PYG{p}{)}
+\end{Verbatim}

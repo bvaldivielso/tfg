@@ -1,20 +1,21 @@
 \subsection{Transformaciones Naturales}
 Para construir una transformación natural entre dos endofuntores de
-$\Hask$ $F$ y $G$ necesitamos, en primer lugar, una función de tipo
-\cod{FA -> GA} para \cod{A} cualquier tipo del lenguaje.
+$\Hask$ \cod{F} y \cod{G} necesitamos, en primer lugar, una función de tipo
+\cod{FA -> GA} para cada tipo \cod{A} del lenguaje.
 
 Usamos el sistema de polimorfismo de Haskell para suplir nuestra primera
 necesidad. El lenguaje nos permite definir una función de
-tipo \cod{F a -> G a} (una función polimórfica en la variable de
-tipo \cod{a}) que, especializando a cada tipo del lenguaje, será
-la componente en cada objeto de $\Hask$ de nuestra transformación natural. \textcolor{red}{usas $A$ y $a$ para tipo casi en el mismo párrafo ?¿?¿?}
+tipo \cod{F a -> G a} (usamos \cod{a} minúscula
+cuando nos referimos a una función polimórfica en la variable
+\cod{a}) que, especializando a cada tipo del lenguaje, será
+la componente en cada objeto de $\Hask$ de nuestra transformación natural.
 
 Un ejemplo de este tipo de función polimórfica sería:
-\begin{verbatim}
+\begin{minted}{haskell}
 discardLeft :: Either b a -> Maybe a
 discardLeft (Left stringQueNoQuiero) = Nothing
 discardLeft (Right v) = Just v
-\end{verbatim}
+\end{minted}
 (recordemos que es \cod{Either b}, y no \cod{Either} a secas,
 la instancia de la clase \cod{Functor})
 
@@ -25,20 +26,24 @@ tales condiciones pero eso no
 será necesario: el sistema de polimorfismo de
 Haskell (\textit{parametric polymorphism}) nos lo garantiza.
 Haskell nos impone la restricción de que
-una función polimórfica en el la \textcolor{red}{???} variable de tipo \cod{a}
+una función polimórfica en la variable de tipo \cod{a}
 esté implementada
-con la misma expresión. Por ejemplo, en Haskell no es posible
+con la misma expresión independientemente de futuras
+especializaciones de \cod{a}. Por ejemplo, en Haskell no es posible
 escribir una función polimórfica de esta forma:
-\begin{verbatim}
+\begin{minted}{haskell}
 polimorfica :: a -> a
 polimorfica v = v
 
 polimorfica :: Int -> Int
 polimorfica n = n + 1
-\end{verbatim}
+\end{minted}
 Esta restricción, junto con otras características
 del polimorfismo paramétrico, permite comprobar que cualquier
-función de tipo \cod{F a->G a} con \cod{F} y \cod{G} funtores es
+función de tipo \cod{F a->G a} (donde, insistimos, la \cod{a}
+minúscula significa que se trata de una función polimórfica
+en el tipo \cod{a})
+con \cod{F} y \cod{G} funtores es
 una transformación natural \cite{theorems-for-free}.
 
 Mostramos a continuación algunos ejemplos de transformaciones naturales
@@ -49,7 +54,7 @@ anteriormente.
 \paragraph{Entre \cod{Maybe} y \cod{Either}}
 La función \cod{discardLeft :: Either b a -> Maybe a} que hemos definido
 antes es un ejemplo de transformación natural. La interpretación
-que dimos de estos tipos en el primer capítulo fue la siguiente:
+que dimos de estos tipos en el primer capítulo fue la siguiente.
 \begin{itemize}
 \item Los valores de la forma \cod{Nothing :: Maybe a} representan
   situaciones de error durante un cómputo. Los valores de la forma
@@ -59,69 +64,157 @@ que dimos de estos tipos en el primer capítulo fue la siguiente:
   situaciones de error durante un cómputo y además aportan más información
   sobre el error (por ejemplo si la variable \cod{b} estuviera
   especializada a \cod{String} podríamos tener un valor de error
-  que fuera \cod{Left "No fue posible conectar al servidor"}. Los
+  que fuera \cod{Left "No fue posible conectar con el servidor"}. Los
   valores de la forma \cod{Right v :: Either b a} representan cómputos
-  exitosos con valor de retorno \cod{ v :: a }.
+  exitosos con valor de retorno \cod{v :: a}.
 \end{itemize}
 
-En este sentido podemos implementar la función \cod{discardLeft} como
+En este sentido podemos interpretar la función \cod{discardLeft} como
 una aplicación que recibe un cómputo posiblemente fallido y descarta
 la información asociada al fallo en caso de que la haya. En caso de
 computación exitosa deja invariante su resultado.
 
 Podemos escribir una transformación natural en el sentido inverso
-fijando un valor de tipo \cod{b}. Por ejemplo
-
-\begin{verbatim}
+fijando un valor de tipo \cod{b}. Por ejemplo:
+\begin{minted}{haskell}
 maybeToRight :: b -> Maybe a -> Either b a
 maybeToRight defaultError Nothing = Left defaultError
 maybeToRight defaultError (Just v) = Right v
-\end{verbatim}
+\end{minted}
 
 Y \cod{maybeToRight} no es una transformación natural pero para
 cualquier valor \cod{x :: B} tenemos que
-\cod{maybeToRight x :: Maybe a -> Either B a} sí que lo es. Bajo
-la interpretación de cómputos propensos a error, esta transformación
-natural añade una justificación del error a un cómputo fallido
-sin contexto del fallo.
+\cod{maybeToRight x :: Maybe a -> Either B a} sí que lo es.
 
 \paragraph{Transformaciones naturales al funtor constante}
 En Haskell podemos definir el funtor constante de la siguiente
 manera:
-\begin{verbatim}
+\begin{minted}{haskell}
 data Const b a = Const b
 
 instance Functor (Const b) where
   fmap f (Const b) = Const b
-\end{verbatim}
+\end{minted}
 
-Este es un funtor distinto a los anteriores que hemos
-definido en Haskell demás \textcolor{red}{????} en el sentido de que no utiliza
-la variable de tipo de ninguna forma. \textit{Escribir esto mejor} \textcolor{red}{pues si}.
-
-
+Este funtor es un funtor trivial porque lleva a todos los tipos
+esencialmente al mismo tipo y además lleva todas las funciones,
+también esencialmente, a la
+identidad.
 Supongamos que tenemos una función polimórfica de tipo
-\cod{f :: F a -> B} donde \cod{B} es un tipo fijo. Esta función
+\cod{f :: F a -> B} donde \cod{B} es un tipo concreto. Esta función
 se puede extender a otra función
 \cod{fConst :: F a -> Const B a} de la siguiente forma:
-\begin{verbatim}
--- recordamos f :: F a -> B
+\begin{minted}{haskell}
 fConst :: F a -> Const B a
 fConst x = Const (f x)
-\end{verbatim}
+\end{minted}
 El tipo de \cod{fConst} (es de la forma \cod{F a -> G a} donde tanto
 \cod{F} como \cod{G} son funtores) nos garantiza que es una transformación
-natural. En particular cumple las condiciones de naturalidad. Si
-escribimos estas condiciones de naturalidad en haskell llegamos a:
-
-\begin{verbatim}
--- dado g :: c -> c'
+natural. Entonces cumple las condiciones de naturalidad. Especificando
+la condición de naturalidad con la sintaxis de Haskell llegamos a
+que para cualquier función \cod{g :: C -> C'} (donde \cod{C}
+y \cod{C'} son dos tipos fijos pero arbitrarios):
+\begin{minted}{haskell}
 fConst . fmap g = fmap g . fConst
-\end{verbatim}
-donde el \cod{fmap} de la izquierda es el de \cod{F} y el de
-la izquierda es el de \cod{Const B}.\textcolor{red}{izquierda derecha?¿?¿?} Pero el de \cod{Const b}
-deja invariante el resultado. Esto nos lleva a comprobar que:
-\cod{f . fmap g = f}. Es decir, si modificamos un valor de
-nuestro funtor con alguna función de la forma \cod{fmap g} no
-estaremos variando la métrica. Un ejemplo de esto lo podemos
-ver con la función \cod{length :: [a] -> Int}.
+\end{minted}
+donde el \cod{fmap} que aparece en el miembro
+de la izquierda es el de la instancia
+de \cod{Functor} de \cod{F} y el de
+la derecha es el de \cod{Const B}.
+Pero vimos anteriormente que la implementación de \cod{fmap}
+de \cod{Const b} es básicamente la identidad.
+Esto nos lleva a comprobar que:
+\cod{f . fmap g = f}. Es decir, dada cualquier función de tipo
+\cod{f :: F a -> B} los valores \cod{f} son invariantes a través
+de aplicaciones de la forma \cod{fmap g}. Ponemos dos ejemplos
+que aclararán esta proposición:
+
+\begin{itemize}
+\item Consideramos la función \cod{length :: [a] -> Int}. En este
+  caso lo que estamos diciendo es que dada una lista
+  \cod{l :: [A]} y cualquier función \cod{h :: A -> B} tenemos que
+\begin{minted}{haskell}
+length (fmap h l) = length l
+\end{minted}
+   Es decir, la longitud de
+  una lista no cambia a través de funciones de la forma
+  \cod{fmap h}.
+\item Consideramos ahora la función
+\begin{minted}{haskell}
+isNothing :: Maybe a -> Bool
+isNothing Nothing = True
+isNothing (Just x) = False
+\end{minted}
+En este caso dado un valor \cod{m :: Maybe A} y cualquier función
+\cod{h :: A -> B} tenemos que:
+\begin{minted}{haskell}
+isNothing (fmap f m) = isNothing m
+\end{minted}
+Es decir, que las funciones de la forma \cod{fmap h} no pueden llevar
+un valor \cod{Nothing :: Maybe C} a uno
+\cod{Just x :: Maybe D} ni viceversa.
+\end{itemize}
+
+\paragraph{Transformaciones naturales a través de funtores}
+Realizamos ahora la construcción de las transformaciones naturales
+a través de los funtores en Haskell. Utilizaremos el tipo
+\cod{Composition f g a} que usamos en uno de los ejemplos de
+funtores.
+\begin{minted}{haskell}
+natApplication :: (Functor f, Functor g, Functor h) =>
+  (f a -> g a) -> Composition h f a -> Composition h g a
+natApplication tau (Composition hfa) =
+  Composition (fmap tau hfa)
+\end{minted}
+Esta construcción es la que nos permite dada una transformación
+natural \cod{tau :: F a -> G a} y un funtor \cod{H} obtener una transformación
+natural \cod{natApplication tau :: H F a -> H G a}.
+La transformación natural \cod{F H a -> G H a} se obtiene simplemente
+restringiendo \cod{tau} a tipos de la forma \cod{H a}.
+
+Veamos un ejemplo de uso de \cod{natApplication}. Especializaremos
+\cod{f} al funtor \cod{Either String}, \cod{g} al funtor
+\cod{Maybe} y \cod{h} al funtor \cod{[]}. La transformación natural
+que usaremos será \cod{discardLeft :: Either String a -> Maybe a}.
+A continuación ponemos algunos ejemplos de cómo funciona
+\cod{natApplication discardLeft}.
+\begin{minted}{haskell}
+-- natApplication discardLeft :: [Either String a] -> [Maybe a]
+natApplication
+    discardLeft
+    (Composition [Left "error", Right 5, Left "test", Right 6])
+
+-- resultado: [Nothing, Just 5, Nothing, Just 6]
+
+natApplication
+    discardLeft
+    (Composition [Right "gg", Right "hh", Left "hh"])
+-- resultado [Just "gg", Just "hh", Nothing ]
+\end{minted}
+
+%% \subsection{Lema de Yoneda}
+%% Aplicando el mismo razonamiento que utilizamos con el funtor
+%% $\Hom(A, -)$ al funtor de haskell \cod{Reader a}
+%% (esto lo podemos hacer porque $\Hask$ es una categoría cartesianamente
+%% cerrada y \cod{Reader a b} es el objeto $\Hom$ interno, aunque
+%% no profundizaremos en esto) podemos decir que
+%% el tipo \cod{F A} donde \cod{F} es un funtor es isomorfo
+%% al tipo de las transformaciones naturales \cod{Reader A a -> F a}.
+%% Este isomorfismo lo podemos mostrar en haskell de la siguiente forma:
+%% \begin{minted}{haskell}
+%% data Yoneda f a = Yoneda (forall b. Reader a b -> f b)
+
+%% iso :: (Functor f) => f a -> Yoneda f a
+%% iso fa = Yoneda natTrans
+%%   where
+%%     natTrans :: Reader a b -> f b
+%%     natTrans (Reader aToB) = fmap aToB fa
+
+%% iso_inv :: (Functor f) => Yoneda f a -> f a
+%% iso_inv (Yoneda tau) = tau (Reader id)
+
+%% -- iso . iso_inv = id
+%% \end{minted}
+
+%% En vista de este isomorfismo podemos implementar una instancia
+%% de \cod{Functor} para \cod{Yoneda f}:

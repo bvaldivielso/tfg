@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{Lista} \PYG{n}{a} \PYG{o+ow}{=} \PYG{k+kt}{ListaVacia} \PYG{o}{|} \PYG{k+kt}{NoVacia} \PYG{n}{a} \PYG{k+kt}{Lista}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplos de valores}
+\PYG{k+kt}{ListaVacia} \PYG{o+ow}{::} \PYG{k+kt}{Lista} \PYG{k+kt}{Int}
+\PYG{k+kt}{NoVacia} \PYG{l+m+mi}{3} \PYG{k+kt}{ListaVacia} \PYG{o+ow}{::} \PYG{k+kt}{Lista} \PYG{k+kt}{Int}
+\PYG{k+kt}{NoVacia} \PYG{l+m+mi}{3} \PYG{p}{(}\PYG{k+kt}{NoVacia} \PYG{l+m+mi}{4} \PYG{k+kt}{ListaVacia}\PYG{p}{)} \PYG{o+ow}{::} \PYG{k+kt}{Lista} \PYG{k+kt}{Int}
+\end{Verbatim}

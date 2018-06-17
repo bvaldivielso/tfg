@@ -4,31 +4,36 @@ En el contexto del lenguaje de programación Haskell (aunque esta
 construcción es análoga en otros lenguajes de programación
 fuertemente tipados) se suele hablar de la categoría
 $\Hask$  en la que los objetos son los tipos del lenguaje
-(por ejemplo \verb~Int~, \verb~String~ o \verb~Double~) y
+(por ejemplo \cod{Int}, \cod{String} o \cod{Double}) y
 las flechas son las funciones entre esos tipos. Por ejemplo
-la función \verb~length :: String -> Int~ vista en
+la función \cod{length :: String -> Int} vista en
 $\Hask$ sería una flecha
-$\texttt{length} \in \Hom_{\Hask}(\texttt{String}, \texttt{Int})$.
+$\cod{length} \in \Hom_{\Hask}(\cod{String}, \cod{Int})$.
 Como operador de composición tenemos la composición habitual de
-funciones, que en haskell se nota con \texttt{.} (un punto) y se
+funciones, que en haskell se nota con \cod{.} (un punto) y se
 define de la siguiente forma:
-\begin{verbatim}
+\begin{minted}{haskell}
 (.) :: (b -> c) -> (a -> b) -> (a -> c)
-(.) f g argumentWithTypeA = f (g argumentWithTypeA)
-\end{verbatim}
-Además tenemos la función \texttt{id} que nos define las
-flechas identidad en $\Hask$:
+(.) f g a = f (g a)
+\end{minted}
+En la declaración de tipo de la función \cod{(.)} (la línea superior)
+utilizamos letras en minúsculas como variables de tipo. Esto quiere
+decir que la función es polimórfica en esos tipos, que luego se
+especializarán según los valores con los que llamemos al operador.
 
-\begin{verbatim}
+Además de la composición tenemos la función \cod{id},
+que nos servirá como la flecha identidad en $\Hask$ para
+cada tipo:
+\begin{minted}{haskell}
 id :: a -> a
 id x = x
-\end{verbatim}
+\end{minted}
 Nótese que aun teniendo esta colección de objetos, de flechas, la
 operación de composición (que es asociativa) y las identidades tenemos
 que $\Hask$ no es una categoría. Esto se debe
 entre otras cosas a algunas
 peculiaridades del comportamiento del
-valor especial \texttt{undefined} de Haskell. Salvando el uso de
+valor especial \cod{undefined} de Haskell. Salvando el uso de
 este valor, la teoría de categorías es un modelo ampliamente aceptado
 para el estudio de $\Hask$. No presumimos en este trabajo
 de que $\Hask$ cumpla bajo toda circunstancia los axiomas de las
@@ -39,34 +44,35 @@ Una justificación de que $\Hask$ es indistinguible de una
 categoría restringiéndose a un subconjunto del lenguaje lo encontramos
 en \cite{fastandloose}.
 
-A lo largo del trabajo veremos como especializando construcciones
-categóricas a $\Hask$ obtendremos aplicaciones de la teoría
-de la categorías a la programación.
+A lo largo del trabajo veremos cómo especializando nociones
+categóricas a $\Hask$ obtendremos un marco desde el que comprender
+mejor algunas construcciones habituales que se dan en la programación.
 
-\paragraph{\texttt{Pipes}}
+\paragraph{\cod{Pipes}}
 \textcolor{red}{Hablar de este otro ejemplo de categorías}
 
 
 \subsection{Funtores}
 \paragraph{Endofuntores en $\Hask$}
 Llamamos endofuntor a un funtor que va de una categoría $\C$ en sí misma.
-Sabiendo esto podemos comenzar a entender en qué consiste un endofuntor
-en $\Hask$: una forma de asignar tipos a otros tipos (los objetos
-de $\Hask$) y transformar funciones en otras funciones (las flechas
-de $\Hask$) de manera que se preserven algunas relaciones.
+Sabiendo esto podemos comenzar a entender que un endofuntor
+en $\Hask$ tiene que asignar tipos (los objetos de $\Hask$) a
+otros tipos y funciones (las flechas de $\Hask$) a otras funciones
+de manera que se cumplan algunas relaciones.
 
 Es habitual encontrar mecanismos que permiten asignar tipos a otros tipos
-en los lenguajes de programación usados hoy día. En \verb~C++~
-tenemos como ejemplo concreto \verb~vector~ que a cada tipo
-(por ejemplo \verb~int~, un entero)
-le asigna otro tipo (\verb~vector<int>~, un vector de enteros). En
-general las templates de \texttt{C++} permiten realizar este tipo de
-construcciones. En \verb~java~ los Generics cumplen una función similar.
+en los lenguajes de programación usados hoy día. En \cod{C++}
+tenemos como ejemplo concreto \cod{vector} que a cada tipo
+(por ejemplo \cod{int}, el tipo de los enteros)
+le asigna otro tipo (\cod{vector<int>}, el tipo
+de los vectores de enteros). En
+general las templates de \cod{C++} permiten realizar este tipo de
+construcciones. En \cod{java} los \cod{Generics} cumplen una función similar.
 
 También es habitual en los lenguajes de programación modernos
 que las funciones
 sean \textit{ciudadanos de primera clase} (\textit{first class citizens}),
-es decir, se puede operar sobre las funciones como se opera sobre
+es decir, se puede operar sobre éstas como se opera sobre
 cualquier otro valor del lenguaje. En este contexto es natural que
 surjan funciones que reciben funciones como parámetro y devuelven
 otras funciones. Python es un ejemplo de lenguaje en el que
@@ -74,108 +80,125 @@ se encuentran estas \textit{higher order functions} (se usan
 tan habitualmente que hasta se incorporó en el
 lenguaje sintaxis específica para ellas \cite{decorators}).
 
-En la biblioteca estándar de Haskell existe una \verb~typeclass~
+En la biblioteca estándar de Haskell existe una \cod{typeclass}
 (el mecanismo de polimorfismo de Haskell, que para los propósitos
 de este trabajo podemos suponer similar a las interfaces de java)
 que sirve para dotar de comportamiento funtorial a los constructores
 de tipo que implementemos. La typeclass
-se llama, convenientemente, \verb~Functor~ \cite{haskell-functor} y se
+se llama, convenientemente, \cod{Functor} \cite{haskell-functor} y se
 define de la siguiente manera:
 
-\begin{verbatim}
+\begin{minted}{haskell}
 class Functor F where
   fmap :: (a -> b) -> (F a -> F b)
-\end{verbatim}
+\end{minted}
 
 Si queremos que nuestro constructor de tipo
-sea un \verb~Functor~ tendremos
-que implementar sobre él una función llamada \verb~fmap~ que reciba
-una función de tipo \verb~a -> b~ y nos devuelva una función
-de tipo \verb~F a -> F b~ donde \verb~F~ es nuestro constructor de tipo.
+sea un \cod{Functor} tendremos
+que implementar sobre él una función llamada \cod{fmap} que reciba
+una función de tipo \cod{a -> b} y nos devuelva una función
+de tipo \cod{F a -> F b} donde \cod{F} es nuestro constructor de tipo.
 
-Veremos ejemplos a continuación que aclararán la situación pero si
-tuviéramos que trazar un paralelismo con \texttt{C++} podríamos decir
-que \verb~vector~ (que sería \verb~F~ del código en Haskell) sería una
-instancia de la typeclass \verb~Functor~ si implementáramos una función
-llamada \verb~fmap~ que recibe como parámetro una función que va
-de un tipo cualquiera \verb~A~ a un tipo cualquiera \verb~B~ y
-devuelve una función que va del tipo \verb~vector<A>~ (análogo a
-\verb~F a~ en el código en Haskell) a \verb~vector<B>~.
+Veremos ejemplos a continuación que aclararán la situación, pero si
+tuviéramos que trazar un paralelismo con \cod{C++} podríamos decir
+que \cod{vector} (que sería \cod{F} del código en Haskell) sería una
+instancia de la typeclass \cod{Functor} si implementáramos una función
+llamada \cod{fmap} que recibe como parámetro una función que va
+de un tipo cualquiera \cod{A} a un tipo cualquiera \cod{B}, y
+devuelve una función que va del tipo \cod{vector<A>} (análogo a
+\cod{F a} en el código en Haskell) a \cod{vector<B>}.
 
-Haskell no comprueba que tu implementación de \texttt{fmap}
+Haskell no comprueba que tu implementación de \cod{fmap}
 verifica los axiomas de los funtores. Esa tarea se delega al
 desarrollador. Los axiomas de los funtores en
 haskell teniendo en cuenta los
-operadores de composición \verb~.~ y la función identidad son:
+operadores de composición \cod{.} y la función identidad son:
 
-\begin{verbatim}
-; f :: a -> b
-; g :: b -> c
+\begin{minted}{haskell}
+-- digamos que f :: a -> b
+-- y que g :: b -> c
+-- Entonces
 
+-- el funtor se lleva bien con la composición
 fmap (g . f) = (fmap g) . (fmap f) :: F a -> F c
 
+-- el funtor lleva identidades a identidades
 fmap id = id :: F a -> F a
-\end{verbatim}
+\end{minted}
+
+Aclaramos que esto no es código en haskell sino la especificación
+de las propiedades que debe cumplir \cod{fmap} expresadas con la
+sintaxis de haskell.
+Nótese además que solo escribimos \cod{fmap} sin hacer referencia a
+la instancia de \cod{Funtor} cuya implementación de \cod{fmap}
+estamos usando. El compilador de haskell es capaz de inferir,
+en general, según el contexto del código, a que instancia de
+\cod{Functor} nos referimos cuando usamos \cod{fmap}.
 
 Proponemos algunos ejemplos de instancias de la typeclass
-\verb~Functor~
+\cod{Functor}
 que se encuentran en la biblioteca estándar
 de haskell.
 
 \paragraph{Maybe}
-La definición de \verb~Maybe~ es la siguiente:
+La definición de \cod{Maybe} es la siguiente:
 
-\begin{verbatim}
+\begin{minted}{haskell}
 data Maybe a = Just a | Nothing
-\end{verbatim}
+\end{minted}
 
 Este tipo se usa constantemente en Haskell. Representa el resultado
 de computaciones que podrían fallar o podrían no tener solución en
 casos concretos. Podemos poner un ejemplo de
-utilización de este tipo: \verb~head_safe~, una
+utilización de este tipo: \cod{head\_safe}, una
 función que devuelve el primer elemento de una lista:
 
-\begin{verbatim}
+\begin{minted}{haskell}
 head_safe :: [a] -> Maybe a
 head_safe [] = Nothing
 head_safe (x:xs) = Just x
-\end{verbatim}
+\end{minted}
 
-Decidimos que el tipo de retorno de \verb~head_safe~ sea \verb~Maybe a~ puesto
+Decidimos que el tipo de retorno de \cod{head\_safe} sea \cod{Maybe a} puesto
 que este cómputo puede no tener solución en caso de que la lista no
-tenga elementos. En otros lenguajes la función \verb~head~ lanzaría una
+tenga elementos. En otros lenguajes la función \cod{head} lanzaría una
 excepción si se le pasara una lista vacía, pero en Haskell se puede
-codificar la naturaleza propensa a fallos
-del resultado en el sistema de tipos.
+codificar la posibilidad de que no exista resultado
+en el sistema de tipos.
 
-Resulta que se puede dotar al constructor de tipos \verb~Maybe~ de
-un comportamiento funtorial. Mostramos a continuación su
-implementación de la typeclass \verb~Functor~
-
-\begin{verbatim}
+\cod{Maybe} es un constructor de tipos en el sentido de que
+a cada tipo \cod{A} (una vez más,
+usaremos nombres de tipos que comienzan con
+mayúscula para referirnos a tipos concretos, mientras que usaremos
+nombres en minúscula para referirnos a tipos polimórficos) le asigna
+un tipo \cod{Maybe A}, cuyos valores son o bien de la forma
+\cod{Just v} para \cod{v} algún valor de tipo \cod{A} o bien
+\cod{Nothing}. Resulta que se puede dotar a \cod{Maybe} de
+comportamiento funtorial. Mostramos a continuación su
+implementación de la typeclass \cod{Functor}
+\begin{minted}{haskell}
 instance Functor Maybe where
   fmap f (Just x) = Just (f x)
   fmap f Nothing = Nothing
-\end{verbatim}
-
-Lo que hace esta función \verb~fmap~ es extender funciones de tipo
-\verb~a -> b~ a una función de tipo \verb~Maybe a -> Maybe b~. Esta función
-no hace nada si recibe un \verb~Nothing~ (representante del fallo
-en el cómputo) y aplica la función al contenido del valor \verb~Just x~.
+\end{minted}
+Lo que hace esta función \cod{fmap} es extender funciones de tipo
+\cod{a -> b} a funciones de tipo \cod{Maybe a -> Maybe b}. Esta función
+no hace nada si recibe un \cod{Nothing} y aplica la función al
+contenido del valor \cod{Just x}.
 
 Podemos comprobar que se cumplen los axiomas de los funtores.
 
-\begin{verbatim}
-; veamos fmap id = id :: Maybe a -> Maybe a
-; fmap id x = id x = x
-; si x = (Just y) entonces
-(fmap id) x = fmap id (Just y) = Just (id y) = (Just y) = x
+\begin{minted}{haskell}
+-- veamos fmap id = id :: Maybe a -> Maybe a
+-- fmap id x = id x = x
+-- si x = (Just y) entonces
+fmap id x = fmap id (Just y) = Just (id y) = (Just y) = x
 
-; si x = Nothing
-(fmap id) Nothing = Nothing
+-- si x = Nothing
+fmap id Nothing = Nothing
 
-; veamos que se comporta bien con la composición.
-; una vez más supongamos que x = (Just y)
+-- veamos que se comporta bien con la composición.
+-- una vez más supongamos que x = (Just y)
 (fmap (f . g)) x = fmap (f . g) (Just y)
                  = Just ( (f . g) y )
                  = Just (f (g y))
@@ -183,26 +206,27 @@ Podemos comprobar que se cumplen los axiomas de los funtores.
                  = ( (fmap f) . (fmap g) ) (Just y)
                  = ( (fmap f) . (fmap g) ) x
 
-; si x = Nothing
+-- si x = Nothing
 (fmap (f . g)) x = (fmap (f . g)) Nothing
                  = Nothing
                  = (fmap f) Nothing
                  = (fmap f) ((fmap g) Nothing)
                  = ((fmap f) . (fmap g)) Nothing
-\end{verbatim}
+\end{minted}
 
 \paragraph{Either}
-La definición de \verb~Either~ es la siguiente:
+La definición de \cod{Either} es la siguiente:
 
-\begin{verbatim}
+\begin{minted}{haskell}
 data Either a b = Left a | Right b
-\end{verbatim}
+\end{minted}
 
-El tipo \verb~Either~ en haskell se usa para representar cómputos que pueden
-devolver valores de dos tipos distintos. Un ejemplo muy habitual
-de \verb~Either~ es representar cómputos que, al igual que \verb~Maybe~,
-podrían ser erróneos, pero dando detalles sobre el error en caso
-de error.
+El tipo \cod{Either} en haskell se usa para representar cómputos que pueden
+devolver valores de dos tipos distintos según el caso.
+Un caso de uso muy habitual
+de \cod{Either} es representar cómputos que, al igual que \cod{Maybe},
+podrían fallar, pero dando detalles sobre el error en caso de
+que lo hubiera.
 
 Proponemos un ejemplo artificial que aun así muestra para qué se
 podría usar este tipo. Supongamos que tenemos un sistema con usuarios
@@ -211,69 +235,73 @@ de nuestros usuarios en edad laboral. Supongamos además que tenemos
 dos tipos de premio: uno para adultos jóvenes y otro para el resto
 de personas en edad laboral.
 
-Utilizando \verb~Maybe~ para resolver el problema nos quedaría un código
+Utilizando \cod{Maybe} para resolver el problema nos quedaría un código
 de la siguiente forma:
 
-\begin{verbatim}
+\begin{minted}{haskell}
 data PremiosTrabajadores = PremiosJovenes | PremiosMayores
 
-dar_premio :: Int -> Maybe PremiosAdultos
+dar_premio :: Int -> Maybe PremiosTrabajadores
 dar_premio age
   | age < 16 = Nothing
-  | 16 <= age < 40 = Just PremiosJovenes
-  | 40 <= age < 65 = Just PremiosMayores
+  | 16 <= age && age < 40 = Just PremiosJovenes
+  | 40 <= age && age < 65 = Just PremiosMayores
   | 65 <= age = Nothing
-\end{verbatim}
+\end{minted}
 
 Este código cumple su propósito de decirnos qué premio
 le corresponde al usuario en caso de que efectivamente le
 toque un premio. Sin embargo, lo que no devuelve la función
 es el motivo por el que el cliente no es elegible para este.
 Para conseguir que la función devuelva ese tipo de información
-podemos usar \verb~Either~.
+podemos usar \cod{Either}.
 
-\begin{verbatim}
+\begin{minted}{haskell}
 data PremiosTrabajadores = PremiosJovenes | PremiosMayores
 
-dar_premio :: Int -> Either String PremiosAdultos
+dar_premio :: Int -> Either String PremiosTrabajadores
 dar_premio edad
   | edad < 16 = Left "Demasiado joven para estar en edad laboral"
-  | 16 <= edad < 40 = Right PremiosJovenes
-  | 40 <= edad < 65 = Right PremiosMayores
+  | 16 <= edad && edad < 40 = Right PremiosJovenes
+  | 40 <= edad && edad < 65 = Right PremiosMayores
   | 65 <= edad = Left "Demasiado mayor para estar en edad laboral"
-\end{verbatim}
+\end{minted}
 
-¿Es \verb~Either~ un funtor? La respuesta es que no, porque de entrada
-\verb~Either~ es un constructor de tipo con dos parametros y para que
-un constructor de tipo sea un funtor necesitamos que solo tenga
-un parámetro. Entonces \verb~Either~ no es un funtor, pero resulta que
-\verb~Either a~ donde \verb~a~ es algún (cualquier) tipo fijo de Haskell sí
-es un funtor. Es decir si consideramos fijo el primer tipo
-\verb~(Either a)~ es un constructor de tipos que admite un tipo
+¿Es \cod{Either} instancia de la clase \cod{Functor}?
+La respuesta es que no, porque de entrada
+\cod{Either} es un constructor de tipo con dos parametros y para que
+un constructor de tipo sea instancia
+de \cod{Functor} necesitamos que sólo tenga
+un parámetro. Resulta, sin embargo, que
+\cod{Either a} sí que lo es. Es decir si consideramos fijo el primer tipo
+\cod{(Either a)} es un constructor de tipos que admite un tipo
 como parámetro y además se puede implementar una instancia de
-\verb~Functor~ sobre él de la siguiente forma:
+\cod{Functor} sobre él de la siguiente forma:
 
-\begin{verbatim}
+\begin{minted}{haskell}
 instance Functor (Either a) where
+  -- fmap :: (b -> c) -> Either a b -> Either a c
   fmap f (Left x) = Left x
   fmap f (Right x) = Right (f x)
-\end{verbatim}
+\end{minted}
 
-Esta instancia de \verb~Functor~ es similar a la de \verb~Maybe~: si el valor
-es de los de \emph{error} no se hace nada con él. Si es de los valores
-\emph{buenos} se transforma mediante la función \verb~f~. Veamos que efectivamente
-esta instancia de \verb~Functor~ cumple con las leyes:
-
-\begin{verbatim}
-; la identidad va a la identidad:
-; supongamos x = (Left y)
+Esta instancia de \cod{Functor} es similar a la de \cod{Maybe}:
+si el valor
+es de los de \emph{error} no se hace nada con él.
+Si es de los valores
+\emph{buenos} se transforma mediante la
+función \cod{f}. Veamos que efectivamente
+esta instancia de \cod{Functor} cumple con las leyes:
+\begin{minted}{haskell}
+-- la identidad va a la identidad:
+-- supongamos x = (Left y)
 
 fmap id x = fmap id (Left y) = Left y = x
 
-; supongamos x = Right y
+-- supongamos x = Right y
 fmap id x = fmap id (Right y) = Right (id y) = Right y = x
 
-; probemos ahora que se lleva bien con la composición
+-- probemos ahora que se lleva bien con la composición
 fmap (f . g) (Left y) = Left y = (fmap f) (Left y)
                       = (fmap f) (fmap g (Left y))
                       = (fmap f) . (fmap g) (Left y)
@@ -281,24 +309,24 @@ fmap (f . g) (Left y) = Left y = (fmap f) (Left y)
 fmap (f . g) (Right y) = Right ( (f . g) y )
                        = fmap f (Right (g y))
                        = (fmap f . fmap g) (Right y)
-\end{verbatim}
+\end{minted}
 
-Veamos un ejemplo de utilización de la instancia de \verb~Functor~ de
-\verb~Either a~ siguiendo con el ejemplo que utilizamos antes. Imaginemos
+Veamos un ejemplo de utilización de la instancia de \cod{Functor} de
+\cod{Either a} siguiendo con el ejemplo que utilizamos antes. Imaginemos
 que tenemos una función que asocia los distintos premios a sus títulos.
 Por ejemplo:
 
-\begin{verbatim}
+\begin{minted}{haskell}
 titulos_premios :: PremiosTrabajadores -> String
 titulos_premios PremioJovenes = "Semana de senderismo"
 titulos_premios PremioMayores = "Cata de Vinos"
-\end{verbatim}
+\end{minted}
 
 Entonces si quisiéramos una función que a partir de la edad de
 un usuario nos devolviera qué mensaje mostrarle en la interfaz
 con respecto al premio podríamos hacer lo siguiente:
 
-\begin{verbatim}
+\begin{minted}{haskell}
 mensaje_premio :: Int -> String
 mensaje_premio edad =
   case resultado of
@@ -308,38 +336,41 @@ mensaje_premio edad =
   where
     resultado :: Either String String
     resultado = fmap titulos_premios (dar_premio edad)
-\end{verbatim}
+\end{minted}
 
-\paragraph{List}
 \paragraph{Reader}
-Definimos \texttt{Reader} de la siguiente forma:
-\begin{verbatim}
+Definimos \cod{Reader} de la siguiente forma:
+\begin{minted}{haskell}
 data Reader a b = Reader (a -> b)
-\end{verbatim}
+\end{minted}
 
 Esta definición quiere decir
-que un valor de \textit{tipo} \texttt{Reader a b} es
-de la forma \texttt{Reader g} donde \texttt{g} es
-una función que recibe un valor de tipo \texttt{a} como
-parámetro y devuelve un valor de tipo \texttt{b}. De la misma manera
-que hicimos con \texttt{Either} podemos fijar la primera variable
-de tipo e implementar una instancia de \texttt{Functor} para
-\texttt{(Reader a)}:
+que un valor de \textit{tipo} \cod{Reader a b} es
+de la forma \cod{Reader g} donde \cod{g} es
+una función que recibe un valor de tipo \cod{a} como
+parámetro y devuelve un valor de tipo \cod{b}. Básicamente
+el tipo \cod{Reader a b} es \textit{lo mismo} que el
+tipo \cod{a -> b} pero en ocasiones es útil tener \cod{Reader a b}
+como tipo aparte.
+De la misma manera
+que hicimos con \cod{Either}, podemos fijar la primera variable
+de tipo e implementar una instancia de \cod{Functor} para
+\cod{(Reader a)}:
 
-\begin{verbatim}
+\begin{minted}{haskell}
 instance Functor (Reader a) where
-  ; fmap :: (b -> c) -> (Reader a b) -> (Reader a c)
+  -- fmap :: (b -> c) -> (Reader a b) -> (Reader a c)
   fmap f (Reader g) = Reader (f . g)
-\end{verbatim}
+\end{minted}
 
-Podemos probar que esta instancia de \texttt{Functor} cumple
+Podemos probar que esta instancia de \cod{Functor} cumple
 las leyes de los funtores:
 
-\begin{verbatim}
-; f :: b -> c
-; g :: c -> d
-; a  = (Reader h) :: (Reader a b) y entonces
-; h :: a -> b
+\begin{minted}{haskell}
+-- f :: b -> c
+-- g :: c -> d
+-- a  = (Reader h) :: (Reader a b) y entonces
+-- h :: a -> b
 
 fmap (g . f) a = fmap (g. f) (Reader h)
                = Reader ( (g . f) . h)
@@ -349,20 +380,45 @@ fmap (g . f) a = fmap (g. f) (Reader h)
                = (fmap g . fmap f) (Reader h)
                = (fmap g . fmap f) a
 
-; y por tanto fmap (g . f) = fmap g . fmap f
-; en las mismas condiciones:
+-- y por tanto fmap (g . f) = fmap g . fmap f
+-- en las mismas condiciones:
 
 fmap id a = fmap id (Reader h)
           = Reader (id . h)
           = Reader h
           = a
 
-;; y por tanto fmap id = id
-\end{verbatim}
+-- y por tanto fmap id = id
+\end{minted}
 
 Veremos más adelante en el trabajo las aplicaciones
-de \texttt{Reader}. Creemos también importante resaltar las similitudes
-entre \texttt{Reader} y los funtores $\Hom$ descritos en los ejemplos
-matemáticos de funtores. Formalizaremos esta relación
-más adelante en el trabajo
-cuando hablemos de objetos $\Hom$ internos.
+de \cod{Reader}. Creemos también importante resaltar las similitudes
+entre \cod{Reader} y los funtores $\Hom$ descritos en los ejemplos
+matemáticos de funtores.
+
+\paragraph{Composición de Funtores}
+Para mostrar la expresividad de haskell definimos el funtor composición.
+En primer lugar definimos el tipo:
+\begin{minted}{haskell}
+data Composition f g a = Composition (f (g (a))
+\end{minted}
+Un constructor de tipo parametrizado por tres tipos, donde los dos
+primeros son a su vez constructores de tipos. Se puede interpretar
+el constructor de tipo \cod{Composition f g} como la composición de
+los constructores de tipo \cod{f} y \cod{g}. Por ejemplo podemos
+construir el tipo \cod{Composition [] Maybe Int} que tiene como
+valores, por ejemplo:
+\begin{minted}{haskell}
+Composition [Just 3, Just 4]
+Composition [Nothing, Nothing, Nothing, Just 300]
+Composition []
+\end{minted}
+Pues bien, si \cod{f} y \cod{g} son funtores, resulta que también
+podemos definir una instancia válida de \cod{Functor} para
+\cod{Compose fg} de la siguiente manera:
+\begin{minted}{haskell}
+instance (Functor f, Functor g) => Functor (Compose f g) where
+  fmap f (Composition fga) = Composition (fmap (fmap f) fga)
+\end{minted}
+Esta construcción se corresponde con la construcción que
+hicimos de composición de funtores.

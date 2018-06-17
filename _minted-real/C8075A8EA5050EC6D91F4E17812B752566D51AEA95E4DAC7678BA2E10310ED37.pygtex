@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{x} \PYG{o+ow}{::} \PYG{k+kt}{Id} \PYG{k+kt}{Int}
+\PYG{n+nf}{x} \PYG{o+ow}{=} \PYG{n}{suma} \PYG{l+m+mi}{3} \PYG{l+m+mi}{4} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{y} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}}
+        \PYG{n}{suma} \PYG{n}{y} \PYG{l+m+mi}{7} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{z} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}}
+            \PYG{n}{return} \PYG{n}{z}
+            \PYG{p}{)}
+        \PYG{p}{)}
+\end{Verbatim}

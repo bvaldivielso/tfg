@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{suma} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Id} \PYG{k+kt}{Int}
+\PYG{n+nf}{suma} \PYG{n}{x} \PYG{n}{y} \PYG{o+ow}{=} \PYG{k+kt}{Id} \PYG{p}{(}\PYG{n}{x} \PYG{o}{+} \PYG{n}{y}\PYG{p}{)}
+
+\PYG{n+nf}{x} \PYG{o+ow}{::} \PYG{k+kt}{Id} \PYG{k+kt}{Int}
+\PYG{n+nf}{x} \PYG{o+ow}{=} \PYG{k+kr}{do}
+  \PYG{n}{y} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{suma} \PYG{l+m+mi}{3} \PYG{l+m+mi}{4}
+  \PYG{n}{z} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{suma} \PYG{n}{y} \PYG{l+m+mi}{7}
+  \PYG{n}{return} \PYG{n}{z} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} x = Id 14}
+\end{Verbatim}

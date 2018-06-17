@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{numCommonFriends} \PYG{o+ow}{::} \PYG{k+kt}{User} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{User} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Haxl} \PYG{k+kt}{Int}
+\PYG{n+nf}{numCommonFriends} \PYG{n}{x} \PYG{n}{y} \PYG{o+ow}{=}
+    \PYG{n}{length} \PYG{o}{\PYGZlt{}\PYGZdl{}\PYGZgt{}} \PYG{p}{(}\PYG{n}{intersect} \PYG{o}{\PYGZlt{}\PYGZdl{}\PYGZgt{}} \PYG{n}{friendsOf} \PYG{n}{x} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{friendsOf} \PYG{n}{y}\PYG{p}{)}
+\end{Verbatim}

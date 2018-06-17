@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{do}
+  \PYG{n}{yield} \PYG{l+m+mi}{3}
+  \PYG{n}{yield} \PYG{l+m+mi}{3}
+  \PYG{n}{yield} \PYG{l+m+mi}{4}
+  \PYG{n}{yield} \PYG{l+m+mi}{4}
+  \PYG{n}{lift} \PYG{o}{\PYGZdl{}} \PYG{n}{putStrLn} \PYG{l+s}{\PYGZdq{}Accion de IO\PYGZdq{}}
+  \PYG{n}{yield} \PYG{l+m+mi}{5}
+  \PYG{n}{yield} \PYG{l+m+mi}{5}
+  \PYG{n}{return} \PYG{n+nb}{()}
+\end{Verbatim}

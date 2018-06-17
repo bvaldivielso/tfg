@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{o}{\PYGZti{}\PYGZgt{}}\PYG{p}{)} \PYG{o+ow}{::} \PYG{k+kt}{Monad} \PYG{n}{m}
+     \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Producer} \PYG{n}{b} \PYG{n}{m} \PYG{n}{r}\PYG{p}{)}
+     \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{n}{b} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Producer} \PYG{n}{c} \PYG{n}{m} \PYG{n}{r}\PYG{p}{)}
+     \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Producer} \PYG{n}{c} \PYG{n}{m} \PYG{n}{r}\PYG{p}{)}
+\PYG{p}{(}\PYG{n}{f} \PYG{o}{\PYGZti{}\PYGZgt{}} \PYG{n}{g}\PYG{p}{)} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{for} \PYG{p}{(}\PYG{n}{f} \PYG{n}{x}\PYG{p}{)} \PYG{n}{g}
+\end{Verbatim}

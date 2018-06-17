@@ -2,14 +2,13 @@ Comenzamos con el estudio de una de las nociones nacidas
 en teoría de categorías que son
 más importantes para nuestro trabajo: las mónadas.
 
-
 \subsection{Definición}
 \begin{definition}
   Una mónada sobre una categoría $\C$
-  es una terna $(T, \eta, \mu)$ donde $T : \arr{\C}{\C}$ es un
-  endofuntor y $\eta : \nat{1_\C}{T}, \, \mu: \nat{T^2}{T}$ son dos
+  es una terna $(T, \eta, \mu)$, donde $T : \arr{\C}{\C}$ es un
+  endofuntor, y $\eta : \nat{1_\C}{T}$ y $\mu: \nat{T^2}{T}$ son dos
   transformaciones naturales tales que los siguientes diagramas
-  conmutan:
+  conmutan.
   \begin{center}
     \begin{equation}\label{diagrama:mu}
     \begin{tikzcd}
@@ -34,35 +33,37 @@ de la definición.
 \paragraph{Monoides}
 Sea $M$ un monoide. Definimos:
 \begin{itemize}
-\item El funtor $T : \arr{\Set}{\Set}$
-  como $T(X) = M\times X$
-\item $\eta_X : \arr{X}{T(X)}$ definida
-por $\eta_X(x) = (e, x)$ (con $e \in M$ el elemento neutro)
-\item $\mu_X : \arr{T^2(X)}{T(X)}$ definida por
-$\mu_X(m, n, x) = (m\cdot n, x)$
+\item el funtor $T : \arr{\Set}{\Set}$
+  como $T(X) = M\times X$;
+\item la transformación natural $\eta_X : \arr{X}{T(X)}$, dada
+por $\eta_X(x) = (e, x)$ (con $e \in M$ el elemento neutro);
+\item la transformación natural $\mu_X : \arr{T^2(X)}{T(X)}$ dada por
+$\mu_X(m, n, x) = (m\cdot n, x)$.
 \end{itemize}
 
-Veamos que $(T, \eta, \mu)$ es una mónada.
-\textit{A lo largo de este ejemplo nos tomaremos la libertad de identificar $T^2X$ con $M\times M\times X$ en lugar con $M \times (M\times X)$ con la intención de simplificar la notación}.
-En primer lugar
+Veamos que $(T, \eta, \mu)$ es una mónada. A lo largo de este
+ejemplo nos tomaremos la licencia de identificar $T^2X$
+con $M\times M\times X$ en lugar de con $M \times (M\times X)$,
+con la intención de simplificar la notación.
+En primer lugar,
 tenemos que ver que para cualquier conjunto $X$ el siguiente
 diagrama es conmutativo (diagrama \eqref{diagrama:mu} de la definición
 de mónada):
 \begin{center}
   \begin{tikzcd}
     M\times M \times M \times X \arrow{r}{T\mu_X}
-           \arrow{d}{\mu_{TX}} & M\times M\times X \arrow{d}{\mu_X} \\
+           \arrow{d}[swap]{\mu_{TX}} & M\times M\times X \arrow{d}{\mu_X} \\
     M\times M\times X \arrow{r}{\mu_X} & M \times X
   \end{tikzcd}
 \end{center}
-Es decir $\mu_X \circ \mu_{TX} = \mu_X \circ T\mu_X$. Para comprobar
+es decir, $\mu_X \circ \mu_{TX} = \mu_X \circ T\mu_X$. Para comprobar
 esta igualdad tomamos $(m, n, k, x) \in T^3(X)$.
-Por un lado:
+Por un lado
 $$(\mu_X \circ \mu_{TX})(m, n, k, x) = \mu_X(\mu_{TX}(m, n, k, x)
-  = \mu_X(m\cdot n, k, x) = ((m\cdot n)\cdot k, x)$$
-Por otro lado:
+  = \mu_X(m\cdot n, k, x) = ((m\cdot n)\cdot k, x),$$
+y por otro lado:
 $$(\mu_X \circ T\mu_X)(m, n, k, x) = \mu_X(T\mu_X(m, n, k, x))
-  = \mu_X(m, n\cdot k, x) = (m \cdot (n\cdot k), x)$$
+  = \mu_X(m, n\cdot k, x) = (m \cdot (n\cdot k), x),$$
 y por la asociatividad del producto en $M$ tenemos que
 el diagrama es conmutativo.
 Queda ver que para cualquier conjunto $X$ el diagrama
@@ -74,45 +75,53 @@ Queda ver que para cualquier conjunto $X$ el diagrama
     & T(X) &
   \end{tikzcd}
 \end{center}
-es conmutativo, es decir, $\mu_X \circ T\eta_X = 1_{TX} = \mu_X \circ \eta_{TX}$. Podemos
-comprobar esta igualdad basta ver que para cualquier $(m, x) \in TX$:
-$$\mu_X(T\eta_X(m, x)) = \mu_X(m, e, x) = (m \cdot e, x) = (m, x)$$
-$$\mu_X(\eta_{TX}(m, x)) = \mu_X(e, m, x) = (e\cdot m, x) = (m, x)$$
+es conmutativo, es decir, $\mu_X \circ T\eta_X = 1_{TX} = \mu_X \circ \eta_{TX}$. Para
+comprobar esta igualdad basta ver que para cualquier $(m, x) \in TX$
+$$\mu_X(T\eta_X(m, x)) = \mu_X(m, e, x) = (m \cdot e, x) = (m, x),$$
+y además
+$$\mu_X(\eta_{TX}(m, x)) = \mu_X(e, m, x) = (e\cdot m, x) = (m, x).$$
 
 \paragraph{Sumas}
 Sea $\C$ una categoría con coproductos finitos. Dado un objeto
 $C$ de $\C$ de definimos:
 
 \begin{itemize}
-\item El endofuntor $T: \arr{\C}{\C}$ dado por $T(X) = C + X$
-\item La transformación natural $\eta : \nat{1_\C}{T}$ dada por
-  $\eta_X : \arr{X}{C+X}$ la inyección canónica en el coproducto.
-\item La transformación natural $\mu: \nat{T^2}{T}$ dada por
-  $\mu_X : \arr{C + (C + X)}{C + X}$ \textit{Definir}
+\item el endofuntor $T: \arr{\C}{\C}$, dado por $T(X) = C + X$;
+\item la transformación natural $\eta : \nat{1_\C}{T}$, dada por
+  $\eta_X : \arr{X}{C+X}$ la inyección canónica en el coproducto;
+\item la transformación natural $\mu: \nat{T^2}{T}$ dada por
+  $\mu_X : \arr{C + (C + X)}{C + X}$,
+  $\mu_X = [[1_C, 1_C], 1_X]$ (donde estamos identificando
+  $C + (C + X)$ con $(C + C) + X$ para simplificar la notación).
 \end{itemize}
-
 La terna $(T, \eta, \mu)$ es una mónada.
-
 
 \paragraph{Mónada $\Hom(A, -)$}
 Sea $A$ un conjunto. Definimos:
 
 \begin{itemize}
-\item El endofuntor $T = \Hom(A, -) : \arr{\Set}{\Set}$
-\item La transformación natural $\eta : \nat{1_\Set}{T}$ dada
-  por $\eta_X : \arr{X}{\Hom(A, X)}$ con $\eta_X(x)(a) = x$.
-\item La transformación natural $\mu: \nat{T^2}{T}$ dada por
+\item el endofuntor $T = \Hom(A, -) : \arr{\Set}{\Set}$;
+\item la transformación natural $\eta : \nat{1_\Set}{T}$, dada
+  por $\eta_X : \arr{X}{\Hom(A, X)}$ con $\eta_X(x)(a) = x$;
+\item la transformación natural $\mu: \nat{T^2}{T}$, dada por
   $\mu_X : \arr{\Hom(A, \Hom(A, X))}{\Hom(A, X)}$ con
-  $\mu_X(f)(a) = f(a)(a)$
+  $\mu_X(f)(a) = f(a)(a)$.
 \end{itemize}
-
 La terna $(T, \eta, \mu)$ es una mónada.
 
 \subsection{Las adjunciones dan lugar a mónadas}
+Aunque las nociones de adjunción y mónada surgieron de forma separada
+dentro del estudio de la teoría de categorías, no pasó mucho tiempo
+hasta que se descubrió que ambos conceptos estaban relacionados.
+En 1961, P. Huber demuestra que a partir de cada par de funtores adjuntos
+se puede obtener una mónada. Exponemos la construcción
+que realizó en el siguiente
+teorema.
+
 \begin{theorem}
-Sean $\C$ y $\D$ dos categorías y $F : \arr{\C}{\D}$ y $G: \arr{\D}{\C}$ un
-par de funtores adjuntos $F \adjoint G$ con unidad
-$\eta : \nat{1_{\C}}{GF}$ y counidad $\epsilon: \nat{FG}{1_\D}$. La terna
+Sean $\C$ y $\D$ dos categorías, y $F : \arr{\C}{\D}$ y $G: \arr{\D}{\C}$ un
+par de funtores adjuntos $F \adjoint G$, con unidad
+$\eta : \nat{1_{\C}}{GF}$, y counidad $\epsilon: \nat{FG}{1_\D}$. La terna
 $(GF, \eta, G\epsilon F)$ es una mónada.
 \end{theorem}
 \begin{proof}
@@ -124,15 +133,15 @@ $(GF, \eta, G\epsilon F)$ es una mónada.
       & GF \ar[equal]{ur} \ar[equal]{ul} &
     \end{tikzcd}
   \end{center}
-  Es decir, hay que probar que:
-  $$G\epsilon F \circ GF\eta = 1_{GF} = G\epsilon F \circ \eta GF$$
+  es decir, hay que probar que:
+  $$G\epsilon F \circ GF\eta = 1_{GF} = G\epsilon F \circ \eta GF.$$
   Probaremos la igualdad de la derecha.
   Sea $C$ un objeto de $\C$. La componente en
   $C$ de la transformación natural del
   miembro de la derecha de la ecuación
   es $G\epsilon_{FC} \circ \eta_{GFC}$.
   Por la condición \eqref{diagrama:adjuncion1} de la definición de
-  adjunción tenemos que el siguiente diagrama en $\D$:
+  adjunción, tenemos que el siguiente diagrama en $\D$:
   \begin{center}
     \begin{tikzcd}
       FGFC \arrow{r}{1_{FGFC}}
@@ -140,7 +149,7 @@ $(GF, \eta, G\epsilon F)$ es una mónada.
       & FC
     \end{tikzcd}
   \end{center}
-  Lo podemos trasladar al siguiente diagrama conmutativo en $\C$:
+  lo podemos trasladar al siguiente diagrama conmutativo en $\C$:
   \begin{center}
     \begin{tikzcd}
       GFC \arrow{r}{\eta_{GFC}}
@@ -149,15 +158,15 @@ $(GF, \eta, G\epsilon F)$ es una mónada.
       & GFC
     \end{tikzcd}
   \end{center}
-  Y entonces $$\phi_{GFC, FC}(\epsilon_{FC}) = G\epsilon_{FC} \circ \eta_{GFC}$$
-  Pero por la definición de $\epsilon_{FC}$ tenemos que
-  $$1_{GFC} = \phi_{GFC, FC}(\epsilon_{FC}) = G\epsilon_{FC} \circ \eta_{GFC}$$
-  Con lo que
+  y entonces $$\phi_{GFC, FC}(\epsilon_{FC}) = G\epsilon_{FC} \circ \eta_{GFC},$$
+  pero por la definición de $\epsilon_{FC}$, tenemos que
+  $$1_{GFC} = \phi_{GFC, FC}(\epsilon_{FC}) = G\epsilon_{FC} \circ \eta_{GFC},$$
+  con lo que
   $G\epsilon F \circ \eta GF = 1_{GF}$. La prueba de que $G\epsilon F \circ GF\eta = 1_{GF}$ es análoga.
 
 
   Queda probar la condición \eqref{diagrama:eta} de la definición
-  de mónada. El diagrama de \eqref{diagrama:eta} es en este caso:
+  de mónada. El diagrama \eqref{diagrama:eta} es en este caso:
   \begin{center}
     \begin{tikzcd}
       GFGFGF \arrow{d}{GFG\epsilon F}
@@ -166,7 +175,7 @@ $(GF, \eta, G\epsilon F)$ es una mónada.
       GFGF \arrow{r}{G\epsilon F} & GFGF
     \end{tikzcd}
   \end{center}
-  Y la conmutatividad de este diagrama es
+  y la conmutatividad de este diagrama es
   equivalente a la del siguiente:
   \begin{center}
     \begin{tikzcd}
@@ -176,7 +185,7 @@ $(GF, \eta, G\epsilon F)$ es una mónada.
       FG \arrow{r}{\epsilon}& 1_\D
     \end{tikzcd}
   \end{center}
-  Pero este diagrama en cualquier objeto $D$ de la categoría $\D$ es
+  pero este diagrama en cualquier objeto $D$ de la categoría $\D$ es
   \begin{center}
     \begin{tikzcd}
       FGFG D \arrow{d}{FG\epsilon_D}
@@ -186,7 +195,7 @@ $(GF, \eta, G\epsilon F)$ es una mónada.
     \end{tikzcd}
   \end{center}
   que es precisamente la condición de naturalidad de
-  $\epsilon : \nat{FG}{1_\D}$ aplicada a la flecha
+  $\epsilon : \nat{FG}{1_\D}$, aplicada a la flecha
   $\epsilon_D : \arr{FGD}{D}$.
 \end{proof}
 
@@ -210,31 +219,30 @@ La respuesta es afirmativa.
   \end{enumerate}
 \end{theorem}
 \begin{proof}[\textbf{Demostración. } Categoría de Kleisli]
-  Probamos el resultado paso por paso.
+  Probamos el resultado por pasos.
   \begin{enumerate}
-  \item Construcción de $\D$. Definimos $\Obj{\D} = \Obj{\C}$ y
+  \item Construimos $\D$. Definimos $\Obj{\D} = \Obj{\C}$ y
     $\Hom_\D(A, B) = \Hom_\C(A, TB)$.
     Dadas dos flechas $f \in \Hom_\D(A, B)$ y
     $g \in \Hom_\D(B, C)$ definimos la composición $g \circ_\D f \in \Hom_\D(A, C)$
     como la flecha
     $$g \circ_\D f :
     A \xrightarrow{f} TB \xrightarrow{Tg} T^2 C \xrightarrow{\mu_C} T C
-    $$
+    .$$
     Veamos que esta operación de composición
-    cumple los axiomas:
+    cumple los axiomas.
     \begin{itemize}
     \item Es asociativa. Sean $f : \Hom_\D(A, B)$, $g : \Hom_\D(B, C)$
-      y $h : \Hom_\D(C, D)$ entonces
+      y $h : \Hom_\D(C, D)$, entonces
       $$(h \circ_{\D} g) \circ_\D f = \mu_D \circ T(h \circ_\D g) \circ f
       = \mu_D \circ T(\mu_D \circ Th \circ g) \circ f
       = \mu_D \circ T\mu_D \circ T^2h \circ Tg \circ f$$
       $$=^* \mu_D \circ \mu_{TD} \circ T^2h \circ Tg \circ f
       =^{**}\mu_D \circ Th \circ \mu_C \circ Tg \circ f
       =\mu_D \circ Th \circ (g \circ_\D f)
-      = h \circ_\D (g \circ_\D f)$$
-
-      Donde ($*$) es consecuencia del diagrama \eqref{diagrama:mu}
-      de la definición de mónada aplicado sobre $D$ y ($**$) es
+      = h \circ_\D (g \circ_\D f),$$
+      donde ($*$) es consecuencia del diagrama \eqref{diagrama:mu}
+      de la definición de mónada aplicado sobre $D$, y ($**$) es
       consecuencia de la naturalidad de $\mu : \nat{T^2}{T}$.
 
     \item Existen identidades. Sean
@@ -242,53 +250,52 @@ La respuesta es afirmativa.
       que
       $$f \circ_\D \eta_A = \mu_X \circ Tf \circ \eta_A
       =^* \mu_X \circ \eta_{TB} \circ f
-      =^{**} f$$
-    Donde $(*)$ es consecuencia de la naturalidad de
-    $\eta : \nat{1_\C}{T}$ y $(**)$ es consecuencia
+      =^{**} f,$$
+    donde $(*)$ es consecuencia de la naturalidad de
+    $\eta : \nat{1_\C}{T}$, y $(**)$ es consecuencia
     del diagrama \eqref{diagrama:eta} de la definición de mónada.
     Por otro lado
     $$\eta_A \circ_\D g = \mu_A \circ T\eta_A \circ g
-    =^* g$$
+    =^* g,$$
     con $(*)$ consecuencia otra vez del diagrama \eqref{diagrama:eta}.
 
-    Esto muestra que en la categoría $\D$ la flecha $\eta_A$ es la
+    Esto muestra que en la categoría $\D$, la flecha $\eta_A$ es la
     identidad del objeto $A$ para cualquier objeto $A$ de la categoría.
     \end{itemize}
   \item Ahora que conocemos la estructura de categoría
-    de $\D$ definimos $F : \arr{\C}{\D}$ como $FA = A$
-    para cada objeto $A$ de $\C$ y $Ff = Tf \circ \eta_A$ para
+    de $\D$, definimos $F : \arr{\C}{\D}$ como $FA = A$
+    para cada objeto $A$ de $\C$, y $Ff = Tf \circ \eta_A$ para
     toda flecha $f: \arr{A}{B}$ de $\C$.
-    Veamos que $F$ es un funtor. Por partes:
+    Veamos que $F$ es un funtor.
     \begin{itemize}
     \item $F$ se lleva bien con la composición. Dado el diagrama
-      $A \xrightarrow{f} B \xrightarrow{C}$ en la categoría $\C$
-      tenemos que:
+      $A \xrightarrow{f} B \xrightarrow{C}$ en la categoría $\C$,
+      tenemos que
       $$F(g \circ f) = T(g \circ f) \circ \eta_A
       = Tg \circ Tf \circ \eta_A
-      =^* Tg \circ \eta_B \circ f$$
-      Donde $(*)$ se deduce de la naturalidad de
-      $\eta : \nat{1_\C}{T}$. Igualmente:
+      =^* Tg \circ \eta_B \circ f,$$
+      donde $(*)$ se deduce de la naturalidad de
+      $\eta : \nat{1_\C}{T}$. Igualmente
       $$Fg \circ_\D Ff = (Tg \circ \eta_B) \circ_\D (Tf \circ \eta_A)
       = \mu_C \circ T(Tg \circ \eta_B) \circ (Tf \circ \eta_A)$$
       $$= \mu_C \circ T^2g \circ T\eta_B \circ Tf \circ \eta_A
       =^* \mu_C \circ T^2g \circ T\eta_B \circ \eta_B \circ f$$
       $$=^{**} Tg \circ \mu_B \circ T\eta_B \circ \eta_B \circ f
-      =^{***} Tg \circ \eta_B \circ f$$
-      Con $(*)$ consecuencia de la naturalidad de
+      =^{***} Tg \circ \eta_B \circ f,$$
+      con $(*)$ consecuencia de la naturalidad de
       $\eta: \nat{1_\C}{T}$, $(**)$ consecuencia de la naturalidad
       de $\mu : \nat{T^2}{T}$, y $(***)$ por el diagrama
       \eqref{diagrama:eta} de la definición de mónadas.
 
 
-    \item $F$ lleva identidades a identidades:
-      $$F1_A = T1_A \circ \eta_A = 1_{TA} \circ \eta_A = \eta_A$$
+    \item $F$ lleva identidades a identidades. Se cumple que
+      $$F1_A = T1_A \circ \eta_A = 1_{TA} \circ \eta_A = \eta_A,$$
       que es la flecha identidad de $A$ en $\D$.
-
     \end{itemize}
 
-  \item Definimos $GA = TA$ para cada objeto $A$ de $\D$
+  \item Definimos $GA = TA$ para cada objeto $A$ de $\D$,
     y $Gf = \mu_B \circ Tf$ para cada flecha $f \in \Hom_\D(A, B)$.
-    Mostramos que $G: \arr{\D}{\C}$ es un funtor:
+    Mostramos que $G: \arr{\D}{\C}$ es un funtor.
     \begin{itemize}
     \item $G$ se lleva bien con la composición. Dadas $f \in \Hom_\D(A, B)$
       y $g \in \Hom_\D(B, C)$ tenemos que:
@@ -297,20 +304,19 @@ La respuesta es afirmativa.
       = \mu_C \circ T\mu_C \circ T^2g \circ Tf$$
       $$=^* \mu_C \circ \mu_{TC} \circ T^2g \circ Tf
       =^{**} \mu_C \circ Tg \circ \mu_B \circ Tf
-      = Gg \circ Gf$$
-      Con $(*)$ consecuencia del diagrama \eqref{diagrama:mu}
-      de la definición de mónada y $(**)$ consecuencia de la
+      = Gg \circ Gf,$$
+      con $(*)$ consecuencia del diagrama \eqref{diagrama:mu}
+      de la definición de mónada, y $(**)$ consecuencia de la
       naturalidad de $\mu : \nat{T^2}{T}$.
-    \item $G$ se lleva bien con las identidades.
+    \item $G$ lleva identidades a identidadese. Se cumple que
       $G\eta_A = \mu_A \circ T\eta_A = 1_{TA}$
       por el diagrama \eqref{diagrama:eta} de la definición de mónada.
     \end{itemize}
   \item La prueba de que $F \adjoint G$ es sencilla.
     El isomorfismo natural que necesitamos para establecer la
-    adjunción es precisamente:
-    $$\phi : \Hom_\D(F-, -) \cong \Hom_\C(-, G-)$$
-    $$\phi_{A, B}(f) = f$$
+    adjunción es precisamente
+    $$\phi : \Hom_\D(F-, -) \cong \Hom_\C(-, G-),$$
+    $$\phi_{A, B}(f) = f.$$
     La comprobación de la naturalidad de $\phi$ es rutinaria.
-
   \end{enumerate}
 \end{proof}

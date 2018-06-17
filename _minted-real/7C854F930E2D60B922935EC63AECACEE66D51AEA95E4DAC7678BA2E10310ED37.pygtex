@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{aplicar} \PYG{o+ow}{::} \PYG{p}{(}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{b}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{b}
+\PYG{n+nf}{aplicar} \PYG{n}{f} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{f} \PYG{n}{x}
+
+\PYG{n+nf}{seis} \PYG{o+ow}{::} \PYG{k+kt}{Int}
+\PYG{n+nf}{seis} \PYG{o+ow}{=} \PYG{n}{aplicar} \PYG{n}{suma1} \PYG{l+m+mi}{5}
+
+\PYG{n+nf}{hombre} \PYG{o+ow}{::} \PYG{k+kt}{String}
+\PYG{n+nf}{hombre} \PYG{o+ow}{=} \PYG{n}{aplicar} \PYG{n}{genero} \PYG{p}{(}\PYG{k+kt}{Hombre} \PYG{l+m+mi}{180}\PYG{p}{)}
+\end{Verbatim}

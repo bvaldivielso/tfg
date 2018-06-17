@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{fmap} \PYG{o+ow}{::} \PYG{p}{(}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{b}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{f} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{f} \PYG{n}{b}
+\PYG{n+nf}{fmap} \PYG{n}{f} \PYG{n}{fa} \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{pure} \PYG{n}{f}\PYG{p}{)} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{fa}
+\end{Verbatim}

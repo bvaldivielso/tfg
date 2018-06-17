@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{sum\PYGZus{}three\PYGZus{}heads} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Maybe} \PYG{k+kt}{Int}
+\PYG{n+nf}{sum\PYGZus{}three\PYGZus{}heads} \PYG{n}{xs} \PYG{n}{ys} \PYG{n}{zs} \PYG{o+ow}{=}
+    \PYG{n}{head\PYGZus{}safe} \PYG{n}{xs} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{x} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}}
+        \PYG{n}{head\PYGZus{}safe} \PYG{n}{ys} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{y} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}}
+            \PYG{n}{head\PYGZus{}safe} \PYG{n}{zs} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{z} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}}
+                \PYG{n}{return} \PYG{p}{(}\PYG{n}{x} \PYG{o}{+} \PYG{n}{y} \PYG{o}{+} \PYG{n}{z}\PYG{p}{)}
+            \PYG{p}{)}
+        \PYG{p}{)}
+    \PYG{p}{)}
+\end{Verbatim}

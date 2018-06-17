@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{rAnalisisLexico} \PYG{o+ow}{::} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Reader} \PYG{k+kt}{Config} \PYG{p}{([}\PYG{k+kt}{Token}\PYG{p}{])}
+\PYG{n+nf}{rAnalisisLexico} \PYG{n}{s} \PYG{o+ow}{=} \PYG{k+kt}{Reader} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{conf} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{analisisLexico} \PYG{n}{conf} \PYG{n}{s}\PYG{p}{)}
+
+\PYG{n+nf}{rAnalisisSintactico} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Token}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Reader} \PYG{k+kt}{Config} \PYG{p}{(}\PYG{k+kt}{ArbolSintactico}\PYG{p}{)}
+\PYG{n+nf}{rAnalisisSintactico} \PYG{n}{tokens} \PYG{o+ow}{=} \PYG{k+kt}{Reader} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{conf} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{analisisSintactico} \PYG{n}{conf} \PYG{n}{tokens}\PYG{p}{)}
+
+\PYG{n+nf}{rAnalisisSemantico} \PYG{o+ow}{::} \PYG{k+kt}{ArbolSintactico} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Reader} \PYG{k+kt}{Config} \PYG{k+kt}{Programa}
+\PYG{n+nf}{rAnalisisSintactico} \PYG{n}{aSintactico} \PYG{o+ow}{=} \PYG{k+kt}{Reader} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{conf} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{analisisSemantico} \PYG{n}{conf} \PYG{n}{aSintactico}\PYG{p}{)}
+\end{Verbatim}

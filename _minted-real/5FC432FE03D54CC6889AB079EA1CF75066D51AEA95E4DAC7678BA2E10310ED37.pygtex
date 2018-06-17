@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{Dni} \PYG{o+ow}{=} \PYG{k+kt}{Dni} \PYG{p}{\PYGZob{}}
+  \PYG{n}{numero} \PYG{o+ow}{::} \PYG{k+kt}{Int}
+  \PYG{n}{letra} \PYG{o+ow}{::} \PYG{k+kt}{Char}
+  \PYG{p}{\PYGZcb{}}
+\end{Verbatim}

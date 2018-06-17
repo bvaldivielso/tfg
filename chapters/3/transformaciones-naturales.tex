@@ -6,13 +6,12 @@ e introducir el concepto de transformación
 natural como el morfismo
 entre funtores.
 
-Procedemos con la definición:
-
+Procedemos con la definición.
 \begin{definition}
   Dados dos funtores $F: \arr{\C}{\D}$ y $G : \arr{\C}{\D}$ decimos
   que $\lambda : \nat{F}{G}$ es una transformación natural si $\lambda$
   asigna a cada objeto $C$ de $\C$ una flecha
-  $\lambda_C : \arr{FC}{GC}$ de manera que para
+  $\lambda_C : \arr{FC}{GC}$, de manera que para
   cualquier flecha $g : \arr{C}{C'}$ el siguiente diagrama
   es conmutativo:
 \begin{center}
@@ -33,13 +32,13 @@ $V^{**}$ y una aplicación lineal
 $f: \arr{V}{W}$ a la correspondiente aplicación
 lineal
 $f^{**} : \arr{V^{**}}{W^{**}}$ definida por
-$$f^{**}(g)(\phi) = g(\phi\circ f)$$
+$$f^{**}(g)(\phi) = g(\phi\circ f).$$
 Podemos probar que existe una transformación
 natural entre el funtor doble dual y el funtor identidad
 de la categoría $\VectK$. La transformación
 natural es $\lambda : \nat{1_{\VectK}}{(-)^{**}}$ definido por:
-$$\lambda_V : \arr{V}{V^{**}}$$
-$$\lambda_V(v)(\phi) = \phi(v)$$
+$$\lambda_V : \arr{V}{V^{**}},$$
+$$\lambda_V(v)(\phi) = \phi(v).$$
 Nótese además que para cada espacio vectorial $V$ se tiene
 que $\lambda_V$ es un isomorfismo de espacios vectoriales.
 
@@ -54,9 +53,9 @@ $$f^{ab} : \arr{G^{ab}}{H^{ab}}$$
 $$f^{ab}(g[G, G]) = \pi_H (f(g))$$
 Donde $\pi_H$ es la proyección al cociente.
 La aplicación está bien definida porque los homomorfismos
-de grupos llevan conmutadores en conmutadores y como
+de grupos llevan conmutadores en conmutadores, y como
 $H^{ab}$ es un grupo abeliano y el único conmutador de un
-grupo abeliano es el 1 se tiene que
+grupo abeliano es el 1, se tiene que
 $[G, G] \subseteq \ker (\pi_H \circ f)$.
 
 Comprobar que $\pi: \nat{1_\Grp}{(-)^{ab}}$ es una transformación natural
@@ -64,7 +63,7 @@ se reduce a comprobar que para cada homomorfismo de grupos
 $f: \arr{G}{H}$ el siguiente diagrama es conmutativo:
 \begin{center}
   \begin{tikzcd}
-    G \arrow{r}{\pi_G} \arrow{d}{f} & G^{ab} \arrow{d}{f^{ab}} \\
+    G \arrow{r}{\pi_G} \arrow{d}[swap]{f} & G^{ab} \arrow{d}{f^{ab}} \\
     H \arrow{r}{\pi_H} & H^{ab}
   \end{tikzcd}
 \end{center}
@@ -74,7 +73,7 @@ Los siguientes resultados nos permitirán componer
 transformaciones naturales y considerar categorías en las
 que los objetos son funtores entre dos categorías $\C$ y $\D$ y las
 flechas son precisamente
-las transformaciones naturales entre estos funtores:
+las transformaciones naturales entre estos funtores.
 
 \begin{proposition}
   \begin{enumerate}
@@ -91,7 +90,7 @@ las transformaciones naturales entre estos funtores:
   \item La composición de transformaciones naturales
     es asociativa en el siguiente sentido: dados
     $F \xrightarrow{\lambda} G \xrightarrow{\sigma} H \xrightarrow{\tau}I$
-    tenemos que $(\tau \circ \sigma) \circ \lambda = \tau \circ (\sigma \lambda)$
+    tenemos que $(\tau \circ \sigma) \circ \lambda = \tau \circ (\sigma \lambda)$.
   \item Dado cualquier par de funtores $F,G : \arr{\C}{\D}$ y
     transformaciones naturales $\tau : \arr{F}{G}$,
     $\sigma : \arr{G}{F}$ tenemos que $1_F \circ \sigma = \sigma$
@@ -113,20 +112,20 @@ $H: \arr{\C}{\funccat{\C'}{\D}}$. Definimos
 $HC = F_C = F(C, -) : \arr{\C'}{\D}$. Por otro lado,
 si $f: \arr{C_1}{C_2}$ es una flecha de $\C$ definimos
 $Hf$ como la transformación natural
-$$Hf: \nat{F_{C_1}}{F_{C_2}}$$
-$$Hf_{C'} = F(f, 1_{C'}): \arr{F(C_1, C')}{F(C_2, C')}$$
-Comprobar que $H: \arr{\C}{\funccat{\C'}{\D}}$ es natural
+$$Hf: \nat{F_{C_1}}{F_{C_2}},$$
+$$Hf_{C'} = F(f, 1_{C'}): \arr{F(C_1, C')}{F(C_2, C')}.$$
+Comprobar que $Hf: \arr{\C}{\funccat{\C'}{\D}}$ es natural
 es rutinario.
 
 \subsection{Isomorfismos naturales}
 \begin{definition}
-  Dados dos funtores $F, G : \arr{\C}{\D}$ diremos que la transformación
+  Dados dos funtores $F, G : \arr{\C}{\D}$, diremos que la transformación
   natural $\lambda : \nat{F}{G}$ es un isomorfismo natural si
   $\lambda_C : \arr{FC}{GC}$ es un isomorfismo para todo objeto $C$
   de $\C$.
 \end{definition}
 Podemos relacionar los isomorfismos naturales y las categorías
-de funtores de la siguiente manera:
+de funtores de la siguiente manera.
 \begin{proposition}
   Sean $F, G : \arr{\C}{\D}$ dos funtores. Entonces
   $\phi: \nat{F}{G}$
@@ -171,7 +170,6 @@ de funtores de la siguiente manera:
 \subsection{Transformaciones naturales a través de funtores}
 Sean $F: \arr{\C}{\D}$ y $G: \arr{\C}{\D}$ dos funtores y
 $\tau : \nat{F}{G}$ una transformación natural entre ellos.
-Entonces:
 \begin{itemize}
 \item Dado un funtor $H: \arr{\D}{\D'}$ definimos
 $(H\tau)_A = H(\tau_A)$ para cada objeto $A$ de

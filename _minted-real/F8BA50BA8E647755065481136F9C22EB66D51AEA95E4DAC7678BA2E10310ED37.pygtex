@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{analisisLexico} \PYG{o+ow}{::} \PYG{k+kt}{Config} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Token}\PYG{p}{]}
+\PYG{n+nf}{analisisSintactico} \PYG{o+ow}{::} \PYG{k+kt}{Config} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Token}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{ArbolSintactico}
+\PYG{n+nf}{analisisSemantico} \PYG{o+ow}{::} \PYG{k+kt}{Config} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{ArbolSintactico} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Programa}
+
+\PYG{n+nf}{compilar} \PYG{o+ow}{::} \PYG{k+kt}{Config} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Programa}
+\PYG{n+nf}{compilar} \PYG{n}{config} \PYG{n}{s} \PYG{o+ow}{=}
+    \PYG{k+kr}{let} \PYG{n}{tokens} \PYG{o+ow}{=} \PYG{n}{analisisLexico} \PYG{n}{config} \PYG{n}{s}
+        \PYG{n}{arbolSintactico} \PYG{o+ow}{=} \PYG{n}{analisisSemantico} \PYG{n}{config} \PYG{n}{tokens}
+    \PYG{k+kr}{in}
+        \PYG{n}{analisisSemantico} \PYG{n}{config} \PYG{n}{arbolSintactico}
+\end{Verbatim}

@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{compilar} \PYG{o+ow}{::} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Either} \PYG{k+kt}{ErrorCompilacion} \PYG{k+kt}{Programa}
+\PYG{n+nf}{compilar} \PYG{n}{s} \PYG{o+ow}{=}
+  \PYG{p}{(}\PYG{n}{analisisLexico} \PYG{n}{s}\PYG{p}{)} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{analisisSintactico} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{analisisSemantico}
+\end{Verbatim}

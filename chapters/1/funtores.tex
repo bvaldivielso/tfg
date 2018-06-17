@@ -6,24 +6,24 @@ podemos asociar a las categorías una noción de morfismos que preserva
 su estructura. A estos morfismos de categorías les llamaremos
 \emph{funtores}. Un funtor $F$ de una categoría
 $\C$ en una categoría $\D$ (que notaremos por $F : \arr{\C}{\D}$)
-tendrá que llevar objetos de $\C$ en objetos de $\D$ y flechas
+tendrá que llevar objetos de $\C$ en objetos de $\D$, y flechas
 de $\C$ en flechas de $\D$ preservando la estructura de la
-categoría en el siguiente sentido:
+categoría en el siguiente sentido.
 \begin{enumerate}
 \item $F$ respeta los dominios y los codominios:
 si $f : \arr{A}{B}$ es una flecha
-de la categoría $\mathcal{C}$ entonces
+de la categoría $\mathcal{C}$, entonces
 $F f : \arr{F A}{F B}$ es la correspondente flecha asociada
 en $\D$.
-\item $F$ preserva las identidades. Dicho de otra forma si $C$ es un
-objeto de $\mathcal{C}$ entonces $F 1_C = 1_{F C}$.
+\item $F$ preserva las identidades. Dicho de otra forma, si $C$ es un
+objeto de $\mathcal{C}$, entonces $F 1_C = 1_{F C}$.
 \item $F$ respeta la composición: si tenemos $f: \arr{A}{B}$ y
-$g : \arr{B}{C}$ tenemos que $F (g\circ f) = F g \circ F f$.
+$g : \arr{B}{C}$, entonces $F (g\circ f) = F g \circ F f$.
 \end{enumerate}
 
 Aunque la acción sobre los objetos
 no determina por completo a un funtor, habrá ocasiones en las que
-el lector podrá completar por sí mismo fácilmente la acción de este
+el lector podrá completar por sí mismo fácilmente la acción de éste
 sobre las flechas. En tales casos nos limitaremos a referirnos
 al funtor describiendo su acción sobre los objetos.
 
@@ -34,15 +34,13 @@ Diremos que el diagrama es conmutativo cuando para cada par
 de objetos $C$ y $C'$ del diagrama la composición
 de las flechas que conforman un camino entre $C$ y $C'$ es independiente
 del camino utilizado. Un ejemplo sería el siguiente diagrama:
-
 \begin{center}
   \begin{tikzcd}
     FA \arrow{r}{Ff} \arrow{rd}[swap]{F(g \circ f)} & FB \arrow{d}{Fg} \\
     & FC
   \end{tikzcd}
 \end{center}
-
-Donde afirmar que el diagrama es conmutativo se traduce en
+donde afirmar que el diagrama es conmutativo se traduce en
 que $F g \circ F f = F (g\circ f)$. Según McLane en \cite{mclane}
 
 \begin{quotation}
@@ -53,14 +51,14 @@ que $F g \circ F f = F (g\circ f)$. Según McLane en \cite{mclane}
 \end{quotation}
 
 \subsubsection{Ejemplos}
-\paragraph{Funtores subyacentes a $\Set$}
+\paragraph{Funtores de conjunto subyacente}
 Podemos considerar el funtor $U : \arr{\Grp}{\Set}$
 que asigna a cada grupo su conjunto subyacente y a cada flecha la
 aplicación entre los conjuntos subyacentes (cada homomorfismo de
 grupos es también una aplicación entre ambos conjuntos). Es rutinario
 comprobar que se respetan los axiomas de funtores. Existen también
 funtores subyacentes desde la categoría de anillos, espacios topológicos
-o retículos por ejemplo.
+o retículos, por ejemplo.
 
 \paragraph{Grupos libres}
 Podemos definir un funtor $F : \arr{\Set}{\Grp}$ de la siguiente
@@ -94,30 +92,31 @@ que se cumplen los axiomas de los funtores. En primer lugar
 supongamos que $g : \arr{C}{D}$ y $h : \arr{D}{E}$ entonces tenemos
 que probar
 $$\Hom(A, h \circ g) = \Hom(A, h) \circ \Hom(A, g) :
-\arr{\Hom(A, B)}{\Hom(A, C)}$$
+\arr{\Hom(A, B)}{\Hom(A, C)}$$.
 
 Para probar tal cosa suponemos $f \in \Hom(A, B)$ y entonces:
-\begin{multline*}
-\Hom(A, h\circ g)(f) = (h \circ g) \circ f = h \circ (g \circ f) \\
-= h \circ \Hom(A, g)(f) = \Hom(A, h)(\Hom(A, g)(f)) \\
-= (\Hom(A, h) \circ \Hom(A, g))(f)
-\end{multline*}
+\begin{align*}
+  \Hom(A, h\circ g)(f) & \\
+  & = (h \circ g) \circ f = h \circ (g \circ f) \\
+  & = h \circ \Hom(A, g)(f) = \Hom(A, h)(\Hom(A, g)(f)) \\
+  & = (\Hom(A, h) \circ \Hom(A, g))(f)
+\end{align*}.
 
 Y por tanto se comporta bien respecto a la composición. Veamos que se
 comporta bien respecto a la identidad. Sea $f \in \Hom(A, B)$ entonces
-$$\Hom(A, 1_B)(f) = 1_B \circ f = f$$ y por tanto
+$$\Hom(A, 1_B)(f) = 1_B \circ f = f$$, y por tanto
 $\Hom(A, 1_B) = 1_{\Hom(A, B)}$.
 
-Teniendo en cuenta $\Hom(A, -)$ se comporta bien respecto a la
+Viendo que $\Hom(A, -)$ se comporta bien respecto a la
 composición y lleva identidades en identidades concluimos que es
 un funtor.
 
 \subsection{Funtores fieles y plenos}
 Dado un funtor $F : \arr{\C}{\D}$,
-diremos que es fiel (resp. pleno) si para cada par de objetos
+diremos que es fiel (respectivamente pleno) si para cada par de objetos
 $C$ y $C'$ de $\C$ tenemos que la aplicación inducida
 $F : \arr{\Hom_\C(C, C')}{\Hom_\D(FC, FC')}$ es inyectiva
-(resp. sobreyectiva).
+(respectivamente sobreyectiva).
 
 \subsection{Funtores Identidad}
 Dada una categoría $\C$ definimos el funtor
@@ -129,9 +128,9 @@ $f: \arr{C}{C'}$ de $\C$.
 Dados dos funtores $F : \arr{\C}{\D}$ y $G: \arr{\D}{\E}$
 definimos $F \circ G : \arr{\C}{\E}$ como $(F\circ G)C = F(G(C))$
 y $(F\circ G)(f) = F(Gf) : \arr{FGC}{FGC'}$ donde $C, C'$ son objetos
-de $\C$ y $f: \arr{C}{C'}$. $F\circ G$
+de $\C$ y $f: \arr{C}{C'}$. Se tiene por tanto que $F\circ G$
 es un funtor. La composición de funtores cumple las siguientes
-propiedades:
+propiedades.
 \begin{itemize}
 \item Es asociativa. Dado los funtores
   $\C \xrightarrow{F} \C' \xrightarrow{G} \D \xrightarrow{H} \D'$
@@ -139,7 +138,6 @@ propiedades:
 \item Para cualquier funtor $F : \arr{\C}{\D}$ se cumple
   que $F \circ 1_\C = F = 1_\D \circ F$.
 \end{itemize}
-
 Estas propiedades nos permiten considerar categorías en las que
 los objetos son categorías y las flechas son los funtores entre
 ellas.
@@ -169,8 +167,6 @@ de forma que:
 \item $(F\times G)(f, g) = (F f, G g)$ donde $f$ es una flecha
   de $\C$ y $g$ es una flecha de $\D$.
 \end{itemize}
-
-
 
 
 %% \paragraph{Endofuntores en Haskell}

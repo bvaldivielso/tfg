@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{dup2} \PYG{o}{\PYGZti{}\PYGZgt{}} \PYG{n}{leng} \PYG{o+ow}{::} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Producer} \PYG{k+kt}{Int} \PYG{k+kt}{IO} \PYG{n+nb}{()}
+\end{Verbatim}

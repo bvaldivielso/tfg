@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{Const} \PYG{n}{b} \PYG{n}{a} \PYG{o+ow}{=} \PYG{k+kt}{Const} \PYG{n}{b}
+
+\PYG{k+kr}{instance} \PYG{k+kt}{Functor} \PYG{p}{(}\PYG{k+kt}{Const} \PYG{n}{b}\PYG{p}{)} \PYG{k+kr}{where}
+  \PYG{n}{fmap} \PYG{n}{f} \PYG{p}{(}\PYG{k+kt}{Const} \PYG{n}{b}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Const} \PYG{n}{b}
+\end{Verbatim}

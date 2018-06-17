@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{multiplica} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+\PYG{n+nf}{multiplica} \PYG{o+ow}{=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{x} \PYG{n}{y} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x} \PYG{o}{*} \PYG{n}{y}\PYG{p}{)}
+\end{Verbatim}

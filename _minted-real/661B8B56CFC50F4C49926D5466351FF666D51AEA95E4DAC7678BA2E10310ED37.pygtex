@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{Par} \PYG{n}{a} \PYG{n}{b} \PYG{o+ow}{=} \PYG{k+kt}{Par} \PYG{n}{a} \PYG{n}{b}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplos de valores}
+\PYG{k+kt}{Par} \PYG{l+m+mi}{3} \PYG{l+s+sc}{\PYGZsq{}c\PYGZsq{}} \PYG{o+ow}{::} \PYG{k+kt}{Par} \PYG{k+kt}{Int} \PYG{k+kt}{Char}
+\PYG{k+kt}{Par} \PYG{l+s+sc}{\PYGZsq{}c\PYGZsq{}} \PYG{l+m+mi}{3} \PYG{o+ow}{::} \PYG{k+kt}{Par} \PYG{k+kt}{Char} \PYG{k+kt}{Int}
+\PYG{k+kt}{Par} \PYG{l+m+mi}{4} \PYG{l+m+mi}{5} \PYG{o+ow}{::} \PYG{k+kt}{Par} \PYG{k+kt}{Int} \PYG{k+kt}{Int}
+\end{Verbatim}

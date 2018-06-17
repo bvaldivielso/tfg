@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{instance} \PYG{k+kt}{Functor} \PYG{p}{(}\PYG{k+kt}{Either} \PYG{n}{a}\PYG{p}{)} \PYG{k+kr}{where}
+  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} fmap :: (b \PYGZhy{}\PYGZgt{} c) \PYGZhy{}\PYGZgt{} Either a b \PYGZhy{}\PYGZgt{} Either a c}
+  \PYG{n}{fmap} \PYG{n}{f} \PYG{p}{(}\PYG{k+kt}{Left} \PYG{n}{x}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Left} \PYG{n}{x}
+  \PYG{n}{fmap} \PYG{n}{f} \PYG{p}{(}\PYG{k+kt}{Right} \PYG{n}{x}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Right} \PYG{p}{(}\PYG{n}{f} \PYG{n}{x}\PYG{p}{)}
+\end{Verbatim}

@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{n}{dup2} \PYG{o}{\PYGZti{}\PYGZgt{}} \PYG{n}{leng}\PYG{p}{)} \PYG{o}{\PYGZti{}\PYGZgt{}} \PYG{n}{numberAndSquare}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} y}
+\PYG{n+nf}{dup2} \PYG{o}{\PYGZti{}\PYGZgt{}} \PYG{p}{(}\PYG{n}{leng} \PYG{o}{\PYGZti{}\PYGZgt{}} \PYG{n}{numberAndSquare}\PYG{p}{)}
+\end{Verbatim}

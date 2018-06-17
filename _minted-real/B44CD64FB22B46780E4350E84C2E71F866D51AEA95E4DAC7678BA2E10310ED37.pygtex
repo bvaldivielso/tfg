@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{True} \PYG{o+ow}{::} \PYG{k+kt}{Bool}
+\PYG{k+kt}{False} \PYG{o+ow}{::} \PYG{k+kt}{Bool}
+\PYG{l+s+sc}{\PYGZsq{}c\PYGZsq{}} \PYG{o+ow}{::} \PYG{k+kt}{Char}
+\PYG{l+s}{\PYGZdq{}hola\PYGZdq{}} \PYG{o+ow}{::} \PYG{k+kt}{String}
+\PYG{l+m+mi}{3} \PYG{o+ow}{::} \PYG{k+kt}{Int}
+\end{Verbatim}

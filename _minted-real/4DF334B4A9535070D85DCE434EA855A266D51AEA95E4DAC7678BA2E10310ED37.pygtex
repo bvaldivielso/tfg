@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{showTitle} \PYG{o+ow}{::}
+  \PYG{p}{(}\PYG{k+kt}{MonadReader} \PYG{k+kt}{Config} \PYG{n}{m}\PYG{p}{,} \PYG{k+kt}{MonadIO} \PYG{n}{m}\PYG{p}{)} \PYG{o+ow}{=\PYGZgt{}} \PYG{n}{m} \PYG{n+nb}{()}
+\PYG{n+nf}{showTitle} \PYG{o+ow}{=} \PYG{k+kr}{do}
+  \PYG{n}{titleStr} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{fmap} \PYG{n}{title} \PYG{n}{ask}
+  \PYG{n}{appPrint} \PYG{n}{titleStr}
+\end{Verbatim}

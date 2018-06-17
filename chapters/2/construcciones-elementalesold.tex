@@ -730,10 +730,10 @@ objeto final es el tipo con un solo valor, al que se le suele llamar
 \texttt{()} (pronunciado \texttt{Unit}). \texttt{()} es un tipo
 cuyo único valor es \texttt{()} y para cada tipo \texttt{a} podemos
 definir la función:
-\begin{verbatim}
+\begin{minted}{haskell}
 constUnit :: a -> ()
 constUnit x = ()
-\end{verbatim}
+\end{minted}
 Por otro lado tenemos que el objeto inicial de \texttt{Hask} es el tipo
 llamado \texttt{Void}, que no tiene ningún valor. En la biblioteca
 estándar se encuentra una función llamada \texttt{absurd}
@@ -751,26 +751,26 @@ como valores pares de valores de \texttt{A} y de \texttt{B}.
 Las proyecciones se implementan en la biblioteca estándar de
 Haskell de la siguiente forma:
 
-\begin{verbatim}
+\begin{minted}{haskell}
 fst :: (a, b) -> a
 fst (x, y) = x
 
 snd :: (a, b) -> b
 fst (x, y) = y
-\end{verbatim}
+\end{minted}
 
 Si tenemos un par de funciones \cod{f1 :: X -> A} y
 \cod{f2 :: X -> B} podemos definir la función \texttt{f}:
-\begin{verbatim}
+\begin{minted}{haskell}
 f :: X -> (A, B)
 f x = (f1 x, f2 x)
-\end{verbatim}
+\end{minted}
 
 \subsection{Coproductos}
 En la sección sobre funtores introdujimos el tipo \cod{Either}:
-\begin{verbatim}
+\begin{minted}{haskell}
 data Either a b = Left a | Right b
-\end{verbatim}
+\end{minted}
 Resulta que \cod{Either} es el coproducto en \cod{Hask}. Si
 \cod{A} y \cod{B} son dos tipos de haskell entonces su coproducto
 es \cod{Either A B} y las inyecciones canónicas son por un lado
@@ -779,17 +779,17 @@ es \cod{Either A B} y las inyecciones canónicas son por un lado
 \cod{f1 :: A -> Y} y \cod{f2 :: B -> Y} tenemos que la única
 función \cod{f :: Either A B -> Y} que se lleva bien con las inyecciones
 es:
-\begin{verbatim}
+\begin{minted}{haskell}
 f :: Either A B -> Y
 f (Left a) = f1 a
 f (Right b) = f2 b
-\end{verbatim}
+\end{minted}
 
 Veamos que se lleva bien con las inyecciones:
-\begin{verbatim}
+\begin{minted}{haskell}
 (f . Left) a = f (Left a) = f1 a
 ;; por tanto f . Left = f1
 
 (f . Right) b = f (Right b) = f2 b
 ;; por tanto f . Right = f2
-\end{verbatim}
+\end{minted}

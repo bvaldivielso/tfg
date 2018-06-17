@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{mu} \PYG{o+ow}{::} \PYG{n}{m} \PYG{p}{(}\PYG{n}{m} \PYG{n}{a}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{m} \PYG{n}{a}
+\PYG{n+nf}{mu} \PYG{n}{mma} \PYG{o+ow}{=} \PYG{n}{mma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{id}
+\end{Verbatim}

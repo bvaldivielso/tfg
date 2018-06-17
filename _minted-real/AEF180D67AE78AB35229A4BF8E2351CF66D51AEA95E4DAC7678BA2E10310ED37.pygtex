@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{comentarioSobreAltura} \PYG{o+ow}{::} \PYG{k+kt}{PersonaConAltura} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String}
+\PYG{n+nf}{comentarioSobreAltura} \PYG{p}{(}\PYG{k+kt}{Hombre} \PYG{n}{altura}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kr}{if} \PYG{n}{altura} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{174}
+                                        \PYG{k+kr}{then} \PYG{l+s}{\PYGZdq{}Tienes altura inferior a la media\PYGZdq{}}
+                                        \PYG{k+kr}{else} \PYG{l+s}{\PYGZdq{}Tienes altura superior a la media\PYGZdq{}}
+\PYG{n+nf}{comentarioSobreAltura} \PYG{p}{(}\PYG{k+kt}{Mujer} \PYG{n}{altura}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kr}{if} \PYG{n}{altura} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{163}
+                                        \PYG{k+kr}{then} \PYG{l+s}{\PYGZdq{}Tienes altura inferior a la media\PYGZdq{}}
+                                        \PYG{k+kr}{else} \PYG{l+s}{\PYGZdq{}Tienes altura superior a la media\PYGZdq{}}
+\PYG{n+nf}{comentarioSobreAltura} \PYG{p}{(}\PYG{k+kt}{Otro} \PYG{n}{genero} \PYG{n}{x}\PYG{p}{)} \PYG{o+ow}{=} \PYG{l+s}{\PYGZdq{}No tengo informacion sobre la altura media en el género \PYGZdq{}} \PYG{o}{++} \PYG{n}{genero}
+\end{Verbatim}

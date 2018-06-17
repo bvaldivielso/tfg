@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{class} \PYG{k+kt}{TieneTamaño} \PYG{n}{t} \PYG{o+ow}{=\PYGZgt{}} \PYG{k+kt}{TieneTamañoNumerico} \PYG{n}{t} \PYG{k+kr}{where}
+  \PYG{n}{tamañoNumerico} \PYG{o+ow}{::} \PYG{n}{t} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+
+\PYG{k+kr}{instance} \PYG{k+kt}{TieneTamañoNumerico} \PYG{k+kt}{Int} \PYG{k+kr}{where}
+  \PYG{n}{tamañoNumerico} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{x}
+
+\PYG{k+kr}{instance} \PYG{k+kt}{TieneTamañoNumerico} \PYG{k+kt}{Char} \PYG{k+kr}{where}
+  \PYG{n}{tamañoNumerico} \PYG{k+kr}{\PYGZus{}} \PYG{o+ow}{=} \PYG{l+m+mi}{100} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Error: Char no es instancia de TieneTamaño}
+\end{Verbatim}

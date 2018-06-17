@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{newtype} \PYG{k+kt}{EnvuelveEntero} \PYG{o+ow}{=} \PYG{k+kt}{EnvuelveEntero} \PYG{k+kt}{Int}
+\end{Verbatim}

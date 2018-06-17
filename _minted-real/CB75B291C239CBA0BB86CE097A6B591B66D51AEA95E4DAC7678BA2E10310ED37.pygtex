@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{Tamaño} \PYG{o+ow}{=} \PYG{k+kt}{Grande} \PYG{o}{|} \PYG{k+kt}{Pequeño}
+
+\PYG{k+kr}{class} \PYG{k+kt}{TieneTamaño} \PYG{n}{t} \PYG{k+kr}{where}
+  \PYG{n}{tamaño} \PYG{o+ow}{::} \PYG{n}{t} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Tamaño}
+
+\PYG{k+kr}{instance} \PYG{k+kt}{TieneTamaño} \PYG{k+kt}{Int} \PYG{k+kr}{where}
+  \PYG{n}{tamaño} \PYG{n}{x} \PYG{o+ow}{=} \PYG{k+kr}{if} \PYG{n}{x} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{179} \PYG{k+kr}{then} \PYG{k+kt}{Grande} \PYG{k+kr}{else} \PYG{k+kt}{Pequeño}
+
+\PYG{k+kr}{instance} \PYG{k+kt}{TieneTamaño} \PYG{k+kt}{String} \PYG{k+kr}{where}
+  \PYG{n}{tamaño} \PYG{n}{s} \PYG{o+ow}{=} \PYG{k+kr}{if} \PYG{p}{(}\PYG{n}{length} \PYG{n}{s}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{10} \PYG{k+kr}{then} \PYG{k+kt}{Grande} \PYG{k+kr}{else} \PYG{k+kt}{Pequeño}
+
+\PYG{k+kr}{instance} \PYG{k+kt}{TieneTamaño} \PYG{k+kt}{PersonaConAltura}
+  \PYG{n}{tamaño} \PYG{p}{(}\PYG{k+kt}{Hombre} \PYG{n}{altura}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{tamaño} \PYG{n}{altura}
+  \PYG{n}{tamaño} \PYG{p}{(}\PYG{k+kt}{Mujer} \PYG{n}{altura}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{tamaño} \PYG{n}{altura}
+  \PYG{n}{tamaño} \PYG{p}{(}\PYG{k+kt}{Otro} \PYG{k+kr}{\PYGZus{}} \PYG{n}{altura}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{tamaño} \PYG{n}{altura}
+\end{Verbatim}

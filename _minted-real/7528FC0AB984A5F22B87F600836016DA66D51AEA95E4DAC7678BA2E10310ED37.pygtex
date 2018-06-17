@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{threeNumbers} \PYG{o+ow}{::} \PYG{k+kt}{Producer} \PYG{k+kt}{Int} \PYG{k+kt}{IO} \PYG{n+nb}{()}
+\PYG{n+nf}{threeNumbers} \PYG{o+ow}{=} \PYG{k+kr}{do}
+  \PYG{n}{yield} \PYG{l+m+mi}{3}
+  \PYG{n}{yield} \PYG{l+m+mi}{4}
+  \PYG{n}{lift} \PYG{o}{\PYGZdl{}} \PYG{n}{putStrLn} \PYG{l+s}{\PYGZdq{}Accion de IO\PYGZdq{}}
+  \PYG{n}{yield} \PYG{l+m+mi}{5}
+  \PYG{n}{return} \PYG{n+nb}{()}
+\end{Verbatim}

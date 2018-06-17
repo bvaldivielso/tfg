@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{pure} \PYG{n}{id} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{v} \PYG{o+ow}{=} \PYG{n}{v} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} identidad}
+\PYG{n+nf}{pure} \PYG{p}{(}\PYG{o}{.}\PYG{p}{)} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{u} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{v} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{w} \PYG{o+ow}{=} \PYG{n}{v} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{p}{(}\PYG{n}{v} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{w}\PYG{p}{)} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} composición}
+\PYG{n+nf}{pure} \PYG{n}{f} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{pure} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{pure} \PYG{p}{(}\PYG{n}{f} \PYG{n}{x}\PYG{p}{)} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} homomorfismo}
+\PYG{n+nf}{u} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{pure} \PYG{n}{y} \PYG{o+ow}{=} \PYG{n}{pure} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{f} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{f} \PYG{n}{y}\PYG{p}{)} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{u} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} intercambio}
+\end{Verbatim}

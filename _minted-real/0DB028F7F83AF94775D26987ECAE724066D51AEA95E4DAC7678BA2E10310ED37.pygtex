@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{appLoop} \PYG{o+ow}{::} \PYG{k+kt}{AppM} \PYG{n+nb}{()}
+\PYG{n+nf}{appLoop} \PYG{o+ow}{=} \PYG{k+kr}{do}
+  \PYG{n}{eof} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{liftIO} \PYG{n}{isEOF}
+  \PYG{k+kr}{if} \PYG{n}{eof}
+    \PYG{k+kr}{then} \PYG{n}{showStack}
+    \PYG{k+kr}{else} \PYG{p}{(}\PYG{k+kr}{do} \PYG{n}{n} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{liftIO} \PYG{n}{readLn}
+             \PYG{n}{addNumber} \PYG{n}{n}
+             \PYG{n}{appLoop}
+         \PYG{p}{)}
+
+\PYG{n+nf}{main} \PYG{o+ow}{::} \PYG{k+kt}{IO} \PYG{n+nb}{()}
+\PYG{n+nf}{main} \PYG{o+ow}{=} \PYG{n}{runApp} \PYG{p}{(}\PYG{k+kt}{Config} \PYG{l+s}{\PYGZdq{}AppTitle\PYGZdq{}} \PYG{l+s}{\PYGZdq{}\PYGZgt{}\PYGZdq{}}\PYG{p}{)} \PYG{o}{\PYGZdl{}} \PYG{k+kr}{do}
+  \PYG{n}{showTitle}
+  \PYG{n}{appLoop}
+\end{Verbatim}

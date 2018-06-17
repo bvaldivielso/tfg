@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{mensaje\PYGZus{}premio} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String}
+\PYG{n+nf}{mensaje\PYGZus{}premio} \PYG{n}{edad} \PYG{o+ow}{=}
+  \PYG{k+kr}{case} \PYG{n}{resultado} \PYG{k+kr}{of}
+    \PYG{p}{(}\PYG{k+kt}{Left} \PYG{n}{mensajeError}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{l+s}{\PYGZdq{}Error: \PYGZdq{}} \PYG{o}{++} \PYG{n}{mensajeError}
+    \PYG{p}{(}\PYG{k+kt}{Right} \PYG{n}{tituloPremio}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{l+s}{\PYGZdq{}Enhorabuena has conseguido una \PYGZdq{}} \PYG{o}{++} \PYG{n}{tituloPremio}
+
+  \PYG{k+kr}{where}
+    \PYG{n}{resultado} \PYG{o+ow}{::} \PYG{k+kt}{Either} \PYG{k+kt}{String} \PYG{k+kt}{String}
+    \PYG{n}{resultado} \PYG{o+ow}{=} \PYG{n}{fmap} \PYG{n}{titulos\PYGZus{}premios} \PYG{p}{(}\PYG{n}{dar\PYGZus{}premio} \PYG{n}{edad}\PYG{p}{)}
+\end{Verbatim}

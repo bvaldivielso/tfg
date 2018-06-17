@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{suma3AlNumero} \PYG{o+ow}{::} \PYG{k+kt}{Dni} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+\PYG{n+nf}{suma3AlNumero} \PYG{p}{(}\PYG{k+kt}{Dni} \PYG{n}{numero} \PYG{n}{caracter}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{numero} \PYG{o}{+} \PYG{l+m+mi}{3}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} devuelve el dni completo como una cadena}
+\PYG{n+nf}{devuelveCadena} \PYG{o+ow}{::} \PYG{k+kt}{Dni} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String}
+\PYG{n+nf}{devuelveCadena} \PYG{p}{(}\PYG{k+kt}{Dni} \PYG{n}{n} \PYG{n}{c}\PYG{p}{)} \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{show} \PYG{n}{n}\PYG{p}{)} \PYG{o}{++} \PYG{p}{(}\PYG{n}{show} \PYG{n}{c}\PYG{p}{)}
+\end{Verbatim}

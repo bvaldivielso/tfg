@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{mu} \PYG{o}{.} \PYG{n}{mu} \PYG{o+ow}{=} \PYG{n}{mu} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{mu}\PYG{p}{)} \PYG{o+ow}{::} \PYG{n}{m} \PYG{p}{(}\PYG{n}{m} \PYG{p}{(}\PYG{n}{m} \PYG{n}{a}\PYG{p}{))} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{m} \PYG{n}{a}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} y}
+\PYG{n+nf}{mu} \PYG{o}{.} \PYG{n}{return} \PYG{o+ow}{=} \PYG{n}{id} \PYG{o+ow}{=} \PYG{n}{mu} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{return}\PYG{p}{)} \PYG{o+ow}{::} \PYG{n}{m} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{m} \PYG{n}{a}
+\end{Verbatim}

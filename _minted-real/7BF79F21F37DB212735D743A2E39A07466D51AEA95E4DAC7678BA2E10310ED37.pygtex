@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{unit} \PYG{o+ow}{::} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Reader} \PYG{n}{b} \PYG{p}{(}\PYG{k+kt}{Product} \PYG{n}{b} \PYG{n}{a}\PYG{p}{)}
+\PYG{n+nf}{unit} \PYG{n}{a} \PYG{o+ow}{=} \PYG{k+kt}{Reader} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{b} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Product} \PYG{p}{(}\PYG{n}{b}\PYG{p}{,} \PYG{n}{a}\PYG{p}{))}
+\end{Verbatim}

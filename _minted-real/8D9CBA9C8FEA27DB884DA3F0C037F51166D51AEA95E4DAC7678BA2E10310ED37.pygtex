@@ -1,0 +1,45 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} consideramos mmma :: m (m (m a))}
+\PYG{n+nf}{mu} \PYG{o}{.} \PYG{n}{mu} \PYG{n}{mmma} \PYG{o+ow}{=} \PYG{n}{mu} \PYG{p}{(}\PYG{n}{mu} \PYG{n}{mmma}\PYG{p}{)}
+                 \PYG{o+ow}{=} \PYG{n}{mu} \PYG{p}{(}\PYG{n}{mmma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{id}\PYG{p}{)}
+                 \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{mmma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{id}\PYG{p}{)} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{id}
+                 \PYG{c+c1}{\PYGZhy{}\PYGZhy{} por la ley 3}
+                 \PYG{o+ow}{=} \PYG{n}{mmma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{x} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{id}\PYG{p}{))}
+                 \PYG{c+c1}{\PYGZhy{}\PYGZhy{} por la definición de mu}
+                 \PYG{o+ow}{=} \PYG{n}{mmma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{x} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{mu} \PYG{n}{x}\PYG{p}{)}
+                 \PYG{o+ow}{=} \PYG{n}{mmma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{mu}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} por otro lado}
+\PYG{n+nf}{mu} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{mu}\PYG{p}{)} \PYG{n}{mmma} \PYG{o+ow}{=} \PYG{n}{mu} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{mu} \PYG{n}{mmma}\PYG{p}{)}
+                    \PYG{o+ow}{=} \PYG{n}{mu} \PYG{p}{(}\PYG{n}{mmma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{return} \PYG{o}{.} \PYG{n}{mu}\PYG{p}{)}
+                    \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{mmma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{return} \PYG{o}{.} \PYG{n}{mu}\PYG{p}{)} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{id}
+                    \PYG{c+c1}{\PYGZhy{}\PYGZhy{} por la ley 3}
+                    \PYG{o+ow}{=} \PYG{n}{mmma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{x} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{return} \PYG{p}{(}\PYG{n}{mu} \PYG{n}{x}\PYG{p}{)} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{id}\PYG{p}{)}
+                    \PYG{c+c1}{\PYGZhy{}\PYGZhy{} por la ley 1}
+                    \PYG{o+ow}{=} \PYG{n}{mmma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{x} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{mu} \PYG{n}{x}\PYG{p}{)}
+                    \PYG{o+ow}{=} \PYG{n}{mmma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{mu}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} y por tanto}
+\PYG{n+nf}{mu} \PYG{o}{.} \PYG{n}{mu} \PYG{o+ow}{=} \PYG{n}{mu} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{mu}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} por otro lado}
+\PYG{n+nf}{mu} \PYG{o}{.} \PYG{n}{return} \PYG{n}{ma} \PYG{o+ow}{=} \PYG{n}{mu} \PYG{p}{(}\PYG{n}{return} \PYG{n}{ma}\PYG{p}{)}
+               \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{return} \PYG{n}{ma}\PYG{p}{)} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{id}
+               \PYG{c+c1}{\PYGZhy{}\PYGZhy{} por la ley 1}
+               \PYG{o+ow}{=} \PYG{n}{ma}
+
+\PYG{n+nf}{mu} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{return}\PYG{p}{)} \PYG{n}{ma} \PYG{o+ow}{=} \PYG{n}{mu} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{return} \PYG{n}{ma}\PYG{p}{)}
+                      \PYG{o+ow}{=} \PYG{n}{mu} \PYG{p}{(}\PYG{n}{ma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{return} \PYG{o}{.} \PYG{n}{return}\PYG{p}{)}
+                      \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{ma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{return} \PYG{o}{.} \PYG{n}{return}\PYG{p}{)} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{id}
+                      \PYG{c+c1}{\PYGZhy{}\PYGZhy{} por la ley 3}
+                      \PYG{o+ow}{=} \PYG{n}{ma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{x} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{return} \PYG{p}{(}\PYG{n}{return} \PYG{n}{x}\PYG{p}{)} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{id}\PYG{p}{)}
+                      \PYG{c+c1}{\PYGZhy{}\PYGZhy{} por la ley 1}
+                      \PYG{o+ow}{=} \PYG{n}{ma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{x} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{return} \PYG{n}{x}\PYG{p}{)}
+                      \PYG{o+ow}{=} \PYG{n}{ma} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{return}
+                      \PYG{c+c1}{\PYGZhy{}\PYGZhy{} por la ley 2}
+                      \PYG{o+ow}{=} \PYG{n}{ma}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} lo que prueba definitivamente que}
+\PYG{n+nf}{mu} \PYG{o}{.} \PYG{n}{return} \PYG{o+ow}{=} \PYG{n}{id} \PYG{o+ow}{=} \PYG{n}{mu} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{return}\PYG{p}{)}
+\end{Verbatim}

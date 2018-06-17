@@ -14,8 +14,8 @@ Empezaremos por precisar qué es una adjunción.
 \subsection{Definición}
 \begin{definition}
   Una adjunción entre categorías $\C$ y $\D$ es un par de funtores
-  $F : \arr{\C}{\D}$ y $G: \arr{\D}{\C}$ tales que los funtores
-  $$\Hom_\D(F-, -) : \arr{\C^{op}\times\D}{\Set}$$
+  $F : \arr{\C}{\D}$ y $G: \arr{\D}{\C}$, tales que los funtores
+  $$\Hom_\D(F-, -) : \arr{\C^{op}\times\D}{\Set},$$
   $$\Hom_\C(-, G-) : \arr{\C^{op}\times\D}{\Set}$$
   son naturalmente isomorfos.
   Diremos que $F$ es el
@@ -26,9 +26,9 @@ Empezaremos por precisar qué es una adjunción.
 
 Nótese que para cualquier
 objeto $C$ de $\C$ y cualquier objeto
-$D$ de $\D$ un par de funtores adjuntos $F \adjoint G$ nos permite
-establecer biyecciones entre los conjuntos:
-$$\Hom_\D(FC, D) \cong \Hom_\C(C, GD)$$
+$D$ de $\D$, un par de funtores adjuntos $F \adjoint G$ nos permite
+establecer biyecciones entre los conjuntos
+$$\Hom_\D(FC, D) \cong \Hom_\C(C, GD).$$
 Sea $\phi_{C, D} : \arr{\Hom_\D(FC, D)}{\Hom_\C(C, GD)}$ una tal
 familia de biyecciones. Comprobar que $\phi$ es natural en
 $C$ y en $D$ se reduce
@@ -38,7 +38,7 @@ a, por un lado, comprobar que el siguiente diagrama en $\D$:
     FC \arrow{r}{f} & D \arrow{r}{g} & D'
   \end{tikzcd}
 \end{center}
-Se traslada al siguiente diagrama conmutativo en $\C$:
+se traslada al siguiente diagrama conmutativo en $\C$:
 \begin{center}
 \begin{equation}\label{diagrama:adjuncion1}
 \begin{tikzcd}
@@ -47,7 +47,7 @@ C \arrow[bend right=50, swap]{rr}{\phi_{C, D'}(g \circ f)}
 \end{tikzcd}
 \end{equation}
 \end{center}
-Y que por otro lado, el siguiente diagrama en $\C$:
+y que por otro lado, el siguiente diagrama en $\C$:
 \begin{center}
   \begin{tikzcd}
     C' \arrow{r}{h} & C \arrow{r}{f} & GD
@@ -67,7 +67,7 @@ FC' \arrow[bend right=50, swap]{rr}{\phi^{-1}_{C', D}(f \circ h)}
 Sean $\C$ y $\D$ dos categorías y $F: \arr{\C}{\D}$ y
 $G: \arr{\D}{\C}$ dos funtores adjuntos $F \adjoint G$. Esta adjunción
 induce un par de transformaciones naturales
-$\eta : \nat{1_\C}{GF}$ y $\epsilon: \nat{FG}{1_\D}$ que conoceremos
+$\eta : \nat{1_\C}{GF}$ y $\epsilon: \nat{FG}{1_\D}$, que conoceremos
 con el nombre de \textbf{la unidad} y \textbf{la counidad} de
 la adjunción. Mostramos a continuación la construcción de la
 unidad.
@@ -87,16 +87,16 @@ tenemos que verificar es el siguiente:
     C' \arrow{r}{\eta_{C'}} & GFC'
   \end{tikzcd}
 \end{center}
-Es decir tenemos que comprobar que
+es decir tenemos que comprobar que
 $$\phi_{C', FC'}(1_{FC'}) \circ f = \eta_{C'} \circ f = GFf \circ \eta_C
-  = GFf \circ \phi_{C, FC}(1_{FC})$$
-Pero teniendo en cuenta cuenta que $\phi$ es natural tenemos que el diagrama
+  = GFf \circ \phi_{C, FC}(1_{FC}),$$
+pero teniendo en cuenta cuenta que $\phi$ es natural tenemos que el diagrama
 \begin{center}
   \begin{tikzcd}
     FC \arrow{r}{1_{FC}} & FC \arrow{r}{Ff} & FC'
   \end{tikzcd}
 \end{center}
-Lo podemos trasladar al siguiente diagrama conmutativo (por el
+lo podemos trasladar al siguiente diagrama conmutativo (por el
 diagrama \eqref{diagrama:adjuncion1} de la definición de adjunción):
 \begin{center}
   \begin{tikzcd}
@@ -106,15 +106,15 @@ diagrama \eqref{diagrama:adjuncion1} de la definición de adjunción):
             & GFC \arrow{r}{GFf} & GFC'
   \end{tikzcd}
 \end{center}
-Por lo que $GFf \circ \eta_C = \phi_{C, FC'}(Ff)$ pero a su vez:
+vemos que $GFf \circ \eta_C = \phi_{C, FC'}(Ff)$, pero a su vez:
 \begin{center}
   \begin{tikzcd}
     C \arrow{r}{f} & C'
        \arrow{r}{\eta_{C'}} & GFC'
   \end{tikzcd}
 \end{center}
-Lo podemos trasladar a (por el diagrama \eqref{diagrama:adjuncion2}
-de la definición de adjunción):
+lo podemos trasladar (por el diagrama \eqref{diagrama:adjuncion2}
+de la definición de adjunción) a:
 \begin{center}
   \begin{tikzcd}
     FC \arrow[bend right=50, swap]{rr}{\phi_{C, FC'}^{-1}(\eta_{C'} \circ f)}
@@ -122,10 +122,10 @@ de la definición de adjunción):
   \end{tikzcd}
 \end{center}
 Este último diagrama muestra que
-$$Ff = \phi^{-1}_{C, FC'}(\eta_{C'} \circ f)$$
-Y por tanto
+$$Ff = \phi^{-1}_{C, FC'}(\eta_{C'} \circ f),$$
+y por tanto
 $$GFf \circ \eta_C = \phi_{C, FC'}(Ff) = \phi_{C, FC'}
-  (\phi^{-1}_{C,FC'}(\eta_{C'} \circ f)) = \eta_{C'} \circ f$$
+  (\phi^{-1}_{C,FC'}(\eta_{C'} \circ f)) = \eta_{C'} \circ f,$$
 lo que prueba la naturalidad de $\eta : \nat{1_\C}{GF}$.
 
 La counidad $\epsilon: \nat{FG}{1_\D}$ se define como:
@@ -138,23 +138,25 @@ Sea $A$ un conjunto. Veamos que los funtores
 $-\times A : \arr{\Set}{\Set}$ y
 $\Hom(A, -) : \arr{\Set}{\Set}$ conforman una adjunción.
 Necesitamos encontrar un isomorfismo natural
-$$\phi : \nat{\Hom(-\times A, -)}{\Hom(-, \Hom(A, -))}$$
+$$\phi : \nat{\Hom(-\times A, -)}{\Hom(-, \Hom(A, -))}.$$
 Para ello definimos
-$$\phi_{B, Z} : \arr{\Hom(B\times A, Z)}{\Hom(B, \Hom(A, Z))}$$
-$$\phi_{B, Z}(f)(b)(a) = f(b, a)$$
+$$\phi_{B, Z} : \arr{\Hom(B\times A, Z)}{\Hom(B, \Hom(A, Z))},$$
+$$\phi_{B, Z}(f)(b)(a) = f(b, a).$$
 
 Veamos que $\phi_{B, Z}$ es una biyección.
 En primer lugar vemos que es sobreyectiva.
 Sea $f' \in \Hom(B, \Hom(A, Z))$. Definimos la aplicación
-$f : \arr{B\times A}{Z}$ dada por $f(b, a) = f'(b)(a), \,  \forall (b, a) \in B\times A$. Aplicando
+$f : \arr{B\times A}{Z}$ dada por $f(b, a) = f'(b)(a)$ para
+toda pareja $(b, a) \in B\times A$. Aplicando
 la definición de $\phi_{B, Z}$
-tenemos $\phi_{B,Z}(f)(b)(a) = f(b, a) = f'(b)(a)$ también $\forall (b, a) \in B\times A$, y por tanto
+tenemos $\phi_{B,Z}(f)(b)(a) = f(b, a) = f'(b)(a)$ también para toda
+pareja $(b, a) \in B\times A$, y por tanto
 $\phi_{B,Z}(f) = f'$. Veamos ahora que $\phi$ es inyectiva. Supongamos
 que tenemos $f_1, f_2 : \arr{B\times A}{Z}$ tales que
-$\phi_{B, Z}(f_1) = \phi_{B, Z}(f_2)$ pero entonces tenemos que
+$\phi_{B, Z}(f_1) = \phi_{B, Z}(f_2)$, pero entonces tenemos que
 $f_1(b, a) = \phi_{B, Z}(f_1)(b)(a) = \phi_{B,Z}(f_2)(b)(a) = f_2(b, a)$
-$\forall (b, a) \in B\times A$
-y por tanto $f_1 = f_2$.
+para todo par $(b, a) \in B\times A$,
+con lo que $f_1 = f_2$.
 
 Comprobamos ahora las condiciones de naturalidad. En primer lugar dado
 el diagrama:
@@ -163,7 +165,7 @@ el diagrama:
     B \arrow{r}{f} & B' \arrow{r}{g} & \Hom(A, Z)
   \end{tikzcd}
 \end{center}
-Hemos de ver que el siguiente diagrama es conmutativo (diagrama
+hemos de ver que el siguiente diagrama es conmutativo (diagrama
 \eqref{diagrama:adjuncion2} de la definición de adjunción):
 \begin{center}
   \begin{tikzcd}
@@ -172,24 +174,24 @@ Hemos de ver que el siguiente diagrama es conmutativo (diagrama
       \arrow{r}{f\times A} & B'\times A \arrow{r}{\phi^{-1}_{B', Z}(g)} & Z
   \end{tikzcd}
 \end{center}
-Y esto equivale a probar
-$$\phi_{B,  Z}(g \circ f) = \phi_{B', Z}(g) \circ (f\times A)$$
+y esto equivale a probar
+$$\phi_{B,  Z}(g \circ f) = \phi_{B', Z}(g) \circ (f\times A),$$
 donde $f \times A$ está definida por
-$$f\times A: \arr{B\times A}{B'\times A}$$
-$$(f\times A)(b, a) = (f(b), a)$$
+$$f\times A: \arr{B\times A}{B'\times A},$$
+$$(f\times A)(b, a) = (f(b), a).$$
 Aplicando sobre un valor cualquiera
-$(b, a) \in B\times A$ tenemos que:
-$$\phi_{B, Z}^{-1}(g \circ f)(b, a) = (g\circ f)(b)(a) = g(f(b))(a)$$
-y
+$(b, a) \in B\times A$, tenemos que:
+$$\phi_{B, Z}^{-1}(g \circ f)(b, a) = (g\circ f)(b)(a) = g(f(b))(a),$$
+pero además
 $$(\phi_{B', Z}^{-1}(g) \circ (f\times A))(b, a) =
-   \phi_{B', Z}^{-1}(g)(f(b), a) = g(f(b))(a)$$
+   \phi_{B', Z}^{-1}(g)(f(b), a) = g(f(b))(a).$$
 En segundo lugar dado el diagrama:
 \begin{center}
   \begin{tikzcd}
     B\times A \arrow{r}{f} & Z \arrow{r}{g} & Z'
   \end{tikzcd}
 \end{center}
-Hemos de ver que el siguiene diagrama es conmutativo
+hemos de ver que el siguiene diagrama es conmutativo
 (diagrama \eqref{diagrama:adjuncion1} de la definición de adjunción):
 \begin{center}
   \begin{tikzcd}
@@ -197,16 +199,16 @@ Hemos de ver que el siguiene diagrama es conmutativo
       \arrow{r}{\phi_{B, Z}(f)} & \Hom(A, Z) \arrow{r}{\Hom(A, g)} & \Hom(A, Z')
   \end{tikzcd}
 \end{center}
-Es decir, $\phi_{B, Z'}(g \circ f) = \Hom(A, g) \circ \phi_{B, Z}(f)$. Para
+es decir, $\phi_{B, Z'}(g \circ f) = \Hom(A, g) \circ \phi_{B, Z}(f)$. Para
 todo
 $(b, a) \in B\times A$ tenemos que:
-$$\phi_{B, Z'}(g \circ f)(b)(a) = (g\circ f)(b, a) = g(f(b, a))$$
+$$\phi_{B, Z'}(g \circ f)(b)(a) = (g\circ f)(b, a) = g(f(b, a)),$$
 y
-\begin{multline*}
-(\Hom(A, g)\circ\phi_{B, Z}(f))(b)(a) = (\Hom(A, g)(\phi_{B, Z}(f)(b))(a)\\
-  = (g \circ \phi_{B,Z}(f)(b))(a) = g(f(b, a))
-\end{multline*}
-Y por tanto $\phi$ es una transformación natural.
+\begin{align*}
+(\Hom(A, g)\circ\phi_{B, Z}(f))(b)(a) & = (\Hom(A, g)(\phi_{B, Z}(f)(b))(a)\\
+  & = (g \circ \phi_{B,Z}(f)(b))(a) = g(f(b, a)),
+\end{align*}
+y por tanto $\phi$ es una transformación natural.
 
 Esta adjunción nos dice que dar una aplicación que va de $B\times A$ a $Z$
 es esencialmente lo mismo que dar una aplicación que vaya de $B$ al conjunto
@@ -219,7 +221,7 @@ $F \adjoint U$.
 La unidad $\eta : \nat{1_\Set}{UF}$ es la inclusión canónica
 $\eta_X : X \subseteq UFX$ de un conjunto en el
 grupo libre generado por él. La counidad
-$\mu : \nat{FU}{1_\Grp}$ determina para cada grupo $G$
-el homomorfismo de grupos $\mu_G : \arr{FUG}{G}$
+$\mu : \nat{FU}{1_\Grp}$ determina para cada grupo $G$,
+el homomorfismo de grupos $\mu_G : \arr{FUG}{G}$,
 tal que a cada palabra
 $g_1g_2\ldots g_n \in FUG$ le asigna el valor $\prod_{i=1}^n g_i \in G$.

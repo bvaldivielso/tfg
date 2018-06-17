@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} si v :: a}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    m :: m a}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    k :: a \PYGZhy{}\PYGZgt{} m b entonces}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    h :: b \PYGZhy{}\PYGZgt{} m c}
+\PYG{p}{(}\PYG{n}{return} \PYG{n}{v} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{k}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{k} \PYG{n}{v} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} ley 1}
+
+\PYG{p}{(}\PYG{n}{m} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{return}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{m} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} ley 2}
+
+\PYG{n+nf}{m} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{x} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{k} \PYG{n}{x} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{h}\PYG{p}{)}  \PYG{o+ow}{=}  \PYG{p}{(}\PYG{n}{m} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{k}\PYG{p}{)} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{h} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} ley 3}
+
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} en relación a fmap, f :: a  \PYGZhy{}\PYGZgt{} b}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                     m :: ma}
+\PYG{n+nf}{fmap} \PYG{n}{f} \PYG{n}{m}  \PYG{o+ow}{=}  \PYG{n}{m} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n}{return} \PYG{o}{.} \PYG{n}{f}
+\end{Verbatim}

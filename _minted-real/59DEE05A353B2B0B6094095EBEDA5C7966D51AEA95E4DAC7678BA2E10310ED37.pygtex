@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} digamos que f :: a \PYGZhy{}\PYGZgt{} b}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} y que g :: b \PYGZhy{}\PYGZgt{} c}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Entonces}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} el funtor se lleva bien con la composición}
+\PYG{n+nf}{fmap} \PYG{p}{(}\PYG{n}{g} \PYG{o}{.} \PYG{n}{f}\PYG{p}{)} \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{g}\PYG{p}{)} \PYG{o}{.} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{f}\PYG{p}{)} \PYG{o+ow}{::} \PYG{k+kt}{F} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{F} \PYG{n}{c}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} el funtor lleva identidades a identidades}
+\PYG{n+nf}{fmap} \PYG{n}{id} \PYG{o+ow}{=} \PYG{n}{id} \PYG{o+ow}{::} \PYG{k+kt}{F} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{F} \PYG{n}{a}
+\end{Verbatim}

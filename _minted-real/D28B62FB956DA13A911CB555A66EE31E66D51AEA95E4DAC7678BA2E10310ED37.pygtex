@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} natApplication discardLeft :: [Either String a] \PYGZhy{}\PYGZgt{} [Maybe a]}
+\PYG{n+nf}{natApplication}
+    \PYG{n}{discardLeft}
+    \PYG{p}{(}\PYG{k+kt}{Composition} \PYG{p}{[}\PYG{k+kt}{Left} \PYG{l+s}{\PYGZdq{}error\PYGZdq{}}\PYG{p}{,} \PYG{k+kt}{Right} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{k+kt}{Left} \PYG{l+s}{\PYGZdq{}test\PYGZdq{}}\PYG{p}{,} \PYG{k+kt}{Right} \PYG{l+m+mi}{6}\PYG{p}{])}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} resultado: [Nothing, Just 5, Nothing, Just 6]}
+
+\PYG{n+nf}{natApplication}
+    \PYG{n}{discardLeft}
+    \PYG{p}{(}\PYG{k+kt}{Composition} \PYG{p}{[}\PYG{k+kt}{Right} \PYG{l+s}{\PYGZdq{}gg\PYGZdq{}}\PYG{p}{,} \PYG{k+kt}{Right} \PYG{l+s}{\PYGZdq{}hh\PYGZdq{}}\PYG{p}{,} \PYG{k+kt}{Left} \PYG{l+s}{\PYGZdq{}hh\PYGZdq{}}\PYG{p}{])}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} resultado [Just \PYGZdq{}gg\PYGZdq{}, Just \PYGZdq{}hh\PYGZdq{}, Nothing ]}
+\end{Verbatim}

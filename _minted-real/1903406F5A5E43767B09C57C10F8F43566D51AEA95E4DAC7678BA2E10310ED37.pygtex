@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{appPrint} \PYG{o+ow}{::}
+  \PYG{p}{(}\PYG{k+kt}{MonadReader} \PYG{k+kt}{Config} \PYG{n}{m}\PYG{p}{,} \PYG{k+kt}{MonadIO} \PYG{n}{m}\PYG{p}{)} \PYG{o+ow}{=\PYGZgt{}} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{m} \PYG{n+nb}{()}
+\PYG{n+nf}{appPrint} \PYG{n}{msg} \PYG{o+ow}{=} \PYG{k+kr}{do}
+  \PYG{n}{promptText} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{fmap} \PYG{n}{prompt} \PYG{n}{ask}
+  \PYG{n}{liftIO} \PYG{o}{\PYGZdl{}} \PYG{n}{putStrLn} \PYG{p}{(}\PYG{n}{promptText} \PYG{o}{++} \PYG{l+s}{\PYGZdq{} \PYGZdq{}} \PYG{o}{++} \PYG{n}{msg}\PYG{p}{)}
+\end{Verbatim}

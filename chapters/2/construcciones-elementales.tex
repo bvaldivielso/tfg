@@ -15,18 +15,18 @@ aplicación inyectiva y de producto cartesiano.
 
 \begin{definition*}
 Una aplicación $f : \arr{A}{B}$ es inyectiva si dados
-$a, a' \in A$ tenemos que $f(a) = f(a') \implies a = a'$.
+$a, a' \in A$, tenemos que $f(a) = f(a')$ implica $a = a'$.
 \end{definition*}
 
 \begin{definition*}
 Dados dos conjuntos $A$ y $B$ definimos su producto cartesiano
 como:
-$$A\times B = \{ (a, b) : a \in A \quad b \in B \}$$
+$$A\times B = \{ (a, b) : a \in A, \quad b \in B \}$$
 \end{definition*}
 
 Si intentamos trasladar las construcciones que hacemos sobre
 conjuntos y las aplicaciones entre ellos
-a construcciones sobre categorías arbitrarias
+a construcciones sobre categorías arbitrarias,
 será útil saber cómo trasladar la noción de elemento.
 
 Si consideramos el conjunto con un solo elemento, al que llamaremos
@@ -45,7 +45,7 @@ un conjunto de flechas de la categoría hemos tenido que acudir a un
 objeto especial de la categoría de conjuntos: $\uno$. Este procedimiento
 es algo que quizá no podamos realizar en otras categorías pero nos
 motiva a hacer una definición más general de
-\textit{elemento categórico}:
+\textit{elemento categórico}.
 
 \begin{definition}
 En una categoría $\C$ llamaremos elemento de un objeto $A$
@@ -69,10 +69,10 @@ algunos conceptos originados sobre conjuntos.
 
 \section{Monomorfismos}
 \begin{definition}
-Consideremos una categoría $\C$ y una flecha $f : \arr{A}{B}$ de esta.
+Consideremos una categoría $\C$ y una flecha $f : \arr{A}{B}$ de ésta.
 Diremos que $f$ es un monomorfismo si para cualquier objeto
 $T$ de $\C$ y dados dos elementos
-$x, y \in^T A$ tenemos que $fx = fy \implies x = y$.
+$x, y \in^T A$, tenemos que $fx = fy$ implica $x = y$.
 \end{definition}
 
 Nótese cómo esta definición es casi idéntica a la definición de
@@ -98,8 +98,8 @@ tal que $f \circ g = 1_B$ y $g \circ f = 1_A$.
 Nótese que esta definición la podemos caracterizar en términos
 de biyecciones sobre conjuntos de elementos.
 \begin{proposition}
-Sean $\C$ una categoría y $f: \arr{A}{B}$ una flecha de esta.
-$f$ es un isomorfismo si y solo si $f$ es una biyección entre
+Sean $\C$ una categoría y $f: \arr{A}{B}$ una flecha de ésta.
+Entonces $f$ es un isomorfismo si y solo si $f$ es una biyección entre
 los elementos de $A$ y los elementos de $B$ definidos sobre $T$
 para cualquier objeto $T$ de $\C$.
 \end{proposition}
@@ -113,23 +113,26 @@ Es inmediato ver
 que los isomorfismos de la categoría $\Set$ se corresponden con las
 biyecciones y que los isomorfismos sobre $\Grp$, $\Ring$, $\Top$, ...
 se corresponden con los isomorfismos de grupos,
-isomorfismos de anillos y homeomorfismos de espacios topológicos.
+isomorfismos de anillos y homeomorfismos de espacios topológicos,
+respectivamente.
 
 \section{Productos}
 También es posible trasladar la definición de producto de conjuntos
-a una categoría arbitraria mediante la siguiente definición:
+a una categoría arbitraria mediante la siguiente definición.
 
 \begin{definition}
-Sea $\C$ una categoría y $A$ y $B$ dos objetos de esta. Diremos que
+Sea $\C$ una categoría y $A$ y $B$ dos objetos de ésta. Diremos que
 existe el producto de $A$ y $B$ si
 existe una terna $(A\times B, \pi_1, \pi_2)$
 donde $A\times B$ es un objeto de $\C$ y
 $\pi_1 : \arr{A\times B}{A}, \pi_2 : \arr{A\times B}{B}$ son dos flechas tales
 que para cualesquiera elementos $x : \arr{T}{A}$ de $A$ e
 $y: \arr{T}{B}$ de $B$, existe un único elemento
-$(x,y): \arr{T}{A\times B}$ de $A\times B$ tal que $\pi_1 (x,y)=x$ y $\pi_2(x,y)=y$.
+$(x,y): \arr{T}{A\times B}$ de $A\times B$ tal que $\pi_1 ((x,y))=x$ y $\pi_2((x,y))=y$ (de ahora en adelante notaremos $\pi_i(x, y)$ por
+simplificar la notación).
 
-Expresaremos esto diciendo que  el siguiente diagrama es conmutativo:
+Expresaremos esto diciendo que  el siguiente diagrama es conmutativo
+para cada $T$:
 \begin{center}
 \begin{tikzcd}
 &\arrow{ld}[swap]{x} T \arrow[d, dotted, "{\exists! (x, y)}"] \arrow[rd, "y"] & \\
@@ -139,11 +142,11 @@ A & \arrow[l, "\pi_1"] A\times B  \arrow{r}[swap]{\pi_2} & B
 
 \end{definition}
 
-Debemos resaltar dos aspectos importantes de esta definición:
+Debemos resaltar dos aspectos importantes de esta definición.
 \begin{itemize}
 \item El producto de dos objetos en una categoría dada no tiene por qué
       existir.
-\item De existir un producto, este solo queda determinado salvo isomorfismo. De hecho si $(A\times B, \pi_1, \pi_2)$ es un producto de $A$ y $B$
+\item De existir un producto, éste sólo queda determinado salvo isomorfismo. De hecho si $(A\times B, \pi_1, \pi_2)$ es un producto de $A$ y $B$
 y $\phi : \arr{P}{A\times B}$ es un isomorfismo entonces
 $(P, \pi_1 \circ \phi , \pi_2 \circ \phi)$ es otro producto de $A$
 y $B$.
@@ -151,11 +154,11 @@ y $B$.
 
 \subsection{Ejemplos}
 \paragraph{\Set}
-Dados dos conjuntos $A$ y $B$ siempre existe el producto de estos
+Dados dos conjuntos $A$ y $B$ siempre existe el producto de éstos
 y además coincide (salvo el isomorfismo
 que comentamos antes) con el producto cartesiano de ambos
 junto a sus proyecciones canónicas. Desmotramos tal
-afirmación a continuación:
+afirmación a continuación.
 
 Sean $x: \arr{T}{A}, y: \arr{T}{B}$ dos aplicaciones. Podemos
 definir la aplicación $(x, y) :\arr{T}{A\times B}$ por
@@ -163,14 +166,14 @@ $(x, y)(t) = (x(t), y(t))$. Esta aplicación cumple en efecto que
 $\pi_1 \circ (x, y) = x$ y $\pi_2 \circ y = y$. Pero además es la única
 que cumple esto pues si tenemos otra aplicación
 $f : \arr{T}{A\times B}$ cumpliendo $\pi_1 \circ f = x$ y
-$\pi_2 \circ f = y$ solo nos basta recordar que podemos
+$\pi_2 \circ f = y$ sólo nos basta recordar que podemos
 escribir $f$ como:
 $f(t)=(\pi_1\circ f(t), \pi_2\circ f(t))=(x(t), y(t))$.
 y por tanto $f = (x, y)$.
 
 \paragraph{Otras estructuras matemáticas}
 A continuación mostramos ejemplos de productos
-en categorías conocidas:
+en categorías conocidas.
 
 \begin{itemize}
 \item En $\Grp$ el producto se corresponde con el
@@ -183,7 +186,7 @@ producto directo de grupos.
 Al principio de la sección le dimos un papel especial al conjunto
 de un solo elemento $\uno$. Nos gustaría caracterizar a ese objeto de
 la categoría $\Set$ con alguna propiedad estrictamente categórica.
-Esto es posible:
+Esto es posible tal y como vemos a continuación.
 
 \begin{definition}
 Sea $\C$ una categoría y $\final$ un objeto. Diremos que $\final$ es un objeto
@@ -195,7 +198,7 @@ Comprobar que de existir el objeto $\final$ es único salvo isomorfismo
 es inmediato.
 \subsection{Ejemplos}
 \paragraph{En $\Set$}
-En la categoría de los conjuntos el objeto final es el $\uno$,
+En la categoría de los conjuntos el objeto final es $\uno$,
 el conjunto de un solo elemento.
 
 \paragraph{En $\Grp$}
@@ -209,7 +212,7 @@ En la categoría de los anillos con unidad el objeto final es
 también el anillo trivial.
 
 \section{Dualidad}
-El concepto de dualidad que se encuentra frecuentemente en las
+El concepto de dualidad que se encuentra frecuentemente en
 matemáticas puede ser analizado de forma muy general desde el punto
 de vista categórico. Para introducir esta noción presentamos a
 continuación la definición de categoría opuesta.
@@ -224,19 +227,20 @@ composición dada por $f \circ_{op} g = g \circ f$.
 \end{definition}
 
 Comprobar que esta construcción es efectivamente una categoría
-en sencillo:
+en sencillo.
 \begin{itemize}
 \item La composición es asociativa: sean
 $f \in \Hom_{\C^{op}}(A, B)$, $g \in \Hom_{\C^{op}}(B, C)$
 y $h \in \Hom_{\C^{op}}(C, D)$. Tenemos que
-\begin{multline*}
-(h \circ_{op} g) \circ_{op} f = (g \circ h) \circ_{op} f \\
-= f \circ (g \circ h)
-= (f \circ g) \circ h
+\begin{align*}
+  (h \circ_{op} g) \circ_{op} f
+    & = (g \circ h) \circ_{op} f
+    = f \circ (g \circ h) \\
+& = (f \circ g) \circ h
 = (g \circ_{op} f)  \circ h
 = h \circ_{op} (g \circ_{op} f)
-\end{multline*}
-\item Existen las identidades. Las identidades en $\C^{op}$
+\end{align*}
+\item Existen las identidades: las identidades en $\C^{op}$
 son las mismas flechas que en la categoría original $\C$.
 \end{itemize}
 
@@ -244,12 +248,12 @@ La categoría opuesta nos otorga una herramienta para reaprovechar
 definiciones realizadas anteriormente. Dada una propiedad $P$ que
 se pueda o no cumplir en una categoría $\C$ llamamos propiedad
 dual de $P$ a la propiedad de que se cumpla $P$ en la categoría opuesta
-$\C^{op}$. Esto nos permite definir las siguientes propiedades:
+$\C^{op}$. Esto nos permite definir las siguientes propiedades.
 
 \begin{itemize}
 \item Ser epimorfismo es la propiedad dual de ser monomorfismo (es decir
 $f$ es un epimorfismo en $\C$ si $f$ es un monomorfismo en la categoría opuesta
-$\C^{op}$)
+$\C^{op}$).
 \item La propiedad dual de ser isomorfismo es ella misma. La propiedad
 dual de ser único salvo isomorfismo es ella misma.
 \item El coproducto es el dual del producto, es decir llamaremos
@@ -277,8 +281,8 @@ Esta propiedad
 se puede caracterizar de forma sencilla desde dentro de $\C$.
 \begin{proposition}
 $f: \arr{A}{B}$ es un epimorfismo si y solo si dado cualquier objeto $X$ y
-cualquier par de flechas $g_1, g_2 : \arr{B}{X}$
-tenemos que $g_1 \circ f = g_2 \circ f \implies g_1 = g_2$.
+cualquier par de flechas $g_1, g_2 : \arr{B}{X}$,
+tenemos que $g_1 \circ f = g_2 \circ f$ implica $g_1 = g_2$.
 En este caso diremos también que $f$ se puede cancelar por la
 derecha.
 \end{proposition}
@@ -306,14 +310,14 @@ inyectiva.
 Consideremos la inclusión
 $i : \arr{\Z}{\Q}$, un anillo $R$
 y un par de aplicaciones de anillos $g_1, g_2 : \arr{\Q}{R}$. Supongamos
-que $g_1 \circ i = g_2 \circ i$. Ahora  $\forall x \in \Q$
-tenemos que $\exists a, b \in \Z : x = \frac{a}{b}$ y entonces:
-\begin{multline*}
-g_1(x) = g_1(\frac{a}{b}) = g_1(a)g_1(b)^{-1} \\
-       = (g_1 \circ i)(a)(g_1\circ i)(b)^{-1}
-       = (g_2\circ i)(a)(g_2\circ i)(b)^{-1}
-       = g_2(a)g_2(b)^{-1} = g_2(x)
-\end{multline*}
+que $g_1 \circ i = g_2 \circ i$. Ahora para todo $x \in \Q$
+tenemos que existen $a, b$ enteros tales que $x = \frac{a}{b}$ y entonces:
+\begin{align*}
+g_1(x) & = g_1(\frac{a}{b}) = g_1(a)g_1(b)^{-1}
+       = (g_1 \circ i)(a)(g_1\circ i)(b)^{-1} \\
+       & = (g_2\circ i)(a)(g_2\circ i)(b)^{-1}
+       = g_2(a)g_2(b)^{-1} = g_2(x).
+\end{align*}
 
 Con lo que $g_1=g_2$. Esto prueba que $i : \arr{\Z}{\Q}$ es epimorfismo.
 Claramente es también un monomorfismo. La categoría de anillos es
@@ -371,17 +375,17 @@ se razona de forma análoga.
 \subsection{Coproducto}
 Coproducto es la propiedad dual de producto. Si vemos qué significa
 ser coproducto desde dentro de la misma categoría $\C$ obtenemos
-la siguiente definición:
+la siguiente definición.
 
 \begin{definition}
-Sea $\C$ una categoría y $A$ y $B$ dos objetos de esta. Diremos que
-existe el coproducto de $A$ y $B$
-si existe una terna $(A+B, i_1, i_2)$
-donde $A+B$ es un objeto de $\C$ y
+Sea $\C$ una categoría y $A$ y $B$ dos objetos de ésta. Diremos que
+existe el coproducto de $A$ y $B$,
+si existe una terna $(A+B, i_1, i_2)$,
+donde $A+B$ es un objeto de $\C$, y
 $i_1 : \arr{A}{A+B}, i_2 : \arr{B}{A+B}$ son dos flechas tales
-que para cualquier objeto $Y$ y sendas flechas $f_1 : \arr{A}{Y}$,
-$f_2 : \arr{B}{Y}$ existe un único morfismo
-$f : \arr{A+B}{Y}$ tal que el siguiente diagrama es conmutativo:
+que, para cualquier objeto $Y$, y sendas flechas $f_1 : \arr{A}{Y}$,
+$f_2 : \arr{B}{Y}$, existe un único morfismo
+$f : \arr{A+B}{Y}$ tal que el siguiente diagrama es conmutativo.
 \begin{center}
 \begin{tikzcd}
 & &  Y & & \\
@@ -403,25 +407,22 @@ En $\Grp $ el coproducto coincide con el producto libre.
 \subsection{Funtores $\Hom(-, A)$}
 Dado un objeto $A$ de la categoría $\C$ definimos el funtor
 $\Hom_\C(-, A)$ como
-$$\Hom_\C(-, A) = \Hom_{\C^{op}}(A, -) : \arr{\C^{op}}{\Set}$$
+$$\Hom_\C(-, A) = \Hom_{\C^{op}}(A, -) : \arr{\C^{op}}{\Set}.$$
 
 Sabemos cómo actúa $\Hom_\C(-, A)$ sobre las flechas de $\C^{op}$
 pero si tenemos una flecha $f \in \Hom_\C(C, C')$ tenemos que:
 
 $$\Hom_\C(f, A) = \Hom_{\C^{op}}(A, f) :
-  \arr{\Hom_{\C^{op}}(A, C')}{\Hom_{\C^{op}}(A, C)}$$
+  \arr{\Hom_{\C^{op}}(A, C')}{\Hom_{\C^{op}}(A, C)},$$
 ya que $f \in \Hom_{\C^{op}}(C', C)$. Dicho de otra forma:
 $$\Hom_\C(f, A) : \arr{\Hom_{\C}(C', A)}{\Hom_{\C}(C, A)}$$
-
 y su acción es:
 
-$$\Hom_\C(f, A)(g) = g\circ f$$
+$$\Hom_\C(f, A)(g) = g\circ f.$$
+Además si tenemos dos flechas de $\C$ que se pueden componer
+$f$ y $g$, tenemos que:
 
-además si tenemos dos flechas de $\C$ que se pueden componer
-$f$ y $g$ tenemos que:
-
-$$\Hom_\C(g \circ f, A) = \Hom_\C(f, A) \circ \Hom_\C(g, A)$$
-
+$$\Hom_\C(g \circ f, A) = \Hom_\C(f, A) \circ \Hom_\C(g, A),$$
 con lo que la composición funciona \textit{al revés}. Diremos que
 $F$ es un funtor contravariante sobre sobre $\C$ cuando $F$ sea
 un funtor definido sobre $\C^{op}$. En este sentido
@@ -431,37 +432,39 @@ sobre $\C$.
 \subsection{Funtor opuesto}
 Dado un funtor $F : \arr{\C}{\D}$ podemos definir el funtor opuesto
 $F^{op} : \arr{\C^{op}}{\D^{op}}$ tal que $F^{op}C = FC$ y para cualquier
-flecha $f \in \Hom_{\C^{op}}(C, C') = \Hom_{\C}(C', C)$
+flecha $f \in \Hom_{\C^{op}}(C, C') = \Hom_{\C}(C', C)$,
 $$F^{op}f = F f \in \Hom_\C(FC', FC) = \Hom_{\D^{op}}(FC, FC')$$
 
 \section{En programación}
-A lo largo de esta sección aplicamos las construcciones que hemos visto
-a la categoría \texttt{Hask}.
+A lo largo de esta sección aplicamos alguna de
+las construcciones que hemos visto
+a la categoría $\Hask$.
 
 \subsection{Objetos iniciales y finales}
-\texttt{Hask} tiene tanto objetos iniciales como objetos finales. El
+$\Hask$ tiene tanto objetos iniciales como objetos finales. El
 objeto final es el tipo con un solo valor, al que se le suele llamar
-\texttt{()} (pronunciado \texttt{Unit}). \texttt{()} es un tipo
-cuyo único valor es \texttt{()} y para cada tipo \texttt{a} podemos
+\cod{()} (pronunciado \cod{Unit}). El tipo \cod{()} tiene
+como único valor el valor \cod{()} (tipo y valor
+son homónimos en este caso) y para cada tipo \cod{a} podemos
 definir la función:
 \begin{verbatim}
 constUnit :: a -> ()
 constUnit x = ()
 \end{verbatim}
-Por otro lado tenemos que el objeto inicial de \texttt{Hask} es el tipo
-llamado \texttt{Void}, que no tiene ningún valor. En la biblioteca
-estándar se encuentra una función llamada \texttt{absurd}
+Por otro lado tenemos que el objeto inicial de $\Hask$ es el tipo
+llamado \cod{Void}, que no tiene ningún valor. En la biblioteca
+estándar se encuentra una función llamada \cod{absurd}
 que tiene
-como tipo \texttt{Void -> a} y es la única función con este tipo.
+como tipo \cod{Void -> a} y es la única función con este tipo.
 En cualquier caso, la función no puede ser llamada puesto que no
 hay ningún valor con el que llamarla. La situación tanto como para
 el objeto inicial como para el final es muy similar a la que se daba
 en \Set.
 
 \subsection{Productos}
-\texttt{Hask} tiene productos. Dado dos tipos \texttt{A} y
-\texttt{B} podemos construir el tipo \texttt{(A, B)} que tiene
-como valores pares de valores de \texttt{A} y de \texttt{B}.
+$\Hask$ tiene productos. Dado dos tipos \cod{A} y
+\cod{B} podemos construir el tipo \cod{(A, B)} que tiene
+como valores pares de valores de \cod{A} y de \cod{B}.
 Las proyecciones se implementan en la biblioteca estándar de
 Haskell de la siguiente forma:
 
@@ -470,11 +473,11 @@ fst :: (a, b) -> a
 fst (x, y) = x
 
 snd :: (a, b) -> b
-fst (x, y) = y
+snd (x, y) = y
 \end{verbatim}
 
 Si tenemos un par de funciones \cod{f1 :: X -> A} y
-\cod{f2 :: X -> B} podemos definir la función \texttt{f}:
+\cod{f2 :: X -> B} podemos definir la función \cod{f}:
 \begin{verbatim}
 f :: X -> (A, B)
 f x = (f1 x, f2 x)
@@ -499,11 +502,16 @@ f (Left a) = f1 a
 f (Right b) = f2 b
 \end{verbatim}
 
-Veamos que se lleva bien con las inyecciones:
+Comprobar que se lleva bien con las inyecciones es inmediato:
 \begin{verbatim}
 (f . Left) a = f (Left a) = f1 a
-;; por tanto f . Left = f1
+-- por tanto f . Left = f1
 
 (f . Right) b = f (Right b) = f2 b
-;; por tanto f . Right = f2
+-- por tanto f . Right = f2
 \end{verbatim}
+
+En la biblioteca estándar tenemos la función
+\cod{either :: (a -> c) -> (b -> c) -> Either a b -> c}
+que es precisamente la función que construye \cod{f} a partir
+de \cod{f1, f2}.

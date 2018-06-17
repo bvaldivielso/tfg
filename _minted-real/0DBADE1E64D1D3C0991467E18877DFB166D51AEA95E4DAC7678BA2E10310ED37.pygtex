@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ley 1}
+\PYG{p}{(}\PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{return} \PYG{n}{a}
+\PYG{n+nf}{k} \PYG{n}{x}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{k} \PYG{n}{a}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ley 2}
+\PYG{p}{(}\PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{m}
+\PYG{n+nf}{return} \PYG{n}{x}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{m}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ley 3}
+\PYG{n+nf}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{m}
+\PYG{p}{(}\PYG{n}{y} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{k} \PYG{n}{x}
+\PYG{n+nf}{h} \PYG{n}{y}\PYG{p}{)}
+
+\PYG{n+nf}{y} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{(}\PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{m}
+      \PYG{n}{k} \PYG{n}{x}\PYG{p}{)}
+\PYG{n+nf}{h} \PYG{n}{y}
+\end{Verbatim}

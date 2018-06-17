@@ -15,6 +15,10 @@
 \usetikzlibrary{babel}
 \usepackage[spanish]{babel}
 
+
+\usepackage{lmodern}
+
+\usepackage{minted} % código haskell
 \usepackage{tikz-cd} % diagramas conmutativos
 
 \usepackage[hidelinks]{hyperref} % para hiperreferencias
@@ -133,19 +137,93 @@
 
 \tableofcontents
 
-\chapter*{Abstract}
-Abstract goes here
+\chapter*{Resumen y palabras clave}
 
-\chapter*{Dedication}
+
+\chapter*{Abstract and keywords}
 To mum and dad
 
 \chapter*{Declaration}
 I declare that..
 
-\chapter*{Acknowledgements}
-I want to thank...
+\chapter*{Introducción}
+El lenguaje de programación haskell surge en el año 1990 con
+la idea de aunar los esfuerzos de múltiples instituciones académicas
+en el desarrollo de un lenguaje de programación funcional. Este
+lenguaje de programación estaba pensado para ser una base
+común sobre la que realizar docencia e investigación en la
+programación funcional.
+
+Haskell cumplió su propósito de ser el vehículo de numerosa innovaciones
+en materia del diseño de lenguajes de programación. Entre otros
+desarrollos, haskell hizo de un concepto nacido en la teoría de
+categorías, las mónadas, una construcción fundamental para el lenguaje.
+
+Conforme se refinaban las especificaciones del lenguaje, la idea de
+utilizar haskell en la industria era cada vez
+más factible. Hoy en día haskell
+es usado en empresas de sectores tan diversos como la banca,
+las redes sociales o la mensajería instantánea.
+
+El objetivo del trabajo será comprender la forma en la que
+la teoría de categorías ha sido aplicada al diseño de software
+en el lenguaje de programación haskell. El objetivo del trabajo,
+naturalmente, no puede cumplirse sin estudiar la teoría de categorías
+de la que emanan estas aplicaciones.
+
+Comenzamos el trabajo por las definiciones más básicas de la
+teoría de categorías: las categorías y los funtores. Ya en el
+primer capítulo podremos encontrar los primeros ejemplos de
+conceptos categóricos que se usan
+diariamente en el desarrollo de software en haskell.
+
+En el segundo capítulo mostraremos la potencia expresiva de
+las categorías para la realización de distintas construcciones
+sobre estructuras matemáticas diferentes. Especializaremos algunas
+de estas construcciones a la programación.
+
+El tercer capítulo tratará una de las nociones más importantes
+de la teoría de categorías, que nos servirá
+más adelante para enunciar la definición de mónada:
+las transformaciones naturales.
+Aprovecharemos la teoría construida hasta el momento
+para enunciar y demostrar el lema de Yoneda, uno de los resultados
+centrales de la teoría de categorías. En la parte de aplicaciones
+a la programación veremos cómo las transformaciones naturales
+permiten establecer relaciones entre constructores de tipos
+polimórficos.
+
+En el cuarto capítulo conseguiremos definir
+qué son las monadas. Tendremos que pasar
+antes por la definición de adjunción, una abstracción que ha sido
+identificada por múltiples autores como uno de los conceptos clave
+de la teoría. Finalizaremos la parte del trabajo dedicada a las
+matemáticas analizando la relación entre las adjunciones y las
+mónadas. Al final del capítulo intentaremos justificar el rol
+de las mónadas en la programación funcional.
+
+Finalizaremos el trabajo en el capítulo quinto. Dedicaremos
+este capítulo a la exposición de dos patrones de diseño que,
+junto con las mónadas, muestran la influencia de la teoría de
+categorías en la forma en la que se programa en haskell. Aprovecharemos
+también para comentar brevemente otros patrones de diseño
+que indicarían líneas de futuro trabajo.
+
+El libro \textit{Topos, Triples and Theories} ha sido la referencia
+principal para el estudio de la teoría de categorías durante
+la elaboración de este trabajo. Ocasionalmente
+se ha utilizado el libro
+\textit{Categories for the working mathematician}
+para la consulta de algún tema concreto.
+
+El principal recurso de consulta sobre el lenguaje de programación
+haskell ha sido \textit{Real World Haskell}. Esporádicamente se
+han consultado otras fuentes que serán referenciadas cuando corresponda
+a lo largo del texto.
 
 \tableofcontents
+
+
 
 \chapter{Categorías y funtores}
 \section{Categorías}
@@ -154,7 +232,6 @@ I want to thank...
 \input{chapters/1/funtores.tex}
 \section{En programación}
 \input{chapters/1/programacion.tex}
-
 \chapter{Construcciones elementales}
 \input{chapters/2/construcciones-elementales.tex}
 
@@ -175,10 +252,58 @@ I want to thank...
 \section{En Programación}
 \input{chapters/4/programacion.tex}
 
-\chapter{Conclusion}
+\chapter{Patrones de diseño}
+\input{chapters/5/patrones.tex}
+
+\chapter*{Conclusiones y vías futuras}
+En la asignatura de Geometría I, durante mi primer año de carrera
+pude leer una afirmación que despertó mi curiosidad: ``
+\textit{un espacio vectorial es naturalmente isomorfo a su doble dual}
+''. Lo que
+entendí en su momento es que entre esos dos espacios existía
+un isomorfismo que era más evidente que otros, aunque no creí
+que esa noción se pudiera formalizar.
+
+Este trabajo, cinco años más tarde, me permite por fin
+darle un sentido preciso a esa afirmación. Digo más, la maquinaria
+que me permite entender qué significa que un espacio vectorial
+sea naturalmente isomorfo a su doble dual me
+sugiere una forma nueva de entender gran parte de los contenidos
+de la carrera, especialmente (pero no exclusivamente) las asignaturas
+de álgebra.
+
+La complejidad del software construido a lo larga de la escasa
+historia de la disciplina no ha hecho más que crecer, y no hay motivos
+para pensar que esta tendencia parará. El desarrollo de
+nuevos paradigmas como la programación
+orientada a objetos permitió a los ingenieros domar la complejidad
+y llevar a cabo proyectos que hubieran sido imposibles con técnicas
+más rudimentarias. La utilización de la teoría de categorías
+para formalizar abstracciones en lenguajes de programación funcional
+podría ser un paso adelante. Muchas empresas se benefician ya
+del uso de haskell en sus sistemas y de las
+numerosas innovaciones que este
+lenguaje de programación introdujo.
+
+Desde mi punto de vista he hecho una buena exposición de los contenidos
+de teoría de categorías que permiten entender los patrones
+de diseño más usados en haskell. No estoy convencido de que este
+texto, por sí mismo, pueda convencer a nadie de que estas técnicas
+pueden ser beneficiosas para el desarrollo de software. Haskell es
+un lenguaje de programación muy diferente, y cómo tal, aceptar sus
+propuestas puede requerir un trabajo continuado. En este sentido
+podemos afirmar que los objetivos han sido alcanzados.
+
+La línea exacta de este trabajo puede continuarse con el estudio
+de mónadas libres y categorías de álgebras sobre mónadas. Estos
+conceptos, que se estudian en los textos de categorías por su
+relevancia en las matemáticas, tienen aplicaciones
+a la programación. Otra línea de trabajo sería la de la teoría
+de categorías para el estudio de sistemas de tipos.
 
 \printbibliography
 
 \appendix
-\chapter{Appendix Title}
+\chapter[Haskell Básico]{Haskell básico para entender los ejemplos}
+\input{chapters/apendice/haskell.tex}
 \end{document}

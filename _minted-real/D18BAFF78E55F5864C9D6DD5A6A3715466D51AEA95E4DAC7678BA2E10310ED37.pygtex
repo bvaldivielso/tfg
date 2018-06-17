@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{lengNumberAndSquare} \PYG{o+ow}{::} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Producer} \PYG{k+kt}{Int} \PYG{k+kt}{IO} \PYG{n+nb}{()}
+\PYG{n+nf}{lengNumberAndSquare} \PYG{n}{s} \PYG{o+ow}{=} \PYG{k+kr}{do}
+  \PYG{n}{yield} \PYG{p}{(}\PYG{n}{length} \PYG{n}{s}\PYG{p}{)}
+  \PYG{n}{lift} \PYG{o}{\PYGZdl{}} \PYG{n}{putStrLn} \PYG{l+s}{\PYGZdq{}Ahora emitimos el cuadrado\PYGZdq{}}
+  \PYG{n}{yield} \PYG{p}{((}\PYG{n}{length} \PYG{n}{s}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{length} \PYG{n}{s}\PYG{p}{))}
+\end{Verbatim}

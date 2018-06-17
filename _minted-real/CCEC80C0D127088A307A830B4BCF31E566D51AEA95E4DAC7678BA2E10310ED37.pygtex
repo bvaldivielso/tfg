@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{main} \PYG{o+ow}{::} \PYG{k+kt}{IO} \PYG{n+nb}{()}
+\PYG{n+nf}{main} \PYG{o+ow}{=} \PYG{k+kr}{do}
+    \PYG{n}{putStrLn} \PYG{l+s}{\PYGZdq{}Cual es tu nombre\PYGZdq{}}
+    \PYG{n}{nombre} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{readLn}
+    \PYG{n}{putStrLn} \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Hola \PYGZdq{}} \PYG{o}{++} \PYG{n}{nombre}\PYG{p}{)}
+\end{Verbatim}

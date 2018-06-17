@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{instance} \PYG{k+kt}{Functor} \PYG{p}{(}\PYG{k+kt}{Reader} \PYG{n}{a}\PYG{p}{)} \PYG{k+kr}{where}
+  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} fmap :: (b \PYGZhy{}\PYGZgt{} c) \PYGZhy{}\PYGZgt{} (Reader a b) \PYGZhy{}\PYGZgt{} (Reader a c)}
+  \PYG{n}{fmap} \PYG{n}{f} \PYG{p}{(}\PYG{k+kt}{Reader} \PYG{n}{g}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Reader} \PYG{p}{(}\PYG{n}{f} \PYG{o}{.} \PYG{n}{g}\PYG{p}{)}
+\end{Verbatim}

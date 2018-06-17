@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{nombreTamaño} \PYG{o+ow}{::} \PYG{k+kt}{Tamaño} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String}
+\PYG{n+nf}{nombreTamaño} \PYG{k+kt}{Grande} \PYG{o+ow}{=} \PYG{l+s}{\PYGZdq{}grande\PYGZdq{}}
+\PYG{n+nf}{nombreTamaño} \PYG{k+kt}{Pequeño} \PYG{o+ow}{=} \PYG{l+s}{\PYGZdq{}pequeño\PYGZdq{}}
+
+\PYG{n+nf}{decirTamaño} \PYG{o+ow}{::} \PYG{k+kt}{TieneTamaño} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String}
+\PYG{n+nf}{decirTamaño} \PYG{n}{nombre} \PYG{n}{a} \PYG{o+ow}{=}
+  \PYG{n}{nombre} \PYG{o}{++} \PYG{l+s}{\PYGZdq{} tiene tamaño \PYGZdq{}} \PYG{o}{++} \PYG{n}{nombreTamaño} \PYG{p}{(}\PYG{n}{tamaño} \PYG{n}{a}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplos}
+\PYG{n+nf}{decirTamaño} \PYG{l+s}{\PYGZdq{}tres\PYGZdq{}} \PYG{l+m+mi}{3} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} tres tiene tamaño pequeño}
+\PYG{n+nf}{decirTamaño} \PYG{l+s}{\PYGZdq{}Braulio\PYGZdq{}} \PYG{p}{(}\PYG{k+kt}{Hombre} \PYG{l+m+mi}{180}\PYG{p}{)} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Braulio tiene tamaño grande}
+\PYG{n+nf}{decirTamaño} \PYG{l+s}{\PYGZdq{}cadena de texto\PYGZdq{}} \PYG{l+s}{\PYGZdq{}eeeeeeeeeeee\PYGZdq{}} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} ...}
+\end{Verbatim}

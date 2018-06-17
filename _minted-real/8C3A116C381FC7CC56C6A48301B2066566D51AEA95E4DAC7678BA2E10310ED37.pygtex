@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{natApplication} \PYG{o+ow}{::} \PYG{p}{(}\PYG{k+kt}{Functor} \PYG{n}{f}\PYG{p}{,} \PYG{k+kt}{Functor} \PYG{n}{g}\PYG{p}{,} \PYG{k+kt}{Functor} \PYG{n}{h}\PYG{p}{)} \PYG{o+ow}{=\PYGZgt{}}
+  \PYG{p}{(}\PYG{n}{f} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{g} \PYG{n}{a}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Composition} \PYG{n}{h} \PYG{n}{f} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Composition} \PYG{n}{h} \PYG{n}{g} \PYG{n}{a}
+\PYG{n+nf}{natApplication} \PYG{n}{tau} \PYG{p}{(}\PYG{k+kt}{Composition} \PYG{n}{hfa}\PYG{p}{)} \PYG{o+ow}{=}
+  \PYG{k+kt}{Composition} \PYG{p}{(}\PYG{n}{fmap} \PYG{n}{tau} \PYG{n}{hfa}\PYG{p}{)}
+\end{Verbatim}

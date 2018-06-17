@@ -1,0 +1,339 @@
+Comentamos brevemente algunas funcionalidades de haskell
+que facilitarán la comprensión de los ejemplos utilizados.
+
+\section{Expresiones y tipos}
+Toda expresión en Haskell tiene un tipo. Los siguientes
+son ejemplos de expresiones junto con sus tipos:
+\begin{minted}{haskell}
+True :: Bool
+False :: Bool
+'c' :: Char
+"hola" :: String
+3 :: Int
+\end{minted}
+En general la sintaxis \cod{a :: A} se utiliza en haskell para
+afirmar que la expresión \cod{a} tiene tipo \cod{A}. Que toda
+expresión en haskell esté tipada no significa que tengamos que
+ser explícito acerca de estos tipos, el compilador es capaz
+en la mayoría de las ocasiones de inferir por nosotros cual
+es el tipo de todas las expresiones de un programa. Será habitual,
+sin embargo, que especifiquemos un tipo aunque no sea necesario,
+para ayudar al lector.
+
+\section{Funciones}
+En haskell las funciones son ciudadanos de primera clase
+(\textit{first class citizens}) en el sentido de que son valores
+como cualquier otro. Esto significa, entre otras cosas, que las
+funciones tienen un tipo.
+
+Proponemos ejemplos de funciones a continuación:
+\begin{minted}{haskell}
+suma1 :: Int -> Int
+suma1 x = x + 1
+
+tres :: Int
+tres = suma 2
+
+esA :: Char -> Bool
+esA c = if c == 'A'
+        then True
+        else False
+\end{minted}
+El tipo de \cod{suma1} indica que la función recibe un parámetro
+de tipo entero y devuelve un valor de tipo entero. Se pueden
+definir también funciones de múltiples parámetros:
+\begin{minted}{haskell}
+suma :: Int -> Int -> Int
+suma x y = x + y
+
+cinco :: Int
+cinco = suma 3 2
+\end{minted}
+El tipo de \cod{suma} puede resulta sorprendente
+a quien esté acostumbrado a trabajar con lenguajes imperativos.
+Haskell solo considera funciones de un parámetro. La trampa es que
+\cod{suma} es una función que recibe un parámetro de tipo \cod{Int}
+y devuelve \emph{otra función} que recibe un parámetro \cod{Int}
+y devuelve un valor de tipo \cod{Int}. El siguiente ejemplo es
+equivalente al anterior:
+\begin{minted}{haskell}
+suma :: Int -> Int -> Int
+suma x y = suma x + y
+
+sumaTres :: Int -> Int
+sumaTres = suma 3
+
+cinco :: Int
+cinco = sumaTres 2
+\end{minted}
+Entonces cuando haskell evalúa la expresión
+\begin{minted}{haskell}
+suma 3 2
+\end{minted}
+lo está haciendo asociado a la izquierda:
+\begin{minted}{haskell}
+(suma 3) 2
+\end{minted}
+La técnica de transformar una función que recibe varios parámetros
+en una función que recibe un parámetro y devuelve otra función
+se llama currificación. Haskell hace currificación automática
+de todas las funciones.
+
+De hecho no existe ninguna diferencia entre el tipo de la función
+\cod{suma} tal como estaba definido anteriormente y el tipo:
+\begin{minted}{haskell}
+suma :: Int -> (Int -> Int)
+suma x y = x + y
+\end{minted}
+
+\section{Expresiones lambda}
+Existe un tipo especial de expresión en haskell llamado expresión
+lambda y que sirve para definir funciones. Ponemos un ejemplo
+a continuación:
+\begin{minted}{haskell}
+suma1 :: Int -> Int
+suma1 = (\x -> x + 1)
+\end{minted}
+La expresión construye la función que recibe un valor \cod{x}
+y devuelve el valor \cod{x+1}. Las expresiones lambda sirven
+también para definir funciones que reciben múltiples parámetros:
+\begin{minted}{haskell}
+multiplica :: Int -> Int -> Int
+multiplica = (\x y -> x * y)
+\end{minted}
+
+Es importante notar que la expresión \cod{\\x -> f x} es
+equivalente a la expresión \cod{f}.
+
+\section{Definir tipos}
+Haskell permite al usuario definir sus propios tipos. Veamos
+un ejemplo sencillo:
+\begin{minted}{haskell}
+data Dni = Dni Int Char
+\end{minted}
+Esta línea define el tipo \cod{Dni} (izquierda) y el constructor
+homónimo (derecha) que acepta como parámetros un entero y un carácter.
+Mostramos a continuación ejemplos de valores del tipo \cod{Dni}.
+\begin{minted}{haskell}
+(Dni 44669279 'J') :: Dni
+(Dni 12345678 'C') :: Dni
+\end{minted}
+Todos los valores del tipo \cod{Dni} son de la forma
+\cod{(Dni i l)} donde \cod{i :: Int} y \cod{l :: Char}. Además,
+podemos considerar al constructor \cod{Dni} una función con tipo
+\cod{Dni :: Int -> Char -> Dni}. Nótese que
+\cod{Dni} antes de los dos puntos representa al constructor pero
+que el \cod{Dni} de la derecha representa al tipo.
+
+Como todos los valores del tipo \cod{Dni} son de la forma especificada
+arriba, haskell nos permite definir funciones sobre ese tipo de la
+siguiente manera:
+\begin{minted}{haskell}
+suma3AlNumero :: Dni -> Int
+suma3AlNumero (Dni numero caracter) = numero + 3
+
+-- devuelve el dni completo como una cadena
+devuelveCadena :: Dni -> String
+devuelveCadena (Dni n c) = (show n) ++ (show c)
+\end{minted}
+
+Podemos definir tipos con más de un constructor. Por ejemplo:
+\begin{minted}{haskell}
+data PersonaConAltura = Hombre Int | Mujer Int | Otro String Int
+\end{minted}
+donde definimos el tipo \cod{PersonaConAltura} y los constructores
+\cod{Hombre :: Int -> PersonaConAltura},
+\cod{Mujer :: Int -> PersonaConAltura},
+\cod{Otro :: String -> Int -> PersonaConAltura}. Todo valor de
+\cod{PersonaConAltura} será o bien de la forma
+\cod{Hombre n}, o bien \cod{Mujer n}, o bien \cod{Otro o n}, donde
+\cod{n :: Int} y \cod{o :: String}. Esto hace que haskell
+nos permita definir funciones sobre este tipo como:
+\begin{minted}{haskell}
+comentarioSobreAltura :: PersonaConAltura -> String
+comentarioSobreAltura (Hombre altura) = if altura < 174
+                                        then "Tienes altura inferior a la media"
+                                        else "Tienes altura superior a la media"
+comentarioSobreAltura (Mujer altura) = if altura < 163
+                                       then "Tienes altura inferior a la media"
+                                       else "Tienes altura superior a la media"
+comentarioSobreAltura (Otro genero x) =
+            "No tengo informacion sobre la altura media en el género " ++ genero
+\end{minted}
+Esta funcionalidad de hacer distinción de casos sobre los constructores
+de un tipo es conocida como \textit{pattern matching}. También se puede
+hacer \textit{pattern matching} dentro de una expresión con la siguiente
+sintaxis:
+\begin{minted}{haskell}
+genero :: PersonaConAltura -> String
+genero persona = case persona of
+    Hombre _ -> "Hombre"
+    Mujer _ -> "Mujer"
+    Otro g _ -> g
+
+-- equivalentemente podríamos haber implementado la función como
+genero (Hombre _) = "Hombre"
+genero (Mujer _) = "Mujer"
+genero (Otro g _) = g
+\end{minted}
+donde usamos el carácter \cod{\_} para indicar (tanto a lectores como
+al compilador) que no usaremos esa variable.
+
+Nótese que podemos definir tipos \textit{recursivos} en el siguiente
+sentido:
+\begin{minted}{haskell}
+data Peano = Cero | Succ Peano
+\end{minted}
+Aquí estamos definiendo el tipo \cod{Peano} que tiene dos constructores:
+\cod{Cero :: Peano} (no admite parámetros) y \cod{Succ :: Peano -> Peano}.
+Podemos hacer \textit{pattern matching} sobre este tipo:
+\begin{minted}{haskell}
+aNumero :: Peano -> Int
+aNumero Cero = 0
+aNumero (Succ peano) = 1 + (aNumero peano)
+
+esCero :: Peano -> Bool
+esCero Cero = True
+esCero (Succ _) = False
+\end{minted}
+
+Existe otra sintaxis para definir tipos con un solo constructor y que reciben
+un solo parámetro:
+\begin{minted}{haskell}
+newtype EnvuelveEntero = EnvuelveEntero Int
+\end{minted}
+que para los propósitos de este trabajo consideraremos igual a la sintaxis
+que usa \cod{data} en lugar de \cod{newtype}.
+
+Cuando usamos la sintaxis:
+\begin{minted}{haskell}
+data Dni = Dni {
+  numero :: Int
+  letra :: Char
+  }
+\end{minted}
+No solo estamos definiendo el tipo \cod{Dni} junto con el constructor de tipo
+\cod{Dni :: Int -> Char -> Dni} sino que además estamos definiendo las
+proyecciones evidente \cod{numero :: Dni -> Int} y \cod{letra :: Dni -> Char}.
+
+\section{Funciones con tipos variables}
+Podemos definir funciones polimórficas como la siguiente:
+\begin{minted}{haskell}
+aplicar :: (a -> b) -> a -> b
+aplicar f x = f x
+
+seis :: Int
+seis = aplicar suma1 5
+
+hombre :: String
+hombre = aplicar genero (Hombre 180)
+\end{minted}
+La función \cod{aplicar} se puede especializar a tipos concretos como
+\cod{a = Int, b = Int} en el caso del valor \cod{seis} o a los
+tipos \cod{a = PersonaConAltura, b = String} en el caso del
+valor \cod{hombre}.
+
+
+\section{Tipos Parametrizados}
+Podemos definir tipos parametrizados por otros tipos. Por ejemplo:
+\begin{minted}{haskell}
+data ParConNombre a = ParConNombre String a a
+\end{minted}
+esto define todos los tipos \cod{ParConNombre A} donde \cod{A} es
+un tipo fijo pero arbitrario. Nótese que \cod{ParConNombre} no
+es un tipo, pero \cod{ParConNombre Int} sí que lo es.
+Un ejemplo de valor de este tipo sería \cod{ParConNombre "tresdos" 3 2 :: ParConNombre Int}.
+
+El constructor \cod{ParConNombre :: String -> a -> a -> ParConNombre a}
+es ahora una función con tipos variables. Se puede estar parametrizado por más
+de un tipo:
+\begin{minted}{haskell}
+data Par a b = Par a b
+
+-- ejemplos de valores
+Par 3 'c' :: Par Int Char
+Par 'c' 3 :: Par Char Int
+Par 4 5 :: Par Int Int
+\end{minted}
+
+\section{Listas}
+Podemos definir listas en haskell de forma similar a como
+definimos el tipo \cod{Peano}:
+\begin{minted}{haskell}
+data Lista a = ListaVacia | NoVacia a Lista
+
+-- ejemplos de valores
+ListaVacia :: Lista Int
+NoVacia 3 ListaVacia :: Lista Int
+NoVacia 3 (NoVacia 4 ListaVacia) :: Lista Int
+\end{minted}
+y podemos definir funciones sobre este tipo:
+\begin{minted}{haskell}
+sumarLista :: Lista Int -> Int
+sumarLista ListaVacia = 0
+sumarLista (NoVacia x otraLista) = x + (sumarLista otraLista)
+\end{minted}
+No necesitamos definir este tipo por nuestra cuenta
+porque ya está definido en la biblioteca estándar de haskell
+y cuenta con una sintaxis más intuitiva:
+\begin{minted}{haskell}
+sumarLista :: [Int] -> Int
+sumarLista [] = 0
+sumarLista (x:xs) = x + (sumarLista xs)
+\end{minted}
+Cuando queramos hacer referencia a que \cod{[]} es un tipo
+parametrizado a veces escribiremos \cod{[] Int} en lugar
+de \cod{[Int]}.
+
+\section{Typeclasses}
+Haskell soporta una funcionalidad similar a las interfaces de java
+conocida como typeclasses. Una typeclass define una interfaz que
+cualquier tipo que quiera ser instancia de esa clase debe implementar.
+Por ejemplo:
+\begin{minted}{haskell}
+data Tamaño = Grande | Pequeño
+
+class TieneTamaño t where
+  tamaño :: t -> Tamaño
+
+instance TieneTamaño Int where
+  tamaño x = if x > 179 then Grande else Pequeño
+
+instance TieneTamaño String where
+  tamaño s = if (length s) > 10 then Grande else Pequeño
+
+instance TieneTamaño PersonaConAltura
+  tamaño (Hombre altura) = tamaño altura
+  tamaño (Mujer altura) = tamaño altura
+  tamaño (Otro _ altura) = tamaño altura
+\end{minted}
+Nótese como hemos implementado la instancia de \cod{Tamaño} de
+\cod{PersonaConAltura} aprovechando la instancia de \cod{Int}.
+Podemos escribir funciones que solo acepten instancias de
+esta typeclass:
+\begin{minted}{haskell}
+nombreTamaño :: Tamaño -> String
+nombreTamaño Grande = "grande"
+nombreTamaño Pequeño = "pequeño"
+
+decirTamaño :: TieneTamaño a => String -> a -> String
+decirTamaño nombre a =
+  nombre ++ " tiene tamaño " ++ nombreTamaño (tamaño a)
+
+-- ejemplos
+decirTamaño "tres" 3 -- tres tiene tamaño pequeño
+decirTamaño "Braulio" (Hombre 180) -- Braulio tiene tamaño grande
+decirTamaño "cadena de texto" "eeeeeeeeeeee" -- ...
+\end{minted}
+De hecho, también se pueden definir clases que solo puedan ser
+instanciadas por instancias de otras clases:
+\begin{minted}{haskell}
+class TieneTamaño t => TieneTamañoNumerico t where
+  tamañoNumerico :: t -> Int
+
+instance TieneTamañoNumerico Int where
+  tamañoNumerico x = x
+
+instance TieneTamañoNumerico Char where
+  tamañoNumerico _ = 100 -- Error: Char no es instancia de TieneTamaño
+\end{minted}

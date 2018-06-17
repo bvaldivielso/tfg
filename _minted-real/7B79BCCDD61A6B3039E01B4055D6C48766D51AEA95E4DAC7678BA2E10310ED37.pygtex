@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{Config} \PYG{o+ow}{=} \PYG{k+kt}{Config} \PYG{p}{\PYGZob{}}
+  \PYG{n}{title} \PYG{o+ow}{::} \PYG{k+kt}{String}\PYG{p}{,}
+  \PYG{n}{prompt} \PYG{o+ow}{::} \PYG{k+kt}{String}
+  \PYG{p}{\PYGZcb{}}
+\end{Verbatim}

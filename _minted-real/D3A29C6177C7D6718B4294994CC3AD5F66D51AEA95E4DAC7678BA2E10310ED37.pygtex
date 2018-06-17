@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{runApp} \PYG{o+ow}{::} \PYG{k+kt}{Config} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{AppM} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{IO} \PYG{n}{a}
+\PYG{n+nf}{runApp} \PYG{n}{config} \PYG{p}{(}\PYG{k+kt}{AppM} \PYG{n}{m}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{evalStateT} \PYG{p}{(}\PYG{n}{runReaderT} \PYG{n}{m} \PYG{n}{config}\PYG{p}{)} \PYG{k+kt}{[]}
+\end{Verbatim}

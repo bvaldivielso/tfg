@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{numTokens} \PYG{o+ow}{::} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Either} \PYG{k+kt}{ErrorCompilacion} \PYG{k+kt}{Int}
+\PYG{n+nf}{numTokens} \PYG{n}{src} \PYG{o+ow}{=}
+    \PYG{n}{compilar} \PYG{n}{src} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{n+nf}{\PYGZbs{}}\PYG{k+kr}{\PYGZus{}} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{n}{analisisLexico} \PYG{n}{src} \PYG{o}{\PYGZgt{}\PYGZgt{}=} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{tokens} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}}
+        \PYG{n}{return} \PYG{p}{(}\PYG{n}{length} \PYG{n}{tokens}\PYG{p}{)}
+        \PYG{p}{))}
+\end{Verbatim}

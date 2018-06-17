@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{addNumber} \PYG{o+ow}{::}
+  \PYG{p}{(}\PYG{k+kt}{MonadState} \PYG{k+kt}{Stack} \PYG{n}{m}\PYG{p}{)} \PYG{o+ow}{=\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{m} \PYG{n+nb}{()}
+\PYG{n+nf}{addNumber} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{modify} \PYG{o}{\PYGZdl{}} \PYG{n+nf}{\PYGZbs{}}\PYG{n}{state} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{n}{x}\PYG{k+kt}{:}\PYG{n}{state}\PYG{p}{)}
+\end{Verbatim}

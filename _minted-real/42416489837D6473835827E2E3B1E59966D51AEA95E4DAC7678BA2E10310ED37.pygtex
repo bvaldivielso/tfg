@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{polimorfica} \PYG{o+ow}{::} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{a}
+\PYG{n+nf}{polimorfica} \PYG{n}{v} \PYG{o+ow}{=} \PYG{n}{v}
+
+\PYG{n+nf}{polimorfica} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+\PYG{n+nf}{polimorfica} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{n} \PYG{o}{+} \PYG{l+m+mi}{1}
+\end{Verbatim}

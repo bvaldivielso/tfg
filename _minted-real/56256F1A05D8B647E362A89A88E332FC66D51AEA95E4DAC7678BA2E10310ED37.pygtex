@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{Composition} \PYG{p}{[}\PYG{k+kt}{Just} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{k+kt}{Just} \PYG{l+m+mi}{4}\PYG{p}{]}
+\PYG{k+kt}{Composition} \PYG{p}{[}\PYG{k+kt}{Nothing}\PYG{p}{,} \PYG{k+kt}{Nothing}\PYG{p}{,} \PYG{k+kt}{Nothing}\PYG{p}{,} \PYG{k+kt}{Just} \PYG{l+m+mi}{300}\PYG{p}{]}
+\PYG{k+kt}{Composition} \PYG{k+kt}{[]}
+\end{Verbatim}

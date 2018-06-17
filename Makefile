@@ -1,7 +1,7 @@
-real.pdf: macros/* real.tex references.bib chapters/*
-	pdflatex real.tex
+real.pdf: macros real.tex references.bib chapters
+	pdflatex  --shell-escape	real.tex
 	biber real
-	pdflatex real.tex
+	pdflatex  --shell-escape	real.tex
 
 all: real.pdf
 

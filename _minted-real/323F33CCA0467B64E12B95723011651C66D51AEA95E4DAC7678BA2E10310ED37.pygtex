@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ley 3}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} la expresión}
+\PYG{k+kr}{do}
+  \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{m}
+  \PYG{n}{y} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{k} \PYG{n}{x}
+  \PYG{n}{h} \PYG{n}{y}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} es igual a}
+\PYG{k+kr}{do}
+  \PYG{n}{y} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{(}\PYG{k+kr}{do}
+    \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{m}
+    \PYG{n}{k} \PYG{n}{x}\PYG{p}{)}
+  \PYG{n}{h} \PYG{n}{y}
+\end{Verbatim}

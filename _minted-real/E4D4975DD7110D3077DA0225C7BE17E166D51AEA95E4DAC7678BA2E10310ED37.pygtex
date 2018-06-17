@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{sumarLista} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+\PYG{n+nf}{sumarLista} \PYG{k+kt}{[]} \PYG{o+ow}{=} \PYG{l+m+mi}{0}
+\PYG{n+nf}{sumarLista} \PYG{p}{(}\PYG{n}{x}\PYG{k+kt}{:}\PYG{n}{xs}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{x} \PYG{o}{+} \PYG{p}{(}\PYG{n}{sumarLista} \PYG{n}{xs}\PYG{p}{)}
+\end{Verbatim}

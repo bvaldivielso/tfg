@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{pure} \PYG{o+ow}{=} \PYG{n}{return}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (\PYGZlt{}*\PYGZgt{}) :: f (a \PYGZhy{}\PYGZgt{} b) \PYGZhy{}\PYGZgt{} f a \PYGZhy{}\PYGZgt{} f b}
+\PYG{n+nf}{ff} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{fa} \PYG{o+ow}{=} \PYG{k+kr}{do}
+  \PYG{n}{f} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{ff}
+  \PYG{n}{a} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{fa}
+  \PYG{n}{return} \PYG{p}{(}\PYG{n}{f} \PYG{n}{a}\PYG{p}{)}
+\end{Verbatim}

@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{compilar} \PYG{o+ow}{::} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Either} \PYG{k+kt}{ErrorCompilacion} \PYG{k+kt}{Programa}
+\PYG{n+nf}{compilar} \PYG{n}{s} \PYG{o+ow}{=} \PYG{k+kr}{case} \PYG{n}{analisisLexico} \PYG{n}{s} \PYG{k+kr}{of}
+    \PYG{k+kt}{Right} \PYG{n}{tokens} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kr}{case} \PYG{n}{analisisSintactico} \PYG{n}{token} \PYG{k+kr}{of}
+        \PYG{k+kt}{Right} \PYG{n}{arbolSintactico} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kr}{case} \PYG{n}{analisisSemantico} \PYG{n}{arbolSintactico} \PYG{k+kr}{of}
+            \PYG{k+kt}{Right} \PYG{n}{programa} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Right} \PYG{n}{programa}
+            \PYG{k+kt}{Left} \PYG{n}{errorSemantico} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Left} \PYG{n}{errorSemantico}
+        \PYG{k+kt}{Left} \PYG{n}{errorSintactico} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Left} \PYG{n}{errorSintactico}
+    \PYG{k+kt}{Left} \PYG{n}{errorLexico} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Left} \PYG{n}{errorLexico}
+\end{Verbatim}

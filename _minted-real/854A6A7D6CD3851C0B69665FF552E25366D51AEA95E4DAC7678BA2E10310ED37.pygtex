@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{pure} \PYG{n}{f} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{u1} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{u2} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{o}{...} \PYG{o}{\PYGZlt{}*\PYGZgt{}} \PYG{n}{un}
+\end{Verbatim}

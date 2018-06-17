@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{PremiosTrabajadores} \PYG{o+ow}{=} \PYG{k+kt}{PremiosJovenes} \PYG{o}{|} \PYG{k+kt}{PremiosMayores}
+
+\PYG{n+nf}{dar\PYGZus{}premio} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Maybe} \PYG{k+kt}{PremiosTrabajadores}
+\PYG{n+nf}{dar\PYGZus{}premio} \PYG{n}{age}
+  \PYG{o}{|} \PYG{n}{age} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{16} \PYG{o+ow}{=} \PYG{k+kt}{Nothing}
+  \PYG{o}{|} \PYG{l+m+mi}{16} \PYG{o}{\PYGZlt{}=} \PYG{n}{age} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{age} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{40} \PYG{o+ow}{=} \PYG{k+kt}{Just} \PYG{k+kt}{PremiosJovenes}
+  \PYG{o}{|} \PYG{l+m+mi}{40} \PYG{o}{\PYGZlt{}=} \PYG{n}{age} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{age} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{65} \PYG{o+ow}{=} \PYG{k+kt}{Just} \PYG{k+kt}{PremiosMayores}
+  \PYG{o}{|} \PYG{l+m+mi}{65} \PYG{o}{\PYGZlt{}=} \PYG{n}{age} \PYG{o+ow}{=} \PYG{k+kt}{Nothing}
+\end{Verbatim}

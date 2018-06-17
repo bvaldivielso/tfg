@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{do} \PYG{p}{\PYGZob{}} \PYG{n}{m1}\PYG{p}{;}
+     \PYG{n}{m2}\PYG{p}{;}
+     \PYG{n}{m3}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{class} \PYG{k+kt}{MonadTrans} \PYG{n}{t} \PYG{k+kr}{where}
+    \PYG{n}{lift} \PYG{o+ow}{::} \PYG{k+kt}{Monad} \PYG{n}{m} \PYG{o+ow}{=\PYGZgt{}} \PYG{n}{m} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{t} \PYG{n}{m} \PYG{n}{a}
+\end{Verbatim}

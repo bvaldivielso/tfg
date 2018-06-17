@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{type} \PYG{k+kt}{AppT} \PYG{o+ow}{=} \PYG{k+kt}{ReaderT} \PYG{k+kt}{Config} \PYG{p}{(}\PYG{k+kt}{StateT} \PYG{k+kt}{Stack} \PYG{k+kt}{IO}\PYG{p}{)}
+
+\PYG{k+kr}{newtype} \PYG{k+kt}{AppM} \PYG{n}{a} \PYG{o+ow}{=} \PYG{k+kt}{AppM} \PYG{p}{\PYGZob{}} \PYG{n}{unApp} \PYG{o+ow}{::} \PYG{k+kt}{AppT} \PYG{n}{a} \PYG{p}{\PYGZcb{}}
+  \PYG{k+kr}{deriving} \PYG{p}{(}\PYG{k+kt}{Functor}\PYG{p}{,} \PYG{k+kt}{Applicative}\PYG{p}{,} \PYG{k+kt}{Monad}\PYG{p}{,}
+            \PYG{k+kt}{MonadReader} \PYG{k+kt}{Config}\PYG{p}{,} \PYG{k+kt}{MonadState} \PYG{k+kt}{Stack}\PYG{p}{,} \PYG{k+kt}{MonadIO}\PYG{p}{)}
+\end{Verbatim}

@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{isNothing} \PYG{o+ow}{::} \PYG{k+kt}{Maybe} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{isNothing} \PYG{k+kt}{Nothing} \PYG{o+ow}{=} \PYG{k+kt}{True}
+\PYG{n+nf}{isNothing} \PYG{p}{(}\PYG{k+kt}{Just} \PYG{n}{x}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{False}
+\end{Verbatim}

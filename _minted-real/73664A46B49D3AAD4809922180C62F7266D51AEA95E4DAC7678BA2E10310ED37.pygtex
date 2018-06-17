@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{PremiosTrabajadores} \PYG{o+ow}{=} \PYG{k+kt}{PremiosJovenes} \PYG{o}{|} \PYG{k+kt}{PremiosMayores}
+
+\PYG{n+nf}{dar\PYGZus{}premio} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Either} \PYG{k+kt}{String} \PYG{k+kt}{PremiosAdultos}
+\PYG{n+nf}{dar\PYGZus{}premio} \PYG{n}{edad}
+  \PYG{o}{|} \PYG{n}{edad} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{16} \PYG{o+ow}{=} \PYG{k+kt}{Left} \PYG{l+s}{\PYGZdq{}Demasiado joven para estar en edad laboral\PYGZdq{}}
+  \PYG{o}{|} \PYG{l+m+mi}{16} \PYG{o}{\PYGZlt{}=} \PYG{n}{edad} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{40} \PYG{o+ow}{=} \PYG{k+kt}{Right} \PYG{k+kt}{PremiosJovenes}
+  \PYG{o}{|} \PYG{l+m+mi}{40} \PYG{o}{\PYGZlt{}=} \PYG{n}{edad} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{65} \PYG{o+ow}{=} \PYG{k+kt}{Right} \PYG{k+kt}{PremiosMayores}
+  \PYG{o}{|} \PYG{l+m+mi}{65} \PYG{o}{\PYGZlt{}=} \PYG{n}{edad} \PYG{o+ow}{=} \PYG{k+kt}{Left} \PYG{l+s}{\PYGZdq{}Demasiado mayor para estar en edad laboral\PYGZdq{}}
+\end{Verbatim}

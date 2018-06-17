@@ -1,0 +1,557 @@
+En esta sección estudiaremos tres ejemplos de patrones de diseño
+y conjuntos de
+buenas prácticas que se encuentran habitualmente en código escrito
+en haskell y que son inicialmente motivados por la teoría de
+categorías.
+
+\section{El patrón categórico}
+La filosofía Unix, originada
+principios de los setenta durante el desarrollo del sistema
+operativo homónimo, aboga por el
+diseño de componentes de software con una superficie muy reducida
+y altamente combinable. Peter Salus resumió la filosofía Unix
+en tres puntos:
+\begin{itemize}
+\item Escribe programas que hagan una sola cosa y que la hagan bien.
+\item Escribe programas para que puedan funciona conjuntamente.
+\item Escribe programas que trabajen con texto, porque el texto
+  es un formato que entienden todos los programas.
+\end{itemize}
+La vigencia de la filosofía Unix aproximadamente 50 años más
+tarde de su concepción es muestra de su potencia. La modularidad
+es también una cualidad que se desea del software y para la que
+se desarrollan patrones de diseño.
+
+La programación funcional es otro ejemplo de ambiente en el que
+se sigue esta filosofía, ya que se busca crear software
+a base de componer de forma arbitrariamente elaborada
+funciones sencillas.
+
+El patrón categórico es un refinamiento de estas ideas, buscando
+que las primitivas básicas que comprende tu software sean las
+flechas de una categoría. Esto tiene las siguientes ventajas:
+\begin{itemize}
+\item Exista una forma de componer las primitivas. Tal como
+  en la filosofía unix.
+\item La composición es asociativa. Es mucho más sencillo razonar
+  sobre una combinación de elementos asociativa que sobre una
+  que no lo es. La asociatividad hace más sencillo comprender
+  qué hace el código.
+
+\item La existencia de identidades supone la existencia de primitivas
+  que son \textit{triviales} respecto a la composición. Este es
+  otro factor que favorece
+  la comprensión de la operación de composición.
+\end{itemize}
+
+Estudiaremos un ejemplo de librería en haskell que fue concebida
+con el patrón categórico en mente.
+
+\subsection{Pipes}
+\cod{pipes} es una librería de software libre hecha en haskell para
+la gestión de \cod{streams}. Esta librería provee abstracciones para
+el tratamiento de secuencias de datos y transformaciones sobre estas.
+Un ejemplo de secuencias que podrían gestionarse con la librería
+\cod{pipes} sería una sucesión de mensajes que llegan de un servidor
+remoto o las líneas de un fichero en disco.
+
+La librería ofrece tres abstracciones principales para el manejo
+de \cod{streams}:
+\begin{itemize}
+\item \cod{Producers}: a los que en el presente texto nos referiremos
+  como productores. Modelan fuentes de datos. Un \cod{Producer},
+  por ejemplo, podría ser el que emite las líneas de un fichero de
+  datos para su consumo por otra parte del software.
+\item \cod{Consumers}: modelan destinos de datos. \textit{Piden} datos
+  para realizar tareas con ellos. Un ejemplo de \cod{Consumer}
+  recibiría mensajes de tipo \cod{String} y los almacenaría
+  en una base de datos.
+\item \cod{Pipes}: modelan transformaciones de los datos. Pueden recibir
+  datos de un tipo y emitir datos de otro tipo. Un ejemplo sería un
+  \cod{pipe} que recibe enteros y emite esos mismos enteros multiplicados
+  por dos.
+\end{itemize}
+
+En este texto nos centraremos en los productores y pondremos de manifiesto
+la naturaleza categórica en la que se centra su diseño. Explicaciones
+análogas se pueden ofrecer para los consumidores y para los \cod{pipes}.
+
+\subsubsection{Productores}
+El tipo que describe a los productores es:
+\begin{minted}{haskell}
+Producer tipoEmitido monadaBase tipoResultado
+\end{minted}
+En lo que concierne a los ejemplos que mostraremos a lo largo de esta
+sección consideraremos que la mónada base es \cod{IO}. Esto permite al
+productor realizar acciones de entrada/salida como escribir en ficheros,
+mandar información por la red o mostrar información por pantalla. El
+\cod{tipoEmitido} es el tipo de los mensajes que emite el productor.
+Cuando el productor acaba de emitir los mensajes que haya
+considerado necesarios puede optar por devolver un valor. El tipo de
+ese valor es \cod{tipoResultado}. El siguiente es un ejemplo de
+productor con tipos concretos.
+\begin{minted}{haskell}
+threeNumbers :: Producer Int IO ()
+threeNumbers = do
+  yield 3
+  yield 4
+  lift $ putStrLn "Accion de IO"
+  yield 5
+  return ()
+\end{minted}
+La función \cod{lift} nos permite ejecutar acciones de la mónada
+base en el código del productor. En este caso esa acción es mostrar
+un mensaje por pantalla. Este productor emitirá tres valores enteros
+y entre el segundo y el tercer valor ejecutará una acción de
+entrada/salida.
+
+Existe un tipo especial de productor que no emite ningún valor,
+y se llama \cod{Effect}. En este texto nos referiremos a los valores
+de tipo \cod{Effect} como efectos. \cod{pipes} no nos permite ejecutar
+un productor si no lo \textit{conectamos} a algún sitio, es decir,
+si no hay alguna parte de nuestro código que utilice los valores
+emitidos. No existe este problema con los efectos, ya que no emiten
+ningún valor. Para ejecutar un efecto podemos usar la función:
+\begin{minted}{haskell}
+runEffect :: Effect IO () -> IO ()
+\end{minted}
+
+Consideremos el efecto:
+\begin{minted}{haskell}
+print :: Int -> Effect IO ()
+print x = do
+  lift (putStrLn $ "el numero es " ++ show x)
+\end{minted}
+Esta función recibe como parámetro un entero y devuelve un efecto que
+consiste en imprimir por pantalla tal entero. Podemos \textit{conectar}
+esta función que recibe un entero con nuestro productor anterior, que
+emitía enteros. La forma de combinarlos es usar la función \cod{for}
+de \cod{pipes} que podemos considerar
+que tiene la siguiente cabecera:
+\begin{minted}{haskell}
+for :: Monad m => Producer a m r -> (a -> Effect m ()) -> Effect m r
+\end{minted}
+Entonces podemos construir la expresión:
+\begin{minted}{haskell}
+(for threeNumbers print) :: Effect IO ()
+\end{minted}
+La forma en la que \cod{for} combinará el productor con la función
+\cod{print} es sustituyendo cada llamada a \cod{yield} en el productor
+por una llamada a la función \cod{print}. Es decir, la expresión anterior
+generaría un efecto equivalente a:
+\begin{minted}{haskell}
+do
+  lift (putStrLn $ "el numero es " ++ show 3)
+  lift (putStrLn $ "el numero es " ++ show 4)
+  lift $ putStrLn "Accion de IO"
+  lift (putStrLn $ "el numeroes " ++ show 5)
+  return ()
+\end{minted}
+
+En general, \cod{for} no solo permite combinar productores con
+efectos sino que también se pueden combinar productores con otros
+productores. Definimos la siguiente función:
+\begin{minted}{haskell}
+dup :: Int -> Producer Int IO ()
+dup x = do
+  yield x
+  yield x
+\end{minted}
+es decir, recibe un parámetro y devuelve un productor que emite
+ese valor dos veces. Este productor también se puede combinar con
+\cod{for} siguiendo la misma lógica que se seguía anteriormente:
+cada llamada a \cod{yield} se sustituye por una llamada a la función
+\cod{dup}. Entonces el productor
+\begin{minted}{haskell}
+for threeNumbers dup
+\end{minted}
+es equivalente al productor
+\begin{minted}{haskell}
+do
+  yield 3
+  yield 3
+  yield 4
+  yield 4
+  lift $ putStrLn "Accion de IO"
+  yield 5
+  yield 5
+  return ()
+\end{minted}
+¿Podemos combinar también \cod{dup} y \cod{print}? La respuesta es
+afirmativa. En \cod{pipes} se define un combinador con el siguiente
+tipo:
+\begin{minted}{haskell}
+(~>) :: Monad m
+     => (a -> Producer b m r)
+     -> (b -> Producer c m r)
+     -> (a -> Producer c m r)
+(f ~> g) x = for (f x) g
+\end{minted}
+Es decir si tenemos una función que recibe un parámetro de tipo \cod{a}
+y devuelve un productor que emite valores de tipo \cod{b} y tenemos
+otra función que acepta un parámetro de tipo \cod{b} y emite valores
+de tipo \cod{c} podemos combinarlos para obtener una función que
+recibe un parámetro de tipo \cod{a} y devuelve un productor que emite
+valores de tipo \cod{c}. Esta cabecera puede resultar confusa para
+alguien que no haya programado nunca en haskell por lo que proponemos
+el siguiente ejemplo:
+\begin{minted}{haskell}
+dup2 :: String -> Producer String IO ()
+dup2 s = do
+  yield s
+  yield (s ++ s)
+
+leng :: String -> Producer Int IO ()
+leng s = yield (length s)
+
+numberAndSquare :: Int -> Producer Int IO ()
+numberAndSquare x = do
+  yield x
+  lift $ putStrLn "Ahora emitimos el cuadrado"
+  yield (x * x)
+\end{minted}
+El operador \cod{\pcomp >} nos permite combinar tanto \cod{dup2} y
+\cod{leng} como \cod{leng} y \cod{numberAndSquare}. Detallamos
+qué significa cada una de las composiciones:
+\begin{minted}{haskell}
+dup2 ~> leng :: String -> Producer Int IO ()
+\end{minted}
+es una función equivalente a:
+\begin{minted}{haskell}
+dup2Leng :: String -> Producer Int IO ()
+dup2Leng  = do
+  yield (length s)
+  yield (length (s ++ s))
+\end{minted}
+Por otro lado:
+\begin{minted}{haskell}
+leng ~> numberAndSquare :: String -> Producer Int IO ()
+\end{minted}
+es equivalente a:
+\begin{minted}{haskell}
+lengNumberAndSquare :: String -> Producer Int IO ()
+lengNumberAndSquare s = do
+  yield (length s)
+  lift $ putStrLn "Ahora emitimos el cuadrado"
+  yield ((length s) * (length s))
+\end{minted}
+Pero aún hay más, también son posibles las siguientes combinaciones:
+\begin{minted}{haskell}
+(dup2 ~> leng) ~> numberAndSquare
+-- y
+dup2 ~> (leng ~> numberAndSquare)
+\end{minted}
+y no solo eso sino que además a partir de la implementación de
+\cod{pipes} se puede demostrar que las dos expresiones anteriores
+producen productores equivalentes. En ese sentido
+podemos decir que el operador
+\cod{\pcomp >} es asociativo.
+
+De hecho podemos decir que los productores forman una categoría.
+En esta categoría los objetos son los tipos de haskell y las flechas
+$\arr{a}{b}$ son las funciones de haskell de tipo
+\cod{a -> Producer b IO ()}. La composición es el operador
+\cod{\pcomp >} que hemos descrito anteriormente. Ya hemos visto que el operador
+es asociativo, quedaría ver que existen las identidades para cada
+tipo y existen. La identidad es precisamente
+\begin{minted}{haskell}
+yield :: a -> Producer a IO ()
+\end{minted}
+es decir, \cod{yield \pcomp> f = f} y \cod{g \pcomp> yield = g}.
+
+\section{Monad Transformers}
+En el capítulo anterior comentamos el uso de mónadas para realizar
+labores como:
+\begin{itemize}
+\item Ejecutar operaciones de entrada/salida
+\item Gestionar computaciones puras con estado
+\item Gestión de fallos de forma transparente
+\item Acceso global a un repositorio de información inmutable
+\end{itemize}
+Una aplicación normalmente necesita varias de estas funcionalidades
+al mismo tiempo. Los \textit{monad transformers} permiten combinar
+las funcionalidades de varias mónadas. Un ejemplo de clase que
+regula el funcionamiento de esta abstracción es:
+
+\begin{minted}{haskell}
+class MonadTrans t where
+    lift :: Monad m => m a -> t m a
+\end{minted}
+Es decir, un \cod{t} t
+
+\subsection{Ejemplo de aplicación}
+Podemos suponer que estamos escribiendo una aplicación que necesita
+acceso global a unos datos de configuración, tiene que realizar
+transformaciones que modifiquen estado y además tiene que mostrar
+información por pantalla. Si tuviéramos que realizar esas tareas
+por separado usaríamos respectivamente el \cod{Reader} monad,
+el \cod{State} monad y el \cod{IO} monad. Para hacer todo a la vez
+tendremos que usar monad transformers.
+
+Nuestra aplicación hará lo siguiente: recibirá por entrada estándar
+enteros que escriba el usuario y los irá almacenando en una lista.
+Cuando se acabe la entrada mostrará la lista completa de los enteros
+que el usuario ha introducido. Es una aplicación sencilla pero que
+mostrará la utilidad de usar monad transformers.
+
+En primer lugar definiremos el tipo \cod{Config} de la aplicación que
+representa la configuración inicial de la aplicación. En este caso
+el tipo \cod{Config} solo almacenará el título de la aplicación y
+el carácter prompt que usará a la hora de mostrar salida. El tipo
+es el siguiente:
+\begin{minted}{haskell}
+data Config = Config {
+  title :: String,
+  prompt :: String
+  }
+\end{minted}
+El estado a modificar de nuestra aplicación será precisamente la
+lista de enteros. Usaremos un alias de tipo para representar este
+tipo.
+\begin{minted}{haskell}
+type Stack = [Int]
+\end{minted}
+Definimos la pila de mónadas sobre la que diseñaremos nuestra
+aplicación. Usaremos una mónada
+\cod{Reader Config} para que las acciones
+que se ejecuten en el dominio de nuestra aplicación
+tengan acceso a la configuración global. Utilizaremos también
+una mónada \cod{State Stack} para que las acciones puedan modificar
+el estado de la lista de enteros. Finalmente, utilizaremos la
+mónada \cod{IO} para poder efectuar acciones de entrada/salida.
+El tipo que utilizaremos para definir las acciones de nuestra aplicación
+será entonces:
+\begin{minted}{haskell}
+type AppT = ReaderT Config (StateT Stack IO)
+
+newtype AppM a = AppM { unApp :: AppT a }
+  deriving (Functor, Applicative, Monad,
+            MonadReader Config, MonadState Stack, MonadIO)
+\end{minted}
+El tipo \cod{AppT} es un alias para la pila de monad transformers
+que usaremos. Encapsulamos ese tipo en otro llamado \cod{AppM} (esto
+es algo habitual en haskell y representa ventajas a la
+hora de aumentar la seguridad en cuanto a la comprobación de tipos
+que el compilador puede hacer). La librería \cod{mtl} nos proporciona
+typeclasses como \cod{MonadReader Config} que nos permiten utilizar
+la funcionalidad del monad \cod{Reader} dentro de una pila
+de monad transformers. Análogamente sucede con
+\cod{MonadState Stack}.
+
+Si tenemos un valor de \cod{AppM a} necesitamos una forma de
+transformarlo en un valor de \cod{IO a} para poder ejecutarlo.
+Para ello usamos la función:
+\begin{minted}{haskell}
+runApp :: Config -> AppM a -> IO a
+runApp config (AppM m) = evalStateT (runReaderT m config) []
+\end{minted}
+Esta aplicación recibe una configuración y un valor de
+\cod{AppM a} y devuelve la acción de \cod{IO a} asociada. Ejecuta
+la acción inicializando el valor del \cod{Stack} a la lista vacía.
+
+Mostramos algunas de las acciones que se ejecutarán en el contexto
+de nuestra aplicación:
+\begin{minted}{haskell}
+addNumber ::
+  (MonadState Stack m) => Int -> m ()
+addNumber x = modify $ \state -> (x:state)
+\end{minted}
+Esta acción añade al estado de la aplicación un entero \cod{x}. Nótese
+que esta acción se podría implementar con este tipo y sería equivalente:
+\begin{minted}{haskell}
+addNumber ::
+  Int -> AppM ()
+addNumber x = modify $ \state -> (x:state)
+\end{minted}
+La ventaja de implementarla con un tipo polimórfico que sea
+\cod{MonadState Stack m} es que el compilador entiende que esa función
+puede ejecutarse sobre cualquier pila de mónadas que gestione un estado
+de tipo \cod{Stack}. Esto no es útil porque existan muchas pilas de
+mónadas sobre la que sea útil ejecutar esa acción sino porque con
+ese tipo se hace imposible ejecutar ninguna acción \cod{IO ()} en
+la función. Para que se pueda ejecutar una acción de entrada/salida
+se debe estar dentro de un \cod{MonadIO} pero la \textit{constraint}
+\cod{MonadState Stack m} no implica que se pueda ejecutar ninguna
+operación \cod{IO}. La ventaja de este hecho es que viendo
+simplemente el tipo
+de la función podemos saber que la única funcionalidad que puede
+ejecutar esta función es una transformación sobre el estado
+\cod{Stack}. En este caso es fácil leer directamente qué hace la función
+y saber que solo modifica el estado, pero delimitar estrictamente
+sobre qué partes de un sistema actúa una función es útil a la hora
+de trabajar sobre sistemas más complejos.
+
+Otro ejemplo de esto lo encontramos en la acción:
+\begin{minted}{haskell}
+appPrint ::
+  (MonadReader Config m, MonadIO m) => String -> m ()
+appPrint msg = do
+  promptText <- fmap prompt ask
+  liftIO $ putStrLn (promptText ++ " " ++ msg)
+\end{minted}
+Viendo este código sabemos que la función \cod{appPrint} no puede
+modificar el estado. En las constraints asumimos \cod{MonadIO}
+porque necesitamos imprimir por la salida estándar y asumimos
+\cod{MonadReader} porque necesitamos leer la configuración
+para ver el carácter de \cod{prompt}.
+
+\begin{minted}{haskell}
+showTitle ::
+  (MonadReader Config m, MonadIO m) => m ()
+showTitle = do
+  titleStr <- fmap title ask
+  appPrint titleStr
+\end{minted}
+Es análoga a \cod{appPrint}. Implementamos también una función
+que muestra por pantalla el estado de la aplicación.
+\begin{minted}{haskell}
+showStack :: AppM ()
+showStack = do
+  stack <- get
+  appPrint (show stack)
+\end{minted}
+En esta función no usamos un tipo polimórfico porque necesitamos
+utilizar las tres mónadas para cumplir esta funcionalidad. Necesitamos
+el \cod{State} monad para leer el estado de la aplicación, necesitamos
+\cod{Reader} para poder usar \cod{appPrint}, que necesita conocer
+el \cod{prompt} y por supuesto necesitamos \cod{MonadIO} para imprimir
+mensajes por pantalla.
+
+Finalmente mostramos el código que falta para que la aplicación
+funcione:
+\begin{minted}{haskell}
+appLoop :: AppM ()
+appLoop = do
+  eof <- liftIO isEOF
+  if eof
+    then showStack
+    else (do n <- liftIO readLn
+             addNumber n
+             appLoop
+         )
+
+main :: IO ()
+main = runApp (Config "AppTitle" ">") $ do
+  showTitle
+  appLoop
+\end{minted}
+La función \cod{main} inicializa la aplicación con un valor
+de configuración, imrpime el título por pantalla y ejecuta el
+bucle central de la aplicación. Este bucle comprueba si se
+ha llegado al final de la entrada estándar. Si no, se lee un entero
+por la entrada, se añade a la pila y se vuelve a ejecutar el bucle
+central. Si se ha llegado al final de la entrada estándar se
+muestra por pantalla el contenido de la pila y se sale.
+
+\section{Otros patrones de diseño}
+Finalizaremos el trabajo con la exposición breve de un par de
+patrones de diseño conocidos y bien documentados en la comunidad
+de haskell que muestran que la influencia de la teoría de categorías
+no se limita al patrón categórico y a los monads transformers.
+Analizar en más profundidad las siguientes construcciones podría
+ser una buena forma de continuar con la línea de este trabajo.
+
+\subsection{\cod{Applicative}}
+\cod{Applicative} es otra typeclass de la biblioteca estándar
+de haskell. Es una superclase de \cod{Monad}, en el sentido de que
+toda instancia de \cod{Monad} es una instancia de
+\cod{Applicative}. La interfaz de \cod{Applicative} es la siguiente:
+\begin{minted}{haskell}
+class Functor f => Applicative f where
+    pure :: a -> f a
+    (<*>) :: f (a -> b) -> f a -> f b
+\end{minted}
+La función \cod{pure} nos recuerda a la función \cod{return} de la
+instancia de \cod{Monad}, y de hecho si un applicative dado es
+un \cod{Monad} las funciones \cod{pure} y \cod{return} deben coincidir.
+La función \cod{(<*>)} se parece tanto a \cod{fmap} de la clase
+\cod{Functor} como a \cod{(>{}>=)} de la clase \cod{Monad}, pero no
+es ninguna de las dos. Veamos las leyes que una instancia de
+\cod{Applicative} debe cumplir según la documentación de haskell:
+\begin{minted}{haskell}
+pure id <*> v = v -- identidad
+pure (.) <*> u <*> v <*> w = v <*> (v <*> w) -- composición
+pure f <*> pure x = pure (f x) -- homomorfismo
+u <*> pure y = pure (\f -> f y) <*> u -- intercambio
+\end{minted}
+Se puede probar que si tenemos una instancia de mónada y
+definimos:
+\begin{minted}{haskell}
+pure = return
+
+-- (<*>) :: f (a -> b) -> f a -> f b
+ff <*> fa = do
+  f <- ff
+  a <- fa
+  return (f a)
+\end{minted}
+(hemos podido usar notación \cod{do} porque estamos asumiendo
+que \cod{f} es un \cod{Monad})
+Entonces se cumplen las leyes de applicative. A partir de
+una instancia de applicative también podemos definir una instancia
+de funtor que cumple las leyes de la siguiente forma:
+\begin{minted}{haskell}
+fmap :: (a -> b) -> f a -> f b
+fmap f fa = (pure f) <*> fa
+\end{minted}
+
+Para entender la diferencia cualitativa entre \cod{Applicative} y
+\cod{Monad} enunciaremos el siguiente resultado: toda expresión
+creada usando los combinadores aplicativos (\cod{pure} y \cod{(<*>)})
+se puede transformar en una expresión de la siguiente forma:
+\begin{minted}{haskell}
+pure f <*> u1 <*> u2 <*> ... <*> un
+\end{minted}
+donde \cod{f :: u1 -> u2 -> ... -> z} y \cod{ui :: f ui} son valores
+aplicativos. Esto no es posible en general con expresiones monádicas,
+donde la \textit{estructura} de la computación puede depender de
+resultados intermedios.
+
+Esta diferencia ha permitido que \cod{Applicative} se identifique
+como la abstracción adecuada
+para la resolución de múltiples problemas como el parseo de gramáticas libres de
+contexto o la validación de formularios. Facebook liberó
+recientemente
+una librería de haskell llamada Haxl para la gestión
+de la concurrencia de
+forma totalmente implícita para el programador, permitiendo
+que funciones como:
+\begin{minted}{haskell}
+numCommonFriends :: User -> User -> Haxl Int
+numCommonFriends x y =
+    length <$> (intersect <$> friendsOf x <*> friendsOf y)
+\end{minted}
+ejecuten las llamadas \cod{friendsOf} a la base de datos de forma
+concurrente (e incluso integrando soluciones de cacheo de forma
+transparente para el programador). Usando la instancia de
+applicative de Haxl el programador permite que la librería
+extraiga el paralelismo implícito de su código sin tener que programar
+de forma distinta a como lo haría con código secuencial.
+
+Categóricamente, \cod{applicative} ha sido identificado como una
+clase especial de funtores de categorías monoidales.
+
+\subsubsection{Free Monads}
+Los free monads son una abstracción que proviene también de la
+teoría de categorías y que ha sido utilizada exitosamente para el
+diseño de software. La aplicación de las free monads a haskell
+permite el encaje natural de lenguajes de dominio específico así
+como la creación de intérpretes muy generales para estos lenguajes.
+
+Una de las librerías más utilizada que implementan la construcción
+es \cod{free}, y es utilizada por numerosas aplicaciones en haskell
+entre las que podemos destacar:
+\begin{itemize}
+\item \cod{engine-io}: una implementación de un protocolo de
+  websockets.
+\item \cod{reddit}: una librería para interactuar con el popular
+  servicio homónimo.
+\end{itemize}
+
+La idea que sugiere la utilización de las free monads es la
+creación de una DSL que permita expresar toda la lógica de negocio
+de tu aplicación de forma agnóstica al resto de tecnologías
+utilizadas (es decir, no mezclar código del framework que estés
+utilizando con tu lógica de negocio) y que luego sean los intérpretes
+de esa DSL los que tengan que interactuar con el resto de componentes
+del sistema.

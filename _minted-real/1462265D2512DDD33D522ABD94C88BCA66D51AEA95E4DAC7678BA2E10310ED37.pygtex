@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{mx}
+\PYG{n+nf}{bloque\PYGZus{}utilizando\PYGZus{}x}
+\end{Verbatim}

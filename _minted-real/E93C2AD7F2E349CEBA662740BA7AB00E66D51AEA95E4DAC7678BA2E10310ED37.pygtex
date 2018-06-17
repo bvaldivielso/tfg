@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{ErrorCompilacion} \PYG{o+ow}{=} \PYG{k+kt}{ErrorLexico} \PYG{o}{|} \PYG{k+kt}{ErrorSintactico} \PYG{o}{|} \PYG{k+kt}{ErrorSemantico}
+
+\PYG{n+nf}{analisisLexico} \PYG{o+ow}{::} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Either} \PYG{k+kt}{ErrorCompilacion} \PYG{p}{[}\PYG{k+kt}{Token}\PYG{p}{]}
+\PYG{n+nf}{analisisSintactico} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Token}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Either} \PYG{k+kt}{ErrorCompilacion} \PYG{k+kt}{ArbolSintactico}
+\PYG{n+nf}{analisisSemantico} \PYG{o+ow}{::} \PYG{k+kt}{ArbolSintactico} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Either} \PYG{k+kt}{ErrorCompilacion} \PYG{k+kt}{Programa}
+\end{Verbatim}

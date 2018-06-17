@@ -1,86 +1,680 @@
 \subsection{Adjunciones}
 \paragraph{Currificación}
 Definimos el siguiente funtor producto en Haskell.
-\begin{verbatim}
-type Product b a = (b, a)
+\begin{minted}{haskell}
+data Product b a = Product (b, a)
 
-instance Functor (Product fijo) where
-  -- fmap :: a -> c -> (fijo, a) -> (fijo, c)
-  fmap f (x, a) = (x, f a)
-\end{verbatim}
-
-Veamos que los funtores \cod{Product fijo} y y \cod{Reader fijo}
+instance Functor (Product b) where
+  -- fmap :: a -> c -> (b, a) -> (b, c)
+  fmap f (Product (x, a)) = Product (x, f a)
+\end{minted}
+Veamos que los funtores \cod{Product b} y y \cod{Reader b}
 son funtores adjuntos. Para comprobarlo necesitamos definir
-una biyección natural entre los conjuntos
-$\Hom_\Hask(\cod{Product fijo a}, z) \cong
-\Hom_\Hask(a, \cod{Reader fijo z})$. La biyección se puede
+un isomorfismo natural entre los conjuntos
+$\Hom_\Hask(\cod{Product b a}, \cod{z}) \cong
+\Hom_\Hask(\cod{a}, \cod{Reader b z})$. La biyección se puede
 implementar de la siguiente forma:
-\begin{verbatim}
-biy :: ((Product fijo a) -> z) -> (a -> (Reader fijo z))
-biy f a = Reader (\fijo -> f (a, fijo))
+\begin{minted}{haskell}
+biy :: forall a b z. (Product b a -> z) -> (a -> (Reader b z))
+biy f a = Reader h
+  where
+    h :: b -> z
+    h b = f (Product (b, a))
 
--- y la inversa
-biy_inv :: (a -> Reader fijo z) -> (Product fijo a -> z)
-biy_inv f (fijo, a) = (f a) fijo
-\end{verbatim}
-Se puede comprobar que son inversas fácilmente. La unidad la podemos
-implementar tambień:
-\begin{verbatim}
-unit :: a -> Reader fijo (Product fijo a)
-unit a = Reader (\fijo -> (fijo, a))
-\end{verbatim}
+biy_inv :: forall a b z. (a -> (Reader b z)) -> (Product b a -> z)
+biy_inv f (Product (b, a)) = h b
+  where
+    h :: b -> z
+    (Reader h) = f a
+\end{minted}
+
+Se puede comprobar que estas funciones
+son inversas fácilmente. La unidad de
+la adjunción la podemos
+implementar de la siguiente manera:
+\begin{minted}{haskell}
+unit :: a -> Reader b (Product b a)
+unit a = Reader (\b -> Product (b, a))
+\end{minted}
 Y la counidad:
-\begin{verbatim}
-counit :: Product fijo (Reader fijo a) -> a
-counit (fijo, Reader f) = f fijo
-\end{verbatim}
+\begin{minted}{haskell}
+counit :: Product b (Reader b a) -> a
+counit (Product (b, Reader f)) = f b
+\end{minted}
 
-Y sabemos que son naturales porque son polimórficos en la variable
-\cod{a}.
+Y sabemos que son naturales porque es una función
+polimórfica de tipo \cod{F a -> G a} con \cod{F} y \cod{G}
+funtores.
 
-Esta adjunción nos dice una cosa sobre Haskell: es equivalente
-dar una función que recibe dos parámetros de tipo
-\cod{A} y de tipo \cod{B} y devuelve uno de tipo \cod{Z} que dar
+Esta adjunción nos dice una cosa sobre haskell: es equivalente
+dar una función que recibe un parámetro de tipo
+\cod{A} y otro de tipo \cod{B} y devuelve un valor de tipo \cod{Z} que dar
 una función que recibe un parámetro de tipo \cod{A} y devuelve
 una función de tipo \cod{B -> Z}. Esto motiva la sintaxis de
-Haskell para llamar a función. Habitualmente cuando en un lenguaje
-se implementa una función \cod{f} que recibe dos parámetros ha
-de ser llamada como:
-\begin{verbatim}
+haskell para llamar a funciones. Habitualmente cuando en un lenguaje
+se implementa una función \cod{f} que recibe dos parámetros
+esta función ha de ser llamada como:
+\begin{minted}{haskell}
 f(a, b)
-\end{verbatim}
-En Haskell esto no es así. Debido a que \textit{es lo mismo} definir
-una función que recibe dos parámetros que una función que recibe
-un parámetro y devuelve otra función tenemos que Haskell opta por
-la segunda. Entonces la sintaxis de Haskell
-
-\begin{verbatim}
+\end{minted}
+Esto no es así en haskell. Cuando en haskell escribimos
+\cod{f a b} (lo que interpretamos como llamar a una función con dos
+parámetros) lo que ocurre en realidad es que se llama a la función
+\cod{f} con el parámetro \cod{a}. Esto devuelve
+una función que
+recibe un parámetro de tipo \cod{b}, que se aplica finalmente
+ sobre el valor
+\cod{b}. En otras palabras:
+\begin{minted}{haskell}
 f a b = (f a) b
-\end{verbatim}
+\end{minted}
+La técnica de transformar funciones que reciben
+múltiples parámetros en funciones que reciben un solo parámetro
+pero devuelven otra función es conocida como currificación.
+La currificación automática en haskell
+permite ser muy expresivo a la hora de construir funciones. Un
+ejemplo sencillo que ilustra el tipo de operaciones que se pueden hacer
+gracias a la currificación automática es el siguiente:
+\begin{minted}{haskell}
+add :: Int -> Int -> Int
+add x y = x + y
 
-Es decir, se aplica la función \cod{f} al valor \cod{a}, lo que devuelve
-una función que recibe un parámetro \cod{b} y esta se aplica a continuación
-al valor \cod{b}.
-\textcolor{red}{Esto es útil en Haskell por varios motivos que explicitaremos}.
+mult :: Int -> Int -> Int
+mult x y = x * y
+\end{minted}
+Dadas estas dos funciones en haskell podemos considerar las funciones
+\cod{add 3 :: Int -> Int} que a cada entero \cod{x} le asigna el entero
+\cod{x+3} o la función \cod{mult 5 :: Int -> Int} que a cada entero
+\cod{x} le asigna el entero \cod{5 * x}. Las funciones
+\cod{add 3} y \cod{mult 5} se pueden utilizar como cualquier otra
+función del lenguaje. Por ejemplo:
+\begin{minted}{haskell}
+fmap (add 3 . mult 5) [1,2,3] -- [8, 13, 18]
+\end{minted}
 
 \subsection{Mónadas}
-Al igual que existe una typeclass \cod{Functor} también existe una typeclass
-\cod{Monad} en la bibiloteca estándar de Haskell. La definición es la siguiente:
+Haskell dispone en su biblioteca estándar de la typeclass \cod{Monad},
+así como de varias instancias de esta. La interfaz que presenta
+es la siguiente:
+\begin{minted}{haskell}
+class Functor m => Monad m where
+  return :: a -> m a
+  (>>=) :: m a -> (a -> m b) -> m b
+\end{minted}
+(la sintaxis utilizada en la función \cod{>{}>=}
+significa que será utilizada como operador infijo)
+En la documentación se afirma que una instancia de \cod{Monad}
+debe implementar las funciones \cod{return} y
+\cod{>{}>=} de forma que se satisfagan las siguientes leyes:
+\begin{minted}{haskell}
+-- si v :: a
+--    m :: m a
+--    k :: a -> m b entonces
+--    h :: b -> m c
+(return v >>= k) = k v -- ley 1
 
-\begin{verbatim}
-class Monad M where
-  return :: a -> M a
-  bind :: M a -> (a -> M b) -> M b
-\end{verbatim}
+(m >>= return) = m -- ley 2
 
-Esta definición de Mónada es similar a la que dimos originalmente. Podemos ver
-que \cod{return} es precisamente la transformación natural $\eta$.
-¿Pero cómo se relaciona \cod{bind} con la terminología que usamos anteriormente?
-Implementamos la siguiente función:
+m >>= (\x -> k x >>= h)  =  (m >>= k) >>= h -- ley 3
 
-\begin{verbatim}
-mu :: Monad m => m (m a) -> m a
-mu mma = bind mma id
-\end{verbatim}
 
-\subsubsection{Notación \cod{do}}
+-- en relación a fmap, f :: a  -> b
+--                     m :: ma
+fmap f m  =  m >>= return . f
+\end{minted}
+No es inmediato ver que esta definición de mónada es equivalente
+a la que hemos trabajado durante el capítulo. De los tres
+ingredientes que necesitamos para definir una mónada tenemos dos:
+\begin{itemize}
+\item El funtor, que en este caso es \cod{m}.
+\item La transformación natural $\eta : \nat{1_\Hask}{\cod{m}}$, que
+  en este caso se llama \cod{return :: a -> m a}.
+\end{itemize}
+Sin embargo, la transformación natural
+$\mu : \nat{\cod{m}^2}{\cod{m}}$ que nos falta la podemos obtener
+a partir de \cod{bind} de la siguiente forma:
+\begin{minted}{haskell}
+mu :: m (m a) -> m a
+mu mma = mma >>= id
+\end{minted}
+Las condiciones \eqref{diagrama:mu} y \eqref{diagrama:eta}
+de la definición de mónada
+se pueden expresar con sintaxis de haskell de la siguiente forma:
+\begin{minted}{haskell}
+mu . mu = mu . (fmap mu) :: m (m (m a)) -> m a
+-- y
+mu . return = id = mu . (fmap return) :: m a -> m a
+\end{minted}
+Veamos que ambas equaciones se cumplen si asumimos las leyes que
+debe cumplir cualquier instancia de \cod{Monad}.
+\begin{minted}{haskell}
+-- consideramos mmma :: m (m (m a))
+mu . mu mmma = mu (mu mmma)
+                 = mu (mmma >>= id)
+                 = (mmma >>= id) >>= id
+                 -- por la ley 3
+                 = mmma >>= (\x -> (x >>= id))
+                 -- por la definición de mu
+                 = mmma >>= (\x -> mu x)
+                 = mmma >>= mu
+
+-- por otro lado
+mu . (fmap mu) mmma = mu (fmap mu mmma)
+                    = mu (mmma >>= return . mu)
+                    = (mmma >>= return . mu) >>= id
+                    -- por la ley 3
+                    = mmma >>= (\x -> return (mu x) >>= id)
+                    -- por la ley 1
+                    = mmma >>= (\x -> mu x)
+                    = mmma >>= mu
+
+-- y por tanto
+mu . mu = mu . (fmap mu)
+
+
+-- por otro lado
+mu . return ma = mu (return ma)
+               = (return ma) >>= id
+               -- por la ley 1
+               = ma
+
+mu . (fmap return) ma = mu (fmap return ma)
+                      = mu (ma >>= return . return)
+                      = (ma >>= return . return) >>= id
+                      -- por la ley 3
+                      = ma >>= (\x -> return (return x) >>= id)
+                      -- por la ley 1
+                      = ma >>= (\x -> return x)
+                      = ma >>= return
+                      -- por la ley 2
+                      = ma
+
+-- lo que prueba definitivamente que
+mu . return = id = mu . (fmap return)
+\end{minted}
+Esto nos lleva a confirmar que una instancia de \cod{Monad} en haskell
+es efectivamente una mónada en $\Hask$. La implementación de
+\cod{return} y \cod{>{}>=} determina la implementación de otra
+función:
+\begin{minted}{haskell}
+(>>) :: m a -> m b -> m b
+(>>) ma mb = (ma >>= \x -> mb)
+\end{minted}
+que secuencia los efectos de ambas instancias de la mónada descartando
+el valor del primero. Entenderemos mejor qué significa esto cuando
+veamos los ejemplos.
+
+\subsubsection{Ejemplos de Mónadas en Haskell}
+\paragraph{Maybe}
+Resulta que \cod{Maybe} no es solo un funtor sino que además
+es un \cod{Monad}. La implementación de la instancia es la siguiente:
+\begin{minted}{haskell}
+instance Monad Maybe where
+  return x = Just x -- equivalentemente return = Just
+  -- ma :: Maybe a, f :: a -> Maybe b
+  ma >>= f = case ma of
+    Nothing -> Nothing
+    Just x -> f x
+\end{minted}
+Esta instancia permite componer computaciones que pueden resultar
+en error sin tener que hacer gestión explícita de los casos de error.
+Proponemos un ejemplo a partir de la función
+\cod{head\_safe :: [a] -> Maybe a} que implementamos cuando introdujimos
+\cod{Maybe}:
+\begin{minted}{haskell}
+head_safe :: [a] -> Maybe a
+head_safe (x:xs) = Just x
+head_safe [] = Nothing
+\end{minted}
+Supongamos que queremos implementar una función que recibe tres listas
+de enteros como parámetro y devuelve la suma de los primeros elementos
+de estas listas. Como las listas pueden ser vacías la computación
+puede fallar. Una forma de implementar esta lógica sería:
+\begin{minted}{haskell}
+sum_three_heads :: [Int] -> [Int] -> [Int] -> Maybe Int
+sum_three_heads xs ys zs = case (head_safe xs) of
+  Just x -> case (head_safe ys) of
+      Just y -> case (head_safe zs) of
+          Just z -> Just (x + y + z)
+          Nothing -> Nothing
+      Nothing -> Nothing
+  Nothing -> Nothing
+\end{minted}
+Donde hacemos distinción de casos de forma explícita para propagar
+el error.
+La implementación de la instancia de \cod{Monad} de \cod{Maybe} nos
+permite gestionar esta lógica de error de forma implícita y general:
+\begin{minted}{haskell}
+sum_three_heads :: [Int] -> [Int] -> [Int] -> Maybe Int
+sum_three_heads xs ys zs =
+    head_safe xs >>= (\x ->
+        head_safe ys >>= (\y ->
+            head_safe zs >>= (\z ->
+                return (x + y + z)
+            )
+        )
+    )
+\end{minted}
+Y la lógica de la propagación de errores la gestiona transparentemente
+la implementación de \cod{>{}>=} para \cod{Maybe}.
+Comprobar que ambas implementaciones de la función
+\cod{sum\_three\_heads} son equivalentes es un ejercicio instructivo.
+
+
+\paragraph{\cod{Either a}}
+También existe en la biblioteca estándar de haskell
+una instancia de \cod{Monad} para el funtor
+\cod{Either a}. La implementación es la siguiente:
+\begin{minted}{haskell}
+instance Monad (Either a) where
+    return x = Right x
+
+    -- (>>=) :: Either a b -> (b -> Either a c) -> Either a c
+    mb >>= f = case mb of
+        Left a -> Left a
+        Right b -> f b
+\end{minted}
+La implementación de \cod{Monad} para \cod{Either a} es similar
+a la de \cod{Maybe} en el sentido de que los valores de error
+cortocircuitan la computación, en el sentido de que si a lo largo
+de la cadena de cómputos se encuentra un valor de la forma
+\cod{Left a} ya no se ejecuta la función \cod{f}.
+
+Consideramos las siguientes funciones que modelan el funcionamiento
+de un compilador:
+\begin{minted}{haskell}
+data ErrorCompilacion = ErrorLexico | ErrorSintactico | ErrorSemantico
+
+analisisLexico :: String -> Either ErrorCompilacion [Token]
+analisisSintactico :: [Token] -> Either ErrorCompilacion ArbolSintactico
+analisisSemantico :: ArbolSintactico -> Either ErrorCompilacion Programa
+\end{minted}
+Podríamos definir ahora la función \cod{compilar} que reúne las
+tres fases gestionando los posibles errores que surjan por el
+camino. Una forma de definir esta función sería:
+\begin{minted}{haskell}
+compilar :: String -> Either ErrorCompilacion Programa
+compilar s = case analisisLexico s of
+    Right tokens -> case analisisSintactico token of
+        Right arbolSintactico -> case analisisSemantico arbolSintactico of
+            Right programa -> Right programa
+            Left errorSemantico -> Left errorSemantico
+        Left errorSintactico -> Left errorSintactico
+    Left errorLexico -> Left errorLexico
+\end{minted}
+Pero la instancia de \cod{Monad} nos permite gestionar los errores de
+forma transparente:
+\begin{minted}{haskell}
+compilar :: String -> Either ErrorCompilacion Programa
+compilar s = analisisLexico s >>= (\tokens ->
+    analisisSintactico tokens >>= (\arbolSintactico ->
+        analisisSemantico arbolSintactico
+        )
+    )
+\end{minted}
+De hecho nótese que usando la ley 3 de las mónadas en haskell
+podemos simplificar la expresión anterior a la expresión
+equivalente:
+\begin{minted}{haskell}
+compilar :: String -> Either ErrorCompilacion Programa
+compilar src =
+  (analisisLexico src) >>= analisisSintactico >>= analisisSemantico
+\end{minted}
+que sigue propagando perfectamente los errores pero es
+más fácil de entender.
+
+Ponemos un ejemplo de para qué podría servir el operador
+\cod{>{}>} en esta mónada. Recordemos que:
+\begin{minted}{haskell}
+(>>) :: m a -> m b -> m b
+ma >> mb = ma >>= \_ -> mb
+\end{minted}
+(la barra baja se utiliza para explicitar que no se va a usar
+ese parámetro de la lambda). Dijimos anteriormente
+que \cod{>{}>} ignora el ``contenido'' de una mónada pero
+acumula sus efectos. Veamos qué significa eso en la mónada
+\cod{Either a}. Supongamos que queremos implementar una función
+que dada una cadena de texto representando un programa devuelva
+el número de tokens del código siempre y cuando el programa sea válido.
+Para ello podríamos hacer lo siguiente:
+\begin{minted}{haskell}
+numTokens :: String -> Either ErrorCompilacion Int
+numTokens src =
+    compilar src >> analisisLexico src >>= (\tokens ->
+        return (length tokens)
+        )
+\end{minted}
+En este ejemplo decimos que \cod{>{}>} ignora el ``contenido'' de
+la mónada porque aunque la compilación fuera exitosa no utilizaríamos
+para nada el valor de tipo \cod{Programa} que nos devolvería la
+función \cod{compilar}. Sin embargo acumulamos
+los efectos en el sentido de que si a lo largo de la compilación se
+produce algún error, la computación de \cod{numTokens} cortocircuitará
+y nos devolverá el error, aunque el análisis léxico fuera exitoso.
+Esto se puede comprobar a mano sustituyendo \cod{>{}>} por su
+implementación:
+\begin{minted}{haskell}
+numTokens :: String -> Either ErrorCompilacion Int
+numTokens src =
+    compilar src >>= (\x -> analisisLexico src >>= (\tokens ->
+        return (length tokens)
+        ))
+\end{minted}
+y como la implementacion de \cod{>{}>=} dice que
+\cod{(Left error >{}>= f) = Left error} (sin utilizar
+\cod{f}) si tenemos que el resultado
+de compilar es de la forma \cod{Left error} entonces
+no se ejecuta la lambda que recibe el parámetro \cod{x}.
+
+\paragraph{\cod{Reader a}}
+\cod{Reader a} también dispone de una instancia de \cod{Monad}
+que podemos implementar de la siguiente forma:
+\begin{minted}{haskell}
+-- recordamos data Reader a b = Reader (a -> b)
+
+instance Monad (Reader a) where
+  return x = Reader (\a -> x) -- la función constantemente x
+  -- (>>=) :: Reader a b -> (b -> Reader a c) -> Reader a c
+  (Reader aToB) >>= f = Reader (\a ->
+      let b = aToB b
+          (Reader aToC) = f b
+      in aToC a
+      )
+\end{minted}
+
+Esta implementación puede resultar confusa a quien no esté versado
+en haskell pero se puede interpretar como que si tenemos una función
+que va de un tipo fijo \cod{A} a un tipo fijo \cod{B} y tenemos
+otra función que va de un tipo fijo \cod{B} a una función que
+va del tipo fijo \cod{A} a un tipo fijo \cod{C} podemos obtener
+una función que va de \cod{A} a \cod{C} (sin la necesidad de \cod{B}).
+Podemos realizar una implementación de la misma
+lógica sin \cod{Reader} de por medio
+de la siguiente forma:
+\begin{minted}{haskell}
+bind :: (a -> b) -> (b -> (a -> c)) -> (a -> c)
+bind f g a = (g (f a) a) :: c
+\end{minted}
+
+La instancia de \cod{Monad} de \cod{Reader a} es útil para cuando
+tenemos varias funciones que reciben un parámetro del mismo tipo
+y queremos combinarlas entre ellas. Proponemos un ejemplo análogo
+al anterior en el que la compilación se realiza de acuerdo
+a un valor de configuración que todas las fases tienen
+que tener en cuenta. Una posible implementación sería (asumiendo
+que ninguna de las fases puede fallar para
+simplificar el ejemplo):
+\begin{minted}{haskell}
+analisisLexico :: Config -> String -> [Token]
+analisisSintactico :: Config -> [Token] -> ArbolSintactico
+analisisSemantico :: Config -> ArbolSintactico -> Programa
+
+compilar :: Config -> String -> Programa
+compilar config s =
+    let tokens = analisisLexico config s
+        arbolSintactico = analisisSemantico config tokens
+    in
+        analisisSemantico config arbolSintactico
+\end{minted}
+En este ejemplo tenemos que pasar el parámetro de configuración
+a todas las etapas. El \cod{Reader a} monad nos permite simplificar
+este patrón. Para ello, definimos nuestras etapas como:
+\begin{minted}{haskell}
+rAnalisisLexico :: String -> Reader Config ([Token])
+rAnalisisLexico s = Reader (\conf -> analisisLexico conf s)
+
+rAnalisisSintactico :: [Token] -> Reader Config (ArbolSintactico)
+rAnalisisSintactico tokens = Reader (\conf -> analisisSintactico conf tokens)
+
+rAnalisisSemantico :: ArbolSintactico -> Reader Config Programa
+rAnalisisSintactico aSintactico = Reader (\conf -> analisisSemantico conf aSintactico)
+\end{minted}
+
+Y finalmente nuestra función \cod{compilar} se puede escribir cómo:
+\begin{minted}{haskell}
+compilar :: Config -> String -> Programa
+compilar config s =
+  runReader (rAnalisisLexico s >>= rAnalisisSintactico >>= rAnalisisSemantico) config
+\end{minted}
+donde \cod{runReader} está definida en la biblioteca estándar y está
+definida como:
+\begin{minted}{haskell}
+runReader :: Reader a b -> a -> b
+runReader (Reader f) a = f a
+\end{minted}
+En este caso hemos visto como la instancia de \cod{Monad} de
+\cod{Reader a} se encarga transparentemente de pasar el parámetro
+de tipo \cod{a} a las funciones que lo necesiten.
+
+\subsubsection{Interpretación en programación}
+Hemos visto que las expresiones monádicas (expresiones formadas
+por valores de un \cod{Monad} combinadas con los operadores
+\cod{return} y \cod{>{}>=}) pueden volverse farragosas rápidamente.
+Podemos poner como ejemplo la implementación de
+\cod{sum\_three\_heads} realizada anteriormente:
+\begin{minted}{haskell}
+sum_three_heads :: [Int] -> [Int] -> [Int] -> Maybe Int
+sum_three_heads xs ys zs =
+    head_safe xs >>= (\x ->
+        head_safe ys >>= (\y ->
+            head_safe zs >>= (\z ->
+                return (x + y + z)
+            )
+        )
+    )
+\end{minted}
+Es común que las expresiones monádicas en haskell puedan volverse
+complejas. Para ello se introduce la notación \cod{do}.
+Esta notación permite transformar expresiones monádicas en bloques
+de código que resultarán familiares a los programadores que hayan
+utilizado lenguajes de programación imperativos.
+
+Describimos informalmente la transformación sintáctica. Expresiones
+de la forma:
+\begin{minted}{haskell}
+m1 >> m2 >> m3
+\end{minted}
+las llevamos a:
+\begin{minted}{haskell}
+do { m1;
+     m2;
+     m3;
+}
+\end{minted}
+Y expresiones de la forma
+\begin{minted}{haskell}
+m >>= \x -> f x
+\end{minted}
+las llevamos a
+\begin{minted}{haskell}
+do {
+     x <- m;
+     f x
+}
+\end{minted}
+este código es similar al que podría encontrarse uno en un lenguaje
+de programación imperativo pero utiliza por debajo el operador
+\cod{>{}>=} de la instancia de \cod{Monad} que estemos utilizando.
+Las llaves y el \cod{;} (punto y coma) se pueden omitir si se utiliza
+una identación adecuada.
+
+Para justificar que esta notación
+se puede entender como una extensión de la programación imperativa
+introducimos la mónada identidad.
+\begin{minted}{haskell}
+data Id a = Id a
+
+instance Functor Id where
+ fmap f (Id a) = Id (f a)
+
+instance Monad Id where
+  return a = Id a
+  (Id a) (>>=) f = f a
+\end{minted}
+Utilizando la notación \cod{do} con esta mónada tenemos
+un código que funciona de forma muy parecida a cómo lo hace
+el código imperativo:
+\begin{minted}{haskell}
+suma :: Int -> Int -> Id Int
+suma x y = Id (x + y)
+
+x :: Id Int
+x = do
+  y <- suma 3 4
+  z <- suma y 7
+  return z -- x = Id 14
+\end{minted}
+La notación \cod{do} desarrollaría esta expresión en la siguiente:
+\begin{minted}{haskell}
+x :: Id Int
+x = suma 3 4 >>= (\y ->
+        suma y 7 >>= (\z ->
+            return z
+            )
+        )
+\end{minted}
+lo que nos permite establecer que el código se ejecuta de arriba
+abajo línea por línea (porque ese es el orden de la composición),
+y el operador \cod{<-} se comporta como un operador de asignación.
+
+Decimos que la notación \cod{do} para mónadas \textit{generaliza} ese
+aspecto de la programación imperativa porque la notación
+\cod{do} puede usarse también con el resto de mónadas del lenguaje.
+Podemos escribir los ejemplos
+que hicimos anteriormente con la notación \cod{do}.
+\begin{minted}{haskell}
+sum_three_heads :: [Int] -> [Int] -> [Int] -> Maybe Int
+sum_three_heads xs ys zs = do
+    x <- head_safe xs
+    y <- head_safe ys
+    z <- head_safe zs
+    return (x + y + z)
+
+compilar :: String -> Either ErrorCompilacion Programa
+compilar s = do
+   tokens <- analisisLexico s
+   arbolSintactico <- analisisSintactico tokens
+   programa <- analisisSemantico arbolSintactico
+   return programa
+\end{minted}
+Y por estar usándose por debajo las instancias de mónada
+de \cod{Maybe} y de \cod{Either a} respectivamente podemos
+estar seguro que este código se está encargando de la propagación
+de errores de forma correcta. Esta vez de forma totalmente transparente.
+
+Las leyes de las mónadas se pueden expresar usando la notación
+\cod{do}. La ley 1 dice que las siguientes dos expresiones son
+equivalentes:
+\begin{minted}{haskell}
+-- ley 1
+-- la expresión
+do
+  x <- return v
+  k x
+-- es igual a
+k v
+\end{minted}
+Esto quiere decir que \textit{inyectar} un valor (por
+la izquierda) en el contexto
+monádico no produce ningún efecto. La interpretación de esta
+afirmación varía en función de la instancia de \cod{Monad} que estemos
+utilizando pero en la mónada \cod{Either a} significaría que
+inyectar un valor usando \cod{return} no va a cortocircuitar
+la computación.
+\begin{minted}{haskell}
+-- ley 2
+-- la expresión
+do
+  x <- m
+  return x
+-- es igual a
+m
+\end{minted}
+Esta ley es igual a la anterior salvo que inyectamos el valor
+por la derecha. La tercera ley es más interesante desde el punto
+de vista de la notación \cod{do}:
+\begin{minted}{haskell}
+-- ley 3
+-- la expresión
+do
+  x <- m
+  y <- k x
+  h y
+-- es igual a
+do
+  y <- (do
+    x <- m
+    k x)
+  h y
+\end{minted}
+Esta ley nos permite refactorizar código para organizarlo como
+creamos más conveniente sin afectar al funcionamiento
+de este. Por ejemplo, aplicado a nuestro ejemplo
+\cod{sum\_three\_heads} la tercera ley nos permite implementar
+la función de la siguiente forma:
+\begin{minted}{haskell}
+sum_two_heads :: [Int] -> [Int] -> Maybe Int
+sum_two_heads xs ys = do
+    x <- head_safe xs
+    y <- head_safe ys
+    return (x + y)
+
+sum_three_heads :: [Int] -> [Int] -> [Int] -> Maybe Int
+sum_three_heads xs ys zs = do
+    x <- sum_two_heads xs ys
+    z <- head_safe zs
+    return (x + z)
+\end{minted}
+Concluimos que las leyes de las mónadas son las que hacen que
+sea fácil razonar con código escrito con la notación \cod{do}.
+
+Ahora que disponemos de la notación \cod{do}
+introducimos brevemente otras dos instancias de \cod{Monad} que
+se encuentran en la biblioteca estándar de haskell y que serán
+útiles para entender ejemplos futuros.
+
+\paragraph{L \cod{IO}}
+Haskell utiliza la mónada \cod{IO} para modelar computaciones que
+requieren de entrada/salida (conectar con una base de datos remota,
+imprimir texto por pantalla). Un ejemplo de código que se ejecuta
+dentro de \cod{IO} es el siguiente:
+\begin{minted}{haskell}
+main :: IO ()
+main = do
+    putStrLn "Cual es tu nombre"
+    nombre <- readLn
+    putStrLn ("Hola " ++ nombre)
+\end{minted}
+De hecho, la única forma de ejecutar operaciones de entrada salida
+es dentro de una función que devuelva una acción de tipo \cod{IO A}
+que acabe evaluándose durante la ejecución de la función \cod{main}
+del programa. Esto significa que una función con tipo:
+\begin{minted}{haskell}
+sum :: Int -> Int -> Int
+\end{minted}
+\textbf{nunca} podrá ejecutar operaciones de entrada salida. Esto
+contrasta con otros lenguajes de programación en los que
+independientemente del tipo que tenga una función se pueden realizar
+operaciones de entrada/salida arbitrarias.
+
+En haskell las funciones son puras en el sentido de que se siempre
+que se llamen con los mismos parámetros devolverán los mismos resultados.
+Siguiendo con el ejemplo de la función \cod{sum}, podemos asegurar
+que sea cual sea el momento de ejecución de nuestro programa en el que
+la llamemos, si la llamamos con los mismos parámetros obtendremos
+el mismo resultado. Esto no sería cierto si las funciones en haskell
+pudieran efectuar acciones de entrada/salida. Si pudieran, una
+función podría, por ejemplo, leer un archivo y devolver el contenido
+de este. Sin embargo si llamáramos a esta función, modificáramos el
+contenido del archivo y la volviéramos a llamar obtendríamos un
+resultado diferente. La mónada de \cod{IO} permite que nuestro
+programa se comunique con
+\textit{el mundo exterior}. Al final del día, nuestro programa tiene
+que hacer algo útil.
+
+\paragraph{\cod{State a}}
+Una consecuencia de que haskell sea un lenguaje puro es que
+las funciones que no se ejecuten dentro de
+\cod{IO} no disponen de un estado que puedan mutar.
+La mónada \cod{State a} permite modelar funciones que trabajan
+con estado mutable de forma totalmente pura.

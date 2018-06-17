@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{p2} \PYG{o+ow}{::} \PYG{k+kt}{M} \PYG{n}{x} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{M} \PYG{n}{b}
+\PYG{n+nf}{p2} \PYG{n}{m} \PYG{o+ow}{=} \PYG{k+kr}{do}
+  \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{m}
+  \PYG{n}{k} \PYG{n}{x}
+
+\PYG{n+nf}{p} \PYG{o+ow}{::} \PYG{k+kt}{M} \PYG{n}{b}
+\PYG{n+nf}{p} \PYG{o+ow}{=} \PYG{k+kr}{do}
+ \PYG{n}{y} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{p2} \PYG{n}{m}
+ \PYG{n}{h} \PYG{n}{y}
+\end{Verbatim}

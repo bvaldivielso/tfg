@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{aNumero} \PYG{o+ow}{::} \PYG{k+kt}{Peano} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+\PYG{n+nf}{aNumero} \PYG{k+kt}{Cero} \PYG{o+ow}{=} \PYG{l+m+mi}{0}
+\PYG{n+nf}{aNumero} \PYG{p}{(}\PYG{k+kt}{Succ} \PYG{n}{peano}\PYG{p}{)} \PYG{o+ow}{=} \PYG{l+m+mi}{1} \PYG{o}{+} \PYG{p}{(}\PYG{n}{aNumero} \PYG{n}{peano}\PYG{p}{)}
+
+\PYG{n+nf}{esCero} \PYG{o+ow}{::} \PYG{k+kt}{Peano} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{esCero} \PYG{k+kt}{Cero} \PYG{o+ow}{=} \PYG{k+kt}{True}
+\PYG{n+nf}{esCero} \PYG{p}{(}\PYG{k+kt}{Succ} \PYG{k+kr}{\PYGZus{}}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{False}
+\end{Verbatim}

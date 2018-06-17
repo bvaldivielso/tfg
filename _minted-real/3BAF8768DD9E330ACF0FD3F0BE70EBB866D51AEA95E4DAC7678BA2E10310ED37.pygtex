@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{discardLeft} \PYG{o+ow}{::} \PYG{k+kt}{Either} \PYG{n}{b} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Maybe} \PYG{n}{a}
+\PYG{n+nf}{discardLeft} \PYG{p}{(}\PYG{k+kt}{Left} \PYG{n}{stringQueNoQuiero}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Nothing}
+\PYG{n+nf}{discardLeft} \PYG{p}{(}\PYG{k+kt}{Right} \PYG{n}{v}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Just} \PYG{n}{v}
+\end{Verbatim}

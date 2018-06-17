@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{titulos\PYGZus{}premios} \PYG{o+ow}{::} \PYG{k+kt}{PremiosTrabajadores} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String}
+\PYG{n+nf}{titulos\PYGZus{}premios} \PYG{k+kt}{PremioJovenes} \PYG{o+ow}{=} \PYG{l+s}{\PYGZdq{}Semana de senderismo\PYGZdq{}}
+\PYG{n+nf}{titulos\PYGZus{}premios} \PYG{k+kt}{PremioMayores} \PYG{o+ow}{=} \PYG{l+s}{\PYGZdq{}Cata de Vinos\PYGZdq{}}
+\end{Verbatim}
